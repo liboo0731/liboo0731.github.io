@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="李博的博客">
+    <meta name="keyword" content="striveliboo">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        【zabbix】CentOS7安装Zabbix - Liboo的博客 | Liboo&#39;s Blog
+        
+    </title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/aircloud.css">
+    <link rel="stylesheet" href="/css/gitment.css">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> Internet of Everything, Everywhere. </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar">
+            <img src="/img/avatar.jpg">
+        </div>
+        <div class="name">
+            <i>H2K1E~ACE</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li>
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li>
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li>
+                <a href="/archive">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li>
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Zabbix-安装（CentOS-7）"><span class="toc-text">Zabbix 安装（CentOS 7）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Zabbix-Server安装"><span class="toc-text">Zabbix Server安装</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-安装LAMP"><span class="toc-text">1. 安装LAMP</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-修改Apache-配置"><span class="toc-text">2. 修改Apache 配置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-修改PHP-配置"><span class="toc-text">3. 修改PHP 配置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-修改Firewalld-和-Selinux"><span class="toc-text">4. 修改Firewalld 和 Selinux</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-启动服务"><span class="toc-text">5. 启动服务</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-初始化数据库"><span class="toc-text">6. 初始化数据库</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#7-测试LAMP-是否搭建成功"><span class="toc-text">7. 测试LAMP 是否搭建成功</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#8-添加zabbix-软件仓库"><span class="toc-text">8. 添加zabbix 软件仓库</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#9-修改软件仓库，使用国内源（清华源）"><span class="toc-text">9. 修改软件仓库，使用国内源（清华源）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#10-安装Zabbix-server，Web前端，agent"><span class="toc-text">10. 安装Zabbix server，Web前端，agent</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#11-创建初始数据库"><span class="toc-text">11.  创建初始数据库</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#12-导入初始架构和数据，系统将提示您输入新创建的密码"><span class="toc-text">12. 导入初始架构和数据，系统将提示您输入新创建的密码</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#13-为Zabbix-server-配置数据库"><span class="toc-text">13. 为Zabbix server 配置数据库</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#14-为Zabbix-前端配置PHP"><span class="toc-text">14. 为Zabbix 前端配置PHP</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#15-启动Zabbix-server-和agent-服务"><span class="toc-text">15. 启动Zabbix server 和agent 服务</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#16-配置Zabbix-前端"><span class="toc-text">16. 配置Zabbix 前端</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#17-开始使用Zabbix"><span class="toc-text">17. 开始使用Zabbix</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Zabbix-Proxy安装"><span class="toc-text">Zabbix Proxy安装</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-安装数据库"><span class="toc-text">1. 安装数据库</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-启动服务"><span class="toc-text">2. 启动服务</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-初始化数据库"><span class="toc-text">3. 初始化数据库</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-添加zabbix-软件仓库"><span class="toc-text">4. 添加zabbix 软件仓库</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-修改软件仓库，使用国内源（清华源）"><span class="toc-text">5. 修改软件仓库，使用国内源（清华源）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-安装Zabbix-proxy"><span class="toc-text">6. 安装Zabbix proxy</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#7-创建初始数据库"><span class="toc-text">7.  创建初始数据库</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#8-导入初始架构和数据，系统将提示您输入新创建的密码"><span class="toc-text">8. 导入初始架构和数据，系统将提示您输入新创建的密码</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#9-为Zabbix-server-配置数据库"><span class="toc-text">9. 为Zabbix server 配置数据库</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#10-启动Zabbix-proxy服务"><span class="toc-text">10. 启动Zabbix proxy服务</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Zabbix-Agent安装"><span class="toc-text">Zabbix Agent安装</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-添加zabbix-软件仓库"><span class="toc-text">1.  添加zabbix 软件仓库</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-修改软件仓库，使用国内源（清华源）"><span class="toc-text">2. 修改软件仓库，使用国内源（清华源）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-安装Zabbix-Agent"><span class="toc-text">3. 安装Zabbix Agent</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-配置-Zabbix-Agent"><span class="toc-text">4. 配置 Zabbix Agent</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-修改Firewalld-和-Selinux"><span class="toc-text">5. 修改Firewalld 和 Selinux</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-启动服务"><span class="toc-text">6. 启动服务</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#7-在WEB平台上增加被控主机"><span class="toc-text">7. 在WEB平台上增加被控主机</span></a></li></ol></li></ol></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input">
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+        <div class="index-about-mobile">
+            <i> Internet of Everything, Everywhere. </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        【zabbix】CentOS7安装Zabbix
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2019-05-27 13:32:44</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/tags/#zabbix" title="zabbix">zabbix</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+
+    </div>
+    <div class="post-content ">
+        <h2 id="Zabbix-安装（CentOS-7）"><a href="#Zabbix-安装（CentOS-7）" class="headerlink" title="Zabbix 安装（CentOS 7）"></a>Zabbix 安装（CentOS 7）</h2><h3 id="Zabbix-Server安装"><a href="#Zabbix-Server安装" class="headerlink" title="Zabbix Server安装"></a>Zabbix Server安装</h3><h4 id="1-安装LAMP"><a href="#1-安装LAMP" class="headerlink" title="1. 安装LAMP"></a>1. 安装LAMP</h4><figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y httpd mariadb-server php php-mysql php-gd libjpeg* php-ldap php-odbc php-pear php-<span class="keyword">xml</span> <span class="title">php-xmlrpc</span> php-mhash php-mbstring php-bcmath</span><br></pre></td></tr></table></figure>
+<h4 id="2-修改Apache-配置"><a href="#2-修改Apache-配置" class="headerlink" title="2. 修改Apache 配置"></a>2. 修改Apache 配置</h4><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># <span class="keyword">vi</span> /etc/httpd/<span class="keyword">conf</span>/httpd.<span class="keyword">conf</span></span><br><span class="line"></span><br><span class="line">ServerName zabbixserver</span><br><span class="line">DirectoryIndex <span class="built_in">index</span>.html <span class="built_in">index</span>.php</span><br></pre></td></tr></table></figure>
+<h4 id="3-修改PHP-配置"><a href="#3-修改PHP-配置" class="headerlink" title="3. 修改PHP 配置"></a>3. 修改PHP 配置</h4><figure class="highlight axapta"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"># vi /etc/php.ini</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">date</span>.timezone = PRC	<span class="comment">//修改为中国时区</span></span><br></pre></td></tr></table></figure>
+<h4 id="4-修改Firewalld-和-Selinux"><a href="#4-修改Firewalld-和-Selinux" class="headerlink" title="4. 修改Firewalld 和 Selinux"></a>4. 修改Firewalld 和 Selinux</h4><figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">systemctl <span class="built_in">stop</span> firewalld</span><br><span class="line"></span><br><span class="line">sed -i <span class="string">'s/SELINUX=.*/SELINUX=disabled/g'</span> /etc/selinux/config</span><br><span class="line">setenforce <span class="number">0</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 在 enforcing 模式下启用 SELinux 状态后，您需要执行以下命令以启用 Zabbix 前端和 Zabbix server 之间的通信：</span></span><br><span class="line">setsebool -P httpd_can_connect_zabbix <span class="keyword">on</span></span><br><span class="line">setsebool -P httpd_can_network_connect_db <span class="keyword">on</span></span><br><span class="line">systemctl restart httpd</span><br></pre></td></tr></table></figure>
+<h4 id="5-启动服务"><a href="#5-启动服务" class="headerlink" title="5. 启动服务"></a>5. 启动服务</h4><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">systemctl <span class="builtin-name">enable</span> httpd mariadb</span><br><span class="line">systemctl start httpd mariadb</span><br></pre></td></tr></table></figure>
+<h4 id="6-初始化数据库"><a href="#6-初始化数据库" class="headerlink" title="6. 初始化数据库"></a>6. 初始化数据库</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql_secure_installation</span><br></pre></td></tr></table></figure>
+<h4 id="7-测试LAMP-是否搭建成功"><a href="#7-测试LAMP-是否搭建成功" class="headerlink" title="7. 测试LAMP 是否搭建成功"></a>7. 测试LAMP 是否搭建成功</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># vi /var/www/html/index.php</span></span><br><span class="line"></span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">phpinfo();</span><br><span class="line"><span class="meta">?&gt;</span></span><br><span class="line"></span><br><span class="line">访问：http:<span class="comment">//server_ip_or_name</span></span><br></pre></td></tr></table></figure>
+<h4 id="8-添加zabbix-软件仓库"><a href="#8-添加zabbix-软件仓库" class="headerlink" title="8. 添加zabbix 软件仓库"></a>8. 添加zabbix 软件仓库</h4><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">rpm -ivh http<span class="variable">s:</span>//mirrors.tuna.tsinghua.edu.<span class="keyword">cn</span>/zabbix/zabbix/<span class="number">4.0</span>/rhel/<span class="number">7</span>/x86_64/zabbix-release-<span class="number">4.0</span>-<span class="number">1</span>.el7.noarch.rpm</span><br><span class="line">yum clean <span class="keyword">all</span></span><br></pre></td></tr></table></figure>
+<h4 id="9-修改软件仓库，使用国内源（清华源）"><a href="#9-修改软件仓库，使用国内源（清华源）" class="headerlink" title="9. 修改软件仓库，使用国内源（清华源）"></a>9. 修改软件仓库，使用国内源（清华源）</h4><figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># vi /etc/yum.repos.d/zabbix.repo</span></span><br><span class="line"></span><br><span class="line"><span class="section">[zabbix]</span></span><br><span class="line"><span class="attr">name</span>=Zabbix <span class="literal">Off</span>icial Repository - <span class="variable">$basearch</span></span><br><span class="line"><span class="attr">baseurl</span>=https://mirrors.tuna.tsinghua.edu.cn/zabbix/zabbix/<span class="number">4.0</span>/rhel/<span class="number">7</span>/<span class="variable">$basearch</span>/</span><br><span class="line"><span class="attr">enabled</span>=<span class="number">1</span></span><br><span class="line"><span class="attr">gpgcheck</span>=<span class="number">0</span></span><br><span class="line"><span class="attr">gpgkey</span>=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-ZABBIX-A14FE591</span><br><span class="line"></span><br><span class="line"><span class="section">[zabbix-non-supported]</span></span><br><span class="line"><span class="attr">name</span>=Zabbix <span class="literal">Off</span>icial Repository non-supported - <span class="variable">$basearch</span></span><br><span class="line"><span class="attr">baseurl</span>=https://mirrors.tuna.tsinghua.edu.cn/zabbix/non-supported/rhel/<span class="number">7</span>/<span class="variable">$basearch</span>/</span><br><span class="line"><span class="attr">enabled</span>=<span class="number">1</span></span><br><span class="line"><span class="attr">gpgkey</span>=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-ZABBIX</span><br><span class="line"><span class="attr">gpgcheck</span>=<span class="number">0</span></span><br></pre></td></tr></table></figure>
+<h4 id="10-安装Zabbix-server，Web前端，agent"><a href="#10-安装Zabbix-server，Web前端，agent" class="headerlink" title="10. 安装Zabbix server，Web前端，agent"></a>10. 安装Zabbix server，Web前端，agent</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum -y <span class="keyword">install</span> zabbix-<span class="keyword">server</span>-mysql zabbix-web-mysql zabbix-<span class="keyword">agent</span></span><br></pre></td></tr></table></figure>
+<h4 id="11-创建初始数据库"><a href="#11-创建初始数据库" class="headerlink" title="11.  创建初始数据库"></a>11.  创建初始数据库</h4><figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># mysql -uroot -p</span></span><br><span class="line">password</span><br><span class="line">mysql&gt; create database zabbix <span class="built_in">character</span> <span class="keyword">set</span> utf8 collate utf8_bin;</span><br><span class="line">mysql&gt; grant all privileges <span class="keyword">on</span> zabbix.* <span class="keyword">to</span> zabbix@localhost identified <span class="keyword">by</span> 'password';</span><br><span class="line">mysql&gt; quit;</span><br></pre></td></tr></table></figure>
+<h4 id="12-导入初始架构和数据，系统将提示您输入新创建的密码"><a href="#12-导入初始架构和数据，系统将提示您输入新创建的密码" class="headerlink" title="12. 导入初始架构和数据，系统将提示您输入新创建的密码"></a>12. 导入初始架构和数据，系统将提示您输入新创建的密码</h4><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">zcat <span class="regexp">/usr/</span>share<span class="regexp">/doc/</span>zabbix-server-mysql*<span class="regexp">/create.sql.gz | mysql -uzabbix -p zabbix</span></span><br></pre></td></tr></table></figure>
+<h4 id="13-为Zabbix-server-配置数据库"><a href="#13-为Zabbix-server-配置数据库" class="headerlink" title="13. 为Zabbix server 配置数据库"></a>13. 为Zabbix server 配置数据库</h4><figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># egrep -v "^$|^#" /etc/zabbix/zabbix_server.conf </span></span><br><span class="line"></span><br><span class="line"><span class="attr">LogFile</span>=/var/log/zabbix/zabbix_server.log</span><br><span class="line"><span class="attr">LogFileSize</span>=<span class="number">0</span></span><br><span class="line"><span class="attr">PidFile</span>=/var/run/zabbix/zabbix_server.pid</span><br><span class="line"><span class="attr">SocketDir</span>=/var/run/zabbix</span><br><span class="line"><span class="attr">DBName</span>=zabbix</span><br><span class="line"><span class="attr">DBUser</span>=zabbix</span><br><span class="line"><span class="attr">DBPassword</span>=&lt;zabbix_user_password&gt;</span><br><span class="line"><span class="attr">SNMPTrapperFile</span>=/var/log/snmptrap/snmptrap.log</span><br><span class="line"><span class="attr">Timeout</span>=<span class="number">4</span></span><br><span class="line"><span class="attr">AlertScriptsPath</span>=/usr/lib/zabbix/alertscripts</span><br><span class="line"><span class="attr">ExternalScripts</span>=/usr/lib/zabbix/externalscripts</span><br><span class="line"><span class="attr">LogSlowQueries</span>=<span class="number">3000</span></span><br></pre></td></tr></table></figure>
+<h4 id="14-为Zabbix-前端配置PHP"><a href="#14-为Zabbix-前端配置PHP" class="headerlink" title="14. 为Zabbix 前端配置PHP"></a>14. 为Zabbix 前端配置PHP</h4><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># <span class="keyword">vi</span> /etc/httpd/<span class="keyword">conf</span>.d/zabbix.<span class="keyword">conf</span></span><br><span class="line"></span><br><span class="line">php_value date.timezone Asia/Shanghai</span><br></pre></td></tr></table></figure>
+<h4 id="15-启动Zabbix-server-和agent-服务"><a href="#15-启动Zabbix-server-和agent-服务" class="headerlink" title="15. 启动Zabbix server 和agent 服务"></a>15. 启动Zabbix server 和agent 服务</h4><figure class="highlight axapta"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">systemctl enable zabbix-<span class="keyword">server</span> zabbix-agent</span><br><span class="line">systemctl restart zabbix-<span class="keyword">server</span> zabbix-agent httpd</span><br></pre></td></tr></table></figure>
+<h4 id="16-配置Zabbix-前端"><a href="#16-配置Zabbix-前端" class="headerlink" title="16. 配置Zabbix 前端"></a>16. 配置Zabbix 前端</h4><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">访问：<span class="string">http:</span><span class="comment">//server_ip_or_name/zabbix 按提示输入相关信息</span></span><br></pre></td></tr></table></figure>
+<h4 id="17-开始使用Zabbix"><a href="#17-开始使用Zabbix" class="headerlink" title="17. 开始使用Zabbix"></a>17. 开始使用Zabbix</h4><figure class="highlight sqf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">用户名：<span class="built_in">Admin</span></span><br><span class="line">密码：zabbix</span><br></pre></td></tr></table></figure>
+<h3 id="Zabbix-Proxy安装"><a href="#Zabbix-Proxy安装" class="headerlink" title="Zabbix Proxy安装"></a>Zabbix Proxy安装</h3><h4 id="1-安装数据库"><a href="#1-安装数据库" class="headerlink" title="1. 安装数据库"></a>1. 安装数据库</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum <span class="keyword">install</span> -y mariadb-<span class="keyword">server</span></span><br></pre></td></tr></table></figure>
+<h4 id="2-启动服务"><a href="#2-启动服务" class="headerlink" title="2. 启动服务"></a>2. 启动服务</h4><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">systemctl <span class="builtin-name">enable</span> mariadb</span><br><span class="line">systemctl start mariadb</span><br></pre></td></tr></table></figure>
+<h4 id="3-初始化数据库"><a href="#3-初始化数据库" class="headerlink" title="3. 初始化数据库"></a>3. 初始化数据库</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql_secure_installation</span><br></pre></td></tr></table></figure>
+<h4 id="4-添加zabbix-软件仓库"><a href="#4-添加zabbix-软件仓库" class="headerlink" title="4. 添加zabbix 软件仓库"></a>4. 添加zabbix 软件仓库</h4><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">rpm -ivh http<span class="variable">s:</span>//mirrors.tuna.tsinghua.edu.<span class="keyword">cn</span>/zabbix/zabbix/<span class="number">4.0</span>/rhel/<span class="number">7</span>/x86_64/zabbix-release-<span class="number">4.0</span>-<span class="number">1</span>.el7.noarch.rpm</span><br><span class="line">yum clean <span class="keyword">all</span></span><br></pre></td></tr></table></figure>
+<h4 id="5-修改软件仓库，使用国内源（清华源）"><a href="#5-修改软件仓库，使用国内源（清华源）" class="headerlink" title="5. 修改软件仓库，使用国内源（清华源）"></a>5. 修改软件仓库，使用国内源（清华源）</h4><figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># vi /etc/yum.repos.d/zabbix.repo</span></span><br><span class="line"></span><br><span class="line"><span class="section">[zabbix]</span></span><br><span class="line"><span class="attr">name</span>=Zabbix <span class="literal">Off</span>icial Repository - <span class="variable">$basearch</span></span><br><span class="line"><span class="attr">baseurl</span>=https://mirrors.tuna.tsinghua.edu.cn/zabbix/zabbix/<span class="number">4.0</span>/rhel/<span class="number">7</span>/<span class="variable">$basearch</span>/</span><br><span class="line"><span class="attr">enabled</span>=<span class="number">1</span></span><br><span class="line"><span class="attr">gpgcheck</span>=<span class="number">0</span></span><br><span class="line"><span class="attr">gpgkey</span>=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-ZABBIX-A14FE591</span><br><span class="line"></span><br><span class="line"><span class="section">[zabbix-non-supported]</span></span><br><span class="line"><span class="attr">name</span>=Zabbix <span class="literal">Off</span>icial Repository non-supported - <span class="variable">$basearch</span></span><br><span class="line"><span class="attr">baseurl</span>=https://mirrors.tuna.tsinghua.edu.cn/zabbix/non-supported/rhel/<span class="number">7</span>/<span class="variable">$basearch</span>/</span><br><span class="line"><span class="attr">enabled</span>=<span class="number">1</span></span><br><span class="line"><span class="attr">gpgkey</span>=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-ZABBIX</span><br><span class="line"><span class="attr">gpgcheck</span>=<span class="number">0</span></span><br></pre></td></tr></table></figure>
+<h4 id="6-安装Zabbix-proxy"><a href="#6-安装Zabbix-proxy" class="headerlink" title="6. 安装Zabbix proxy"></a>6. 安装Zabbix proxy</h4><figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum -y <span class="keyword">install</span> zabbix-proxy-mysql</span><br></pre></td></tr></table></figure>
+<h4 id="7-创建初始数据库"><a href="#7-创建初始数据库" class="headerlink" title="7.  创建初始数据库"></a>7.  创建初始数据库</h4><figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># mysql -uroot -p</span></span><br><span class="line">password</span><br><span class="line">mysql&gt; create database zabbix_proxy <span class="built_in">character</span> <span class="keyword">set</span> utf8 collate utf8_bin;</span><br><span class="line">mysql&gt; grant all privileges <span class="keyword">on</span> zabbix_proxy.* <span class="keyword">to</span> zabbix@localhost identified <span class="keyword">by</span> 'password';</span><br><span class="line">mysql&gt; quit;</span><br></pre></td></tr></table></figure>
+<h4 id="8-导入初始架构和数据，系统将提示您输入新创建的密码"><a href="#8-导入初始架构和数据，系统将提示您输入新创建的密码" class="headerlink" title="8. 导入初始架构和数据，系统将提示您输入新创建的密码"></a>8. 导入初始架构和数据，系统将提示您输入新创建的密码</h4><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">zcat <span class="regexp">/usr/</span>share<span class="regexp">/doc/</span>zabbix-proxy-mysql*<span class="regexp">/schema.sql.gz | mysql -uzabbix -p zabbix_proxy</span></span><br></pre></td></tr></table></figure>
+<h4 id="9-为Zabbix-server-配置数据库"><a href="#9-为Zabbix-server-配置数据库" class="headerlink" title="9. 为Zabbix server 配置数据库"></a>9. 为Zabbix server 配置数据库</h4><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># egrep -v "^$|^#" /etc/zabbix/zabbix_proxy.conf </span></span><br><span class="line"></span><br><span class="line"><span class="attribute">Server</span>=&lt;zabbix_server&gt;</span><br><span class="line"><span class="attribute">Hostname</span>=Zabbix proxy</span><br><span class="line"><span class="attribute">LogFile</span>=/var/log/zabbix/zabbix_proxy.log</span><br><span class="line"><span class="attribute">LogFileSize</span>=0</span><br><span class="line"><span class="attribute">PidFile</span>=/var/run/zabbix/zabbix_proxy.pid</span><br><span class="line"><span class="attribute">SocketDir</span>=/var/run/zabbix</span><br><span class="line"><span class="attribute">DBName</span>=zabbix_proxy</span><br><span class="line"><span class="attribute">DBUser</span>=zabbix</span><br><span class="line"><span class="attribute">DBPassword</span>=&lt;zabbix_proxy_user_password&gt;</span><br><span class="line"><span class="attribute">SNMPTrapperFile</span>=/var/log/snmptrap/snmptrap.log</span><br><span class="line"><span class="attribute">Timeout</span>=4</span><br><span class="line"><span class="attribute">ExternalScripts</span>=/usr/lib/zabbix/externalscripts</span><br><span class="line"><span class="attribute">LogSlowQueries</span>=3000</span><br></pre></td></tr></table></figure>
+<h4 id="10-启动Zabbix-proxy服务"><a href="#10-启动Zabbix-proxy服务" class="headerlink" title="10. 启动Zabbix proxy服务"></a>10. 启动Zabbix proxy服务</h4><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">systemctl <span class="builtin-name">enable</span> zabbix-proxy</span><br><span class="line">systemctl start zabbix-proxy</span><br></pre></td></tr></table></figure>
+<h3 id="Zabbix-Agent安装"><a href="#Zabbix-Agent安装" class="headerlink" title="Zabbix Agent安装"></a>Zabbix Agent安装</h3><h4 id="1-添加zabbix-软件仓库"><a href="#1-添加zabbix-软件仓库" class="headerlink" title="1.  添加zabbix 软件仓库"></a>1.  添加zabbix 软件仓库</h4><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">rpm -ivh http<span class="variable">s:</span>//mirrors.tuna.tsinghua.edu.<span class="keyword">cn</span>/zabbix/zabbix/<span class="number">4.0</span>/rhel/<span class="number">7</span>/x86_64/zabbix-release-<span class="number">4.0</span>-<span class="number">1</span>.el7.noarch.rpm</span><br><span class="line">yum clean <span class="keyword">all</span></span><br></pre></td></tr></table></figure>
+<h4 id="2-修改软件仓库，使用国内源（清华源）"><a href="#2-修改软件仓库，使用国内源（清华源）" class="headerlink" title="2. 修改软件仓库，使用国内源（清华源）"></a>2. 修改软件仓库，使用国内源（清华源）</h4><figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># vi /etc/yum.repos.d/zabbix.repo</span></span><br><span class="line"></span><br><span class="line"><span class="section">[zabbix]</span></span><br><span class="line"><span class="attr">name</span>=Zabbix <span class="literal">Off</span>icial Repository - <span class="variable">$basearch</span></span><br><span class="line"><span class="attr">baseurl</span>=https://mirrors.tuna.tsinghua.edu.cn/zabbix/zabbix/<span class="number">4.0</span>/rhel/<span class="number">7</span>/<span class="variable">$basearch</span>/</span><br><span class="line"><span class="attr">enabled</span>=<span class="number">1</span></span><br><span class="line"><span class="attr">gpgcheck</span>=<span class="number">0</span></span><br><span class="line"><span class="attr">gpgkey</span>=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-ZABBIX-A14FE591</span><br><span class="line"></span><br><span class="line"><span class="section">[zabbix-non-supported]</span></span><br><span class="line"><span class="attr">name</span>=Zabbix <span class="literal">Off</span>icial Repository non-supported - <span class="variable">$basearch</span></span><br><span class="line"><span class="attr">baseurl</span>=https://mirrors.tuna.tsinghua.edu.cn/zabbix/non-supported/rhel/<span class="number">7</span>/<span class="variable">$basearch</span>/</span><br><span class="line"><span class="attr">enabled</span>=<span class="number">1</span></span><br><span class="line"><span class="attr">gpgkey</span>=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-ZABBIX</span><br><span class="line"><span class="attr">gpgcheck</span>=<span class="number">0</span></span><br></pre></td></tr></table></figure>
+<h4 id="3-安装Zabbix-Agent"><a href="#3-安装Zabbix-Agent" class="headerlink" title="3. 安装Zabbix Agent"></a>3. 安装Zabbix Agent</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum <span class="keyword">install</span> -y zabbix-<span class="keyword">agent</span></span><br></pre></td></tr></table></figure>
+<h4 id="4-配置-Zabbix-Agent"><a href="#4-配置-Zabbix-Agent" class="headerlink" title="4. 配置 Zabbix Agent"></a>4. 配置 Zabbix Agent</h4><figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># egrep -v "^$|^#" /etc/zabbix/zabbix_agentd.conf </span></span><br><span class="line"></span><br><span class="line"><span class="attr">PidFile</span>=/var/run/zabbix/zabbix_agentd.pid</span><br><span class="line"><span class="attr">LogFile</span>=/var/log/zabbix/zabbix_agentd.log</span><br><span class="line"><span class="attr">LogFileSize</span>=<span class="number">0</span></span><br><span class="line"><span class="attr">Server</span>=&lt;zabbix_server_or_zabbix_proxy_ip&gt;</span><br><span class="line"><span class="attr">ServerActive</span>=&lt;zabbix_server_or_zabbix_proxy_ip&gt;</span><br><span class="line"><span class="attr">Hostname</span>=&lt;hostname&gt;</span><br><span class="line"><span class="attr">Include</span>=/etc/zabbix/zabbix_agentd.d/*.conf</span><br></pre></td></tr></table></figure>
+<h4 id="5-修改Firewalld-和-Selinux"><a href="#5-修改Firewalld-和-Selinux" class="headerlink" title="5. 修改Firewalld 和 Selinux"></a>5. 修改Firewalld 和 Selinux</h4><figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">systemctl <span class="built_in">stop</span> firewalld</span><br><span class="line"></span><br><span class="line">sed -i <span class="string">'s/SELINUX=.*/SELINUX=disabled/g'</span> /etc/selinux/<span class="built_in">config</span></span><br><span class="line">setenforce <span class="number">0</span></span><br></pre></td></tr></table></figure>
+<h4 id="6-启动服务"><a href="#6-启动服务" class="headerlink" title="6. 启动服务"></a>6. 启动服务</h4><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">systemctl <span class="builtin-name">enable</span> zabbix-agent</span><br><span class="line">systemctl restart zabbix-agent</span><br></pre></td></tr></table></figure>
+<h4 id="7-在WEB平台上增加被控主机"><a href="#7-在WEB平台上增加被控主机" class="headerlink" title="7. 在WEB平台上增加被控主机"></a>7. 在WEB平台上增加被控主机</h4><p><em>备注：</em></p>
+<ol>
+<li><em>配置文件中的Hostname 一定要与界面上保持一致</em></li>
+<li><em>agent 配置Server 和ServerActive 时要确定直接被Server 管控还是使用Proxy</em></li>
+<li><em>SELINUX 一定要预先设置为disable，最好设置后重启系统</em></li>
+<li><em>要么关闭防火墙，要么开放对应的端口（agent：10050，proxy：10051）</em></li>
+<li><em>使用二进制包安装时切换到国内源，官方源实在太慢了</em></li>
+</ol>
+
+        
+        <br>
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+    </div>
+</div>
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+        <li>
+            <a target="_blank" href="https://www.zhihu.com/people/li-bo-2-25">
+                            <span class="fa-stack fa-lg">
+                                 <i class="iconfont icon-zhihu"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+        
+
+        
+        <li>
+            <a target="_blank" href="https://github.com/liboo0731">
+                            <span class="fa-stack fa-lg">
+                                <i class="iconfont icon-github"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span>/</span>
+        
+        <span><a href="https://www.cnblogs.com/liboo/">H2K1R~ACE_博客园</a></span>
+        <span>/</span>
+        
+        <span><a href="https://blog.csdn.net/weixin_40108079">H2K1E~ACE_CSDN</a></span>
+        <span>/</span>
+        
+    </p>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/js/index.js"></script>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+    <script>
+        /**
+         *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+         *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+        */
+        if( '' || '')
+        var disqus_config = function () {
+            this.page.url = '';  // Replace PAGE_URL with your page's canonical URL variable
+            this.page.identifier = ''; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        };
+
+        (function() { // DON'T EDIT BELOW THIS LINE
+            var d = document, s = d.createElement('script');
+            s.src = 'https://airclouds-blog.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+    </script>
+
+</html>

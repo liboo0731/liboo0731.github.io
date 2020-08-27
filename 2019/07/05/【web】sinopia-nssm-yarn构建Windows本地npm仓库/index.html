@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="李博的博客">
+    <meta name="keyword" content="striveliboo">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        【web】Sinopia 构建Windows 本地NPM 仓库 - Liboo的博客 | Liboo&#39;s Blog
+        
+    </title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/aircloud.css">
+    <link rel="stylesheet" href="/css/gitment.css">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> Internet of Everything, Everywhere. </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar">
+            <img src="/img/avatar.jpg">
+        </div>
+        <div class="name">
+            <i>H2K1E~ACE</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li>
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li>
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li>
+                <a href="/archive">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li>
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Sinopia-构建Windows-本地NPM-仓库"><span class="toc-text">Sinopia 构建Windows 本地NPM 仓库</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#安装Node-环境"><span class="toc-text">安装Node 环境</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#下载NSSM"><span class="toc-text">下载NSSM</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#如何使用NSSM"><span class="toc-text">如何使用NSSM</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Installing-As-a-Windows-Service"><span class="toc-text">Installing As a Windows Service</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Using-NSSM"><span class="toc-text">Using NSSM:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Using-WinSW"><span class="toc-text">Using WinSW</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Sinopia-目录结构"><span class="toc-text">Sinopia 目录结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Sinopia-配置文件（config-yaml）"><span class="toc-text">Sinopia 配置文件（config.yaml）</span></a></li></ol></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input">
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+        <div class="index-about-mobile">
+            <i> Internet of Everything, Everywhere. </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        【web】Sinopia 构建Windows 本地NPM 仓库
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2019-07-05 09:49:55</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/tags/#web" title="web">web</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#sinopia" title="sinopia">sinopia</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#nssm" title="nssm">nssm</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+
+    </div>
+    <div class="post-content ">
+        <h2 id="Sinopia-构建Windows-本地NPM-仓库"><a href="#Sinopia-构建Windows-本地NPM-仓库" class="headerlink" title="Sinopia 构建Windows 本地NPM 仓库"></a>Sinopia 构建Windows 本地NPM 仓库</h2><h3 id="安装Node-环境"><a href="#安装Node-环境" class="headerlink" title="安装Node 环境"></a>安装Node 环境</h3><p><a href="https://nodejs.org/en/download/" target="_blank" rel="noopener">Downloads</a></p>
+<p><img src="1.png" alt="1.png"></p>
+<h3 id="下载NSSM"><a href="#下载NSSM" class="headerlink" title="下载NSSM"></a>下载NSSM</h3><p><a href="https://www.nssm.cc/download/" target="_blank" rel="noopener">Download</a></p>
+<p><img src="2.png" alt="2.png"></p>
+<h3 id="如何使用NSSM"><a href="#如何使用NSSM" class="headerlink" title="如何使用NSSM"></a>如何使用NSSM</h3><p>服务安装命令： <code>nssm install &lt;servicename&gt;</code></p>
+<p>参考：</p>
+<p><a href="https://www.cnblogs.com/TianFang/p/7912648.html" target="_blank" rel="noopener">使用NSSM将exe封装为服务</a></p>
+<p><img src="3.png" alt="3.png"></p>
+<h3 id="Installing-As-a-Windows-Service"><a href="#Installing-As-a-Windows-Service" class="headerlink" title="Installing As a Windows Service"></a>Installing As a Windows Service</h3><p>Petrik van der Velde edited this page Oct 31, 2017 · <a href="https://github.com/rlidwka/sinopia/wiki/Installing-As-a-Windows-Service/_history" target="_blank" rel="noopener">10 revisions</a></p>
+<p>Loosely based upon the instructions found <a href="http://asysadmin.tumblr.com/post/32941224574/running-nginx-on-windows-as-a-service" target="_blank" rel="noopener">here</a>. I crafted the following and it provided me with a fully working sinopia service installation:</p>
+<ol>
+<li><p>Create a directory for sinopia</p>
+<ul>
+<li><code>mkdir c:\sinopia</code></li>
+<li><code>cd c:\sinopia</code></li>
+</ul>
+</li>
+<li><p>Install sinopia locally (I ran into npm issues with global installs)</p>
+<ul>
+<li><code>npm install sinopia</code></li>
+</ul>
+</li>
+<li><p>Create your config.yaml file in this location (<code>c:\sinopia\config.yaml</code>)</p>
+</li>
+<li><p>Windows Service Setup</p>
+<h4 id="Using-NSSM"><a href="#Using-NSSM" class="headerlink" title="Using NSSM:"></a>Using NSSM:</h4><ul>
+<li><p>Download <a href="https://www.nssm.cc/download/" target="_blank" rel="noopener">NSSM</a> and extract</p>
+</li>
+<li><p>Open an administrative command</p>
+</li>
+<li><p>Browse to the nssm extract location</p>
+</li>
+<li><p>Run <code>nssm install sinopia</code> At a minimum you must fill in the <em>Application</em> tab Path, Startup directory and Arguments fields. Assuming an install with node in the system path and a location of c:\sinopia the below values will work:</p>
+<ul>
+<li>Path: <code>node</code></li>
+<li>Startup directory: <code>c:\sinopia</code></li>
+<li>Arguments: <code>c:\sinopia\node_modules\sinopia\lib\cli.js -c c:\sinopia\config.yaml</code></li>
+</ul>
+<p>You can adjust other service settings under other tabs as desired. When you are done, click <em>Install service</em> button</p>
+</li>
+<li><p>Start the service <code>sc start sinopia</code></p>
+</li>
+</ul>
+<h4 id="Using-WinSW"><a href="#Using-WinSW" class="headerlink" title="Using WinSW"></a>Using WinSW</h4><ul>
+<li>Download <a href="http://repo.jenkins-ci.org/releases/com/sun/winsw/winsw/" target="_blank" rel="noopener">WinSW</a><ul>
+<li>Place the executable (e.g. <code>winsw-1.19-bin.exe</code>) into this folder (<code>c:\sinopia</code>) and rename it to <code>sinopia-winsw.exe</code></li>
+</ul>
+</li>
+<li>Create a configuration file in <code>c:\sinopia</code>, named <code>sinopia-winsw.xml</code> with the following configuration</li>
+</ul>
+</li>
+</ol>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">service</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">id</span>&gt;</span>sinopia<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">name</span>&gt;</span>sinopia<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">description</span>&gt;</span>sinopia<span class="tag">&lt;/<span class="name">description</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">executable</span>&gt;</span>node<span class="tag">&lt;/<span class="name">executable</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">arguments</span>&gt;</span>c:\sinopia\node_modules\sinopia\lib\cli.js -c c:\sinopia\config.yaml<span class="tag">&lt;/<span class="name">arguments</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">logmode</span>&gt;</span>roll<span class="tag">&lt;/<span class="name">logmode</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">workingdirectory</span>&gt;</span>c:\sinopia\<span class="tag">&lt;/<span class="name">workingdirectory</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">service</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>Install your service<ul>
+<li><code>cd c:\sinopia</code></li>
+<li><code>sinopia-winsw.exe install</code></li>
+</ul>
+</li>
+<li>Start your service<ul>
+<li><code>sinopia-winsw.exe start</code></li>
+</ul>
+</li>
+</ul>
+<p>Some of the above config is more verbose than I had expected, it appears as though ‘workingdirectory’ is ignored, but other than that, this works for me and allows my sinopia instance to persist between restarts of the server, and also restart itself should there be any crashes of the sinopia process.</p>
+<h3 id="Sinopia-目录结构"><a href="#Sinopia-目录结构" class="headerlink" title="Sinopia 目录结构"></a>Sinopia 目录结构</h3><p><img src="4.png" alt="4.png"></p>
+<h3 id="Sinopia-配置文件（config-yaml）"><a href="#Sinopia-配置文件（config-yaml）" class="headerlink" title="Sinopia 配置文件（config.yaml）"></a>Sinopia 配置文件（config.yaml）</h3><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># This is the default config file. It allows all users to do anything,</span></span><br><span class="line"><span class="comment"># so don't use it on production systems.</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># Look here for more config file examples:</span></span><br><span class="line"><span class="comment"># https://github.com/rlidwka/sinopia/tree/master/conf</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># path to a directory with all packages</span></span><br><span class="line"><span class="attr">storage:</span> <span class="string">./storage</span></span><br><span class="line"></span><br><span class="line"><span class="attr">auth:</span></span><br><span class="line"><span class="attr">  htpasswd:</span></span><br><span class="line"><span class="attr">    file:</span> <span class="string">./htpasswd</span></span><br><span class="line">    <span class="comment"># Maximum amount of users allowed to register, defaults to "+inf".</span></span><br><span class="line">    <span class="comment"># You can set this to -1 to disable registration.</span></span><br><span class="line"><span class="attr">    max_users:</span> <span class="number">3</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># a list of other known repositories we can talk to</span></span><br><span class="line"><span class="attr">uplinks:</span></span><br><span class="line"><span class="attr">  npmjs:</span></span><br><span class="line"><span class="attr">    url:</span> <span class="attr">http://registry.npm.taobao.org/</span></span><br><span class="line"></span><br><span class="line"><span class="attr">packages:</span></span><br><span class="line">  <span class="string">'@*/*'</span><span class="string">:</span></span><br><span class="line">    <span class="comment"># scoped packages</span></span><br><span class="line"><span class="attr">    access:</span> <span class="string">$all</span></span><br><span class="line"><span class="attr">    publish:</span> <span class="string">$authenticated</span></span><br><span class="line"></span><br><span class="line">  <span class="string">'*'</span><span class="string">:</span></span><br><span class="line">    <span class="comment"># allow all users (including non-authenticated users) to read and</span></span><br><span class="line">    <span class="comment"># publish all packages</span></span><br><span class="line">    <span class="comment">#</span></span><br><span class="line">    <span class="comment"># you can specify usernames/groupnames (depending on your auth plugin)</span></span><br><span class="line">    <span class="comment"># and three keywords: "$all", "$anonymous", "$authenticated"</span></span><br><span class="line"><span class="attr">    access:</span> <span class="string">$all</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># allow all known users to publish packages</span></span><br><span class="line">    <span class="comment"># (anyone can register by default, remember?)</span></span><br><span class="line"><span class="attr">    publish:</span> <span class="string">$authenticated</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># if package is not available locally, proxy requests to 'npmjs' registry</span></span><br><span class="line"><span class="attr">    proxy:</span> <span class="string">npmjs</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># log settings</span></span><br><span class="line"><span class="attr">logs:</span></span><br><span class="line"><span class="bullet">  -</span> <span class="string">&#123;type:</span> <span class="string">stdout,</span> <span class="attr">format:</span> <span class="string">pretty,</span> <span class="attr">level:</span> <span class="string">http&#125;</span></span><br><span class="line">  <span class="comment">#- &#123;type: file, path: sinopia.log, level: info&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="attr">listen:</span> <span class="number">0.0</span><span class="number">.0</span><span class="number">.0</span><span class="string">:4873</span></span><br></pre></td></tr></table></figure>
+
+        
+        <br>
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+    </div>
+</div>
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+        <li>
+            <a target="_blank" href="https://www.zhihu.com/people/li-bo-2-25">
+                            <span class="fa-stack fa-lg">
+                                 <i class="iconfont icon-zhihu"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+        
+
+        
+        <li>
+            <a target="_blank" href="https://github.com/liboo0731">
+                            <span class="fa-stack fa-lg">
+                                <i class="iconfont icon-github"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span>/</span>
+        
+        <span><a href="https://www.cnblogs.com/liboo/">H2K1R~ACE_博客园</a></span>
+        <span>/</span>
+        
+        <span><a href="https://blog.csdn.net/weixin_40108079">H2K1E~ACE_CSDN</a></span>
+        <span>/</span>
+        
+    </p>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/js/index.js"></script>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+    <script>
+        /**
+         *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+         *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+        */
+        if( '' || '')
+        var disqus_config = function () {
+            this.page.url = '';  // Replace PAGE_URL with your page's canonical URL variable
+            this.page.identifier = ''; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        };
+
+        (function() { // DON'T EDIT BELOW THIS LINE
+            var d = document, s = d.createElement('script');
+            s.src = 'https://airclouds-blog.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+    </script>
+
+</html>

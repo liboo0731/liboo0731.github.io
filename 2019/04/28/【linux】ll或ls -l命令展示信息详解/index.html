@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="李博的博客">
+    <meta name="keyword" content="striveliboo">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        【linux】ll或ls -l命令展示信息详解 - Liboo的博客 | Liboo&#39;s Blog
+        
+    </title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/aircloud.css">
+    <link rel="stylesheet" href="/css/gitment.css">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> Internet of Everything, Everywhere. </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar">
+            <img src="/img/avatar.jpg">
+        </div>
+        <div class="name">
+            <i>H2K1E~ACE</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li>
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li>
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li>
+                <a href="/archive">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li>
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#ll或ls-l命令展示信息详解"><span class="toc-text">ll或ls -l命令展示信息详解</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#字段1（文件-目录属性）"><span class="toc-text">字段1（文件/目录属性）</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#第一个字符表示文件类别，如下："><span class="toc-text">第一个字符表示文件类别，如下：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#后9个字符代表3组访问权限："><span class="toc-text">后9个字符代表3组访问权限：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#最后一个字符点（-）或者加号（-）"><span class="toc-text">最后一个字符点（.）或者加号（+）:</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#总结："><span class="toc-text">总结：</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#字段2（文件硬链接数或目录子目录数）"><span class="toc-text">字段2（文件硬链接数或目录子目录数）</span></a></li></ol></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input">
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+        <div class="index-about-mobile">
+            <i> Internet of Everything, Everywhere. </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        【linux】ll或ls -l命令展示信息详解
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2019-04-28 22:11:22</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/tags/#linux" title="linux">linux</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#ll" title="ll">ll</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#ls" title="ls">ls</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+
+    </div>
+    <div class="post-content ">
+        <h3 id="ll或ls-l命令展示信息详解"><a href="#ll或ls-l命令展示信息详解" class="headerlink" title="ll或ls -l命令展示信息详解"></a>ll或ls -l命令展示信息详解</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# ll</span><br><span class="line">total 12</span><br><span class="line">drwxr-xr-x. 2 root root    6 Apr 22 10:12 123</span><br><span class="line">drwxr-xr-x. 3 root root   17 Apr 22 10:12 234</span><br><span class="line">-rw-------. 1 root root 1243 Apr  8 14:58 anaconda-ks.cfg</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">字段1</th>
+<th style="text-align:center">字段2</th>
+<th style="text-align:center">字段3</th>
+<th style="text-align:center">字段4</th>
+<th style="text-align:center">字段5</th>
+<th style="text-align:center">字段6,7,8</th>
+<th style="text-align:center">字段9</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">属性</td>
+<td style="text-align:center">文件硬链接数或目录子目录数</td>
+<td style="text-align:center">拥有者</td>
+<td style="text-align:center">拥有者所在的组</td>
+<td style="text-align:center">大小(以字节为单位)</td>
+<td style="text-align:center">日期</td>
+<td style="text-align:center">名称</td>
+</tr>
+<tr>
+<td style="text-align:center">drwxr-xr-x.</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">root</td>
+<td style="text-align:center">root</td>
+<td style="text-align:center">6</td>
+<td style="text-align:center">Apr 22 10:12</td>
+<td style="text-align:center">123</td>
+</tr>
+</tbody>
+</table>
+<h4 id="字段1（文件-目录属性）"><a href="#字段1（文件-目录属性）" class="headerlink" title="字段1（文件/目录属性）"></a>字段1（文件/目录属性）</h4><h5 id="第一个字符表示文件类别，如下："><a href="#第一个字符表示文件类别，如下：" class="headerlink" title="第一个字符表示文件类别，如下："></a>第一个字符表示文件类别，如下：</h5><ul>
+<li>-：普通文件</li>
+<li>d：目录文件</li>
+<li>b：块设备文件</li>
+<li>c：字符设备文件</li>
+<li>l：符号链接文件</li>
+<li>s: 表示该文件为套接字文件（socket），用于进程间通信</li>
+<li>p: 管道</li>
+</ul>
+<h5 id="后9个字符代表3组访问权限："><a href="#后9个字符代表3组访问权限：" class="headerlink" title="后9个字符代表3组访问权限："></a>后9个字符代表3组访问权限：</h5><ol>
+<li>前3个字符是授权文件所有者的权限；</li>
+<li>中间3个字符是授权同组用户的权限；</li>
+<li>后3个字符是授权其他用户的权限。</li>
+</ol>
+<p>每一组的3个字符一次表示读、写、执行权限，其中：</p>
+<ul>
+<li>r：表示有读权限</li>
+<li>w：表示有写权限</li>
+<li>x：表示有执行权限</li>
+<li>-：表示没有相应的权限</li>
+</ul>
+<h5 id="最后一个字符点（-）或者加号（-）"><a href="#最后一个字符点（-）或者加号（-）" class="headerlink" title="最后一个字符点（.）或者加号（+）:"></a>最后一个字符点（.）或者加号（+）:</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> ll -Z</span></span><br><span class="line">-rw-r--r--  root root ?                                a.file  #没有SElinux上下文，没有ACL</span><br><span class="line">-rw-r--r--+ root root ?                                b.file  #只有ACL，没有SElinux上下文</span><br><span class="line">-rw-------. root root system_u:object_r:admin_home_t:s0 my.cnf #只有SElinux上下文，没有ACL</span><br><span class="line">-rw-rw-r--+ root root unconfined_u:object_r:user_tmp_t:s0 dd.c #有SElinux上下文，有ACL</span><br></pre></td></tr></table></figure>
+<p>开启SELinux功能的Linux系统才会有这个点。 点表示文件带有“SELinux的安全上下文”。 </p>
+<p>CentOS7默认是开启SELinux的，所以会有这个点， 如果关闭SELinux，然后再创建文件，新创建的文件就不会再有这个点了， 但是以前创建的文件本来有这个点的还会显示这个点（虽然SELinux不起作用了）。</p>
+<p>加了ACL权限控制之后，之前具有SELinux属性的文件和目录的权限列最后一个位置全部变成了加号（+）。移除原来的ACL权限之后，恢复原样。</p>
+<h5 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h5><ul>
+<li>Linux权限列的点不是无意义字符。在开启SELinux的情况下创建的目录和文件有具有这个点，权限列有这个点说明该目录或文件以及设置了SELinux相关的权限。在禁用SELinux权限之后，在之前开启SELinux权限时创建的文件或目录保持原来的权限不便，权限列的点依然显示。新创建的目录或文件在权限列无这个点显示。</li>
+<li>权限列中最后一个位置如果是加号，说明这个目录或文件已经设置了ACL权限相关的内容。如果加号存在，则已经有点的目录或文件，点的显示会被覆盖，但原来的SELinux属性保持不变。</li>
+</ul>
+<h4 id="字段2（文件硬链接数或目录子目录数）"><a href="#字段2（文件硬链接数或目录子目录数）" class="headerlink" title="字段2（文件硬链接数或目录子目录数）"></a>字段2（文件硬链接数或目录子目录数）</h4><ul>
+<li>新建文件默认数字为1，代表一个硬链接</li>
+<li>新建目录默认数字为2，代表拥有两个子目录（ . 和 .. ）</li>
+</ul>
+
+        
+        <br>
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+    </div>
+</div>
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+        <li>
+            <a target="_blank" href="https://www.zhihu.com/people/li-bo-2-25">
+                            <span class="fa-stack fa-lg">
+                                 <i class="iconfont icon-zhihu"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+        
+
+        
+        <li>
+            <a target="_blank" href="https://github.com/liboo0731">
+                            <span class="fa-stack fa-lg">
+                                <i class="iconfont icon-github"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span>/</span>
+        
+        <span><a href="https://www.cnblogs.com/liboo/">H2K1R~ACE_博客园</a></span>
+        <span>/</span>
+        
+        <span><a href="https://blog.csdn.net/weixin_40108079">H2K1E~ACE_CSDN</a></span>
+        <span>/</span>
+        
+    </p>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/js/index.js"></script>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+    <script>
+        /**
+         *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+         *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+        */
+        if( '' || '')
+        var disqus_config = function () {
+            this.page.url = '';  // Replace PAGE_URL with your page's canonical URL variable
+            this.page.identifier = ''; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        };
+
+        (function() { // DON'T EDIT BELOW THIS LINE
+            var d = document, s = d.createElement('script');
+            s.src = 'https://airclouds-blog.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+    </script>
+
+</html>

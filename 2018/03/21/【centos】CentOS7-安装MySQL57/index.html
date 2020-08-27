@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="李博的博客">
+    <meta name="keyword" content="striveliboo">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        【centos】CentOS7-安装MySQL5.7 - Liboo的博客 | Liboo&#39;s Blog
+        
+    </title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/aircloud.css">
+    <link rel="stylesheet" href="/css/gitment.css">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> Internet of Everything, Everywhere. </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar">
+            <img src="/img/avatar.jpg">
+        </div>
+        <div class="name">
+            <i>H2K1E~ACE</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li>
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li>
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li>
+                <a href="/archive">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li>
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#配置-yum-源"><span class="toc-text">配置 yum 源</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安装-mysql-源"><span class="toc-text">安装 mysql 源</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#下载"><span class="toc-text">下载</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#安装-mysql-源-1"><span class="toc-text">安装 mysql 源</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#用下面的命令检查-mysql-源是否安装成功"><span class="toc-text">用下面的命令检查 mysql 源是否安装成功</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安装-MySQL"><span class="toc-text">安装 MySQL</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#使用-yum-install-命令安装"><span class="toc-text">使用 yum install 命令安装</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#启动-MySQL-服务，在-CentOS-7-下，新的启动-关闭服务的命令是-systemctl-start-stop"><span class="toc-text">启动 MySQL 服务，在 CentOS 7 下，新的启动/关闭服务的命令是 systemctl start|stop</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#用-systemctl-status-查看-MySQL-状态"><span class="toc-text">用 systemctl status 查看 MySQL 状态</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#MySQL-启动状态，设置开机启动"><span class="toc-text">MySQL 启动状态，设置开机启动</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#修改-root-本地账户密码，mysql-安装完成之后，生成的默认密码在-var-log-mysqld-log-文件中。使用-grep-命令找到日志中的密码。"><span class="toc-text">修改 root 本地账户密码，mysql 安装完成之后，生成的默认密码在 /var/log/mysqld.log 文件中。使用 grep 命令找到日志中的密码。</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#查看临时密码，首次通过初始密码登录后，使用以下命令修改密码"><span class="toc-text">查看临时密码，首次通过初始密码登录后，使用以下命令修改密码</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#以后通过-update-set-语句修改密码"><span class="toc-text">以后通过 update set 语句修改密码</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#添加远程登录用户"><span class="toc-text">添加远程登录用户</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#添加一个允许远程连接的帐户"><span class="toc-text">添加一个允许远程连接的帐户</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#修改-root-为允许远程连接（不推荐）"><span class="toc-text">修改 root 为允许远程连接（不推荐）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#设置默认编码为-utf8"><span class="toc-text">设置默认编码为 utf8</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#默认配置文件路径："><span class="toc-text">默认配置文件路径：</span></a></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input">
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+        <div class="index-about-mobile">
+            <i> Internet of Everything, Everywhere. </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        【centos】CentOS7-安装MySQL5.7
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2018-03-21 21:14:19</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/tags/#centos" title="centos">centos</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#centos7" title="centos7">centos7</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#mysql" title="mysql">mysql</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+
+    </div>
+    <div class="post-content ">
+        <h3 id="配置-yum-源"><a href="#配置-yum-源" class="headerlink" title="配置 yum 源"></a>配置 yum 源</h3><p>在 <a href="https://dev.mysql.com/downloads/repo/yum/" target="_blank" rel="noopener">https://dev.mysql.com/downloads/repo/yum/</a> 找到 yum 源 rpm 安装包</p>
+<h3 id="安装-mysql-源"><a href="#安装-mysql-源" class="headerlink" title="安装 mysql 源"></a>安装 mysql 源</h3><h4 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h4><p>shell&gt; wget <a href="https://dev.mysql.com/get/mysql57-community-release-el7-11.noarch.rpm" target="_blank" rel="noopener">https://dev.mysql.com/get/mysql57-community-release-el7-11.noarch.rpm</a></p>
+<h4 id="安装-mysql-源-1"><a href="#安装-mysql-源-1" class="headerlink" title="安装 mysql 源"></a>安装 mysql 源</h4><p>shell&gt; yum localinstall mysql57-community-release-el7-11.noarch.rpm</p>
+<h4 id="用下面的命令检查-mysql-源是否安装成功"><a href="#用下面的命令检查-mysql-源是否安装成功" class="headerlink" title="用下面的命令检查 mysql 源是否安装成功"></a>用下面的命令检查 mysql 源是否安装成功</h4><p>shell&gt; yum repolist enabled | grep “mysql.<em>-community.</em>“</p>
+<h3 id="安装-MySQL"><a href="#安装-MySQL" class="headerlink" title="安装 MySQL"></a>安装 MySQL</h3><h4 id="使用-yum-install-命令安装"><a href="#使用-yum-install-命令安装" class="headerlink" title="使用 yum install 命令安装"></a>使用 yum install 命令安装</h4><p>shell&gt; yum install mysql-community-server</p>
+<h4 id="启动-MySQL-服务，在-CentOS-7-下，新的启动-关闭服务的命令是-systemctl-start-stop"><a href="#启动-MySQL-服务，在-CentOS-7-下，新的启动-关闭服务的命令是-systemctl-start-stop" class="headerlink" title="启动 MySQL 服务，在 CentOS 7 下，新的启动/关闭服务的命令是 systemctl start|stop"></a>启动 MySQL 服务，在 CentOS 7 下，新的启动/关闭服务的命令是 systemctl start|stop</h4><p>shell&gt; systemctl start mysqld</p>
+<h4 id="用-systemctl-status-查看-MySQL-状态"><a href="#用-systemctl-status-查看-MySQL-状态" class="headerlink" title="用 systemctl status 查看 MySQL 状态"></a>用 systemctl status 查看 MySQL 状态</h4><p>shell&gt; systemctl status mysqld</p>
+<h4 id="MySQL-启动状态，设置开机启动"><a href="#MySQL-启动状态，设置开机启动" class="headerlink" title="MySQL 启动状态，设置开机启动"></a>MySQL 启动状态，设置开机启动</h4><p>shell&gt; systemctl enable mysqld</p>
+<p>shell&gt; systemctl daemon-reload</p>
+<h4 id="修改-root-本地账户密码，mysql-安装完成之后，生成的默认密码在-var-log-mysqld-log-文件中。使用-grep-命令找到日志中的密码。"><a href="#修改-root-本地账户密码，mysql-安装完成之后，生成的默认密码在-var-log-mysqld-log-文件中。使用-grep-命令找到日志中的密码。" class="headerlink" title="修改 root 本地账户密码，mysql 安装完成之后，生成的默认密码在 /var/log/mysqld.log 文件中。使用 grep 命令找到日志中的密码。"></a>修改 root 本地账户密码，mysql 安装完成之后，生成的默认密码在 /var/log/mysqld.log 文件中。使用 grep 命令找到日志中的密码。</h4><p>shell&gt; grep ‘temporary password’ /var/log/mysqld.log</p>
+<h4 id="查看临时密码，首次通过初始密码登录后，使用以下命令修改密码"><a href="#查看临时密码，首次通过初始密码登录后，使用以下命令修改密码" class="headerlink" title="查看临时密码，首次通过初始密码登录后，使用以下命令修改密码"></a>查看临时密码，首次通过初始密码登录后，使用以下命令修改密码</h4><p>shell&gt; mysql -uroot -p mysql&gt; ALTER USER ‘root‘@’localhost’ IDENTIFIED BY ‘MyNewPass4!’;</p>
+<p>或者</p>
+<p>mysql&gt; set password for ‘root‘@’localhost’=password(‘MyNewPass4!’);</p>
+<h4 id="以后通过-update-set-语句修改密码"><a href="#以后通过-update-set-语句修改密码" class="headerlink" title="以后通过 update set 语句修改密码"></a>以后通过 update set 语句修改密码</h4><p>mysql&gt; use mysql; mysql&gt; update user set password=PASSWORD(‘MyNewPass5!’) where user=’root’;</p>
+<p>注意：mysql 5.7 默认安装了密码安全检查插件（validate_password），默认密码检查策略要求密码必须包含：大小写字母、数字和特殊符号，并且长度不能少于8位。否则会提示 ERROR 1819 (HY000): Your password does not satisfy the current policy requirements 错误。查看 MySQL官网密码详细策略。</p>
+<h3 id="添加远程登录用户"><a href="#添加远程登录用户" class="headerlink" title="添加远程登录用户"></a>添加远程登录用户</h3><p>默认只允许root帐户在本地登录，如果要在其它机器上连接mysql，必须添加一个允许远程连接的帐户。或者修改 root 为允许远程连接（不推荐）</p>
+<h3 id="添加一个允许远程连接的帐户"><a href="#添加一个允许远程连接的帐户" class="headerlink" title="添加一个允许远程连接的帐户"></a>添加一个允许远程连接的帐户</h3><p>mysql&gt; GRANT ALL PRIVILEGES ON <em>.</em> TO ‘zhangsan‘@’%’ IDENTIFIED BY ‘Zhangsan2018!’ WITH GRANT OPTION;</p>
+<h3 id="修改-root-为允许远程连接（不推荐）"><a href="#修改-root-为允许远程连接（不推荐）" class="headerlink" title="修改 root 为允许远程连接（不推荐）"></a>修改 root 为允许远程连接（不推荐）</h3><p>mysql&gt; use mysql; mysql&gt; UPDATE user SET Host=’%’ WHERE User=’root’; mysql&gt; flush privileges;</p>
+<h3 id="设置默认编码为-utf8"><a href="#设置默认编码为-utf8" class="headerlink" title="设置默认编码为 utf8"></a>设置默认编码为 utf8</h3><p>mysql 安装后默认不支持中文，需要修改编码。</p>
+<p>修改 /etc/my.cnf 配置文件，在相关节点（没有则自行添加）下添加编码配置，如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[mysqld]</span><br><span class="line">character-set-server=utf8</span><br><span class="line"></span><br><span class="line">[client]</span><br><span class="line">default-character-set=utf8</span><br><span class="line"></span><br><span class="line">[mysql]</span><br><span class="line">default-character-set=utf8</span><br></pre></td></tr></table></figure>
+<p>重启mysql服务，查询编码。可以看到已经改过来了</p>
+<p>shell&gt; systemctl restart mysqld </p>
+<p>shell&gt; mysql -uroot -p </p>
+<p>mysql&gt; show variables like ‘character%’;</p>
+<h3 id="默认配置文件路径："><a href="#默认配置文件路径：" class="headerlink" title="默认配置文件路径："></a>默认配置文件路径：</h3><p>配置文件：/etc/my.cnf</p>
+<p>日志文件：/var/log/var/log/mysqld.log</p>
+<p>服务启动脚本：/usr/lib/systemd/system/mysqld.service</p>
+<p>socket文件：/var/run/mysqld/mysqld.pid</p>
+
+        
+        <br>
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+    </div>
+</div>
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+        <li>
+            <a target="_blank" href="https://www.zhihu.com/people/li-bo-2-25">
+                            <span class="fa-stack fa-lg">
+                                 <i class="iconfont icon-zhihu"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+        
+
+        
+        <li>
+            <a target="_blank" href="https://github.com/liboo0731">
+                            <span class="fa-stack fa-lg">
+                                <i class="iconfont icon-github"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span>/</span>
+        
+        <span><a href="https://www.cnblogs.com/liboo/">H2K1R~ACE_博客园</a></span>
+        <span>/</span>
+        
+        <span><a href="https://blog.csdn.net/weixin_40108079">H2K1E~ACE_CSDN</a></span>
+        <span>/</span>
+        
+    </p>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/js/index.js"></script>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+    <script>
+        /**
+         *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+         *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+        */
+        if( '' || '')
+        var disqus_config = function () {
+            this.page.url = '';  // Replace PAGE_URL with your page's canonical URL variable
+            this.page.identifier = ''; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        };
+
+        (function() { // DON'T EDIT BELOW THIS LINE
+            var d = document, s = d.createElement('script');
+            s.src = 'https://airclouds-blog.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+    </script>
+
+</html>

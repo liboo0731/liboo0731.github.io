@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="李博的博客">
+    <meta name="keyword" content="striveliboo">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        【zabbix】Zabbix集群配置 - Liboo的博客 | Liboo&#39;s Blog
+        
+    </title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/aircloud.css">
+    <link rel="stylesheet" href="/css/gitment.css">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> Internet of Everything, Everywhere. </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar">
+            <img src="/img/avatar.jpg">
+        </div>
+        <div class="name">
+            <i>H2K1E~ACE</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li>
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li>
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li>
+                <a href="/archive">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li>
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Zabbix-集群信息"><span class="toc-text">Zabbix 集群信息</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Zabbix-集群配置"><span class="toc-text">Zabbix 集群配置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#php-ini（172-16-2-224）"><span class="toc-text">php.ini（172-16-2-224）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Zabbix-Server（172-16-2-224）"><span class="toc-text">Zabbix Server（172-16-2-224）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Zabbix-Server-Agent（172-16-2-224）"><span class="toc-text">Zabbix Server Agent（172-16-2-224）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Zabbix-Agent（172-16-2-225）"><span class="toc-text">Zabbix Agent（172-16-2-225）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Zabbix-Proxy（172-16-2-226）"><span class="toc-text">Zabbix Proxy（172-16-2-226）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Zabbix-Proxy-Agent（172-16-2-227）"><span class="toc-text">Zabbix Proxy Agent（172-16-2-227）</span></a></li></ol></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input">
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+        <div class="index-about-mobile">
+            <i> Internet of Everything, Everywhere. </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        【zabbix】Zabbix集群配置
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2019-05-28 17:31:33</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/tags/#zabbix" title="zabbix">zabbix</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+
+    </div>
+    <div class="post-content ">
+        <h2 id="Zabbix-集群信息"><a href="#Zabbix-集群信息" class="headerlink" title="Zabbix 集群信息"></a>Zabbix 集群信息</h2><ul>
+<li>zabbix server：172-16-2-224</li>
+<li>zabbix proxy：172-16-2-226</li>
+<li>zabbix agent1：172-16-2-224（127.0.0.1，Server 本身监控）</li>
+<li>zabbix agent2：172-16-2-225（使用Server监控）</li>
+<li>zabbix agent3：172-16-2-227（使用Proxy 监控）</li>
+</ul>
+<h2 id="Zabbix-集群配置"><a href="#Zabbix-集群配置" class="headerlink" title="Zabbix 集群配置"></a>Zabbix 集群配置</h2><h3 id="php-ini（172-16-2-224）"><a href="#php-ini（172-16-2-224）" class="headerlink" title="php.ini（172-16-2-224）"></a>php.ini（172-16-2-224）</h3><figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[root@host-172-16-2-224 zabbix]</span><span class="comment"># egrep -v '^;|^$' /etc/php.ini </span></span><br><span class="line"><span class="section">[PHP]</span></span><br><span class="line"><span class="attr">engine</span> = <span class="literal">On</span></span><br><span class="line"><span class="attr">short_open_tag</span> = <span class="literal">Off</span></span><br><span class="line"><span class="attr">asp_tags</span> = <span class="literal">Off</span></span><br><span class="line"><span class="attr">precision</span> = <span class="number">14</span></span><br><span class="line"><span class="attr">output_buffering</span> = <span class="number">4096</span></span><br><span class="line"><span class="attr">zlib.output_compression</span> = <span class="literal">Off</span></span><br><span class="line"><span class="attr">implicit_flush</span> = <span class="literal">Off</span></span><br><span class="line"><span class="attr">unserialize_callback_func</span> =</span><br><span class="line"><span class="attr">serialize_precision</span> = <span class="number">17</span></span><br><span class="line"><span class="attr">disable_functions</span> =</span><br><span class="line"><span class="attr">disable_classes</span> =</span><br><span class="line"><span class="attr">zend.enable_gc</span> = <span class="literal">On</span></span><br><span class="line"><span class="attr">expose_php</span> = <span class="literal">On</span></span><br><span class="line"><span class="attr">max_execution_time</span> = <span class="number">300</span></span><br><span class="line"><span class="attr">max_input_time</span> = <span class="number">60</span></span><br><span class="line"><span class="attr">max_input_vars</span> = <span class="number">10000</span></span><br><span class="line"><span class="attr">memory_limit</span> = <span class="number">128</span>M</span><br><span class="line"><span class="attr">error_reporting</span> = E_ALL &amp; ~E_DEPRECATED &amp; ~E_STRICT</span><br><span class="line"><span class="attr">display_errors</span> = <span class="literal">Off</span></span><br><span class="line"><span class="attr">display_startup_errors</span> = <span class="literal">Off</span></span><br><span class="line"><span class="attr">log_errors</span> = <span class="literal">On</span></span><br><span class="line"><span class="attr">log_errors_max_len</span> = <span class="number">1024</span></span><br><span class="line"><span class="attr">ignore_repeated_errors</span> = <span class="literal">Off</span></span><br><span class="line"><span class="attr">ignore_repeated_source</span> = <span class="literal">Off</span></span><br><span class="line"><span class="attr">report_memleaks</span> = <span class="literal">On</span></span><br><span class="line"><span class="attr">track_errors</span> = <span class="literal">Off</span></span><br><span class="line"><span class="attr">html_errors</span> = <span class="literal">On</span></span><br><span class="line"><span class="attr">variables_order</span> = <span class="string">"GPCS"</span></span><br><span class="line"><span class="attr">request_order</span> = <span class="string">"GP"</span></span><br><span class="line"><span class="attr">register_argc_argv</span> = <span class="literal">Off</span></span><br><span class="line"><span class="attr">auto_globals_jit</span> = <span class="literal">On</span></span><br><span class="line"><span class="attr">post_max_size</span> = <span class="number">16</span>M</span><br><span class="line"><span class="attr">auto_prepend_file</span> =</span><br><span class="line"><span class="attr">auto_append_file</span> =</span><br><span class="line"><span class="attr">default_mimetype</span> = <span class="string">"text/html"</span></span><br><span class="line"><span class="attr">always_populate_raw_post_data</span> = -<span class="number">1</span></span><br><span class="line"><span class="attr">doc_root</span> =</span><br><span class="line"><span class="attr">user_dir</span> =</span><br><span class="line"><span class="attr">enable_dl</span> = <span class="literal">Off</span></span><br><span class="line"><span class="attr">file_uploads</span> = <span class="literal">On</span></span><br><span class="line"><span class="attr">upload_max_filesize</span> = <span class="number">2</span>M</span><br><span class="line"><span class="attr">max_file_uploads</span> = <span class="number">20</span></span><br><span class="line"><span class="attr">allow_url_fopen</span> = <span class="literal">On</span></span><br><span class="line"><span class="attr">allow_url_include</span> = <span class="literal">Off</span></span><br><span class="line"><span class="attr">default_socket_timeout</span> = <span class="number">60</span></span><br><span class="line"><span class="section">[CLI Server]</span></span><br><span class="line"><span class="attr">cli_server.color</span> = <span class="literal">On</span></span><br><span class="line"><span class="section">[Date]</span></span><br><span class="line"><span class="attr">date.timezone</span> = Asia/Shanghai</span><br><span class="line"><span class="section">[filter]</span></span><br><span class="line"><span class="section">[iconv]</span></span><br><span class="line"><span class="section">[intl]</span></span><br><span class="line"><span class="section">[sqlite]</span></span><br><span class="line"><span class="section">[sqlite3]</span></span><br><span class="line"><span class="section">[Pcre]</span></span><br><span class="line"><span class="section">[Pdo]</span></span><br><span class="line"><span class="section">[Pdo_mysql]</span></span><br><span class="line"><span class="attr">pdo_mysql.cache_size</span> = <span class="number">2000</span></span><br><span class="line"><span class="attr">pdo_mysql.default_socket</span>=</span><br><span class="line"><span class="section">[Phar]</span></span><br><span class="line"><span class="section">[mail function]</span></span><br><span class="line"><span class="attr">SMTP</span> = localhost</span><br><span class="line"><span class="attr">smtp_port</span> = <span class="number">25</span></span><br><span class="line"><span class="attr">sendmail_path</span> = /usr/sbin/sendmail -t -i</span><br><span class="line"><span class="attr">mail.add_x_header</span> = <span class="literal">On</span></span><br><span class="line"><span class="section">[SQL]</span></span><br><span class="line"><span class="attr">sql.safe_mode</span> = <span class="literal">Off</span></span><br><span class="line"><span class="section">[ODBC]</span></span><br><span class="line"><span class="attr">odbc.allow_persistent</span> = <span class="literal">On</span></span><br><span class="line"><span class="attr">odbc.check_persistent</span> = <span class="literal">On</span></span><br><span class="line"><span class="attr">odbc.max_persistent</span> = -<span class="number">1</span></span><br><span class="line"><span class="attr">odbc.max_links</span> = -<span class="number">1</span></span><br><span class="line"><span class="attr">odbc.defaultlrl</span> = <span class="number">4096</span></span><br><span class="line"><span class="attr">odbc.defaultbinmode</span> = <span class="number">1</span></span><br><span class="line"><span class="section">[Interbase]</span></span><br><span class="line"><span class="attr">ibase.allow_persistent</span> = <span class="number">1</span></span><br><span class="line"><span class="attr">ibase.max_persistent</span> = -<span class="number">1</span></span><br><span class="line"><span class="attr">ibase.max_links</span> = -<span class="number">1</span></span><br><span class="line"><span class="attr">ibase.timestampformat</span> = <span class="string">"%Y-%m-%d %H:%M:%S"</span></span><br><span class="line"><span class="attr">ibase.dateformat</span> = <span class="string">"%Y-%m-%d"</span></span><br><span class="line"><span class="attr">ibase.timeformat</span> = <span class="string">"%H:%M:%S"</span></span><br><span class="line"><span class="section">[MySQL]</span></span><br><span class="line"><span class="attr">mysql.allow_local_infile</span> = <span class="literal">On</span></span><br><span class="line"><span class="attr">mysql.allow_persistent</span> = <span class="literal">On</span></span><br><span class="line"><span class="attr">mysql.cache_size</span> = <span class="number">2000</span></span><br><span class="line"><span class="attr">mysql.max_persistent</span> = -<span class="number">1</span></span><br><span class="line"><span class="attr">mysql.max_links</span> = -<span class="number">1</span></span><br><span class="line"><span class="attr">mysql.default_port</span> =</span><br><span class="line"><span class="attr">mysql.default_socket</span> =</span><br><span class="line"><span class="attr">mysql.default_host</span> =</span><br><span class="line"><span class="attr">mysql.default_user</span> =</span><br><span class="line"><span class="attr">mysql.default_password</span> =</span><br><span class="line"><span class="attr">mysql.connect_timeout</span> = <span class="number">60</span></span><br><span class="line"><span class="attr">mysql.trace_mode</span> = <span class="literal">Off</span></span><br><span class="line"><span class="section">[MySQLi]</span></span><br><span class="line"><span class="attr">mysqli.max_persistent</span> = -<span class="number">1</span></span><br><span class="line"><span class="attr">mysqli.allow_persistent</span> = <span class="literal">On</span></span><br><span class="line"><span class="attr">mysqli.max_links</span> = -<span class="number">1</span></span><br><span class="line"><span class="attr">mysqli.cache_size</span> = <span class="number">2000</span></span><br><span class="line"><span class="attr">mysqli.default_port</span> = <span class="number">3306</span></span><br><span class="line"><span class="attr">mysqli.default_socket</span> =</span><br><span class="line"><span class="attr">mysqli.default_host</span> =</span><br><span class="line"><span class="attr">mysqli.default_user</span> =</span><br><span class="line"><span class="attr">mysqli.default_pw</span> =</span><br><span class="line"><span class="attr">mysqli.reconnect</span> = <span class="literal">Off</span></span><br><span class="line"><span class="section">[mysqlnd]</span></span><br><span class="line"><span class="attr">mysqlnd.collect_statistics</span> = <span class="literal">On</span></span><br><span class="line"><span class="attr">mysqlnd.collect_memory_statistics</span> = <span class="literal">Off</span></span><br><span class="line"><span class="section">[OCI8]</span></span><br><span class="line"><span class="section">[PostgreSQL]</span></span><br><span class="line"><span class="attr">pgsql.allow_persistent</span> = <span class="literal">On</span></span><br><span class="line"><span class="attr">pgsql.auto_reset_persistent</span> = <span class="literal">Off</span></span><br><span class="line"><span class="attr">pgsql.max_persistent</span> = -<span class="number">1</span></span><br><span class="line"><span class="attr">pgsql.max_links</span> = -<span class="number">1</span></span><br><span class="line"><span class="attr">pgsql.ignore_notice</span> = <span class="number">0</span></span><br><span class="line"><span class="attr">pgsql.log_notice</span> = <span class="number">0</span></span><br><span class="line"><span class="section">[Sybase-CT]</span></span><br><span class="line"><span class="attr">sybct.allow_persistent</span> = <span class="literal">On</span></span><br><span class="line"><span class="attr">sybct.max_persistent</span> = -<span class="number">1</span></span><br><span class="line"><span class="attr">sybct.max_links</span> = -<span class="number">1</span></span><br><span class="line"><span class="attr">sybct.min_server_severity</span> = <span class="number">10</span></span><br><span class="line"><span class="attr">sybct.min_client_severity</span> = <span class="number">10</span></span><br><span class="line"><span class="section">[bcmath]</span></span><br><span class="line"><span class="attr">bcmath.scale</span> = <span class="number">0</span></span><br><span class="line"><span class="section">[browscap]</span></span><br><span class="line"><span class="section">[Session]</span></span><br><span class="line"><span class="attr">session.save_handler</span> = files</span><br><span class="line"><span class="attr">session.use_cookies</span> = <span class="number">1</span></span><br><span class="line"><span class="attr">session.use_only_cookies</span> = <span class="number">1</span></span><br><span class="line"><span class="attr">session.name</span> = PHPSESSID</span><br><span class="line"><span class="attr">session.auto_start</span> = <span class="number">0</span></span><br><span class="line"><span class="attr">session.cookie_lifetime</span> = <span class="number">0</span></span><br><span class="line"><span class="attr">session.cookie_path</span> = /</span><br><span class="line"><span class="attr">session.cookie_domain</span> =</span><br><span class="line"><span class="attr">session.cookie_httponly</span> =</span><br><span class="line"><span class="attr">session.serialize_handler</span> = php</span><br><span class="line"><span class="attr">session.gc_probability</span> = <span class="number">1</span></span><br><span class="line"><span class="attr">session.gc_divisor</span> = <span class="number">1000</span></span><br><span class="line"><span class="attr">session.gc_maxlifetime</span> = <span class="number">1440</span></span><br><span class="line"><span class="attr">session.bug_compat_42</span> = <span class="literal">Off</span></span><br><span class="line"><span class="attr">session.bug_compat_warn</span> = <span class="literal">Off</span></span><br><span class="line"><span class="attr">session.referer_check</span> =</span><br><span class="line"><span class="attr">session.cache_limiter</span> = nocache</span><br><span class="line"><span class="attr">session.cache_expire</span> = <span class="number">180</span></span><br><span class="line"><span class="attr">session.use_trans_sid</span> = <span class="number">0</span></span><br><span class="line"><span class="attr">session.hash_function</span> = <span class="number">0</span></span><br><span class="line"><span class="attr">session.hash_bits_per_character</span> = <span class="number">5</span></span><br><span class="line"><span class="attr">url_rewriter.tags</span> = <span class="string">"a=href,area=href,frame=src,input=src,form=fakeentry"</span></span><br><span class="line"><span class="section">[MSSQL]</span></span><br><span class="line"><span class="attr">mssql.allow_persistent</span> = <span class="literal">On</span></span><br><span class="line"><span class="attr">mssql.max_persistent</span> = -<span class="number">1</span></span><br><span class="line"><span class="attr">mssql.max_links</span> = -<span class="number">1</span></span><br><span class="line"><span class="attr">mssql.min_error_severity</span> = <span class="number">10</span></span><br><span class="line"><span class="attr">mssql.min_message_severity</span> = <span class="number">10</span></span><br><span class="line"><span class="attr">mssql.compatability_mode</span> = <span class="literal">Off</span></span><br><span class="line"><span class="attr">mssql.secure_connection</span> = <span class="literal">Off</span></span><br><span class="line"><span class="section">[Assertion]</span></span><br><span class="line"><span class="section">[mbstring]</span></span><br><span class="line"><span class="section">[gd]</span></span><br><span class="line"><span class="section">[exif]</span></span><br><span class="line"><span class="section">[Tidy]</span></span><br><span class="line"><span class="attr">tidy.clean_output</span> = <span class="literal">Off</span></span><br><span class="line"><span class="section">[soap]</span></span><br><span class="line"><span class="attr">soap.wsdl_cache_enabled</span>=<span class="number">1</span></span><br><span class="line"><span class="attr">soap.wsdl_cache_dir</span>=<span class="string">"/tmp"</span></span><br><span class="line"><span class="attr">soap.wsdl_cache_ttl</span>=<span class="number">86400</span></span><br><span class="line"><span class="attr">soap.wsdl_cache_limit</span> = <span class="number">5</span></span><br><span class="line"><span class="section">[sysvshm]</span></span><br><span class="line"><span class="section">[ldap]</span></span><br><span class="line"><span class="attr">ldap.max_links</span> = -<span class="number">1</span></span><br><span class="line"><span class="section">[mcrypt]</span></span><br><span class="line"><span class="section">[dba]</span></span><br></pre></td></tr></table></figure>
+<h3 id="Zabbix-Server（172-16-2-224）"><a href="#Zabbix-Server（172-16-2-224）" class="headerlink" title="Zabbix Server（172-16-2-224）"></a>Zabbix Server（172-16-2-224）</h3><figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[root@host-172-16-2-224 zabbix]</span><span class="comment"># egrep -v '^#|^$' zabbix_server.conf </span></span><br><span class="line"><span class="attr">LogFile</span>=/var/log/zabbix/zabbix_server.log</span><br><span class="line"><span class="attr">LogFileSize</span>=<span class="number">0</span></span><br><span class="line"><span class="attr">PidFile</span>=/var/run/zabbix/zabbix_server.pid</span><br><span class="line"><span class="attr">SocketDir</span>=/var/run/zabbix</span><br><span class="line"><span class="attr">DBHost</span>=localhost</span><br><span class="line"><span class="attr">DBName</span>=zabbix</span><br><span class="line"><span class="attr">DBUser</span>=zabbix</span><br><span class="line"><span class="attr">DBPassword</span>=password</span><br><span class="line"><span class="attr">SNMPTrapperFile</span>=/var/log/snmptrap/snmptrap.log</span><br><span class="line"><span class="attr">Timeout</span>=<span class="number">4</span></span><br><span class="line"><span class="attr">AlertScriptsPath</span>=/usr/lib/zabbix/alertscripts</span><br><span class="line"><span class="attr">ExternalScripts</span>=/usr/lib/zabbix/externalscripts</span><br><span class="line"><span class="attr">LogSlowQueries</span>=<span class="number">3000</span></span><br></pre></td></tr></table></figure>
+<h3 id="Zabbix-Server-Agent（172-16-2-224）"><a href="#Zabbix-Server-Agent（172-16-2-224）" class="headerlink" title="Zabbix Server Agent（172-16-2-224）"></a>Zabbix Server Agent（172-16-2-224）</h3><figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[root@host-172-16-2-224 zabbix]</span><span class="comment"># egrep -v '^#|^$' /etc/zabbix/zabbix_agentd.conf </span></span><br><span class="line"><span class="attr">PidFile</span>=/var/run/zabbix/zabbix_agentd.pid</span><br><span class="line"><span class="attr">LogFile</span>=/var/log/zabbix/zabbix_agentd.log</span><br><span class="line"><span class="attr">LogFileSize</span>=<span class="number">0</span></span><br><span class="line"><span class="attr">Server</span>=<span class="number">127.0</span>.<span class="number">0.1</span></span><br><span class="line"><span class="attr">ServerActive</span>=<span class="number">127.0</span>.<span class="number">0.1</span></span><br><span class="line"><span class="attr">Hostname</span>=Zabbix server</span><br><span class="line"><span class="attr">Include</span>=/etc/zabbix/zabbix_agentd.d/*.conf</span><br></pre></td></tr></table></figure>
+<h3 id="Zabbix-Agent（172-16-2-225）"><a href="#Zabbix-Agent（172-16-2-225）" class="headerlink" title="Zabbix Agent（172-16-2-225）"></a>Zabbix Agent（172-16-2-225）</h3><figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[root@host-172-16-2-225 zabbix]</span><span class="comment"># egrep -v '^#|^$' /etc/zabbix/zabbix_agentd.conf </span></span><br><span class="line"><span class="attr">PidFile</span>=/var/run/zabbix/zabbix_agentd.pid</span><br><span class="line"><span class="attr">LogFile</span>=/var/log/zabbix/zabbix_agentd.log</span><br><span class="line"><span class="attr">LogFileSize</span>=<span class="number">0</span></span><br><span class="line"><span class="attr">Server</span>=<span class="number">172.16</span>.<span class="number">2.224</span></span><br><span class="line"><span class="attr">ServerActive</span>=<span class="number">172.16</span>.<span class="number">2.224</span></span><br><span class="line"><span class="attr">Hostname</span>=linux_host_230</span><br><span class="line"><span class="attr">Include</span>=/etc/zabbix/zabbix_agentd.d/*.conf</span><br></pre></td></tr></table></figure>
+<h3 id="Zabbix-Proxy（172-16-2-226）"><a href="#Zabbix-Proxy（172-16-2-226）" class="headerlink" title="Zabbix Proxy（172-16-2-226）"></a>Zabbix Proxy（172-16-2-226）</h3><figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[root@host-172-16-2-226 zabbix]</span><span class="comment"># egrep -v '^$|^#' /etc/zabbix/zabbix_proxy.conf </span></span><br><span class="line"><span class="attr">Server</span>=<span class="number">172.16</span>.<span class="number">2.224</span></span><br><span class="line"><span class="attr">Hostname</span>=linux_host_proxy_229</span><br><span class="line"><span class="attr">LogFile</span>=/var/log/zabbix/zabbix_proxy.log</span><br><span class="line"><span class="attr">LogFileSize</span>=<span class="number">0</span></span><br><span class="line"><span class="attr">PidFile</span>=/var/run/zabbix/zabbix_proxy.pid</span><br><span class="line"><span class="attr">SocketDir</span>=/var/run/zabbix</span><br><span class="line"><span class="attr">DBName</span>=zabbix_proxy</span><br><span class="line"><span class="attr">DBUser</span>=zabbix</span><br><span class="line"><span class="attr">DBPassword</span>=password</span><br><span class="line"><span class="attr">SNMPTrapperFile</span>=/var/log/snmptrap/snmptrap.log</span><br><span class="line"><span class="attr">Timeout</span>=<span class="number">4</span></span><br><span class="line"><span class="attr">ExternalScripts</span>=/usr/lib/zabbix/externalscripts</span><br><span class="line"><span class="attr">LogSlowQueries</span>=<span class="number">3000</span></span><br></pre></td></tr></table></figure>
+<h3 id="Zabbix-Proxy-Agent（172-16-2-227）"><a href="#Zabbix-Proxy-Agent（172-16-2-227）" class="headerlink" title="Zabbix Proxy Agent（172-16-2-227）"></a>Zabbix Proxy Agent（172-16-2-227）</h3><figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[root@host-172-16-2-227 zabbix]</span><span class="comment">#  egrep -v '^#|^$' /etc/zabbix/zabbix_agentd.conf </span></span><br><span class="line"><span class="attr">PidFile</span>=/var/run/zabbix/zabbix_agentd.pid</span><br><span class="line"><span class="attr">LogFile</span>=/var/log/zabbix/zabbix_agentd.log</span><br><span class="line"><span class="attr">LogFileSize</span>=<span class="number">0</span></span><br><span class="line"><span class="attr">Server</span>=<span class="number">172.16</span>.<span class="number">2.226</span></span><br><span class="line"><span class="attr">ServerActive</span>=<span class="number">172.16</span>.<span class="number">2.226</span></span><br><span class="line"><span class="attr">Hostname</span>=linux_host_231</span><br><span class="line"><span class="attr">Include</span>=/etc/zabbix/zabbix_agentd.d/*.conf</span><br></pre></td></tr></table></figure>
+<p><em>备注：</em></p>
+<p><em>Zabbix Agent默认开放 10050 端口</em></p>
+<p><em>Zabbix Proxy默认开放 10051 端口</em></p>
+
+        
+        <br>
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+    </div>
+</div>
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+        <li>
+            <a target="_blank" href="https://www.zhihu.com/people/li-bo-2-25">
+                            <span class="fa-stack fa-lg">
+                                 <i class="iconfont icon-zhihu"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+        
+
+        
+        <li>
+            <a target="_blank" href="https://github.com/liboo0731">
+                            <span class="fa-stack fa-lg">
+                                <i class="iconfont icon-github"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span>/</span>
+        
+        <span><a href="https://www.cnblogs.com/liboo/">H2K1R~ACE_博客园</a></span>
+        <span>/</span>
+        
+        <span><a href="https://blog.csdn.net/weixin_40108079">H2K1E~ACE_CSDN</a></span>
+        <span>/</span>
+        
+    </p>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/js/index.js"></script>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+    <script>
+        /**
+         *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+         *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+        */
+        if( '' || '')
+        var disqus_config = function () {
+            this.page.url = '';  // Replace PAGE_URL with your page's canonical URL variable
+            this.page.identifier = ''; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        };
+
+        (function() { // DON'T EDIT BELOW THIS LINE
+            var d = document, s = d.createElement('script');
+            s.src = 'https://airclouds-blog.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+    </script>
+
+</html>

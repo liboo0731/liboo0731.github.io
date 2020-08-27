@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="李博的博客">
+    <meta name="keyword" content="striveliboo">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        【shell】Shell基础巩固（1） - Liboo的博客 | Liboo&#39;s Blog
+        
+    </title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/aircloud.css">
+    <link rel="stylesheet" href="/css/gitment.css">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> Internet of Everything, Everywhere. </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar">
+            <img src="/img/avatar.jpg">
+        </div>
+        <div class="name">
+            <i>H2K1E~ACE</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li>
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li>
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li>
+                <a href="/archive">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li>
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#算术运算符"><span class="toc-text">算术运算符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#关系运算符"><span class="toc-text">关系运算符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#布尔运算符"><span class="toc-text">布尔运算符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#逻辑运算符"><span class="toc-text">逻辑运算符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#字符串运算符"><span class="toc-text">字符串运算符</span></a></li></ol><li class="toc-item toc-level-2"><a class="toc-link" href="#文件测试运算符"><span class="toc-text">文件测试运算符</span></a>
+</li></div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input">
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+        <div class="index-about-mobile">
+            <i> Internet of Everything, Everywhere. </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        【shell】Shell基础巩固（1）
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2018-08-01 21:41:22</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/tags/#shell" title="shell">shell</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+
+    </div>
+    <div class="post-content ">
+        <h3 id="算术运算符"><a href="#算术运算符" class="headerlink" title="算术运算符"></a>算术运算符</h3><p>下表列出了常用的算术运算符，假定变量 a 为 10，变量 b 为 20：</p>
+<table>
+<thead>
+<tr>
+<th>运算符</th>
+<th>说明</th>
+<th>举例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>+</td>
+<td>加法</td>
+<td><code>expr $a + $b</code> 结果为 30。</td>
+</tr>
+<tr>
+<td>-</td>
+<td>减法</td>
+<td><code>expr $a - $b</code> 结果为 -10。</td>
+</tr>
+<tr>
+<td>*</td>
+<td>乘法</td>
+<td><code>expr $a \* $b</code> 结果为  200。</td>
+</tr>
+<tr>
+<td>/</td>
+<td>除法</td>
+<td><code>expr $b / $a</code> 结果为 2。</td>
+</tr>
+<tr>
+<td>%</td>
+<td>取余</td>
+<td><code>expr $b % $a</code> 结果为 0。</td>
+</tr>
+<tr>
+<td>=</td>
+<td>赋值</td>
+<td>a=$b 将把变量 b 的值赋给 a。</td>
+</tr>
+<tr>
+<td>==</td>
+<td>相等。用于比较两个数字，相同则返回 true。</td>
+<td>[ $a == $b ] 返回 false。</td>
+</tr>
+<tr>
+<td>!=</td>
+<td>不相等。用于比较两个数字，不相同则返回 true。</td>
+<td>[ $a != $b ] 返回 true。</td>
+</tr>
+</tbody>
+</table>
+<p><strong>注意：</strong>条件表达式要放在方括号之间，并且要有空格，例如: <strong>[$a==$b]</strong> 是错误的，必须写成 <strong>[ $a == $b ]</strong>。</p>
+<h3 id="关系运算符"><a href="#关系运算符" class="headerlink" title="关系运算符"></a>关系运算符</h3><p>关系运算符只支持数字，不支持字符串，除非字符串的值是数字。</p>
+<p>下表列出了常用的关系运算符，假定变量 a 为 10，变量 b 为 20：</p>
+<table>
+<thead>
+<tr>
+<th>运算符</th>
+<th>说明</th>
+<th>举例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-eq</td>
+<td>检测两个数是否相等，相等返回 true。</td>
+<td>[ $a -eq $b ] 返回 false。</td>
+</tr>
+<tr>
+<td>-ne</td>
+<td>检测两个数是否不相等，不相等返回 true。</td>
+<td>[ $a -ne $b ] 返回 true。</td>
+</tr>
+<tr>
+<td>-gt</td>
+<td>检测左边的数是否大于右边的，如果是，则返回 true。</td>
+<td>[ $a -gt $b ] 返回 false。</td>
+</tr>
+<tr>
+<td>-lt</td>
+<td>检测左边的数是否小于右边的，如果是，则返回 true。</td>
+<td>[ $a -lt $b ] 返回 true。</td>
+</tr>
+<tr>
+<td>-ge</td>
+<td>检测左边的数是否大于等于右边的，如果是，则返回 true。</td>
+<td>[ $a -ge $b ] 返回 false。</td>
+</tr>
+<tr>
+<td>-le</td>
+<td>检测左边的数是否小于等于右边的，如果是，则返回 true。</td>
+<td>[ $a -le $b ] 返回 true。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="布尔运算符"><a href="#布尔运算符" class="headerlink" title="布尔运算符"></a>布尔运算符</h3><p>下表列出了常用的布尔运算符，假定变量 a 为 10，变量 b 为 20：</p>
+<table>
+<thead>
+<tr>
+<th>运算符</th>
+<th>说明</th>
+<th>举例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>!</td>
+<td>非运算，表达式为 true 则返回 false，否则返回 true。</td>
+<td>[ ! false ] 返回 true。</td>
+</tr>
+<tr>
+<td>-o</td>
+<td>或运算，有一个表达式为 true 则返回 true。</td>
+<td>[ $a -lt 20 -o $b -gt 100 ] 返回 true。</td>
+</tr>
+<tr>
+<td>-a</td>
+<td>与运算，两个表达式都为 true 才返回 true。</td>
+<td>[ $a -lt 20 -a $b -gt 100 ] 返回 false。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="逻辑运算符"><a href="#逻辑运算符" class="headerlink" title="逻辑运算符"></a>逻辑运算符</h3><p>以下介绍 Shell 的逻辑运算符，假定变量 a 为 10，变量 b 为 20:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">运算符		说明		举例</span><br><span class="line">&amp;&amp;		逻辑的	AND		[[ $a -lt 100 &amp;&amp; $b -gt 100 ]] 返回 false</span><br><span class="line">||		逻辑的	OR		[[ $a -lt 100 || $b -gt 100 ]] 返回 true</span><br></pre></td></tr></table></figure>
+<h3 id="字符串运算符"><a href="#字符串运算符" class="headerlink" title="字符串运算符"></a>字符串运算符</h3><p>下表列出了常用的字符串运算符，假定变量 a 为 “abc”，变量 b 为 “efg”：</p>
+<table>
+<thead>
+<tr>
+<th>运算符</th>
+<th>说明</th>
+<th>举例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>=</td>
+<td>检测两个字符串是否相等，相等返回 true。</td>
+<td>[ $a = $b ] 返回 false。</td>
+</tr>
+<tr>
+<td>!=</td>
+<td>检测两个字符串是否相等，不相等返回 true。</td>
+<td>[ $a != $b ] 返回 true。</td>
+</tr>
+<tr>
+<td>-z</td>
+<td>检测字符串长度是否为0，为0返回 true。</td>
+<td>[ -z $a ] 返回 false。</td>
+</tr>
+<tr>
+<td>-n</td>
+<td>检测字符串长度是否为0，不为0返回 true。</td>
+<td>[ -n “$a” ] 返回 true。</td>
+</tr>
+<tr>
+<td>$</td>
+<td>检测字符串是否为空，不为空返回 true。</td>
+<td>[ $a ] 返回 true。</td>
+</tr>
+</tbody>
+</table>
+<h2 id="文件测试运算符"><a href="#文件测试运算符" class="headerlink" title="文件测试运算符"></a>文件测试运算符</h2><p>文件测试运算符用于检测 Unix 文件的各种属性。</p>
+<p>属性检测描述如下：</p>
+<table>
+<thead>
+<tr>
+<th>操作符</th>
+<th>说明</th>
+<th>举例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-b file</td>
+<td>检测文件是否是块设备文件，如果是，则返回 true。</td>
+<td>[ -b $file ] 返回 false。</td>
+</tr>
+<tr>
+<td>-c file</td>
+<td>检测文件是否是字符设备文件，如果是，则返回 true。</td>
+<td>[ -c $file ] 返回 false。</td>
+</tr>
+<tr>
+<td>-d file</td>
+<td>检测文件是否是目录，如果是，则返回 true。</td>
+<td>[ -d $file ] 返回 false。</td>
+</tr>
+<tr>
+<td>-f file</td>
+<td>检测文件是否是普通文件（既不是目录，也不是设备文件），如果是，则返回 true。</td>
+<td>[ -f $file ] 返回 true。</td>
+</tr>
+<tr>
+<td>-g file</td>
+<td>检测文件是否设置了 SGID 位，如果是，则返回 true。</td>
+<td>[ -g $file ] 返回 false。</td>
+</tr>
+<tr>
+<td>-k file</td>
+<td>检测文件是否设置了粘着位(Sticky Bit)，如果是，则返回 true。</td>
+<td>[ -k $file ] 返回 false。</td>
+</tr>
+<tr>
+<td>-p file</td>
+<td>检测文件是否是有名管道，如果是，则返回 true。</td>
+<td>[ -p $file ] 返回 false。</td>
+</tr>
+<tr>
+<td>-u file</td>
+<td>检测文件是否设置了 SUID 位，如果是，则返回 true。</td>
+<td>[ -u $file ] 返回 false。</td>
+</tr>
+<tr>
+<td>-r file</td>
+<td>检测文件是否可读，如果是，则返回 true。</td>
+<td>[ -r $file ] 返回 true。</td>
+</tr>
+<tr>
+<td>-w file</td>
+<td>检测文件是否可写，如果是，则返回 true。</td>
+<td>[ -w $file ] 返回 true。</td>
+</tr>
+<tr>
+<td>-x file</td>
+<td>检测文件是否可执行，如果是，则返回 true。</td>
+<td>[ -x $file ] 返回 true。</td>
+</tr>
+<tr>
+<td>-s file</td>
+<td>检测文件是否为空（文件大小是否大于0），不为空返回 true。</td>
+<td>[ -s $file ] 返回 true。</td>
+</tr>
+<tr>
+<td>-e file</td>
+<td>检测文件（包括目录）是否存在，如果是，则返回 true。</td>
+<td>[ -e $file ] 返回 true。</td>
+</tr>
+</tbody>
+</table>
+
+        
+        <br>
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+    </div>
+</div>
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+        <li>
+            <a target="_blank" href="https://www.zhihu.com/people/li-bo-2-25">
+                            <span class="fa-stack fa-lg">
+                                 <i class="iconfont icon-zhihu"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+        
+
+        
+        <li>
+            <a target="_blank" href="https://github.com/liboo0731">
+                            <span class="fa-stack fa-lg">
+                                <i class="iconfont icon-github"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span>/</span>
+        
+        <span><a href="https://www.cnblogs.com/liboo/">H2K1R~ACE_博客园</a></span>
+        <span>/</span>
+        
+        <span><a href="https://blog.csdn.net/weixin_40108079">H2K1E~ACE_CSDN</a></span>
+        <span>/</span>
+        
+    </p>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/js/index.js"></script>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+    <script>
+        /**
+         *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+         *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+        */
+        if( '' || '')
+        var disqus_config = function () {
+            this.page.url = '';  // Replace PAGE_URL with your page's canonical URL variable
+            this.page.identifier = ''; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        };
+
+        (function() { // DON'T EDIT BELOW THIS LINE
+            var d = document, s = d.createElement('script');
+            s.src = 'https://airclouds-blog.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+    </script>
+
+</html>

@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="李博的博客">
+    <meta name="keyword" content="striveliboo">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        【lvs】两台主机同时部署LVS（DR）+keepalived+RealServer - Liboo的博客 | Liboo&#39;s Blog
+        
+    </title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/aircloud.css">
+    <link rel="stylesheet" href="/css/gitment.css">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> Internet of Everything, Everywhere. </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar">
+            <img src="/img/avatar.jpg">
+        </div>
+        <div class="name">
+            <i>H2K1E~ACE</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li>
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li>
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li>
+                <a href="/archive">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li>
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#两台主机同时部署LVS（DR）-keepalived-RealServer"><span class="toc-text">两台主机同时部署LVS（DR）+keepalived+RealServer</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#问题原因"><span class="toc-text">问题原因</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RealServer-配置网卡和ARP-规则"><span class="toc-text">RealServer 配置网卡和ARP 规则</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Keepalived-配置，只能有一个LVS-存活"><span class="toc-text">Keepalived 配置，只能有一个LVS 存活</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#相关命令操作"><span class="toc-text">相关命令操作</span></a></li></ol></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input">
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+        <div class="index-about-mobile">
+            <i> Internet of Everything, Everywhere. </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        【lvs】两台主机同时部署LVS（DR）+keepalived+RealServer
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2019-04-26 13:27:41</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/tags/#lvs" title="lvs">lvs</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+
+    </div>
+    <div class="post-content ">
+        <h2 id="两台主机同时部署LVS（DR）-keepalived-RealServer"><a href="#两台主机同时部署LVS（DR）-keepalived-RealServer" class="headerlink" title="两台主机同时部署LVS（DR）+keepalived+RealServer"></a>两台主机同时部署LVS（DR）+keepalived+RealServer</h2><h3 id="问题原因"><a href="#问题原因" class="headerlink" title="问题原因"></a>问题原因</h3><p>当 Director1（Master 主)，比如使用 rr 。会转发大约 50% 的包从 Director1 到  Director2 （Backup）。这时 Director2 因为 LVS-DR 的配置规则会接着给这些包在做一次 Load Balance 。又发回给 Director1 。这时会产生一个死的循环。随着时间的推移，不但不能正常的处理连接，服务器也会崩溃。</p>
+<h3 id="RealServer-配置网卡和ARP-规则"><a href="#RealServer-配置网卡和ARP-规则" class="headerlink" title="RealServer 配置网卡和ARP 规则"></a>RealServer 配置网卡和ARP 规则</h3><figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[root@localhost ~]</span><span class="comment"># vi /etc/sysconfig/network-scripts/ifcfg-lo:0</span></span><br><span class="line"></span><br><span class="line"><span class="attr">DEVICE</span>=lo:<span class="number">0</span></span><br><span class="line"><span class="attr">IPADDR</span>=<span class="number">192.168</span>.<span class="number">23.253</span></span><br><span class="line"><span class="attr">NETMASK</span>=<span class="number">255.255</span>.<span class="number">255.255</span></span><br><span class="line"><span class="attr">ONBOOT</span>=<span class="literal">yes</span></span><br><span class="line"></span><br><span class="line"><span class="section">[root@localhost ~]</span><span class="comment"># vi /etc/sysctl.conf </span></span><br><span class="line"></span><br><span class="line"><span class="attr">net.ipv4.conf.lo.arp_ignore</span> = <span class="number">1</span></span><br><span class="line"><span class="attr">net.ipv4.conf.lo.arp_announce</span> = <span class="number">2</span></span><br><span class="line"><span class="comment">#net.ipv4.conf.enp0s3.arp_ignore = 1</span></span><br><span class="line"><span class="comment">#net.ipv4.conf.enp0s3.arp_announce = 2</span></span><br><span class="line"><span class="attr">net.ipv4.conf.all.arp_ignore</span> = <span class="number">1</span></span><br><span class="line"><span class="attr">net.ipv4.conf.all.arp_announce</span> = <span class="number">2</span></span><br><span class="line"></span><br><span class="line"><span class="section">[root@localhost ~]</span><span class="comment"># sysctl -p</span></span><br><span class="line"><span class="section">[root@localhost ~]</span><span class="comment"># systemctl restart network</span></span><br></pre></td></tr></table></figure>
+<h3 id="Keepalived-配置，只能有一个LVS-存活"><a href="#Keepalived-配置，只能有一个LVS-存活" class="headerlink" title="Keepalived 配置，只能有一个LVS 存活"></a>Keepalived 配置，只能有一个LVS 存活</h3><figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# vi keepalived.conf</span><br><span class="line"></span><br><span class="line">! Configuration File for keepalived</span><br><span class="line">global_defs &#123;</span><br><span class="line">   #notification_email &#123;</span><br><span class="line">        #<span class="keyword">aaa</span>@email.com</span><br><span class="line">   #&#125;</span><br><span class="line">   #notification_email_from keepalived@email.com</span><br><span class="line">   #smtp_server <span class="number">127.0</span><span class="meta">.0</span><span class="meta">.1</span></span><br><span class="line">   #smtp_connect_timeout <span class="number">30</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">vrrp_instance web &#123;</span><br><span class="line">    state BACKUP </span><br><span class="line">    interface enp0s3 </span><br><span class="line">    virtual_router_id <span class="number">51</span></span><br><span class="line">    virtual_ipaddress &#123;</span><br><span class="line">        <span class="number">192.168</span><span class="meta">.23</span><span class="meta">.253</span> </span><br><span class="line">    &#125;</span><br><span class="line">    notify_backup <span class="string">"/root/notify_node.sh b"</span></span><br><span class="line">    notify_master <span class="string">"/root/notify_node.sh m"</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">virtual_server <span class="number">192.168</span><span class="meta">.23</span><span class="meta">.253</span> <span class="number">0</span> &#123; </span><br><span class="line">    delay_loop <span class="number">6</span></span><br><span class="line">    lvs_sched wrr </span><br><span class="line">    lvs_method DR</span><br><span class="line">    protocol TCP</span><br><span class="line"></span><br><span class="line">    real_server <span class="number">192.168</span><span class="meta">.23</span><span class="meta">.65</span> <span class="number">0</span> &#123; </span><br><span class="line">        weight <span class="number">3</span></span><br><span class="line">        TCP_CHECK &#123;</span><br><span class="line">            connect_ip <span class="number">192.168</span><span class="meta">.23</span><span class="meta">.65</span> </span><br><span class="line">            connect_port <span class="number">80</span> </span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    real_server <span class="number">192.168</span><span class="meta">.23</span><span class="meta">.67</span> <span class="number">0</span> &#123; </span><br><span class="line">        weight <span class="number">3</span></span><br><span class="line">        TCP_CHECK &#123;</span><br><span class="line">            connect_ip <span class="number">192.168</span><span class="meta">.23</span><span class="meta">.67</span> </span><br><span class="line">            connect_port <span class="number">80</span> </span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">---------------------------------------------------</span><br><span class="line"></span><br><span class="line">#!/bin/bash</span><br><span class="line"># /root/notify_node.sh</span><br><span class="line"></span><br><span class="line">case <span class="number">$1</span> <span class="keyword">in</span></span><br><span class="line">b)</span><br><span class="line">/usr/sbin/ipvsadm -C</span><br><span class="line"><span class="comment">;;</span></span><br><span class="line">m)</span><br><span class="line">/usr/sbin/ipvsadm -R &lt;&lt;EOF</span><br><span class="line">-A -t <span class="number">192.168</span><span class="meta">.23</span><span class="meta">.253</span>:<span class="number">0</span> -s wrr -p <span class="number">360</span></span><br><span class="line">-a -t <span class="number">192.168</span><span class="meta">.23</span><span class="meta">.253</span>:<span class="number">0</span> -r <span class="number">192.168</span><span class="meta">.23</span><span class="meta">.65</span>:<span class="number">0</span> -g -w <span class="number">3</span></span><br><span class="line">-a -t <span class="number">192.168</span><span class="meta">.23</span><span class="meta">.253</span>:<span class="number">0</span> -r <span class="number">192.168</span><span class="meta">.23</span><span class="meta">.67</span>:<span class="number">0</span> -g -w <span class="number">3</span></span><br><span class="line">EOF</span><br><span class="line"><span class="comment">;;</span></span><br><span class="line">esac</span><br><span class="line">/usr/sbin/ipvsadm -Ln</span><br></pre></td></tr></table></figure>
+<h3 id="相关命令操作"><a href="#相关命令操作" class="headerlink" title="相关命令操作"></a>相关命令操作</h3><figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装ipvsadm </span></span><br><span class="line">yum install -y ipvsadm</span><br><span class="line"></span><br><span class="line"><span class="comment"># LVS规则保存及恢复</span></span><br><span class="line">ipvsadm -Sn &gt;<span class="string">/etc/sysconfig/ipvsadm</span></span><br><span class="line">ipvsadm -R &lt;<span class="string">/etc/sysconfig/ipvsadm</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 关闭selinux</span></span><br><span class="line">setenforce 0</span><br><span class="line">sed -i 's/=enforcing/=disabled/g' <span class="string">/etc/sysconfig/selinux</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 抓包</span></span><br><span class="line">tcpdump -i enp0s3 vrrp -n</span><br><span class="line"></span><br><span class="line"><span class="comment"># 防火墙配置</span></span><br><span class="line">firewall-cmd <span class="params">--direct</span> <span class="params">--permanent</span> <span class="params">--add-rule</span> ipv4 filter INPUT 0  <span class="params">--protocol</span> vrrp -j ACCEPT</span><br><span class="line">firewall-cmd <span class="params">--reload</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 测试访问</span></span><br><span class="line">for i in &#123;1.<span class="string">.10</span>&#125;; do curl 192.168.23.253 ;done</span><br><span class="line">for i in &#123;1.<span class="string">.10</span>&#125;; do curl -o <span class="string">/dev/null</span> -s -w %&#123;http_code&#125; 192.168.23.253; <span class="keyword">echo</span> ;done</span><br></pre></td></tr></table></figure>
+
+        
+        <br>
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+    </div>
+</div>
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+        <li>
+            <a target="_blank" href="https://www.zhihu.com/people/li-bo-2-25">
+                            <span class="fa-stack fa-lg">
+                                 <i class="iconfont icon-zhihu"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+        
+
+        
+        <li>
+            <a target="_blank" href="https://github.com/liboo0731">
+                            <span class="fa-stack fa-lg">
+                                <i class="iconfont icon-github"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span>/</span>
+        
+        <span><a href="https://www.cnblogs.com/liboo/">H2K1R~ACE_博客园</a></span>
+        <span>/</span>
+        
+        <span><a href="https://blog.csdn.net/weixin_40108079">H2K1E~ACE_CSDN</a></span>
+        <span>/</span>
+        
+    </p>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/js/index.js"></script>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+    <script>
+        /**
+         *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+         *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+        */
+        if( '' || '')
+        var disqus_config = function () {
+            this.page.url = '';  // Replace PAGE_URL with your page's canonical URL variable
+            this.page.identifier = ''; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        };
+
+        (function() { // DON'T EDIT BELOW THIS LINE
+            var d = document, s = d.createElement('script');
+            s.src = 'https://airclouds-blog.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+    </script>
+
+</html>

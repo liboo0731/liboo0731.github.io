@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="李博的博客">
+    <meta name="keyword" content="striveliboo">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        【nagios】Nagios监控Linux主机内部信息 - Liboo的博客 | Liboo&#39;s Blog
+        
+    </title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/aircloud.css">
+    <link rel="stylesheet" href="/css/gitment.css">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> Internet of Everything, Everywhere. </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar">
+            <img src="/img/avatar.jpg">
+        </div>
+        <div class="name">
+            <i>H2K1E~ACE</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li>
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li>
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li>
+                <a href="/archive">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li>
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Installing-NRPE-Using-the-Install-Script"><span class="toc-text">Installing NRPE Using the Install Script</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Nagios监控Linux主机内部信息"><span class="toc-text">Nagios监控Linux主机内部信息</span></a></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input">
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+        <div class="index-about-mobile">
+            <i> Internet of Everything, Everywhere. </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        【nagios】Nagios监控Linux主机内部信息
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2019-05-22 13:31:54</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/tags/#nagios" title="nagios">nagios</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+
+    </div>
+    <div class="post-content ">
+        <h3 id="Installing-NRPE-Using-the-Install-Script"><a href="#Installing-NRPE-Using-the-Install-Script" class="headerlink" title="Installing NRPE Using the Install Script"></a>Installing NRPE Using the Install Script</h3><p>You must run the following commands as root.</p>
+<figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">cd</span> <span class="string">/tmp</span></span><br></pre></td></tr></table></figure>
+<p>For CentOS &amp; RHEL 5-7, Fedora 14+, SLES &amp; OpenSUSE 11+, Ubuntu 12+, Debian 6+:</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget http:<span class="regexp">//</span>assets.nagios.com<span class="regexp">/downloads/</span>nagiosxi<span class="regexp">/agents/</span>linux-nrpe-agent.tar.gz</span><br></pre></td></tr></table></figure>
+<p>Unpack the installer, and run the install script:</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">tar xzf linux-nrpe-agent<span class="selector-class">.tar</span><span class="selector-class">.gz</span></span><br><span class="line">cd linux-nrpe-agent</span><br><span class="line">./fullinstall</span><br></pre></td></tr></table></figure>
+<p>The script takes care of the following setup:</p>
+<ul>
+<li>Installs prerequisite packages</li>
+<li>Creates required users and groups</li>
+<li>Defines services for xinetd</li>
+<li>Compiles and installs the NRPE agent and Nagios plugins</li>
+<li>Configures the firewall (except on SLES)</li>
+<li>Configures the agent</li>
+</ul>
+<p>The script will stop to prompt you once to ask for the IP address(es) for your monitoring server(s).</p>
+<p>You will need to type either a single address or multiple addresses separated by spaces. This will configure the xinetd superdaemon to allow connections from those addresses to the NRPE agent.</p>
+<p>You now have NRPE installed. You may remove any installation files in the tmp directory.</p>
+<h3 id="Nagios监控Linux主机内部信息"><a href="#Nagios监控Linux主机内部信息" class="headerlink" title="Nagios监控Linux主机内部信息"></a>Nagios监控Linux主机内部信息</h3><ol>
+<li>监控端安装软件</li>
+</ol>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># nagioscore</span></span><br><span class="line">wget -O nagioscore.tar.gz https:<span class="regexp">//gi</span>thub.com<span class="regexp">/NagiosEnterprises/</span>nagioscore<span class="regexp">/archive/</span>nagios-<span class="number">4.4</span>.<span class="number">3</span>.tar.gz</span><br><span class="line"></span><br><span class="line"><span class="comment"># nagios-plugins</span></span><br><span class="line">wget --no-check-certificate -O nagios-plugins.tar.gz https:<span class="regexp">//gi</span>thub.com<span class="regexp">/nagios-plugins/</span>nagios-plugins<span class="regexp">/archive/</span>release-<span class="number">2.2</span>.<span class="number">1</span>.tar.gz</span><br><span class="line"></span><br><span class="line"><span class="comment"># nrpe（需要check_nrpe 插件）</span></span><br><span class="line">wget http:<span class="regexp">//</span>assets.nagios.com<span class="regexp">/downloads/</span>nagiosxi<span class="regexp">/agents/</span>linux-nrpe-agent.tar.gz</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>被监控端安装软件</li>
+</ol>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># nrpe</span></span><br><span class="line">wget http:<span class="regexp">//</span>assets.nagios.com<span class="regexp">/downloads/</span>nagiosxi<span class="regexp">/agents/</span>linux-nrpe-agent.tar.gz</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>被监控端配置</li>
+</ol>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># egrep -v "^#|^$" /usr/local/nagios/etc/nrpe.cfg</span></span><br><span class="line"></span><br><span class="line"><span class="attr">log_facility</span>=daemon</span><br><span class="line"><span class="attr">pid_file</span>=/var/run/nrpe.pid</span><br><span class="line"><span class="attr">server_port</span>=<span class="number">5666</span></span><br><span class="line"><span class="attr">nrpe_user</span>=nagios</span><br><span class="line"><span class="attr">nrpe_group</span>=nagios</span><br><span class="line"><span class="attr">allowed_hosts</span>=<span class="number">127.0</span>.<span class="number">0.1</span></span><br><span class="line"> </span><br><span class="line"><span class="attr">dont_blame_nrpe</span>=<span class="number">1</span></span><br><span class="line"><span class="attr">debug</span>=<span class="number">0</span></span><br><span class="line"><span class="attr">command_timeout</span>=<span class="number">60</span></span><br><span class="line"><span class="attr">connection_timeout</span>=<span class="number">300</span></span><br><span class="line"><span class="attr">include_dir</span>=/usr/local/nagios/etc/nrpe</span><br><span class="line"><span class="attr">command[check_users]</span>=/usr/local/nagios/libexec/check_users -w <span class="number">5</span> -c <span class="number">10</span></span><br><span class="line"><span class="attr">command[check_load]</span>=/usr/local/nagios/libexec/check_load -w <span class="number">15</span>,<span class="number">10</span>,<span class="number">5</span> -c <span class="number">30</span>,<span class="number">25</span>,<span class="number">20</span></span><br><span class="line"><span class="attr">command[check_hda1]</span>=/usr/local/nagios/libexec/check_disk -w <span class="number">20</span>% -c <span class="number">10</span>% -p /dev/sda2</span><br><span class="line"><span class="attr">command[check_zombie_procs]</span>=/usr/local/nagios/libexec/check_procs -w <span class="number">5</span> -c <span class="number">10</span> -s Z</span><br><span class="line"><span class="attr">command[check_total_procs]</span>=/usr/local/nagios/libexec/check_procs -w <span class="number">150</span> -c <span class="number">200</span></span><br></pre></td></tr></table></figure>
+<ol start="4">
+<li>监控端配置</li>
+</ol>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># vi /usr/local/naigos/etc/objects/command.cfg</span></span><br><span class="line"></span><br><span class="line">define command &#123;</span><br><span class="line"></span><br><span class="line">    command_name check_nrpe</span><br><span class="line">    command_line <span class="variable">$USER1</span>$/check_nrpe -H <span class="variable">$HOSTADDRESS</span>$ -c <span class="variable">$ARG1</span>$</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># vi /usr/local/nagios/etc/objects/192.168.23.123.cfg</span></span><br><span class="line"></span><br><span class="line">define host &#123;</span><br><span class="line">    use     linux-server   </span><br><span class="line">    host_name   host123</span><br><span class="line">    alias       My Linux<span class="built_in"> Server </span> </span><br><span class="line">   <span class="built_in"> address </span>    192.168.23.123  </span><br><span class="line">&#125;</span><br><span class="line">define<span class="built_in"> service </span>&#123;</span><br><span class="line">    use         generic-service</span><br><span class="line">    host_name       host123</span><br><span class="line">    service_description check host alive</span><br><span class="line">    check_command       check-host-alive</span><br><span class="line">&#125;</span><br><span class="line">define<span class="built_in"> service </span>&#123;</span><br><span class="line">    use         generic-service</span><br><span class="line">    host_name       host123</span><br><span class="line">    service_description check users</span><br><span class="line">    check_command       check_nrpe!check_users</span><br><span class="line">&#125;</span><br><span class="line">define<span class="built_in"> service </span>&#123;</span><br><span class="line">    use         generic-service</span><br><span class="line">    host_name       host123</span><br><span class="line">    service_description Load</span><br><span class="line">    check_command       check_nrpe!check_load</span><br><span class="line">&#125;</span><br><span class="line">define<span class="built_in"> service </span>&#123;</span><br><span class="line">    use         generic-service</span><br><span class="line">    host_name       host123</span><br><span class="line">    service_description check sda2</span><br><span class="line">    check_command       check_nrpe!check_hda1</span><br><span class="line">&#125;</span><br><span class="line">define<span class="built_in"> service </span>&#123;</span><br><span class="line">    use         generic-service</span><br><span class="line">    host_name       host123</span><br><span class="line">    service_description check zombie procs</span><br><span class="line">    check_command       check_nrpe!check_zombie_procs</span><br><span class="line">&#125;</span><br><span class="line">define<span class="built_in"> service </span>&#123;</span><br><span class="line">    use         generic-service</span><br><span class="line">    host_name       host123</span><br><span class="line">    service_description check total procs</span><br><span class="line">    check_command       check_nrpe!check_total_procs</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># vi /usr/local/nagios/etc/nagios.cfg</span></span><br><span class="line"></span><br><span class="line"><span class="attribute">cfg_file</span>=/usr/local/nagios/etc/objects/192.168.23.123.cfg</span><br></pre></td></tr></table></figure>
+<ol start="5">
+<li>验证配置</li>
+</ol>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="regexp">/usr/</span>local<span class="regexp">/nagios/</span>bin<span class="regexp">/nagios -v /u</span>sr<span class="regexp">/local/</span>nagios<span class="regexp">/etc/</span>nagios.cfg</span><br></pre></td></tr></table></figure>
+<ol start="6">
+<li>重启服务</li>
+</ol>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">systemctl restart nagios</span></span><br></pre></td></tr></table></figure>
+
+        
+        <br>
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+    </div>
+</div>
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+        <li>
+            <a target="_blank" href="https://www.zhihu.com/people/li-bo-2-25">
+                            <span class="fa-stack fa-lg">
+                                 <i class="iconfont icon-zhihu"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+        
+
+        
+        <li>
+            <a target="_blank" href="https://github.com/liboo0731">
+                            <span class="fa-stack fa-lg">
+                                <i class="iconfont icon-github"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span>/</span>
+        
+        <span><a href="https://www.cnblogs.com/liboo/">H2K1R~ACE_博客园</a></span>
+        <span>/</span>
+        
+        <span><a href="https://blog.csdn.net/weixin_40108079">H2K1E~ACE_CSDN</a></span>
+        <span>/</span>
+        
+    </p>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/js/index.js"></script>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+    <script>
+        /**
+         *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+         *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+        */
+        if( '' || '')
+        var disqus_config = function () {
+            this.page.url = '';  // Replace PAGE_URL with your page's canonical URL variable
+            this.page.identifier = ''; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        };
+
+        (function() { // DON'T EDIT BELOW THIS LINE
+            var d = document, s = d.createElement('script');
+            s.src = 'https://airclouds-blog.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+    </script>
+
+</html>

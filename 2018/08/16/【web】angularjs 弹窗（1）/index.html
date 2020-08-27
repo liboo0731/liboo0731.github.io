@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="李博的博客">
+    <meta name="keyword" content="striveliboo">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        【web】angularjs弹窗（ui-bootstrap+directive+ocLazyLoad） - Liboo的博客 | Liboo&#39;s Blog
+        
+    </title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/aircloud.css">
+    <link rel="stylesheet" href="/css/gitment.css">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> Internet of Everything, Everywhere. </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar">
+            <img src="/img/avatar.jpg">
+        </div>
+        <div class="name">
+            <i>H2K1E~ACE</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li>
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li>
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li>
+                <a href="/archive">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li>
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-5"><a class="toc-link" href="#静态资源引入："><span class="toc-text">静态资源引入：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#自定义弹窗指令："><span class="toc-text">自定义弹窗指令：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#参数解释："><span class="toc-text">参数解释：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#组件传值及事件绑定："><span class="toc-text">组件传值及事件绑定：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#页面调用："><span class="toc-text">页面调用：</span></a></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input">
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+        <div class="index-about-mobile">
+            <i> Internet of Everything, Everywhere. </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        【web】angularjs弹窗（ui-bootstrap+directive+ocLazyLoad）
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2018-08-16 19:46:32</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/tags/#web" title="web">web</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#angularjs" title="angularjs">angularjs</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#ui-bootstrap" title="ui-bootstrap">ui-bootstrap</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#ocLazyLoad" title="ocLazyLoad">ocLazyLoad</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+
+    </div>
+    <div class="post-content ">
+        <p>由于angularjs 项目中频繁使用弹窗，完全自行编写耗时耗力，所以结合ui-boostrap 中的modal 模块来实现功能</p>
+<ol>
+<li>创建一个公共弹窗服务，在使用的组件中依赖注入后调用弹窗方法</li>
+<li>在最外层组件（其余组件的父组件）注入弹窗服务，并定义调用弹窗的方法；其余组件require 此父组件，调用父组件中的方法</li>
+<li>自定义一个弹窗指令，设置仅属性调用（restrict: ‘A’），在主模块注入后，即可全局调用</li>
+</ol>
+<p>经过一步步实践和优化后，尽量减少中间环节，最终确认使用自定义指令来实现弹窗功能。</p>
+<h5 id="静态资源引入："><a href="#静态资源引入：" class="headerlink" title="静态资源引入："></a>静态资源引入：</h5><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">href</span>=<span class="string">"css/main.css"</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">href</span>=<span class="string">"plugins/bootstrap/css/bootstrap.css"</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> /&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"js/ocLazyLoad.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"js/drag.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"js/angular.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"js/ui-bootstrap-tpls"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h5 id="自定义弹窗指令："><a href="#自定义弹窗指令：" class="headerlink" title="自定义弹窗指令："></a>自定义弹窗指令：</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">angular.module(<span class="string">'common'</span>, [</span><br><span class="line">    <span class="string">'ui.bootstrap'</span>,</span><br><span class="line">    <span class="string">'oc.lazyLoad'</span></span><br><span class="line">])</span><br><span class="line">.directive(<span class="string">'uibModal'</span>,[<span class="string">'$uibModal'</span>,<span class="string">'$ocLazyLoad'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">$uibModal,$ocLazyLoad</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">        restrict: <span class="string">'A'</span>,</span><br><span class="line">        scope: &#123;</span><br><span class="line">            uibModal: <span class="string">'='</span></span><br><span class="line">        &#125;,</span><br><span class="line">        link: <span class="function"><span class="keyword">function</span>(<span class="params">scope,element,attr</span>)</span>&#123;</span><br><span class="line">            element.on(<span class="string">'click'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">                <span class="comment">//动态加载组件,在组件加载完成后打开弹窗</span></span><br><span class="line">                $ocLazyLoad</span><br><span class="line">                    .load(scope.uibModal.path)</span><br><span class="line">                    .then(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">                        <span class="comment">//弹窗打开方法</span></span><br><span class="line">                        $uibModal.open(&#123;</span><br><span class="line">                            animation:<span class="literal">false</span>,</span><br><span class="line">                            size:scope.uibModal.size?scope.uibModal.size:<span class="string">''</span>,</span><br><span class="line">                            backdrop:<span class="string">'static'</span>,</span><br><span class="line">                            component: scope.uibModal.component,</span><br><span class="line">                            resolve:&#123;</span><br><span class="line">                                <span class="comment">//获取所点击元素内容作为标题</span></span><br><span class="line">                                title:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">                                    <span class="keyword">return</span> element.context.innerHTML;</span><br><span class="line">                                &#125;,</span><br><span class="line">                                <span class="comment">//传入组件的数据</span></span><br><span class="line">                                data:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">                                    <span class="keyword">return</span> scope.uibModal.data;</span><br><span class="line">                                &#125;</span><br><span class="line">                            &#125;</span><br><span class="line">                            &#125;).rendered.then(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">                                <span class="comment">//弹窗显示出来后，绑定拖拽功能</span></span><br><span class="line">                                $(<span class="string">'.modal-content'</span>).drag(<span class="function"><span class="keyword">function</span>(<span class="params">ev,dd</span>)</span>&#123;</span><br><span class="line">                                    $(<span class="keyword">this</span>).css(&#123;</span><br><span class="line">                                        top: dd.offsetY,</span><br><span class="line">                                        left: dd.offsetX</span><br><span class="line">                                    &#125;);</span><br><span class="line">                                &#125;,&#123;</span><br><span class="line">                                    handle:<span class="string">'.modal-header'</span>,</span><br><span class="line">                                    relative:<span class="literal">true</span></span><br><span class="line">                                &#125;);</span><br><span class="line">                            &#125;);</span><br><span class="line">                &#125;);</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;]);</span><br></pre></td></tr></table></figure>
+<h5 id="参数解释："><a href="#参数解释：" class="headerlink" title="参数解释："></a>参数解释：</h5><ul>
+<li>path：组件存放路径，按需加载</li>
+<li>component：组件名</li>
+<li>size：弹窗尺寸，默认，sm，lg</li>
+<li>data：传入组件的数据，Object</li>
+</ul>
+<h5 id="组件传值及事件绑定："><a href="#组件传值及事件绑定：" class="headerlink" title="组件传值及事件绑定："></a>组件传值及事件绑定：</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">angular.module(<span class="string">'users'</span>).component(<span class="string">'usersForm'</span>,&#123;</span><br><span class="line">    templateUrl:<span class="string">'users/form/template.html'</span>,</span><br><span class="line">    controller:[<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">var</span> $ctrl = <span class="keyword">this</span>;</span><br><span class="line">        $ctrl.$onInit = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="keyword">this</span>.resolve);</span><br><span class="line">        &#125;;</span><br><span class="line"></span><br><span class="line">        $ctrl.ok = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">          $ctrl.close(&#123;<span class="attr">$value</span>: $ctrl.resolve.title&#125;);</span><br><span class="line">        &#125;;</span><br><span class="line"></span><br><span class="line">        $ctrl.cancel = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">          $ctrl.dismiss(&#123;<span class="attr">$value</span>: <span class="string">'cancel'</span>&#125;);</span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;],</span><br><span class="line">    <span class="comment">//close 和dismiss 被绑定自$uibModalInstance</span></span><br><span class="line">    bindings:&#123;</span><br><span class="line">        resolve:<span class="string">'&lt;'</span>,</span><br><span class="line">        close: <span class="string">'&amp;'</span>,</span><br><span class="line">        dismiss: <span class="string">'&amp;'</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h5 id="页面调用："><a href="#页面调用：" class="headerlink" title="页面调用："></a>页面调用：</h5><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">uib-modal</span>=<span class="string">"&#123;path:'users/detail/component',component:'usersDetail',data:user&#125;"</span>&gt;</span>查看详情<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">"button"</span> <span class="attr">uib-modal</span>=<span class="string">"&#123;path:'users/form/component',component:'usersForm'&#125;"</span>&gt;</span>新建群组<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+        
+        <br>
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+    </div>
+</div>
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+        <li>
+            <a target="_blank" href="https://www.zhihu.com/people/li-bo-2-25">
+                            <span class="fa-stack fa-lg">
+                                 <i class="iconfont icon-zhihu"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+        
+
+        
+        <li>
+            <a target="_blank" href="https://github.com/liboo0731">
+                            <span class="fa-stack fa-lg">
+                                <i class="iconfont icon-github"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span>/</span>
+        
+        <span><a href="https://www.cnblogs.com/liboo/">H2K1R~ACE_博客园</a></span>
+        <span>/</span>
+        
+        <span><a href="https://blog.csdn.net/weixin_40108079">H2K1E~ACE_CSDN</a></span>
+        <span>/</span>
+        
+    </p>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/js/index.js"></script>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+    <script>
+        /**
+         *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+         *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+        */
+        if( '' || '')
+        var disqus_config = function () {
+            this.page.url = '';  // Replace PAGE_URL with your page's canonical URL variable
+            this.page.identifier = ''; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        };
+
+        (function() { // DON'T EDIT BELOW THIS LINE
+            var d = document, s = d.createElement('script');
+            s.src = 'https://airclouds-blog.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+    </script>
+
+</html>

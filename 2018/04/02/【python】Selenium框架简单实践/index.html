@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="李博的博客">
+    <meta name="keyword" content="striveliboo">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        【python】Selenium框架简单实践 - Liboo的博客 | Liboo&#39;s Blog
+        
+    </title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/aircloud.css">
+    <link rel="stylesheet" href="/css/gitment.css">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> Internet of Everything, Everywhere. </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar">
+            <img src="/img/avatar.jpg">
+        </div>
+        <div class="name">
+            <i>H2K1E~ACE</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li>
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li>
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li>
+                <a href="/archive">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li>
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#selenium-Python（一）基本操作"><span class="toc-text">selenium+Python（一）基本操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#selenium-Python（二）定位元素"><span class="toc-text">selenium+Python（二）定位元素</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#selenium-Python（三）键盘和鼠标操作"><span class="toc-text">selenium+Python（三）键盘和鼠标操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#杰云测试快捷登陆"><span class="toc-text">杰云测试快捷登陆</span></a></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input">
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+        <div class="index-about-mobile">
+            <i> Internet of Everything, Everywhere. </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        【python】Selenium框架简单实践
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2018-04-02 16:42:56</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/tags/#python" title="python">python</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#selenium" title="selenium">selenium</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+
+    </div>
+    <div class="post-content ">
+        <h3 id="selenium-Python（一）基本操作"><a href="#selenium-Python（一）基本操作" class="headerlink" title="selenium+Python（一）基本操作"></a>selenium+Python（一）基本操作</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python</span></span><br><span class="line"><span class="comment"># -*- coding: utf8-*-</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># （一）首先是文件开头上要写</span></span><br><span class="line"><span class="keyword">from</span> selenium <span class="keyword">import</span> webdriver      <span class="comment">#引入selenium模块。</span></span><br><span class="line"><span class="keyword">from</span> [selenium.webdriver.common.keys](http://selenium.webdriver.common.keys/) <span class="keyword">import</span> Keys  <span class="comment">#模拟键盘输入。</span></span><br><span class="line"><span class="keyword">import</span> random,time  <span class="comment">#经常要用到，一个是产生随机数，一个是时间操作的功能</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#（二）最简单的一段功能：</span></span><br><span class="line">browser = webdriver.Firefox()   <span class="comment">#启动chrome浏览器</span></span><br><span class="line">time.sleep(<span class="number">3</span>)  <span class="comment">#停顿3秒</span></span><br><span class="line">browser.maximize_window() <span class="comment">#浏览器窗口最大化</span></span><br><span class="line"><span class="comment">#OutputLogin = Login(browser,username, password) #登录网页的函数，后续讲解</span></span><br><span class="line">time.sleep(int(random.uniform(<span class="number">1</span>, <span class="number">10</span>)))<span class="comment">#随机产生一个1到9秒的随机整数，然后等待这个时间</span></span><br><span class="line">browser.quit() <span class="comment">#退出浏览器</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#（三）定义一个登录系统的函数</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">Login</span><span class="params">(browser,username, password)</span>:</span> <span class="comment">#要有冒号</span></span><br><span class="line">    browser.get(<span class="string">'网页的URL'</span>)  <span class="comment">#浏览器登录网页的URL</span></span><br><span class="line">    time.sleep(<span class="number">3</span>)</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        <span class="comment"># find user login input box</span></span><br><span class="line">        elem_user=browser.find_element_by_id(<span class="string">"username"</span>)</span><br><span class="line">        <span class="comment">#这个是通过find_element_by_id函数来寻找定位网页上的id为username的控件</span></span><br><span class="line">        elem_user.clear()</span><br><span class="line">        elem_user.send_keys(username)</span><br><span class="line">        <span class="comment">#然后向这个控件发送username的值</span></span><br><span class="line">        time.sleep(<span class="number">1</span>)</span><br><span class="line">        <span class="comment"># find pwd input box</span></span><br><span class="line">        elem_pwd=browser.find_element_by_id(<span class="string">"password"</span>)</span><br><span class="line">        elem_pwd.clear()</span><br><span class="line">        elem_pwd.send_keys(password)</span><br><span class="line">        time.sleep(<span class="number">1</span>)</span><br><span class="line">        <span class="comment"># enter RETURN in pwd box to activate</span></span><br><span class="line">        elem_pwd.send_keys(Keys.RETURN)</span><br><span class="line">        <span class="comment">#然后向这个控件发送回车键，注意，如果是键盘上的回车，SHIFT，CONTROL键之类的，要用Keys.控制键的名称作为输入。</span></span><br><span class="line">        <span class="keyword">return</span> username + <span class="string">"  login successfully \n"</span></span><br><span class="line">    <span class="keyword">except</span>:</span><br><span class="line">        <span class="keyword">return</span> username + <span class="string">"  login failed \n"</span></span><br><span class="line">        <span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
+<h3 id="selenium-Python（二）定位元素"><a href="#selenium-Python（二）定位元素" class="headerlink" title="selenium+Python（二）定位元素"></a>selenium+Python（二）定位元素</h3><p>自动化测试中常用的功能是通过各种元素，例如id，class，xpath，css等内容来寻找定位元素，而且不光可以定位一个元素，还可以定位一队元素，然后逐个操作。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#定义一个定位操作单个元素的函数</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">Signup_Click</span><span class="params">(browser)</span>:</span></span><br><span class="line">    input3 = browser.find_element_by_class_name(<span class="string">"checkbtn"</span>)</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        input3.click()</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"Signup successfully \n"</span></span><br><span class="line">    <span class="keyword">except</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"Signup failed \n"</span></span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#定义一个定位操作多个元素的函数</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">Love_Clicks</span><span class="params">(browser,k)</span>:</span></span><br><span class="line">    inputs2 = browser.find_elements_by_class_name(<span class="string">"love"</span>)</span><br><span class="line">    <span class="comment">#注意，是elements，不是element，复数形式</span></span><br><span class="line">    <span class="keyword">for</span> input2 <span class="keyword">in</span> inputs2:</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            input2.click()</span><br><span class="line">        <span class="keyword">except</span>:</span><br><span class="line">            <span class="keyword">pass</span></span><br><span class="line">    <span class="keyword">return</span> str(i)+<span class="string">" Love successfully \n"</span></span><br></pre></td></tr></table></figure>
+<h3 id="selenium-Python（三）键盘和鼠标操作"><a href="#selenium-Python（三）键盘和鼠标操作" class="headerlink" title="selenium+Python（三）键盘和鼠标操作"></a>selenium+Python（三）键盘和鼠标操作</h3><p>Python也可以模拟鼠标和键盘的操作，不过要注意的是键盘带来的屏幕游标位置的挪动和鼠标在屏幕上的挪动位置，两个是不同的。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#首先要在文件头引入</span></span><br><span class="line"><span class="keyword">from</span> [selenium.webdriver.common.action_chains](http://selenium.webdriver.common.action_chains/) <span class="keyword">import</span> ActionChains</span><br><span class="line"></span><br><span class="line"><span class="comment">#定义一个函数</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">Transfer_Clicks</span><span class="params">(browser)</span>:</span></span><br><span class="line">    browser.execute_script(<span class="string">"window.scrollBy(0,-document.body.scrollHeight)"</span>,<span class="string">""</span>)</span><br><span class="line">    <span class="comment">#这个是执行一段Javascript函数，将网页滚到到网页顶部。</span></span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            inputs1 = browser.find_elements_by_class_name(<span class="string">"feedAttr_transfer"</span>)</span><br><span class="line">            <span class="keyword">for</span> input1 <span class="keyword">in</span> inputs1:</span><br><span class="line">                <span class="keyword">try</span>:</span><br><span class="line">                    ActionChains(browser).click(input1).perform()</span><br><span class="line">                    <span class="comment">#模拟鼠标点击控件input1，此时的鼠标位置在input1处</span></span><br><span class="line">                    browser.execute_script(<span class="string">"window.scrollBy(0,200)"</span>,<span class="string">""</span>)</span><br><span class="line">                    <span class="comment">#向下滚动200个像素，鼠标位置也跟着变了</span></span><br><span class="line">                    ActionChains(browser).move_by_offset(<span class="number">0</span>,<span class="number">-80</span>).perform()</span><br><span class="line">                    <span class="comment">#向上移动鼠标80个像素，水平方向不同</span></span><br><span class="line">                    ActionChains(browser).click().perform()</span><br><span class="line">                    <span class="comment">#鼠标左键点击</span></span><br><span class="line">                    ActionChains(browser).key_down(Keys.TAB).perform()</span><br><span class="line">                    <span class="comment">#模拟tab键的输入</span></span><br><span class="line">                    ActionChains(browser).send_keys(Keys.ENTER).perform()</span><br><span class="line">                    <span class="comment">#模拟输入ENTER键</span></span><br><span class="line">                <span class="keyword">except</span>:</span><br><span class="line">                    <span class="keyword">pass</span></span><br><span class="line">        <span class="keyword">except</span>:</span><br><span class="line">            <span class="keyword">pass</span></span><br><span class="line">        <span class="keyword">return</span> <span class="string">"Transfer successfully \n"</span></span><br></pre></td></tr></table></figure>
+<h3 id="杰云测试快捷登陆"><a href="#杰云测试快捷登陆" class="headerlink" title="杰云测试快捷登陆"></a>杰云测试快捷登陆</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#coding=utf8</span></span><br><span class="line"><span class="keyword">from</span> selenium <span class="keyword">import</span> webdriver</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">Login</span><span class="params">(browser,url,username, password)</span>:</span></span><br><span class="line">    browser.get(url)</span><br><span class="line">    time.sleep(<span class="number">1</span>)</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        <span class="comment"># find user login input box</span></span><br><span class="line">        elem_user=browser.find_element_by_id(<span class="string">"j_username"</span>)</span><br><span class="line">        elem_user.clear()</span><br><span class="line">        elem_user.send_keys(username)</span><br><span class="line">        time.sleep(<span class="number">1</span>)</span><br><span class="line">        <span class="comment"># find pwd input box</span></span><br><span class="line">        elem_pwd=browser.find_element_by_id(<span class="string">"j_password"</span>)</span><br><span class="line">        elem_pwd.clear()</span><br><span class="line">        elem_pwd.send_keys(password)</span><br><span class="line">        time.sleep(<span class="number">1</span>)</span><br><span class="line">        <span class="comment"># submit</span></span><br><span class="line">        elem_sub = browser.find_element_by_id(<span class="string">"logoutBtn"</span>)</span><br><span class="line">        elem_sub.click()</span><br><span class="line">        <span class="comment"># action</span></span><br><span class="line">        <span class="comment"># print browser.current_url</span></span><br><span class="line">        time.sleep(<span class="number">3</span>)</span><br><span class="line">        <span class="comment"># get rdp file (current session)</span></span><br><span class="line">        <span class="comment"># print browser.find_element_by_xpath('/html/body/iframe').get_attribute('src')</span></span><br><span class="line">        <span class="keyword">return</span> username + <span class="string">"login successfully \n"</span></span><br><span class="line">    <span class="keyword">except</span>:</span><br><span class="line">        <span class="keyword">return</span> username + <span class="string">"login failed \n"</span></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    browser = webdriver.Chrome()</span><br><span class="line">    browser.maximize_window()</span><br><span class="line">    url = <span class="string">'https://yangtzi.vicp.net:843'</span></span><br><span class="line">    usrname = <span class="string">'user3'</span></span><br><span class="line">    password = <span class="string">'123456'</span></span><br><span class="line">    Login(browser,url,usrname,password)</span><br><span class="line">    browser.close()</span><br></pre></td></tr></table></figure>
+
+        
+        <br>
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+    </div>
+</div>
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+        <li>
+            <a target="_blank" href="https://www.zhihu.com/people/li-bo-2-25">
+                            <span class="fa-stack fa-lg">
+                                 <i class="iconfont icon-zhihu"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+        
+
+        
+        <li>
+            <a target="_blank" href="https://github.com/liboo0731">
+                            <span class="fa-stack fa-lg">
+                                <i class="iconfont icon-github"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span>/</span>
+        
+        <span><a href="https://www.cnblogs.com/liboo/">H2K1R~ACE_博客园</a></span>
+        <span>/</span>
+        
+        <span><a href="https://blog.csdn.net/weixin_40108079">H2K1E~ACE_CSDN</a></span>
+        <span>/</span>
+        
+    </p>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/js/index.js"></script>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+    <script>
+        /**
+         *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+         *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+        */
+        if( '' || '')
+        var disqus_config = function () {
+            this.page.url = '';  // Replace PAGE_URL with your page's canonical URL variable
+            this.page.identifier = ''; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        };
+
+        (function() { // DON'T EDIT BELOW THIS LINE
+            var d = document, s = d.createElement('script');
+            s.src = 'https://airclouds-blog.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+    </script>
+
+</html>

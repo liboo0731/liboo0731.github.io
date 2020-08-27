@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="李博的博客">
+    <meta name="keyword" content="striveliboo">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        【redis】Redis绿色部署 - Liboo的博客 | Liboo&#39;s Blog
+        
+    </title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/aircloud.css">
+    <link rel="stylesheet" href="/css/gitment.css">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> Internet of Everything, Everywhere. </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar">
+            <img src="/img/avatar.jpg">
+        </div>
+        <div class="name">
+            <i>H2K1E~ACE</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li>
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li>
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li>
+                <a href="/archive">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li>
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Linux-下安装"><span class="toc-text">Linux 下安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#redis绿色安装"><span class="toc-text">redis绿色安装</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#安装到指定目录"><span class="toc-text">安装到指定目录</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#功能测试（耗时较长，非必须执行）"><span class="toc-text">功能测试（耗时较长，非必须执行）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#修改配置文件"><span class="toc-text">修改配置文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#编写Redis启停脚本"><span class="toc-text">编写Redis启停脚本</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用redis-用户以systemd-服务启动"><span class="toc-text">使用redis 用户以systemd 服务启动</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#防火墙配置"><span class="toc-text">防火墙配置</span></a></li></ol></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input">
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+        <div class="index-about-mobile">
+            <i> Internet of Everything, Everywhere. </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        【redis】Redis绿色部署
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2019-03-22 09:01:52</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/tags/#redis" title="redis">redis</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+
+    </div>
+    <div class="post-content ">
+        <h2 id="Linux-下安装"><a href="#Linux-下安装" class="headerlink" title="Linux 下安装"></a>Linux 下安装</h2><p><strong>下载地址：</strong><a href="http://redis.io/download" target="_blank" rel="noopener">http://redis.io/download</a>，下载最新稳定版本。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> wget http://download.redis.io/releases/redis-5.0.5.tar.gz</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> tar xzf redis-5.0.5.tar.gz</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">cd</span> redis-5.0.5</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> make</span></span><br></pre></td></tr></table></figure>
+<p>make完后 redis-5.0.5目录下会出现编译后的redis服务程序redis-server，还有用于测试的客户端程序redis-cli，两个程序位于安装目录 src 目录下：</p>
+<p>下面启动redis服务。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">cd</span> src</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> ./redis-server</span></span><br></pre></td></tr></table></figure>
+<p>注意这种方式启动redis 使用的是默认配置。也可以通过启动参数告诉redis使用指定配置文件使用下面命令启动。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">cd</span> src</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> ./redis-server ../redis.conf</span></span><br></pre></td></tr></table></figure>
+<p><strong>redis.conf</strong> 是一个默认的配置文件。我们可以根据需要使用自己的配置文件。</p>
+<p>启动redis服务进程后，就可以使用测试客户端程序redis-cli和redis服务交互了。 比如：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">cd</span> src</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> ./redis-cli</span></span><br><span class="line"><span class="meta">redis&gt;</span><span class="bash"> <span class="built_in">set</span> foo bar</span></span><br><span class="line">OK</span><br><span class="line"><span class="meta">redis&gt;</span><span class="bash"> get foo</span></span><br><span class="line">"bar"</span><br></pre></td></tr></table></figure>
+<h2 id="redis绿色安装"><a href="#redis绿色安装" class="headerlink" title="redis绿色安装"></a>redis绿色安装</h2><h3 id="安装到指定目录"><a href="#安装到指定目录" class="headerlink" title="安装到指定目录"></a>安装到指定目录</h3><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装到 /usr/local/redis</span></span><br><span class="line"></span><br><span class="line"><span class="attribute">installpath</span>=/usr/local/redis</span><br><span class="line">mkdir -p <span class="variable">$installpath</span></span><br><span class="line">cd redis-5.0.5</span><br><span class="line">make <span class="attribute">MALLOC</span>=libc</span><br><span class="line">make <span class="attribute">PREFIX</span>=<span class="variable">$installpath</span> install</span><br><span class="line">\cp -f redis.conf <span class="variable">$installpath</span></span><br></pre></td></tr></table></figure>
+<h3 id="功能测试（耗时较长，非必须执行）"><a href="#功能测试（耗时较长，非必须执行）" class="headerlink" title="功能测试（耗时较长，非必须执行）"></a>功能测试（耗时较长，非必须执行）</h3><figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">在安装成功之后，可以运行测试，确认Redis的功能是否正常</span><br><span class="line">[root<span class="variable">@localhost</span> ~]<span class="comment"># make test</span></span><br><span class="line"></span><br><span class="line">出现报错：</span><br><span class="line">hadoop<span class="variable">@stormspark</span><span class="symbol">:~/workspace/redis2</span>.<span class="number">6.13</span>/src<span class="variable">$ </span>make test</span><br><span class="line">You need tcl <span class="number">8.5</span> <span class="keyword">or</span> newer <span class="keyword">in</span> order to run the Redis test</span><br><span class="line"><span class="symbol">make:</span> *** [test] Error <span class="number">1</span></span><br><span class="line"></span><br><span class="line">解决方式</span><br><span class="line">yum install -y tcl</span><br><span class="line"></span><br><span class="line">重新执行测试</span><br><span class="line">[root<span class="variable">@localhost</span> ~]<span class="comment"># make test</span></span><br><span class="line"></span><br><span class="line">......</span><br><span class="line"></span><br><span class="line">\o/ All tests passed without errors!</span><br><span class="line"></span><br><span class="line"><span class="symbol">Cleanup:</span> may take some time... OK</span><br></pre></td></tr></table></figure>
+<h3 id="修改配置文件"><a href="#修改配置文件" class="headerlink" title="修改配置文件"></a>修改配置文件</h3><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">installpath=/usr/local/redis</span><br><span class="line">sed -<span class="selector-tag">i</span> <span class="string">'/^bind/c#bind 127.0.0.1'</span> <span class="string">"$installpath/redis.conf"</span></span><br><span class="line">sed -<span class="selector-tag">i</span> <span class="string">'/^protected-mode/cprotected-mode no'</span> <span class="string">"$installpath/redis.conf"</span></span><br><span class="line">sed -<span class="selector-tag">i</span> <span class="string">'/^logfile/clogfile "'</span><span class="variable">$installpath</span><span class="string">'/redis.log"'</span> <span class="string">"$installpath/redis.conf"</span></span><br><span class="line">sed -<span class="selector-tag">i</span> <span class="string">'/^pidfile/cpidfile "'</span><span class="variable">$installpath</span><span class="string">'/redis.pid"'</span> <span class="string">"$installpath/redis.conf"</span></span><br></pre></td></tr></table></figure>
+<h3 id="编写Redis启停脚本"><a href="#编写Redis启停脚本" class="headerlink" title="编写Redis启停脚本"></a>编写Redis启停脚本</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]<span class="comment"># vi /usr/local/redis/redis.sh</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#!/bin/sh</span></span><br><span class="line"><span class="comment">#Configurations injected by install_server below....</span></span><br><span class="line"></span><br><span class="line">EXEC=/usr/<span class="built_in">local</span>/redis/bin/redis-server</span><br><span class="line">CLIEXEC=/usr/<span class="built_in">local</span>/redis/bin/redis-cli</span><br><span class="line">PIDFILE=/usr/<span class="built_in">local</span>/redis/redis.pid</span><br><span class="line">CONF=<span class="string">"/usr/local/redis/redis.conf"</span></span><br><span class="line">REDISPORT=<span class="string">"6379"</span></span><br><span class="line"><span class="comment">###############</span></span><br><span class="line"><span class="comment"># SysV Init Information</span></span><br><span class="line"><span class="comment"># chkconfig: - 58 74</span></span><br><span class="line"><span class="comment"># description: redis_6379 is the redis daemon.</span></span><br><span class="line"><span class="comment">### BEGIN INIT INFO</span></span><br><span class="line"><span class="comment"># Provides: redis_6379</span></span><br><span class="line"><span class="comment"># Required-Start: $network $local_fs $remote_fs</span></span><br><span class="line"><span class="comment"># Required-Stop: $network $local_fs $remote_fs</span></span><br><span class="line"><span class="comment"># Default-Start: 2 3 4 5</span></span><br><span class="line"><span class="comment"># Default-Stop: 0 1 6</span></span><br><span class="line"><span class="comment"># Should-Start: $syslog $named</span></span><br><span class="line"><span class="comment"># Should-Stop: $syslog $named</span></span><br><span class="line"><span class="comment"># Short-Description: start and stop redis_6379</span></span><br><span class="line"><span class="comment"># Description: Redis daemon</span></span><br><span class="line"><span class="comment">### END INIT INFO</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">case</span> <span class="string">"<span class="variable">$1</span>"</span> <span class="keyword">in</span></span><br><span class="line">    start)</span><br><span class="line">        <span class="keyword">if</span> [ -f <span class="variable">$PIDFILE</span> ]</span><br><span class="line">        <span class="keyword">then</span></span><br><span class="line">            <span class="built_in">echo</span> <span class="string">"<span class="variable">$PIDFILE</span> exists, process is already running or crashed"</span></span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            <span class="built_in">echo</span> <span class="string">"Starting Redis server..."</span></span><br><span class="line">            <span class="variable">$EXEC</span> <span class="variable">$CONF</span></span><br><span class="line">        <span class="keyword">fi</span></span><br><span class="line">        ;;</span><br><span class="line">    stop)</span><br><span class="line">        <span class="keyword">if</span> [ ! -f <span class="variable">$PIDFILE</span> ]</span><br><span class="line">        <span class="keyword">then</span></span><br><span class="line">            <span class="built_in">echo</span> <span class="string">"<span class="variable">$PIDFILE</span> does not exist, process is not running"</span></span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            PID=$(cat <span class="variable">$PIDFILE</span>)</span><br><span class="line">            <span class="built_in">echo</span> <span class="string">"Stopping ..."</span></span><br><span class="line">            <span class="variable">$CLIEXEC</span> -p <span class="variable">$REDISPORT</span> shutdown</span><br><span class="line">            <span class="keyword">while</span> [ -x /proc/<span class="variable">$&#123;PID&#125;</span> ]</span><br><span class="line">            <span class="keyword">do</span></span><br><span class="line">                <span class="built_in">echo</span> <span class="string">"Waiting for Redis to shutdown ..."</span></span><br><span class="line">                sleep 1</span><br><span class="line">            <span class="keyword">done</span></span><br><span class="line">            <span class="built_in">echo</span> <span class="string">"Redis stopped"</span></span><br><span class="line">        <span class="keyword">fi</span></span><br><span class="line">        ;;</span><br><span class="line">    status)</span><br><span class="line">        PID=$(cat <span class="variable">$PIDFILE</span>)</span><br><span class="line">        <span class="keyword">if</span> [ ! -x /proc/<span class="variable">$&#123;PID&#125;</span> ]</span><br><span class="line">        <span class="keyword">then</span></span><br><span class="line">            <span class="built_in">echo</span> <span class="string">'Redis is not running'</span></span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            <span class="built_in">echo</span> <span class="string">"Redis is running (<span class="variable">$PID</span>)"</span></span><br><span class="line">        <span class="keyword">fi</span></span><br><span class="line">        ;;</span><br><span class="line">    restart)</span><br><span class="line">        <span class="variable">$0</span> stop</span><br><span class="line">        <span class="variable">$0</span> start</span><br><span class="line">        ;;</span><br><span class="line">    *)</span><br><span class="line">        <span class="built_in">echo</span> <span class="string">"Please use start, stop, restart or status as first argument"</span></span><br><span class="line">        ;;</span><br><span class="line"><span class="keyword">esac</span></span><br><span class="line"></span><br><span class="line">[root@localhost ~]<span class="comment"># chmod u+x /usr/local/redis/redis.sh</span></span><br></pre></td></tr></table></figure>
+<h3 id="使用redis-用户以systemd-服务启动"><a href="#使用redis-用户以systemd-服务启动" class="headerlink" title="使用redis 用户以systemd 服务启动"></a>使用redis 用户以systemd 服务启动</h3><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">编写systemd服务</span><br><span class="line">[root@localhost ~]# vi /usr/local/redis/redis.service</span><br><span class="line"></span><br><span class="line">-----------------------------------------</span><br><span class="line">[Unit]</span><br><span class="line"><span class="attribute">Description</span>=redis server</span><br><span class="line"></span><br><span class="line">[Service]</span><br><span class="line"><span class="attribute">User</span>=redis</span><br><span class="line"><span class="attribute">WorkingDirectory</span>=/usr/local/redis</span><br><span class="line"><span class="attribute">ExecStart</span>=/usr/bin/sh redis.sh start</span><br><span class="line"><span class="attribute">ExecStop</span>=/usr/bin/sh redis.sh stop</span><br><span class="line"></span><br><span class="line">[Install]</span><br><span class="line"><span class="attribute">WantedBy</span>=multi-user.target</span><br><span class="line">-----------------------------------------</span><br><span class="line">[Unit]</span><br><span class="line"><span class="attribute">Description</span>=redis server</span><br><span class="line"></span><br><span class="line">[Service]</span><br><span class="line"><span class="attribute">User</span>=redis</span><br><span class="line"><span class="attribute">WorkingDirectory</span>=/usr/local/redis</span><br><span class="line"><span class="attribute">ExecStart</span>=/usr/local/redis/bin/redis-server redis.conf</span><br><span class="line"></span><br><span class="line">[Install]</span><br><span class="line"><span class="attribute">WantedBy</span>=multi-user.target</span><br><span class="line">-----------------------------------------</span><br><span class="line"></span><br><span class="line">放置服务文件</span><br><span class="line">[root@localhost ~]# \cp -f /usr/local/redis/redis.service /usr/lib/systemd/system/redis.service</span><br><span class="line"></span><br><span class="line">创建redis用户</span><br><span class="line">[root@localhost ~]# useradd -r -s /bin/<span class="literal">false</span> redis</span><br><span class="line"></span><br><span class="line">修改文件所属</span><br><span class="line">[root@localhost ~]# chown -R redis.redis /usr/local/redis</span><br><span class="line"></span><br><span class="line">启动并设置开机自启</span><br><span class="line">[root@localhost ~]# systemctl start redis</span><br><span class="line">[root@localhost ~]# systemctl <span class="builtin-name">enable</span> redis</span><br></pre></td></tr></table></figure>
+<h3 id="防火墙配置"><a href="#防火墙配置" class="headerlink" title="防火墙配置"></a>防火墙配置</h3><figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo firewall-<span class="keyword">cmd</span><span class="bash"> --permanent --add-port=6379/tcp</span></span><br><span class="line">sudo firewall-<span class="keyword">cmd</span><span class="bash"> --reload</span></span><br></pre></td></tr></table></figure>
+        
+        <br>
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+    </div>
+</div>
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+        <li>
+            <a target="_blank" href="https://www.zhihu.com/people/li-bo-2-25">
+                            <span class="fa-stack fa-lg">
+                                 <i class="iconfont icon-zhihu"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+        
+
+        
+        <li>
+            <a target="_blank" href="https://github.com/liboo0731">
+                            <span class="fa-stack fa-lg">
+                                <i class="iconfont icon-github"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span>/</span>
+        
+        <span><a href="https://www.cnblogs.com/liboo/">H2K1R~ACE_博客园</a></span>
+        <span>/</span>
+        
+        <span><a href="https://blog.csdn.net/weixin_40108079">H2K1E~ACE_CSDN</a></span>
+        <span>/</span>
+        
+    </p>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/js/index.js"></script>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+    <script>
+        /**
+         *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+         *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+        */
+        if( '' || '')
+        var disqus_config = function () {
+            this.page.url = '';  // Replace PAGE_URL with your page's canonical URL variable
+            this.page.identifier = ''; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        };
+
+        (function() { // DON'T EDIT BELOW THIS LINE
+            var d = document, s = d.createElement('script');
+            s.src = 'https://airclouds-blog.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+    </script>
+
+</html>

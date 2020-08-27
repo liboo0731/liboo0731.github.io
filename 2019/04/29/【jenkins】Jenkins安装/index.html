@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="李博的博客">
+    <meta name="keyword" content="striveliboo">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        【jenkins】Jenkins安装 - Liboo的博客 | Liboo&#39;s Blog
+        
+    </title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/aircloud.css">
+    <link rel="stylesheet" href="/css/gitment.css">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> Internet of Everything, Everywhere. </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar">
+            <img src="/img/avatar.jpg">
+        </div>
+        <div class="name">
+            <i>H2K1E~ACE</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li>
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li>
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li>
+                <a href="/archive">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li>
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Jenkins概念"><span class="toc-text">Jenkins概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Jenkins特性："><span class="toc-text">Jenkins特性：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Jenkins安装"><span class="toc-text">Jenkins安装</span></a></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input">
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+        <div class="index-about-mobile">
+            <i> Internet of Everything, Everywhere. </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        【jenkins】Jenkins安装
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2019-04-29 20:28:46</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/tags/#jenkins" title="jenkins">jenkins</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+
+    </div>
+    <div class="post-content ">
+        <h3 id="Jenkins概念"><a href="#Jenkins概念" class="headerlink" title="Jenkins概念"></a>Jenkins概念</h3><p>Jenkins是一个开源的、可扩展的持续集成、交付、部署（软件/代码的编译、打包、部署）的基于web界面的平台。允许持续集成和持续交付项目，无论用的是什么平台，可以处理任何类型的构建或持续集成。</p>
+<p><strong>官网：</strong><a href="https://jenkins.io/zh/" target="_blank" rel="noopener">https://jenkins.io/zh/</a></p>
+<p><strong>官方文档：</strong><a href="https://jenkins.io/zh/doc/" target="_blank" rel="noopener">https://jenkins.io/zh/doc/</a></p>
+<h3 id="Jenkins特性："><a href="#Jenkins特性：" class="headerlink" title="Jenkins特性："></a>Jenkins特性：</h3><ul>
+<li><p>开源的java语言开发持续集成工具，支持CI，CD；</p>
+</li>
+<li><p>易于安装部署配置：可通过yum安装,或下载war包以及通过docker容器等快速实现安装部署，可方便web界面配置管理；</p>
+</li>
+<li><p>消息通知及测试报告：集成RSS/E-mail通过RSS发布构建结果或当构建完成时通过e-mail通知，生成JUnit/TestNG测试报告；</p>
+</li>
+<li><p>分布式构建：支持Jenkins能够让多台计算机一起构建/测试；</p>
+</li>
+<li><p>文件识别:Jenkins能够跟踪哪次构建生成哪些jar，哪次构建使用哪个版本的jar等； </p>
+</li>
+<li><p>丰富的插件支持:支持扩展插件，你可以开发适合自己团队使用的工具，如git，svn，maven，docker等。</p>
+</li>
+</ul>
+<h3 id="Jenkins安装"><a href="#Jenkins安装" class="headerlink" title="Jenkins安装"></a>Jenkins安装</h3><p>安装最低配置：不少于256M内存，不低于1G磁盘，JDK版本&gt;=8（openjdk也可以）。</p>
+<p><strong>安装jenkins：</strong></p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">[<span class="meta">root@localhost ~</span>]<span class="meta"># yum install -y java-1.8.0-openjdk       //安装openjdk，因为jenkins基于java开发</span></span><br><span class="line"></span><br><span class="line">[<span class="meta">root@localhost ~</span>]<span class="meta"># wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat/jenkins.repo      //wget -O 下载文件并以指定的文件名保存</span></span><br><span class="line">[<span class="meta">root@localhost ~</span>]<span class="meta"># cat /etc/yum.repos.d/jenkins.repo </span></span><br><span class="line"></span><br><span class="line">[<span class="meta">jenkins</span>]</span><br><span class="line">name=Jenkins</span><br><span class="line">baseurl=http:<span class="comment">//pkg.jenkins.io/redhat</span></span><br><span class="line">gpgcheck=<span class="number">1</span>      <span class="comment">//这里会检测key</span></span><br><span class="line"></span><br><span class="line">[<span class="meta">root@localhost ~</span>]<span class="meta"># rpm --import https://pkg.jenkins.io/redhat/jenkins.io.key         //安装jenkins key</span></span><br><span class="line">[<span class="meta">root@localhost ~</span>]<span class="meta"># yum install -y jenkins</span></span><br><span class="line">或</span><br><span class="line">[<span class="meta">root@localhost ~</span>]<span class="meta"># wget https://pkg.jenkins.io/redhat-stable/jenkins-2.164.3-1.1.noarch.rpm</span></span><br><span class="line">[<span class="meta">root@localhost ~</span>]<span class="meta"># yum localinstall -y jenkins-2.164.3-1.1.noarch.rpm</span></span><br></pre></td></tr></table></figure>
+<p><strong>启动jenkins：</strong></p>
+<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root<span class="variable">@lzx</span> ~]<span class="comment"># systemctl start jenkins</span></span><br><span class="line">或</span><br><span class="line">[root<span class="variable">@localhost</span> ~]<span class="comment"># wget http://mirrors.jenkins.io/war-stable/latest/jenkins.war</span></span><br><span class="line">[root<span class="variable">@localhost</span> ~]<span class="comment"># java -jar jenkins.war --httpPort=8080</span></span><br><span class="line"></span><br><span class="line">[root<span class="variable">@lzx</span> ~]<span class="comment"># ps aux |grep jenkins</span></span><br><span class="line">jenkins    <span class="number">1157</span> <span class="number">84.7</span> <span class="number">10.0</span> <span class="number">2320896</span> <span class="number">100884</span> ?      Ssl  <span class="number">23</span><span class="symbol">:</span><span class="number">28</span>   <span class="number">0</span><span class="symbol">:</span>08 /etc/alternatives/java -Dcom.sun.akuma.Daemon=daemonized -Djava.awt.headless=<span class="keyword">true</span> -DJENKINS_HOME=<span class="regexp">/var/lib</span><span class="regexp">/jenkins -jar /usr</span><span class="regexp">/lib/jenkins</span><span class="regexp">/jenkins.war --logfile=/var</span><span class="regexp">/log/jenkins</span><span class="regexp">/jenkins.log --webroot=/var</span><span class="regexp">/cache/jenkins</span><span class="regexp">/war --daemon --httpPort=8080 --debug=5 --handlerCountMax=100 --handlerCountMaxIdle=20</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[root@lzx ~]<span class="comment"># less /var/log/jenkins/jenkins.log         //查看jenkins日志，截取下面部分</span></span><br><span class="line">Jenkins initial setup is required. An admin user has been created and a password generated</span><br><span class="line">.</span><br><span class="line">Please <span class="keyword">use</span> the <span class="keyword">following</span> <span class="keyword">password</span> <span class="keyword">to</span> proceed <span class="keyword">to</span> installation:</span><br><span class="line"></span><br><span class="line"><span class="number">77</span>faa20f2ad544f7bcb6593b1cf1436b        //<span class="keyword">admin</span>密码，初始化安装时会用到</span><br><span class="line"></span><br><span class="line">This may also be <span class="keyword">found</span> <span class="keyword">at</span>: /<span class="keyword">var</span>/lib/jenkins/secrets/initialAdminPassword        //<span class="keyword">admin</span>密码也可以在这里查到</span><br></pre></td></tr></table></figure>
+<p><strong>访问安装：</strong></p>
+<p>打开浏览器，访问 http://&lt; ip : port &gt; 进行安装</p>
+<p><em>参考链接：</em></p>
+<p><em><a href="https://blog.csdn.net/miss1181248983/article/details/82840006" target="_blank" rel="noopener">Jenkins入门（一）</a></em></p>
+
+        
+        <br>
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+    </div>
+</div>
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+        <li>
+            <a target="_blank" href="https://www.zhihu.com/people/li-bo-2-25">
+                            <span class="fa-stack fa-lg">
+                                 <i class="iconfont icon-zhihu"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+        
+
+        
+        <li>
+            <a target="_blank" href="https://github.com/liboo0731">
+                            <span class="fa-stack fa-lg">
+                                <i class="iconfont icon-github"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span>/</span>
+        
+        <span><a href="https://www.cnblogs.com/liboo/">H2K1R~ACE_博客园</a></span>
+        <span>/</span>
+        
+        <span><a href="https://blog.csdn.net/weixin_40108079">H2K1E~ACE_CSDN</a></span>
+        <span>/</span>
+        
+    </p>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/js/index.js"></script>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+    <script>
+        /**
+         *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+         *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+        */
+        if( '' || '')
+        var disqus_config = function () {
+            this.page.url = '';  // Replace PAGE_URL with your page's canonical URL variable
+            this.page.identifier = ''; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        };
+
+        (function() { // DON'T EDIT BELOW THIS LINE
+            var d = document, s = d.createElement('script');
+            s.src = 'https://airclouds-blog.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+    </script>
+
+</html>

@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="李博的博客">
+    <meta name="keyword" content="striveliboo">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        【zabbix】Zabbix使用JMX监控ActiveMQ - Liboo的博客 | Liboo&#39;s Blog
+        
+    </title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/aircloud.css">
+    <link rel="stylesheet" href="/css/gitment.css">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> Internet of Everything, Everywhere. </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar">
+            <img src="/img/avatar.jpg">
+        </div>
+        <div class="name">
+            <i>H2K1E~ACE</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li>
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li>
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li>
+                <a href="/archive">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li>
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Zabbix-使用-JMX-监控-ActiveMQ"><span class="toc-text">Zabbix 使用 JMX 监控 ActiveMQ</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Zabbix-Server-安装配置-Zabbix-Java-Gateway"><span class="toc-text">Zabbix Server 安装配置 Zabbix Java Gateway</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ActiveMQ-配置"><span class="toc-text">ActiveMQ 配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Web管理界面添加主机，使用-JMX-接口"><span class="toc-text">Web管理界面添加主机，使用 JMX 接口</span></a></li></ol></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input">
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+        <div class="index-about-mobile">
+            <i> Internet of Everything, Everywhere. </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        【zabbix】Zabbix使用JMX监控ActiveMQ
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2019-05-30 16:41:05</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/tags/#zabbix" title="zabbix">zabbix</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+
+    </div>
+    <div class="post-content ">
+        <h2 id="Zabbix-使用-JMX-监控-ActiveMQ"><a href="#Zabbix-使用-JMX-监控-ActiveMQ" class="headerlink" title="Zabbix 使用 JMX 监控 ActiveMQ"></a>Zabbix 使用 JMX 监控 ActiveMQ</h2><h3 id="Zabbix-Server-安装配置-Zabbix-Java-Gateway"><a href="#Zabbix-Server-安装配置-Zabbix-Java-Gateway" class="headerlink" title="Zabbix Server 安装配置 Zabbix Java Gateway"></a>Zabbix Server 安装配置 Zabbix Java Gateway</h3><figure class="highlight vala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">安装 zabbix-java-gateway</span><br><span class="line"><span class="meta"># yum install zabbix-java-gateway -y</span></span><br><span class="line"></span><br><span class="line">启动并设置开机自启</span><br><span class="line"><span class="meta"># systemctl start zabbix-java-gateway</span></span><br><span class="line"><span class="meta"># systemctl enable zabbix-java-gateway</span></span><br><span class="line"></span><br><span class="line">修改zabbix_server.conf</span><br><span class="line"><span class="meta"># vi zabbix_server.conf</span></span><br><span class="line"></span><br><span class="line">JavaGateway=<span class="number">172.16</span><span class="number">.2</span><span class="number">.224</span>	<span class="comment">//IP address (or hostname) of Zabbix Java gateway.</span></span><br><span class="line">JavaGatewayPort=<span class="number">10052</span>		<span class="comment">//Port that Zabbix Java gateway listens on.</span></span><br><span class="line">StartJavaPollers=<span class="number">5</span>			<span class="comment">//Number of pre-forked instances of Java pollers.</span></span><br><span class="line"></span><br><span class="line">重启zabbix server</span><br><span class="line"><span class="meta"># systemctl restart zabbix-server</span></span><br></pre></td></tr></table></figure>
+<h3 id="ActiveMQ-配置"><a href="#ActiveMQ-配置" class="headerlink" title="ActiveMQ 配置"></a>ActiveMQ 配置</h3><figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">修改/etc/hosts 为对外地址，否则jmx远程无法使用</span><br><span class="line"><span class="comment"># cat /etc/hosts</span></span><br><span class="line">172.16.2.229   localhost localhost.localdomain localhost4 localhost4.localdomain4</span><br><span class="line"><span class="comment">#127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4</span></span><br><span class="line"><span class="section">::1         localhost localhost.localdomain localhost6 localhost6.localdomain6</span></span><br><span class="line"></span><br><span class="line">开启jmx</span><br><span class="line"><span class="comment"># vi conf/activemq.xml</span></span><br><span class="line"></span><br><span class="line">&lt;broker useJmx=<span class="string">"true"</span> xmlns=<span class="string">"http://activemq.apache.org/schema/core"</span> brokerName=<span class="string">"localhost"</span> dataDirectory=<span class="string">"$&#123;activemq.data&#125;"</span>&gt;</span><br><span class="line"></span><br><span class="line">        &lt;managementContext&gt;</span><br><span class="line">            &lt;managementContext createConnector=<span class="string">"true"</span> connectorPort=<span class="string">"11099"</span>/&gt;</span><br><span class="line">        &lt;/managementContext&gt;</span><br><span class="line">        ...</span><br><span class="line"></span><br><span class="line">配置启动参数</span><br><span class="line"><span class="comment"># vi bin/env </span></span><br><span class="line"></span><br><span class="line">ACTIVEMQ_SUNJMX_START=<span class="string">"$ACTIVEMQ_SUNJMX_START -Dcom.sun.management.jmxremote.port=11099"</span></span><br><span class="line">ACTIVEMQ_SUNJMX_START=<span class="string">"$ACTIVEMQ_SUNJMX_START -Dcom.sun.management.jmxremote.password.file=$&#123;ACTIVEMQ_CONF&#125;/jmx.password"</span></span><br><span class="line">ACTIVEMQ_SUNJMX_START=<span class="string">"$ACTIVEMQ_SUNJMX_START -Dcom.sun.management.jmxremote.access.file=$&#123;ACTIVEMQ_CONF&#125;/jmx.access"</span></span><br><span class="line">ACTIVEMQ_SUNJMX_START=<span class="string">"$ACTIVEMQ_SUNJMX_START -Dcom.sun.management.jmxremote.ssl=false"</span></span><br><span class="line">ACTIVEMQ_SUNJMX_START=<span class="string">"$ACTIVEMQ_SUNJMX_START -Dcom.sun.management.jmxremote=true"</span></span><br><span class="line">ACTIVEMQ_SUNJMX_START=<span class="string">"$ACTIVEMQ_SUNJMX_START -Dcom.sun.management.jmxremote.authenticate=false"</span>	//不需要认证</span><br><span class="line">ACTIVEMQ_SUNJMX_START=<span class="string">"$ACTIVEMQ_SUNJMX_START -Djava.rmi.server.hostname=172.16.2.229"</span></span><br><span class="line"></span><br><span class="line">设置权限</span><br><span class="line">chmod 400 conf/jmx.*</span><br><span class="line"></span><br><span class="line">重启服务</span><br><span class="line"><span class="comment"># systemctl restart activemq</span></span><br></pre></td></tr></table></figure>
+<h3 id="Web管理界面添加主机，使用-JMX-接口"><a href="#Web管理界面添加主机，使用-JMX-接口" class="headerlink" title="Web管理界面添加主机，使用 JMX 接口"></a>Web管理界面添加主机，使用 JMX 接口</h3><figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Configuration -&gt; Host --&gt; Create host</span><br><span class="line"></span><br><span class="line">Host name：host<span class="number">-172</span><span class="number">-16</span><span class="number">-2</span><span class="number">-229</span></span><br><span class="line">Visible name：linux_host_233</span><br><span class="line">Groups：Linux主机测试</span><br><span class="line"># remove Agent interfaces</span><br><span class="line">JMX interfaces：<span class="number">172.16</span><span class="number">.2</span><span class="number">.229</span></span><br><span class="line"></span><br><span class="line"># Templates</span><br><span class="line">Template App Generic Java JMX</span><br></pre></td></tr></table></figure>
+
+        
+        <br>
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+    </div>
+</div>
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+        <li>
+            <a target="_blank" href="https://www.zhihu.com/people/li-bo-2-25">
+                            <span class="fa-stack fa-lg">
+                                 <i class="iconfont icon-zhihu"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+        
+
+        
+        <li>
+            <a target="_blank" href="https://github.com/liboo0731">
+                            <span class="fa-stack fa-lg">
+                                <i class="iconfont icon-github"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span>/</span>
+        
+        <span><a href="https://www.cnblogs.com/liboo/">H2K1R~ACE_博客园</a></span>
+        <span>/</span>
+        
+        <span><a href="https://blog.csdn.net/weixin_40108079">H2K1E~ACE_CSDN</a></span>
+        <span>/</span>
+        
+    </p>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/js/index.js"></script>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+    <script>
+        /**
+         *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+         *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+        */
+        if( '' || '')
+        var disqus_config = function () {
+            this.page.url = '';  // Replace PAGE_URL with your page's canonical URL variable
+            this.page.identifier = ''; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        };
+
+        (function() { // DON'T EDIT BELOW THIS LINE
+            var d = document, s = d.createElement('script');
+            s.src = 'https://airclouds-blog.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+    </script>
+
+</html>

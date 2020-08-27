@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="李博的博客">
+    <meta name="keyword" content="striveliboo">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        【lvs】LVS+Keepalived双主配置 - Liboo的博客 | Liboo&#39;s Blog
+        
+    </title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/aircloud.css">
+    <link rel="stylesheet" href="/css/gitment.css">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> Internet of Everything, Everywhere. </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar">
+            <img src="/img/avatar.jpg">
+        </div>
+        <div class="name">
+            <i>H2K1E~ACE</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li>
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li>
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li>
+                <a href="/archive">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li>
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#LVS-Keepalived-双主配置"><span class="toc-text">LVS + Keepalived 双主配置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#服务器IP规划"><span class="toc-text">服务器IP规划</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Director（LVS-Keepalvied）主机配置"><span class="toc-text">Director（LVS+Keepalvied）主机配置</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Master-Host1-配置"><span class="toc-text">Master Host1 配置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Master-Host2-配置"><span class="toc-text">Master Host2 配置</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RealServer主机配置"><span class="toc-text">RealServer主机配置</span></a></li></ol></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input">
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+        <div class="index-about-mobile">
+            <i> Internet of Everything, Everywhere. </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        【lvs】LVS+Keepalived双主配置
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2019-04-27 08:58:27</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/tags/#lvs" title="lvs">lvs</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+
+    </div>
+    <div class="post-content ">
+        <h2 id="LVS-Keepalived-双主配置"><a href="#LVS-Keepalived-双主配置" class="headerlink" title="LVS + Keepalived 双主配置"></a>LVS + Keepalived 双主配置</h2><p>一般场景中实现LVS高可用及后端的LB，同时只有一台LVS提供服务，另一台作为Backup，显然没有做到最大利用。我们可以让两台LVS都作为Master，并又互为Backup，与master-backup架构相比，master-master架构需要多加一个vip。</p>
+<h3 id="服务器IP规划"><a href="#服务器IP规划" class="headerlink" title="服务器IP规划"></a>服务器IP规划</h3><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">lvs1</span>+<span class="selector-tag">keepalived</span>：192<span class="selector-class">.168</span><span class="selector-class">.1</span><span class="selector-class">.2</span></span><br><span class="line"><span class="selector-tag">lvs2</span>+<span class="selector-tag">keepalived</span>：192<span class="selector-class">.168</span><span class="selector-class">.1</span><span class="selector-class">.3</span></span><br><span class="line"><span class="selector-tag">web1</span>：192<span class="selector-class">.168</span><span class="selector-class">.1</span><span class="selector-class">.4</span></span><br><span class="line"><span class="selector-tag">web2</span>：192<span class="selector-class">.168</span><span class="selector-class">.1</span><span class="selector-class">.5</span></span><br><span class="line"><span class="selector-tag">vip</span>：192<span class="selector-class">.168</span><span class="selector-class">.1</span><span class="selector-class">.6</span>，192<span class="selector-class">.168</span><span class="selector-class">.1</span><span class="selector-class">.7</span></span><br></pre></td></tr></table></figure>
+<h3 id="Director（LVS-Keepalvied）主机配置"><a href="#Director（LVS-Keepalvied）主机配置" class="headerlink" title="Director（LVS+Keepalvied）主机配置"></a>Director（LVS+Keepalvied）主机配置</h3><h4 id="Master-Host1-配置"><a href="#Master-Host1-配置" class="headerlink" title="Master Host1 配置"></a>Master Host1 配置</h4><figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# cat /etc/keepalived/keepalived.conf</span><br><span class="line">vrrp_instance bl_one &#123;</span><br><span class="line">    <span class="section">state</span> MASTER             #指定Keepalived的角色，MASTER为主服务器，BACKUP为备用服务器</span><br><span class="line">    interface eth0           #指定HA监测的接口</span><br><span class="line">    lvs_sync_daemon_interface eth0</span><br><span class="line">    virtual_router_id <span class="number">38</span>     #虚拟路由标识(<span class="number">1</span><span class="number">-255</span>)，在一个VRRP实例中主备服务器ID必须一样</span><br><span class="line">    priority <span class="number">150</span>             #优先级，数字越大越优先，主服务器优先级必须高于备服务器</span><br><span class="line">    advert_int <span class="number">3</span>             #设置主备之间同步检查时间间隔，单位秒</span><br><span class="line">    authentication &#123;</span><br><span class="line">        auth_type PASS</span><br><span class="line">        auth_pass <span class="number">1111</span></span><br><span class="line">    &#125;</span><br><span class="line">    virtual_ipaddress &#123; #定义虚拟IP地址</span><br><span class="line">      <span class="number">192.168</span><span class="number">.1</span><span class="number">.6</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">vrrp_instance bl_two &#123;</span><br><span class="line">    <span class="section">state</span> BACKUP</span><br><span class="line">    interface eth0</span><br><span class="line">    lvs_sync_daemon_interface eth0</span><br><span class="line">    virtual_router_id <span class="number">48</span></span><br><span class="line">    priority <span class="number">120</span></span><br><span class="line">    advert_int <span class="number">3</span></span><br><span class="line">    authentication &#123;</span><br><span class="line">        auth_type PASS</span><br><span class="line">        auth_pass <span class="number">1111</span></span><br><span class="line">    &#125;</span><br><span class="line">    virtual_ipaddress &#123;</span><br><span class="line">      <span class="number">192.168</span><span class="number">.1</span><span class="number">.7</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">virtual_server <span class="number">192.168</span><span class="number">.1</span><span class="number">.6</span> <span class="number">80</span> &#123;</span><br><span class="line">    delay_loop <span class="number">3</span>                    #设置健康状态检查时间</span><br><span class="line">    lb_algo rr                      #设置负载调度算法</span><br><span class="line">    lb_kind DR                      #设置LVS实现负载均衡的机制</span><br><span class="line">    persistence_timeout <span class="number">50</span>          #会话保持时间</span><br><span class="line">    protocol TCP</span><br><span class="line">    real_server <span class="number">192.168</span><span class="number">.1</span><span class="number">.4</span> <span class="number">80</span> &#123;</span><br><span class="line">        weight <span class="number">1</span></span><br><span class="line">        TCP_CHECK &#123;</span><br><span class="line">            connect_timeout <span class="number">10</span>       #设置响应超时时间</span><br><span class="line">            nb_get_retry <span class="number">3</span>           #设置超时重试次数</span><br><span class="line">            delay_before_retry <span class="number">3</span>     #设置超时重试间隔</span><br><span class="line">            connect_port <span class="number">80</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    real_server <span class="number">192.168</span><span class="number">.1</span><span class="number">.5</span> <span class="number">80</span> &#123;</span><br><span class="line">        weight <span class="number">1</span></span><br><span class="line">        TCP_CHECK &#123;</span><br><span class="line">            connect_timeout <span class="number">10</span></span><br><span class="line">            nb_get_retry <span class="number">3</span></span><br><span class="line">            delay_before_retry <span class="number">3</span></span><br><span class="line">            connect_port <span class="number">80</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">virtual_server <span class="number">192.168</span><span class="number">.1</span><span class="number">.7</span> <span class="number">80</span> &#123;</span><br><span class="line">    delay_loop <span class="number">3</span></span><br><span class="line">    lb_algo rr</span><br><span class="line">    lb_kind DR</span><br><span class="line">    persistence_timeout <span class="number">50</span></span><br><span class="line">    protocol TCP</span><br><span class="line">    real_server <span class="number">192.168</span><span class="number">.1</span><span class="number">.4</span> <span class="number">80</span> &#123;</span><br><span class="line">        weight <span class="number">1</span></span><br><span class="line">        HTTP_GET &#123;</span><br><span class="line">            url &#123;</span><br><span class="line">                 path /index.html</span><br><span class="line">                 status_code <span class="number">200</span></span><br><span class="line">              &#125;</span><br><span class="line">            connect_timeout <span class="number">10</span></span><br><span class="line">            nb_get_retry <span class="number">3</span></span><br><span class="line">            delay_before_retry <span class="number">3</span></span><br><span class="line">            connect_port <span class="number">80</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    real_server <span class="number">192.168</span><span class="number">.1</span><span class="number">.5</span> <span class="number">80</span> &#123;</span><br><span class="line">        weight <span class="number">1</span></span><br><span class="line">        HTTP_GET &#123;</span><br><span class="line">            url &#123;</span><br><span class="line">                 path /index.html</span><br><span class="line">                 status_code <span class="number">200</span></span><br><span class="line">              &#125;</span><br><span class="line">            connect_timeout <span class="number">10</span></span><br><span class="line">            nb_get_retry <span class="number">3</span></span><br><span class="line">            delay_before_retry <span class="number">3</span></span><br><span class="line">            connect_port <span class="number">80</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="Master-Host2-配置"><a href="#Master-Host2-配置" class="headerlink" title="Master Host2 配置"></a>Master Host2 配置</h4><figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# cat /etc/keepalived/keepalived.conf</span><br><span class="line">vrrp_instance bl_one &#123;</span><br><span class="line">    <span class="section">state</span> BACKUP</span><br><span class="line">    interface eth0</span><br><span class="line">    lvs_sync_daemon_interface eth0</span><br><span class="line">    virtual_router_id <span class="number">38</span></span><br><span class="line">    priority <span class="number">120</span></span><br><span class="line">    advert_int <span class="number">3</span></span><br><span class="line">    authentication &#123;</span><br><span class="line">        auth_type PASS</span><br><span class="line">        auth_pass <span class="number">1111</span></span><br><span class="line">    &#125;</span><br><span class="line">    virtual_ipaddress &#123;</span><br><span class="line">      <span class="number">192.168</span><span class="number">.1</span><span class="number">.6</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">vrrp_instance bl_two &#123;</span><br><span class="line">    <span class="section">state</span> MASTER</span><br><span class="line">    interface eth0</span><br><span class="line">    lvs_sync_daemon_interface eth0</span><br><span class="line">    virtual_router_id <span class="number">48</span></span><br><span class="line">    priority <span class="number">150</span></span><br><span class="line">    advert_int <span class="number">3</span></span><br><span class="line">    authentication &#123;</span><br><span class="line">        auth_type PASS</span><br><span class="line">        auth_pass <span class="number">1111</span></span><br><span class="line">    &#125;</span><br><span class="line">    virtual_ipaddress &#123;</span><br><span class="line">      <span class="number">192.168</span><span class="number">.1</span><span class="number">.7</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">virtual_server <span class="number">192.168</span><span class="number">.1</span><span class="number">.6</span> <span class="number">80</span> &#123;</span><br><span class="line">    delay_loop <span class="number">3</span></span><br><span class="line">    lb_algo rr</span><br><span class="line">    lb_kind DR</span><br><span class="line">    persistence_timeout <span class="number">50</span></span><br><span class="line">    protocol TCP</span><br><span class="line">    real_server <span class="number">192.168</span><span class="number">.1</span><span class="number">.4</span> <span class="number">80</span> &#123;</span><br><span class="line">        weight <span class="number">1</span></span><br><span class="line">        TCP_CHECK &#123;</span><br><span class="line">            connect_timeout <span class="number">10</span></span><br><span class="line">            nb_get_retry <span class="number">3</span></span><br><span class="line">            delay_before_retry <span class="number">3</span></span><br><span class="line">            connect_port <span class="number">80</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    real_server <span class="number">192.168</span><span class="number">.1</span><span class="number">.5</span> <span class="number">80</span> &#123;</span><br><span class="line">        weight <span class="number">1</span></span><br><span class="line">        TCP_CHECK &#123;</span><br><span class="line">            connect_timeout <span class="number">10</span></span><br><span class="line">            nb_get_retry <span class="number">3</span></span><br><span class="line">            delay_before_retry <span class="number">3</span></span><br><span class="line">            connect_port <span class="number">80</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">virtual_server <span class="number">192.168</span><span class="number">.1</span><span class="number">.7</span> <span class="number">80</span> &#123;</span><br><span class="line">    delay_loop <span class="number">3</span></span><br><span class="line">    lb_algo rr</span><br><span class="line">    lb_kind DR</span><br><span class="line">    persistence_timeout <span class="number">50</span></span><br><span class="line">    protocol TCP</span><br><span class="line">    real_server <span class="number">192.168</span><span class="number">.1</span><span class="number">.4</span> <span class="number">80</span> &#123;</span><br><span class="line">        weight <span class="number">1</span></span><br><span class="line">        HTTP_GET &#123;</span><br><span class="line">            url &#123;</span><br><span class="line">                 path /index.html</span><br><span class="line">                 status_code <span class="number">200</span></span><br><span class="line">              &#125;</span><br><span class="line">            connect_timeout <span class="number">10</span></span><br><span class="line">            nb_get_retry <span class="number">3</span></span><br><span class="line">            delay_before_retry <span class="number">3</span></span><br><span class="line">            connect_port <span class="number">80</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    real_server <span class="number">192.168</span><span class="number">.1</span><span class="number">.5</span> <span class="number">80</span> &#123;</span><br><span class="line">        weight <span class="number">1</span></span><br><span class="line">        HTTP_GET &#123;</span><br><span class="line">            url &#123;</span><br><span class="line">                 path /index.html</span><br><span class="line">                 status_code <span class="number">200</span></span><br><span class="line">              &#125;</span><br><span class="line">            connect_timeout <span class="number">10</span></span><br><span class="line">            nb_get_retry <span class="number">3</span></span><br><span class="line">            delay_before_retry <span class="number">3</span></span><br><span class="line">            connect_port <span class="number">80</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>以上创建了两个实例lb_one、lb_two ，其中A主机做为VIP1地址的master，B主机做为VIP2地址的master，A、B主机互为backup 。另外还有一个技巧点，在master-backup架构中也可以配置多个VIP地址，只需要在实例的VIP配置中增加地址、并在后面指定对应的虚地址后面的realserver即可。在主备脚架中配置多个VIP的方法如下：</p>
+<figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">virtual_ipaddress &#123;</span><br><span class="line">  <span class="number">192.168</span><span class="number">.122</span><span class="number">.100</span></span><br><span class="line">  <span class="number">192.168</span><span class="number">.122</span><span class="number">.110</span></span><br><span class="line">  ......</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="RealServer主机配置"><a href="#RealServer主机配置" class="headerlink" title="RealServer主机配置"></a>RealServer主机配置</h3><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost # cat dr_client.sh</span><br><span class="line"><span class="comment">#!/bin/bash</span></span><br><span class="line"><span class="attribute">VIP1</span>=192.168.1.6</span><br><span class="line"><span class="attribute">VIP2</span>=192.168.1.7</span><br><span class="line"><span class="comment"># vip's broadcast</span></span><br><span class="line"><span class="attribute">BROADCAST</span>=192.168.1.255</span><br><span class="line">. /etc/rc.d/init.d/functions</span><br><span class="line">case <span class="string">"<span class="variable">$1</span>"</span> <span class="keyword">in</span></span><br><span class="line">start)</span><br><span class="line">  echo <span class="string">"reparing for Real Server"</span></span><br><span class="line">    echo <span class="string">"1"</span> &gt;/proc/sys/net/ipv4/conf/lo/arp_ignore</span><br><span class="line">    echo <span class="string">"2"</span> &gt;/proc/sys/net/ipv4/conf/lo/arp_announce</span><br><span class="line">    echo <span class="string">"1"</span> &gt;/proc/sys/net/ipv4/conf/all/arp_ignore</span><br><span class="line">    echo <span class="string">"2"</span> &gt;/proc/sys/net/ipv4/conf/all/arp_announce</span><br><span class="line">    ifconfig lo:0 <span class="variable">$VIP1</span> netmask 255.255.255.255 broadcast <span class="variable">$BROADCAST</span> up</span><br><span class="line">    ifconfig lo:1 <span class="variable">$VIP2</span> netmask 255.255.255.255 broadcast <span class="variable">$BROADCAST</span> up</span><br><span class="line">     /sbin<span class="built_in">/route </span><span class="builtin-name">add</span> -host <span class="variable">$VIP1</span> dev lo:0</span><br><span class="line">     /sbin<span class="built_in">/route </span><span class="builtin-name">add</span> -host <span class="variable">$VIP2</span> dev lo:1</span><br><span class="line">     ;;</span><br><span class="line">stop)</span><br><span class="line">     ifconfig lo:0 down</span><br><span class="line">     ifconfig lo:1 down</span><br><span class="line">    echo <span class="string">"0"</span> &gt;/proc/sys/net/ipv4/conf/lo/arp_ignore</span><br><span class="line">    echo <span class="string">"0"</span> &gt;/proc/sys/net/ipv4/conf/lo/arp_announce</span><br><span class="line">    echo <span class="string">"0"</span> &gt;/proc/sys/net/ipv4/conf/all/arp_ignore</span><br><span class="line">    echo <span class="string">"0"</span> &gt;/proc/sys/net/ipv4/conf/all/arp_announce</span><br><span class="line">     ;;</span><br><span class="line">*)</span><br><span class="line">     echo <span class="string">"Usage: lvs &#123;start|stop&#125;"</span></span><br><span class="line">     exit 1</span><br><span class="line">esac</span><br></pre></td></tr></table></figure>
+
+        
+        <br>
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+    </div>
+</div>
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+        <li>
+            <a target="_blank" href="https://www.zhihu.com/people/li-bo-2-25">
+                            <span class="fa-stack fa-lg">
+                                 <i class="iconfont icon-zhihu"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+        
+
+        
+        <li>
+            <a target="_blank" href="https://github.com/liboo0731">
+                            <span class="fa-stack fa-lg">
+                                <i class="iconfont icon-github"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span>/</span>
+        
+        <span><a href="https://www.cnblogs.com/liboo/">H2K1R~ACE_博客园</a></span>
+        <span>/</span>
+        
+        <span><a href="https://blog.csdn.net/weixin_40108079">H2K1E~ACE_CSDN</a></span>
+        <span>/</span>
+        
+    </p>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/js/index.js"></script>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+    <script>
+        /**
+         *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+         *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+        */
+        if( '' || '')
+        var disqus_config = function () {
+            this.page.url = '';  // Replace PAGE_URL with your page's canonical URL variable
+            this.page.identifier = ''; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        };
+
+        (function() { // DON'T EDIT BELOW THIS LINE
+            var d = document, s = d.createElement('script');
+            s.src = 'https://airclouds-blog.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+    </script>
+
+</html>

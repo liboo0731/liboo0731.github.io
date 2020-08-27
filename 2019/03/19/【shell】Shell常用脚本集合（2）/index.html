@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="李博的博客">
+    <meta name="keyword" content="striveliboo">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        【shell】Shell常用脚本集合（2） - Liboo的博客 | Liboo&#39;s Blog
+        
+    </title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/aircloud.css">
+    <link rel="stylesheet" href="/css/gitment.css">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> Internet of Everything, Everywhere. </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar">
+            <img src="/img/avatar.jpg">
+        </div>
+        <div class="name">
+            <i>H2K1E~ACE</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li>
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li>
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li>
+                <a href="/archive">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li>
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#批量修改文件后缀名"><span class="toc-text">批量修改文件后缀名</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#禁止使用root账号运行"><span class="toc-text">禁止使用root账号运行</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#禁止使用普通账号运行"><span class="toc-text">禁止使用普通账号运行</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#获取运行脚本的所在目录"><span class="toc-text">获取运行脚本的所在目录</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#多角色安装，交互询问"><span class="toc-text">多角色安装，交互询问</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#解压缩（-tar-gz）"><span class="toc-text">解压缩（*.tar.gz）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RPM常见操作"><span class="toc-text">RPM常见操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10个环境变量"><span class="toc-text">10个环境变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#设置环境变量"><span class="toc-text">设置环境变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#常用文件操作"><span class="toc-text">常用文件操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#移除32位软件包"><span class="toc-text">移除32位软件包</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#禁止yum安装32位的软件包"><span class="toc-text">禁止yum安装32位的软件包</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#禁用usb存储"><span class="toc-text">禁用usb存储</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#主机连通性测试"><span class="toc-text">主机连通性测试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#从变量中切割字符串"><span class="toc-text">从变量中切割字符串</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#远程和控制台登录添加登录失败超时控制"><span class="toc-text">远程和控制台登录添加登录失败超时控制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#新建普通用户并设置随机密码"><span class="toc-text">新建普通用户并设置随机密码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ACL规则设置、查看、取消"><span class="toc-text">ACL规则设置、查看、取消</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#向上递归设置ACL"><span class="toc-text">向上递归设置ACL</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#防火墙常用设置"><span class="toc-text">防火墙常用设置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#自动交互"><span class="toc-text">自动交互</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#模板写入"><span class="toc-text">模板写入</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Sed常用操作"><span class="toc-text">Sed常用操作</span></a></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input">
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+        <div class="index-about-mobile">
+            <i> Internet of Everything, Everywhere. </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        【shell】Shell常用脚本集合（2）
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2019-03-19 09:14:25</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/tags/#shell" title="shell">shell</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+
+    </div>
+    <div class="post-content ">
+        <h3 id="批量修改文件后缀名"><a href="#批量修改文件后缀名" class="headerlink" title="批量修改文件后缀名"></a>批量修改文件后缀名</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line"></span><br><span class="line">read -p "old extension:" oldext</span><br><span class="line">read -p "new extension:" newext</span><br><span class="line">read -p "The directory:" dir</span><br><span class="line">cd $dir</span><br><span class="line"></span><br><span class="line">for file in $(ls $dir | grep .$oldext)</span><br><span class="line">        do</span><br><span class="line">        name=$(ls $file | cut -d. -f1)</span><br><span class="line">        mv $file $&#123;name&#125;.$newext</span><br><span class="line">        echo "$name.$oldext ====&gt; $name.$newext"</span><br><span class="line">        done</span><br><span class="line">echo "all files has been modified."</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/sh</span></span><br><span class="line"> </span><br><span class="line">echo "input what suffix will be replaced :"</span><br><span class="line">read SUFFIX_SRC</span><br><span class="line">echo "input what suffix of file to rename to:"</span><br><span class="line">read SUFFIX_DST</span><br><span class="line"> </span><br><span class="line">for i in *.$SUFFIX_SRC</span><br><span class="line">do</span><br><span class="line">    if [ -e $i ]; then</span><br><span class="line">        #echo "mv $i to $&#123;i%.*&#125;.$SUFFIX_DST"</span><br><span class="line">        #mv $i $&#123;i%.*&#125;.$SUFFIX_DST</span><br><span class="line">        echo "mv $i to `basename $i .$SUFFIX_SRC`.$SUFFIX_DST"</span><br><span class="line">        mv $i `basename $i .$SUFFIX_SRC`.$SUFFIX_DST</span><br><span class="line">    else</span><br><span class="line">        echo "file does not exist."</span><br><span class="line">        exit -1</span><br><span class="line">    fi</span><br><span class="line">done</span><br><span class="line">echo "all files has been modified."</span><br></pre></td></tr></table></figure>
+<h3 id="禁止使用root账号运行"><a href="#禁止使用root账号运行" class="headerlink" title="禁止使用root账号运行"></a>禁止使用root账号运行</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">if [ $UID -eq 0 ]; then</span><br><span class="line">	echo "禁止以root帐号运行此脚本"</span><br><span class="line">	exit 1</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+<h3 id="禁止使用普通账号运行"><a href="#禁止使用普通账号运行" class="headerlink" title="禁止使用普通账号运行"></a>禁止使用普通账号运行</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">if [ $UID -ne 0 ]; then</span><br><span class="line">	echo "请以root帐号运行此脚本"</span><br><span class="line">	exit 1</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+<h3 id="获取运行脚本的所在目录"><a href="#获取运行脚本的所在目录" class="headerlink" title="获取运行脚本的所在目录"></a>获取运行脚本的所在目录</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SCRIPTPATH=$(dirname $(readlink -f $0))</span><br></pre></td></tr></table></figure>
+<h3 id="多角色安装，交互询问"><a href="#多角色安装，交互询问" class="headerlink" title="多角色安装，交互询问"></a>多角色安装，交互询问</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">read -p "请选择该服务器的角色 (t:tracker, s:storage, b:both) [t/s/b]:" installRole</span><br><span class="line">while ! echo $installRole | egrep -q '^[tsbTSB]$'</span><br><span class="line">do</span><br><span class="line">	read -p "输入错误，请重新输入 (t:tracker, s:storage, b:both) [t/s/b]:" installRole</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+<h3 id="解压缩（-tar-gz）"><a href="#解压缩（-tar-gz）" class="headerlink" title="解压缩（*.tar.gz）"></a>解压缩（*.tar.gz）</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">压缩</span></span><br><span class="line">tar zcvf file.tar.gz file/</span><br><span class="line"><span class="meta">#</span><span class="bash">解压到当前目录</span></span><br><span class="line">tar xzvf file.tar.gz</span><br><span class="line"><span class="meta">#</span><span class="bash">解压到指定目录</span></span><br><span class="line">tar xzvf file.tar.gz -C /tmp</span><br></pre></td></tr></table></figure>
+<h3 id="RPM常见操作"><a href="#RPM常见操作" class="headerlink" title="RPM常见操作"></a>RPM常见操作</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">rpm -ivh/e/U</span><br><span class="line"><span class="meta">#</span><span class="bash">不考虑依赖</span></span><br><span class="line">rpm -ivh/e/U --nodeps</span><br><span class="line"><span class="meta">#</span><span class="bash">不考虑依赖，并强制</span></span><br><span class="line">rpm -ivh/e/U --nodep --force</span><br><span class="line"></span><br><span class="line">yum install</span><br><span class="line"><span class="meta">#</span><span class="bash">本地安装，没有的包会用源安装</span></span><br><span class="line">yum localinstall</span><br><span class="line"><span class="meta">#</span><span class="bash">组安装</span></span><br><span class="line">yum groupinstall</span><br><span class="line"><span class="meta">#</span><span class="bash">会移除依赖</span></span><br><span class="line">yum remove</span><br><span class="line"><span class="meta">#</span><span class="bash">查询命令来源那个包</span></span><br><span class="line">yum provides</span><br></pre></td></tr></table></figure>
+<h3 id="10个环境变量"><a href="#10个环境变量" class="headerlink" title="10个环境变量"></a>10个环境变量</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">变量名称			作用</span><br><span class="line">HOME			用户的家目录（即主目录）</span><br><span class="line">SHELL			用户在使用的shell解释器名称</span><br><span class="line">HISTSIZE		输出的历史命令记录条数</span><br><span class="line">HISTFILESIZE	保存的历史命令记录条数</span><br><span class="line">MAIL			邮件保存路径</span><br><span class="line">LANG			系统语言、语系名称</span><br><span class="line">RANDOM			生成一个随机数字</span><br><span class="line">PS1				bash解释器的提示符</span><br><span class="line">PATH			定义解释器搜索用户执行命令的路径</span><br><span class="line">EDITOR			用户默认的文本编辑器</span><br><span class="line"></span><br><span class="line">PS: </span><br><span class="line">1.可以用 env 命令来查看当前linux系统中所有的环境变量； </span><br><span class="line">2.用export命令可以把linux的一般变量转换成全局变量。</span><br></pre></td></tr></table></figure>
+<h3 id="设置环境变量"><a href="#设置环境变量" class="headerlink" title="设置环境变量"></a>设置环境变量</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">指明头文件的搜索路径</span></span><br><span class="line">export C_INCLUDE_PATH=$CURRENTPATH/include</span><br><span class="line"><span class="meta">#</span><span class="bash">指明库搜索路径</span></span><br><span class="line">export LD_LIBRARY_PATH=/home/admin/fdfs/lib64</span><br></pre></td></tr></table></figure>
+<h3 id="常用文件操作"><a href="#常用文件操作" class="headerlink" title="常用文件操作"></a>常用文件操作</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">替换</span></span><br><span class="line">sed -i '/^WorkingDirectory=/cWorkingDirectory='$CURRENTPATH'/realserver' $CURRENTPATH/realserver.service</span><br><span class="line"><span class="meta">#</span><span class="bash">删除</span></span><br><span class="line">sed -i '/^tracker_server=/d' $TARGET_CONF_PATH/storage.conf</span><br><span class="line"><span class="meta">#</span><span class="bash">追加</span></span><br><span class="line">sed -i '$a tracker_server='$ip $TARGET_CONF_PATH/storage.conf</span><br></pre></td></tr></table></figure>
+<h3 id="移除32位软件包"><a href="#移除32位软件包" class="headerlink" title="移除32位软件包"></a>移除32位软件包</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rpm -e --nodeps *.i?86</span><br></pre></td></tr></table></figure>
+<h3 id="禁止yum安装32位的软件包"><a href="#禁止yum安装32位的软件包" class="headerlink" title="禁止yum安装32位的软件包"></a>禁止yum安装32位的软件包</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">if ! egrep -q '^exclude=.*' /etc/yum.conf; then</span><br><span class="line">	echo "exclude=*.i?86" &gt;&gt; /etc/yum.conf</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+<h3 id="禁用usb存储"><a href="#禁用usb存储" class="headerlink" title="禁用usb存储"></a>禁用usb存储</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo "blacklist usb-storage" &gt; /etc/modprobe.d/blacklist-usbstorage</span><br></pre></td></tr></table></figure>
+<h3 id="主机连通性测试"><a href="#主机连通性测试" class="headerlink" title="主机连通性测试"></a>主机连通性测试</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">echo "Tracker Server配置示例：192.168.1.2:22122 192.168.1.3:22122 ..."</span><br><span class="line">REPLY=</span><br><span class="line">while true</span><br><span class="line">do</span><br><span class="line">    msg='输入Tracker Server地址，多个值用空格隔开：'</span><br><span class="line">    if [ "$REPLY" ]; then</span><br><span class="line">        echo "正在检测网络连通性"</span><br><span class="line">        failedHost=</span><br><span class="line">        for host in $REPLY</span><br><span class="line">        do</span><br><span class="line">        #if ! echo "HEAD / HTTP/1.0" &gt;/dev/tcp/$&#123;host/://&#125;; then</span><br><span class="line">        if ! echo "HEAD / HTTP/1.0" &gt;/dev/tcp/$&#123;host%:*&#125;/22; then</span><br><span class="line">            failedHost=$host</span><br><span class="line">            break</span><br><span class="line">        fi</span><br><span class="line">        done</span><br><span class="line">        if [ $failedHost ]; then</span><br><span class="line">            prompt="与$failedHost的网络不通，请重新$msg"</span><br><span class="line">        else</span><br><span class="line">            break</span><br><span class="line">        fi</span><br><span class="line">    else</span><br><span class="line">    	prompt="请$msg"</span><br><span class="line">    fi</span><br><span class="line">    read -p "$prompt"</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+<h3 id="从变量中切割字符串"><a href="#从变量中切割字符串" class="headerlink" title="从变量中切割字符串"></a>从变量中切割字符串</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">定义变量</span></span><br><span class="line">[admin@localhost ~]$ str=1.2.3.4:5</span><br><span class="line"><span class="meta">#</span><span class="bash">获取长度</span></span><br><span class="line">[admin@localhost ~]$ echo $&#123;#str&#125;</span><br><span class="line">9</span><br><span class="line"><span class="meta">#</span><span class="bash">替换字符</span></span><br><span class="line">[admin@localhost ~]$ echo $&#123;str/://&#125;</span><br><span class="line">1.2.3.4/5</span><br><span class="line"><span class="meta">#</span><span class="bash">从左开始删除至第一个匹配字符</span></span><br><span class="line">[admin@localhost ~]$ echo $&#123;str#*.&#125;</span><br><span class="line">2.3.4:5</span><br><span class="line">[admin@localhost ~]$ echo $&#123;str##*.&#125;</span><br><span class="line">4:5</span><br><span class="line"><span class="meta">#</span><span class="bash">从右开始删除至匹配到的第一个字符</span></span><br><span class="line">[admin@localhost ~]$ echo $&#123;str%:*&#125;</span><br><span class="line">1.2.3.4</span><br><span class="line">[admin@localhost ~]$ echo $&#123;str%.*&#125;</span><br><span class="line">1.2.3</span><br><span class="line">[admin@localhost ~]$ echo $&#123;str%%.*&#125;</span><br><span class="line">1</span><br><span class="line">[root@localhost ~]$ echo $&#123;str:3&#125;</span><br><span class="line">.3.4:5</span><br><span class="line">[root@localhost ~]$ echo $&#123;str:0:3&#125;</span><br><span class="line">1.2</span><br><span class="line">[root@localhost ~]$ echo $&#123;str:0-3&#125;</span><br><span class="line">4:5</span><br><span class="line">[root@localhost ~]$ echo $&#123;str:0-3:1&#125;</span><br><span class="line">4</span><br></pre></td></tr></table></figure>
+<h3 id="远程和控制台登录添加登录失败超时控制"><a href="#远程和控制台登录添加登录失败超时控制" class="headerlink" title="远程和控制台登录添加登录失败超时控制"></a>远程和控制台登录添加登录失败超时控制</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">for file in "/etc/pam.d/sshd" "/etc/pam.d/login"</span><br><span class="line">do</span><br><span class="line">	if ! egrep -q '^auth\s*required\s*pam_tally2.*' $file; then</span><br><span class="line">		sed -i "1 aauth       required     pam_tally2.so deny=3 unlock_time=28800 even_deny_root root_unlock_time=3600" $file</span><br><span class="line">	fi</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+<h3 id="新建普通用户并设置随机密码"><a href="#新建普通用户并设置随机密码" class="headerlink" title="新建普通用户并设置随机密码"></a>新建普通用户并设置随机密码</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">if ! id admin &amp;&gt;/dev/null;then</span><br><span class="line">	useradd admin</span><br><span class="line">	echo "为admin设置随机8位密码"</span><br><span class="line">	MATRIX='0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz~!@#$%^&amp;*()_+=-'</span><br><span class="line">	LENGTH=12</span><br><span class="line">	while [ "$&#123;n:=1&#125;" -le "$LENGTH" ]</span><br><span class="line">	do</span><br><span class="line">		PASS="$PASS$&#123;MATRIX:$(($RANDOM%$&#123;#MATRIX&#125;)):1&#125;"</span><br><span class="line">		let n+=1</span><br><span class="line">	done</span><br><span class="line">	echo $PASS | passwd --stdin admin</span><br><span class="line">	echo $PASS &gt;/root/adminPassword.txt</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+<h3 id="ACL规则设置、查看、取消"><a href="#ACL规则设置、查看、取消" class="headerlink" title="ACL规则设置、查看、取消"></a>ACL规则设置、查看、取消</h3><ul>
+<li>除特权用户，所属某用户文件/夹不能被其他用户删除</li>
+<li><p>暂时总结：删除是从右到左询问权限，新建是从左到右询问权限</p>
+</li>
+<li><p>使用 -d 参数将默认权限延伸到新产生的文件夹，权限延伸必须是连续的，也就是父目录必须有默认权限设置</p>
+</li>
+<li><p>如果没有设置任何ACL权限，使用 -d 参数设置的默认权限最大为基础权限</p>
+</li>
+<li>如果设置过ACL权限，使用 -d 参数设置的默认权限最大为已设置的ACL权限</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">先使用 -m 设置权限，在使用 -d 将设置的权限延伸到新产生的文件或文件夹</span></span><br><span class="line"><span class="meta">#</span><span class="bash">文件或文件夹设置ACL规则</span></span><br><span class="line">setfacl -m u:admin:rwx file</span><br><span class="line">setfacl -m u:admin:rwx fodler/</span><br><span class="line"><span class="meta">#</span><span class="bash">设置默认ACL规则，只对文件夹有效，可延伸到新建的子文件夹</span></span><br><span class="line">setfacl -d -m u:admin:rwx fodler/</span><br><span class="line"><span class="meta">#</span><span class="bash">递归设置，只对已存在的文件和文件夹有效</span></span><br><span class="line">setfacl -R -m u:admin:rwx fodler/</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">查看ACL规则</span></span><br><span class="line">getfacl file</span><br><span class="line">getfacl fodler/</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">删除文件的acl规则</span></span><br><span class="line">setfacl -x u:admin file</span><br><span class="line"><span class="meta">#</span><span class="bash">删除所有扩展的acl规则，基本的acl规则(所有者，群组，其他）将被保留.</span></span><br><span class="line">setfacl -b fodler/</span><br></pre></td></tr></table></figure>
+<h3 id="向上递归设置ACL"><a href="#向上递归设置ACL" class="headerlink" title="向上递归设置ACL"></a>向上递归设置ACL</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">脚本必须位于用户HOME目录下</span></span><br><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line"></span><br><span class="line">if [ $UID -eq 0 ]; then</span><br><span class="line">        echo "禁止以root帐号运行此脚本"</span><br><span class="line">        exit 1</span><br><span class="line">fi</span><br><span class="line"></span><br><span class="line">CURRENTPATH=$(dirname $(readlink -f $0))</span><br><span class="line"></span><br><span class="line">if ! id activemq &amp;&gt;/dev/null; then</span><br><span class="line">	sudo useradd -r -s /bin/false activemq</span><br><span class="line">	UPPERPATH=$CURRENTPATH</span><br><span class="line">	while true</span><br><span class="line">	do</span><br><span class="line">		if [ "$HOME" == "$UPPERPATH" ]; then</span><br><span class="line">			break</span><br><span class="line">		fi</span><br><span class="line">		UPPERPATH=$(dirname $UPPERPATH)</span><br><span class="line">		setfacl -m u:admin:rwx $UPPERPATH</span><br><span class="line">		setfacl -d -m u:admin:rwx $UPPERPATH</span><br><span class="line">		setfacl -m u:activemq:rwx $UPPERPATH</span><br><span class="line">		setfacl -d -m u:activemq:rwx $UPPERPATH</span><br><span class="line">	done</span><br><span class="line">	setfacl -R -m u:admin:rwx $CURRENTPATH</span><br><span class="line">	setfacl -dR -m u:admin:rwx $CURRENTPATH</span><br><span class="line">	setfacl -R -m u:activemq:rwx $CURRENTPATH</span><br><span class="line">	setfacl -dR -m u:activemq:rwx $CURRENTPATH</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+<h3 id="防火墙常用设置"><a href="#防火墙常用设置" class="headerlink" title="防火墙常用设置"></a>防火墙常用设置</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">禁止外部连接，只开放ssh</span></span><br><span class="line">firewall-cmd --set-default-zone=drop</span><br><span class="line">firewall-cmd --load-zone-defaults=drop --permanent</span><br><span class="line">firewall-cmd --permanent --zone=drop --add-port=22/tcp</span><br><span class="line">firewall-cmd --reload</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">firewall-offline-cmd is an offline <span class="built_in">command</span> line client of the firewalld daemon. It should be used only <span class="keyword">if</span> the firewalld service is not running. For example to migrate from system-config-firewall/lokkit or <span class="keyword">in</span> the install environment to configure firewall settings with kickstart.</span></span><br><span class="line">firewall-offline-cmd --set-default-zone=drop</span><br><span class="line">firewall-offline-cmd --load-zone-defaults=drop</span><br><span class="line">firewall-offline-cmd --add-port=22/tcp</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">keepalived配置规则开放</span></span><br><span class="line">firewall-cmd --direct --permanent --add-rule ipv4 filter INPUT 0 --in-interface ens33 --destination 224.0.0.18 --protocol vrrp -j ACCEPT</span><br></pre></td></tr></table></figure>
+<h3 id="自动交互"><a href="#自动交互" class="headerlink" title="自动交互"></a>自动交互</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# echo -e '123456\n123456'|passwd tom</span><br><span class="line">Changing password for user tom.</span><br><span class="line">New password: BAD PASSWORD: The password is shorter than 8 characters</span><br><span class="line">Retype new password: passwd: all authentication tokens updated successfully.</span><br><span class="line">[root@localhost ~]# echo 123456|passwd --stdin tom</span><br><span class="line">Changing password for user tom.</span><br><span class="line">passwd: all authentication tokens updated successfully.</span><br><span class="line">[root@localhost ~]# passwd tom &lt;&lt;EOF</span><br><span class="line">123456</span><br><span class="line">123456</span><br><span class="line">EOF</span><br><span class="line">Changing password for user tom.</span><br><span class="line">New password: BAD PASSWORD: The password is shorter than 8 characters</span><br><span class="line">Retype new password: passwd: all authentication tokens updated successfully.</span><br><span class="line">[root@localhost ~]#</span><br></pre></td></tr></table></figure>
+<h3 id="模板写入"><a href="#模板写入" class="headerlink" title="模板写入"></a>模板写入</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/sh</span></span><br><span class="line"></span><br><span class="line">a=1</span><br><span class="line">b=2</span><br><span class="line"></span><br><span class="line">cat &gt; t1.txt &lt;&lt;EOF</span><br><span class="line">a=$a</span><br><span class="line">b=$b</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line">cat &lt;&lt;EOF &gt; t2.txt</span><br><span class="line">a=$a</span><br><span class="line">b=$b</span><br><span class="line">EOF</span><br></pre></td></tr></table></figure>
+<h3 id="Sed常用操作"><a href="#Sed常用操作" class="headerlink" title="Sed常用操作"></a>Sed常用操作</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">第一行前面添加（1i）</span></span><br><span class="line">sed -i '1istr' file</span><br><span class="line"><span class="meta">#</span><span class="bash">第一行后面添加（1a）</span></span><br><span class="line">sed -i '1astr' file</span><br><span class="line"><span class="meta">#</span><span class="bash">替换第一行（1c）</span></span><br><span class="line">sed -i '1cstr' file</span><br><span class="line"><span class="meta">#</span><span class="bash">删除第一行（1d）</span></span><br><span class="line">sed -i '1d' file</span><br><span class="line"><span class="meta">#</span><span class="bash">末尾追加（<span class="variable">$a</span>）</span></span><br><span class="line">sed -i '$astr' file</span><br><span class="line"><span class="meta">#</span><span class="bash">匹配替换开头是a的字符为str</span></span><br><span class="line">sed -i 's/^a/str/' file</span><br><span class="line"><span class="meta">#</span><span class="bash">匹配全局替换</span></span><br><span class="line">sed -i 's/^a/str/g' file</span><br><span class="line"><span class="meta">#</span><span class="bash">匹配行前面添加（1i）</span></span><br><span class="line">sed -i '/^a/istr' file</span><br><span class="line"><span class="meta">#</span><span class="bash">匹配行后面添加（1a）</span></span><br><span class="line">sed -i '/^a/astr' file</span><br><span class="line"><span class="meta">#</span><span class="bash">替换匹配行（1c）</span></span><br><span class="line">sed -i '/^a/cstr' file</span><br><span class="line"><span class="meta">#</span><span class="bash">删除匹配行（1d）</span></span><br><span class="line">sed -i '/^a/d' file</span><br><span class="line"><span class="meta">#</span><span class="bash">删除文件中行首的空格</span></span><br><span class="line">sed -i 's/^[ \t]*//' result.data </span><br><span class="line"><span class="meta">#</span><span class="bash">删除文件中行末空格：</span></span><br><span class="line">sed -i 's/[ \t]*$//g' result.data</span><br><span class="line"><span class="meta">#</span><span class="bash">删除文件中所有的空格：</span></span><br><span class="line">sed -i s/[[:space:]]//g result.data</span><br><span class="line"><span class="meta">#</span><span class="bash">把文件中空格变为‘，’：</span></span><br><span class="line">sed -i 's/[ \t]/,/g' result.data</span><br></pre></td></tr></table></figure>
+
+        
+        <br>
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+    </div>
+</div>
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+        <li>
+            <a target="_blank" href="https://www.zhihu.com/people/li-bo-2-25">
+                            <span class="fa-stack fa-lg">
+                                 <i class="iconfont icon-zhihu"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+        
+
+        
+        <li>
+            <a target="_blank" href="https://github.com/liboo0731">
+                            <span class="fa-stack fa-lg">
+                                <i class="iconfont icon-github"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span>/</span>
+        
+        <span><a href="https://www.cnblogs.com/liboo/">H2K1R~ACE_博客园</a></span>
+        <span>/</span>
+        
+        <span><a href="https://blog.csdn.net/weixin_40108079">H2K1E~ACE_CSDN</a></span>
+        <span>/</span>
+        
+    </p>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/js/index.js"></script>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+    <script>
+        /**
+         *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+         *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+        */
+        if( '' || '')
+        var disqus_config = function () {
+            this.page.url = '';  // Replace PAGE_URL with your page's canonical URL variable
+            this.page.identifier = ''; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        };
+
+        (function() { // DON'T EDIT BELOW THIS LINE
+            var d = document, s = d.createElement('script');
+            s.src = 'https://airclouds-blog.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+    </script>
+
+</html>

@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="李博的博客">
+    <meta name="keyword" content="striveliboo">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        【mysql】MySQL主从复制 - Liboo的博客 | Liboo&#39;s Blog
+        
+    </title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/aircloud.css">
+    <link rel="stylesheet" href="/css/gitment.css">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> Internet of Everything, Everywhere. </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar">
+            <img src="/img/avatar.jpg">
+        </div>
+        <div class="name">
+            <i>H2K1E~ACE</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li>
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li>
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li>
+                <a href="/archive">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li>
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input">
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+        <div class="index-about-mobile">
+            <i> Internet of Everything, Everywhere. </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        【mysql】MySQL主从复制
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2019-02-18 20:11:12</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/tags/#mysql" title="mysql">mysql</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+
+    </div>
+    <div class="post-content ">
+        <p><strong>mysql主从复制</strong><br>（超简单）</p>
+<p>怎么安装mysql数据库，这里不说了，只说它的主从复制，步骤如下：</p>
+<p>1、主从服务器分别作以下操作：<br>  1.1、版本一致<br>  1.2、初始化表，并在后台启动mysql<br>  1.3、修改root的密码</p>
+<p>2、修改主服务器master:</p>
+<p>   #vi /etc/my.cnf<br>       [mysqld]<br>       log-bin=mysql-bin   //[必须]启用二进制日志<br>       server-id=222      //[必须]服务器唯一ID，默认是1，一般取IP最后一段</p>
+<p>3、修改从服务器slave:</p>
+<p>   #vi /etc/my.cnf<br>       [mysqld]<br>       log-bin=mysql-bin   //[不是必须]启用二进制日志<br>       server-id=226      //[必须]服务器唯一ID，默认是1，一般取IP最后一段</p>
+<p>4、重启两台服务器的mysql<br>   /etc/init.d/mysql restart</p>
+<p>5、在主服务器上建立帐户并授权slave:</p>
+<p>   #/usr/local/mysql/bin/mysql -uroot -pmttang<br>   mysql&gt;GRANT REPLICATION SLAVE ON <em>.</em> to ‘mysync‘@’%’ identified by ‘q123456’; //一般不用root帐号，&ldquo;%&rdquo;表示所有客户端都可能连，只要帐号，密码正确，此处可用具体客户端IP代替，如192.168.145.226，加强安全。</p>
+<p>6、登录主服务器的mysql，查询master的状态<br>   mysql&gt;show master status;<br>   +——————+———-+————–+——————+<br>   | File             | Position | Binlog_Do_DB | Binlog_Ignore_DB |<br>   +——————+———-+————–+——————+<br>   | mysql-bin.000004 |      308 |              |                  |<br>   +——————+———-+————–+——————+<br>   1 row in set (0.00 sec)<br>   注：执行完此步骤后不要再操作主服务器MYSQL，防止主服务器状态值变化</p>
+<p>7、配置从服务器Slave：<br>   mysql&gt;change master to master_host=’192.168.145.222’,master_user=’mysync’,master_password=’q123456’,<br>         master_log_file=’mysql-bin.000004’,master_log_pos=308;   //注意不要断开，308数字前后无单引号。</p>
+<p>   Mysql&gt;start slave;    //启动从服务器复制功能</p>
+<p>8、检查从服务器复制功能状态：</p>
+<p>   mysql&gt; show slave status\G</p>
+<p>   <strong><strong><strong><strong><strong><strong>***</strong></strong></strong></strong></strong></strong> 1. row <strong><strong><strong><strong><strong><strong>***</strong></strong></strong></strong></strong></strong></p>
+<pre><code>Slave_IO_State: Waiting for master to send event
+Master_Host: 192.168.2.222  //主服务器地址
+Master_User: mysync   //授权帐户名，尽量避免使用root
+Master_Port: 3306    //数据库端口，部分版本没有此行
+Connect_Retry: 60
+Master_Log_File: mysql-bin.000004
+Read_Master_Log_Pos: 600     //#同步读取二进制日志的位置，大于等于Exec_Master_Log_Pos
+Relay_Log_File: ddte-relay-bin.000003
+Relay_Log_Pos: 251
+Relay_Master_Log_File: mysql-bin.000004
+Slave_IO_Running: Yes    //此状态必须YES
+Slave_SQL_Running: Yes     //此状态必须YES
+      ......
+</code></pre><p>注：Slave_IO及Slave_SQL进程必须正常运行，即YES状态，否则都是错误的状态(如：其中一个NO均属错误)。</p>
+<p>以上操作过程，主从服务器配置完成。</p>
+<p>9、主从服务器测试：</p>
+<p>主服务器Mysql，建立数据库，并在这个库中建表插入一条数据：</p>
+<p>  mysql&gt; create database hi_db;<br>  Query OK, 1 row affected (0.00 sec)</p>
+<p>  mysql&gt; use hi_db;<br>  Database changed</p>
+<p>  mysql&gt;  create table hi_tb(id int(3),name char(10));<br>  Query OK, 0 rows affected (0.00 sec)</p>
+<p>  mysql&gt; insert into hi_tb values(001,’bobu’);<br>  Query OK, 1 row affected (0.00 sec)</p>
+<p>  mysql&gt; show databases;<br>   +——————–+<br>   | Database           |<br>   +——————–+<br>   | information_schema |<br>   | hi_db                |<br>   | mysql                |<br>   | test                 |<br>   +——————–+<br>   4 rows in set (0.00 sec)</p>
+<p>从服务器Mysql查询：</p>
+<p>   mysql&gt; show databases;</p>
+<p>   +——————–+<br>   | Database               |<br>   +——————–+<br>   | information_schema |<br>   | hi_db                 |       //I’M here，大家看到了吧<br>   | mysql                 |<br>   | test          |</p>
+<p>   +——————–+<br>   4 rows in set (0.00 sec)</p>
+<p>   mysql&gt; use hi_db<br>   Database changed<br>   mysql&gt; select * from hi_tb;           //查看主服务器上新增的具体数据<br>   +——+——+<br>   | id   | name |<br>   +——+——+<br>   |    1 | bobu |<br>   +——+——+<br>   1 row in set (0.00 sec)</p>
+<p><strong>10、完成：</strong><br>​    编写一shell脚本，用nagios监控slave的两个yes（Slave_IO及Slave_SQL进程），如发现只有一个或零个yes，就表明主从有问题了，发短信警报吧。</p>
+
+        
+        <br>
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+    </div>
+</div>
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+        <li>
+            <a target="_blank" href="https://www.zhihu.com/people/li-bo-2-25">
+                            <span class="fa-stack fa-lg">
+                                 <i class="iconfont icon-zhihu"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+        
+
+        
+        <li>
+            <a target="_blank" href="https://github.com/liboo0731">
+                            <span class="fa-stack fa-lg">
+                                <i class="iconfont icon-github"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span>/</span>
+        
+        <span><a href="https://www.cnblogs.com/liboo/">H2K1R~ACE_博客园</a></span>
+        <span>/</span>
+        
+        <span><a href="https://blog.csdn.net/weixin_40108079">H2K1E~ACE_CSDN</a></span>
+        <span>/</span>
+        
+    </p>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/js/index.js"></script>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+    <script>
+        /**
+         *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+         *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+        */
+        if( '' || '')
+        var disqus_config = function () {
+            this.page.url = '';  // Replace PAGE_URL with your page's canonical URL variable
+            this.page.identifier = ''; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        };
+
+        (function() { // DON'T EDIT BELOW THIS LINE
+            var d = document, s = d.createElement('script');
+            s.src = 'https://airclouds-blog.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+    </script>
+
+</html>

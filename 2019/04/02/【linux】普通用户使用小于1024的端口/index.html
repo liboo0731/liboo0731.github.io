@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="李博的博客">
+    <meta name="keyword" content="striveliboo">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        【linux】普通用户使用小于1024的端口 - Liboo的博客 | Liboo&#39;s Blog
+        
+    </title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/aircloud.css">
+    <link rel="stylesheet" href="/css/gitment.css">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> Internet of Everything, Everywhere. </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar">
+            <img src="/img/avatar.jpg">
+        </div>
+        <div class="name">
+            <i>H2K1E~ACE</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li>
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li>
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li>
+                <a href="/archive">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li>
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-权限绑定"><span class="toc-text">1. 权限绑定</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#设置特权"><span class="toc-text">设置特权</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#取消特权"><span class="toc-text">取消特权</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Now-for-the-caveats"><span class="toc-text">Now for the caveats:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#参考链接"><span class="toc-text">参考链接</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-端口转发"><span class="toc-text">2. 端口转发</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-setuid（不安全）"><span class="toc-text">3. setuid（不安全）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-反向代理（nginx）"><span class="toc-text">4. 反向代理（nginx）</span></a></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input">
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+        <div class="index-about-mobile">
+            <i> Internet of Everything, Everywhere. </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        【linux】普通用户使用小于1024的端口
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2019-04-02 13:20:48</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/tags/#linux" title="linux">linux</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+
+    </div>
+    <div class="post-content ">
+        <p>普通用户启动服务需要绑定80和443端口，而在linux中，1024以下端口被称为privileged port，即特权端口，特权端口只能被由root启动的进程监听。</p>
+<h3 id="1-权限绑定"><a href="#1-权限绑定" class="headerlink" title="1. 权限绑定"></a>1. 权限绑定</h3><h4 id="设置特权"><a href="#设置特权" class="headerlink" title="设置特权"></a>设置特权</h4><p>为特定可执行文件赋予绑定特权端口的权限（永久）： </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">setcap 'cap_net_bind_service=+ep' /path/to/program </span><br><span class="line"></span><br><span class="line">sudo setcap 'cap_net_bind_service=+ep' $(readlink -f $(which node))</span><br></pre></td></tr></table></figure>
+<h4 id="取消特权"><a href="#取消特权" class="headerlink" title="取消特权"></a>取消特权</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">setcap -r /path/to/program</span><br></pre></td></tr></table></figure>
+<h4 id="Now-for-the-caveats"><a href="#Now-for-the-caveats" class="headerlink" title="Now for the caveats:"></a>Now for the caveats:</h4><ol>
+<li>You will need at least a 2.6.24 kernel</li>
+<li>This won’t work if your file is a script. (ie, uses a #! line to launch an interpreter). In this case, as far I as understand, you’d have to apply the capability to the interpreter executable itself, which of course is a security nightmare, since any program using that interpreter will have the capability. I wasn’t able to find any clean, easy way to work around this problem.</li>
+<li>Linux will disable LD_LIBRARY_PATH on any <code>program</code> that has elevated privileges like <code>setcap</code> or <code>suid</code>. So if your <code>program</code> uses its own <code>.../lib/</code>, you might have to look into another option like port forwarding.</li>
+</ol>
+<h4 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h4><p><a href="https://stackoverflow.com/questions/413807/is-there-a-way-for-non-root-processes-to-bind-to-privileged-ports-on-linux" target="_blank" rel="noopener">Is there a way for non-root processes to bind to “privileged” ports on Linux?</a></p>
+<p><a href="https://unix.stackexchange.com/questions/303423/unset-setcap-additional-capabilities-on-excutable" target="_blank" rel="noopener">Unset <code>setcap</code> additional capabilities on excutable</a></p>
+<h3 id="2-端口转发"><a href="#2-端口转发" class="headerlink" title="2. 端口转发"></a>2. 端口转发</h3><p> 首先绑定1024以上的端口，检查IP FORWARD功能是否开启：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">修改文件</span></span><br><span class="line">vi /etc/sysctl.conf</span><br><span class="line">net.ipv4.ip_forward = 1</span><br><span class="line"><span class="meta">#</span><span class="bash">重新加载</span></span><br><span class="line">sysctl -p /etc/sysctl.conf</span><br></pre></td></tr></table></figure>
+<p>配置端口转发，root权限执行</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iptables -A PREROUTING -t nat -p tcp --dport 80 -j REDIRECT --to-port 8080</span><br></pre></td></tr></table></figure>
+<h3 id="3-setuid（不安全）"><a href="#3-setuid（不安全）" class="headerlink" title="3. setuid（不安全）"></a>3. setuid（不安全）</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">chown root:root nginx</span><br><span class="line">chmod 4755 nginx</span><br></pre></td></tr></table></figure>
+<h3 id="4-反向代理（nginx）"><a href="#4-反向代理（nginx）" class="headerlink" title="4. 反向代理（nginx）"></a>4. 反向代理（nginx）</h3>
+        
+        <br>
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+    </div>
+</div>
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+        <li>
+            <a target="_blank" href="https://www.zhihu.com/people/li-bo-2-25">
+                            <span class="fa-stack fa-lg">
+                                 <i class="iconfont icon-zhihu"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+        
+
+        
+        <li>
+            <a target="_blank" href="https://github.com/liboo0731">
+                            <span class="fa-stack fa-lg">
+                                <i class="iconfont icon-github"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span>/</span>
+        
+        <span><a href="https://www.cnblogs.com/liboo/">H2K1R~ACE_博客园</a></span>
+        <span>/</span>
+        
+        <span><a href="https://blog.csdn.net/weixin_40108079">H2K1E~ACE_CSDN</a></span>
+        <span>/</span>
+        
+    </p>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/js/index.js"></script>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+    <script>
+        /**
+         *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+         *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+        */
+        if( '' || '')
+        var disqus_config = function () {
+            this.page.url = '';  // Replace PAGE_URL with your page's canonical URL variable
+            this.page.identifier = ''; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        };
+
+        (function() { // DON'T EDIT BELOW THIS LINE
+            var d = document, s = d.createElement('script');
+            s.src = 'https://airclouds-blog.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+    </script>
+
+</html>

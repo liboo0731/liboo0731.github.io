@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="李博的博客">
+    <meta name="keyword" content="striveliboo">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        【kickstart】Kickstart Option - Liboo的博客 | Liboo&#39;s Blog
+        
+    </title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/aircloud.css">
+    <link rel="stylesheet" href="/css/gitment.css">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> Internet of Everything, Everywhere. </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar">
+            <img src="/img/avatar.jpg">
+        </div>
+        <div class="name">
+            <i>H2K1E~ACE</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li>
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li>
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li>
+                <a href="/archive">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li>
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Kickstart-Options"><span class="toc-text">Kickstart Options</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Note"><span class="toc-text">Note</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Advanced-Partitioning-Example"><span class="toc-text">Advanced Partitioning Example</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Example"><span class="toc-text">Example</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Note-1"><span class="toc-text">Note</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Post-installation-Script"><span class="toc-text">Post-installation Script</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Notes"><span class="toc-text">Notes</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Examples"><span class="toc-text">Examples</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Note-2"><span class="toc-text">Note</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Making-the-Kickstart-File-Available"><span class="toc-text">Making the Kickstart File Available</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#31-8-1-Creating-Kickstart-Boot-Media"><span class="toc-text">31.8.1. Creating Kickstart Boot Media</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Note-3"><span class="toc-text">Note</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Making-the-Kickstart-File-Available-on-the-Network"><span class="toc-text">Making the Kickstart File Available on the Network</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Making-the-Installation-Tree-Available"><span class="toc-text">Making the Installation Tree Available</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Starting-a-Kickstart-Installation"><span class="toc-text">Starting a Kickstart Installation</span></a></li></ol><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-text"> </span></a>
+</li></div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input">
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+        <div class="index-about-mobile">
+            <i> Internet of Everything, Everywhere. </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        【kickstart】Kickstart Option
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2018-09-14 13:43:25</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/tags/#kickstart" title="kickstart">kickstart</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+
+    </div>
+    <div class="post-content ">
+        <h3 id="Kickstart-Options"><a href="#Kickstart-Options" class="headerlink" title="Kickstart Options"></a><a href="https://www.cnblogs.com/liboo/p/9646091.html" target="_blank" rel="noopener">Kickstart Options</a></h3><ul>
+<li><p>autopart  (optional)</p>
+<p>Automatically create partitions — 1 GB or more root (/) partition, a swap partition, and an appropriate boot partition for the architecture. One or more of the default partition sizes can be redefined with the part  directive.–encrypted  — Should all devices with support be encrypted by default? This is equivalent to checking the Encrypt checkbox on the initial partitioning screen.–passphrase=  — Provide a default system-wide passphrase for all encrypted devices.</p>
+</li>
+<li><p>ignoredisk  (optional)</p>
+<p>Causes the installer to ignore the specified disks. This is useful if you use autopartition and want to be sure that some disks are ignored. For example, without ignoredisk, attempting to deploy on a SAN-cluster the kickstart would fail, as the installer detects passive paths to the SAN that return no partition table. The –only-use  option specifies that only the disks listed will be used during installion.The ignoredisk  option is also useful if you have multiple paths to your disks.The syntax is:ignoredisk –drives=<em>drive1,drive2</em>,…where <em>driveN</em> is one of sda, sdb,…, hda,… etc.–only-use  — specifies a list of disks for the installer to use. All other disks are ignored. For example, to use disk sda  during installation and ignore all other disks:ignoredisk –only-use=sda</p>
+</li>
+<li><p>autostep  (optional)</p>
+<p>Similar to interactive  except it goes to the next screen for you. It is used mostly for debugging.–autoscreenshot  — Take a screenshot at every step during installation and copy the images over to /root/anaconda-screenshots  after installation is complete. This is most useful for documentation.</p>
+</li>
+<li><p>auth  or authconfig  (required)</p>
+<p>Sets up the authentication options for the system. It is similar to the authconfig  command, which can be run after the install. By default, passwords are normally encrypted and are not shadowed.–enablemd5  — Use md5 encryption for user passwords.–enablenis  — Turns on NIS support. By default, –enablenis  uses whatever domain it finds on the network. A domain should almost always be set by hand with the –nisdomain=  option.–nisdomain=  — NIS domain name to use for NIS services.–nisserver=  — Server to use for NIS services (broadcasts by default).–useshadow  or –enableshadow  — Use shadow passwords.–enableldap  — Turns on LDAP support in /etc/nsswitch.conf, allowing your system to retrieve information about users (UIDs, home directories, shells, etc.) from an LDAP directory. To use this option, you must install the nss_ldap  package. You must also specify a server and a base DN (distinguished name) with –ldapserver=  and –ldapbasedn=.–enableldapauth  — Use LDAP as an authentication method. This enables the pam_ldap  module for authentication and changing passwords, using an LDAP directory. To use this option, you must have the nss_ldap  package installed. You must also specify a server and a base DN with –ldapserver=  and –ldapbasedn=.–ldapserver=  — If you specified either –enableldap  or –enableldapauth, use this option to specify the name of the LDAP server to use. This option is set in the /etc/ldap.conf  file.–ldapbasedn=  — If you specified either –enableldap  or –enableldapauth, use this option to specify the DN in your LDAP directory tree under which user information is stored. This option is set in the /etc/ldap.conf  file.–enableldaptls  — Use TLS (Transport Layer Security) lookups. This option allows LDAP to send encrypted usernames and passwords to an LDAP server before authentication.–enablekrb5  — Use Kerberos 5 for authenticating users. Kerberos itself does not know about home directories, UIDs, or shells. If you enable Kerberos, you must make users’ accounts known to this workstation by enabling LDAP, NIS, or Hesiod or by using the /usr/sbin/useradd  command. If you use this option, you must have the pam_krb5  package installed.–krb5realm=  — The Kerberos 5 realm to which your workstation belongs.–krb5kdc=  — The KDC (or KDCs) that serve requests for the realm. If you have multiple KDCs in your realm, separate their names with commas (,).–krb5adminserver=  — The KDC in your realm that is also running kadmind. This server handles password changing and other administrative requests. This server must be run on the master KDC if you have more than one KDC.–enablehesiod  — Enable Hesiod support for looking up user home directories, UIDs, and shells. More information on setting up and using Hesiod on your network is in /usr/share/doc/glibc-2.x.x/README.hesiod, which is included in the glibc  package. Hesiod is an extension of DNS that uses DNS records to store information about users, groups, and various other items.–hesiodlhs  — The Hesiod LHS (“left-hand side”) option, set in /etc/hesiod.conf. This option is used by the Hesiod library to determine the name to search DNS for when looking up information, similar to LDAP’s use of a base DN.–hesiodrhs  — The Hesiod RHS (“right-hand side”) option, set in /etc/hesiod.conf. This option is used by the Hesiod library to determine the name to search DNS for when looking up information, similar to LDAP’s use of a base DN.NoteTo look up user information for “jim”, the Hesiod library looks up <em>jim.passwd<lhs><rhs></rhs></lhs></em>, which should resolve to a TXT record that looks like what his passwd entry would look like (jim:<em>:501:501:Jungle Jim:/home/jim:/bin/bash). For groups, the situation is identical, except </em>jim.group<lhs><rhs>* would be used.Looking up users and groups by number is handled by making “501.uid” a CNAME for “jim.passwd”, and “501.gid” a CNAME for “jim.group”. Note that the library does not place a period . in front of the LHS and RHS values when performing a search. Therefore the LHS and RHS values need to have a period placed in front of them in order if they require this.–enablesmbauth  — Enables authentication of users against an SMB server (typically a Samba or Windows server). SMB authentication support does not know about home directories, UIDs, or shells. If you enable SMB, you must make users’ accounts known to the workstation by enabling LDAP, NIS, or Hesiod or by using the /usr/sbin/useradd  command to make their accounts known to the workstation. To use this option, you must have the pam_smb  package installed.–smbservers=  — The name of the server(s) to use for SMB authentication. To specify more than one server, separate the names with commas (,).–smbworkgroup=  — The name of the workgroup for the SMB servers.–enablecache  — Enables the nscd  service. The nscd  service caches information about users, groups, and various other types of information. Caching is especially helpful if you choose to distribute information about users and groups over your network using NIS, LDAP, or hesiod.–passalgo  — Enables SHA256 or SHA512 hashing for passphrases. Use –passalgo=sha256  or –passalgo=sha215  and remove the –enablemd5  if present.</rhs></lhs></p>
+</li>
+<li><p>bootloader  (required)</p>
+<p>Specifies how the boot loader should be installed. This option is required for both installations and upgrades.–append=  — Specifies kernel parameters. To specify multiple parameters, separate them with spaces. For example:bootloader –location=mbr –append=”hdd=ide-scsi ide=nodma”–driveorder  — Specify which drive is first in the BIOS boot order. For example:bootloader –driveorder=sda,hda–hvargs  — If using GRUB, specifies Xen hypervisor arguments. To specify multiple parameters, separate them with spaces. For example:bootloader –hvargs=”dom0_mem=2G dom0_max_vcpus=4”–location=  — Specifies where the boot record is written. Valid values are the following: mbr  (the default), partition  (installs the boot loader on the first sector of the partition containing the kernel), or none  (do not install the boot loader).–password=  — If using GRUB, sets the GRUB boot loader password to the one specified with this option. This should be used to restrict access to the GRUB shell, where arbitrary kernel options can be passed.–md5pass=  — If using GRUB, similar to –password=  except the password should already be encrypted.–upgrade  — Upgrade the existing boot loader configuration, preserving the old entries. This option is only available for upgrades.</p>
+</li>
+<li><p>clearpart  (optional)</p>
+<p>Removes partitions from the system, prior to creation of new partitions. By default, no partitions are removed.NoteIf the clearpart  command is used, then the –onpart  command cannot be used on a logical partition.</p>
+</li>
+<li><p>cmdline  (optional)</p>
+<p>Perform the installation in a completely non-interactive command line mode. Any prompts for interaction halts the install. This mode is useful on IBM System z systems with the x3270 console.</p>
+</li>
+<li><p>device  (optional)</p>
+<p>On most PCI systems, the installation program autoprobes for Ethernet and SCSI cards properly. On older systems and some PCI systems, however, kickstart needs a hint to find the proper devices. The device  command, which tells the installation program to install extra modules, is in this format:device <em><type></type></em> <em><modulename></modulename></em> –opts=<em><options>**<type></type></options></em> — Replace with either scsi  or eth.<em><modulename></modulename></em> — Replace with the name of the kernel module which should be installed.–opts=  — Mount options to use for mounting the NFS export. Any options that can be specified in /etc/fstab  for an NFS mount are allowed. The options are listed in the nfs(5)  man page. Multiple options are separated with a comma.</p>
+</li>
+<li><p>driverdisk  (optional)</p>
+<p>Driver diskettes can be used during kickstart installations. You must copy the driver diskettes’s contents to the root directory of a partition on the system’s hard drive. Then you must use the driverdisk  command to tell the installation program where to look for the driver disk.driverdisk <em><partition></partition></em> [–type=<em><fstype></fstype></em>]Alternatively, a network location can be specified for the driver diskette:driverdisk –source=<a href="ftp://path/to/dd.imgdriverdisk" target="_blank" rel="noopener">ftp://path/to/dd.imgdriverdisk</a> –source=<a href="http://path/to/dd.imgdriverdisk" target="_blank" rel="noopener">http://path/to/dd.imgdriverdisk</a> –source=nfs:host:/path/to/img<em><partition></partition></em> — Partition containing the driver disk.–type=  — File system type (for example, vfat or ext2).</p>
+</li>
+<li><p>firewall  (optional)</p>
+<p>This option corresponds to the Firewall Configuration screen in the installation program:firewall –enabled|–disabled [–trust=] <em><device></device></em> [–port=]–enabled  or –enable  — Reject incoming connections that are not in response to outbound requests, such as DNS replies or DHCP requests. If access to services running on this machine is needed, you can choose to allow specific services through the firewall.–disabled  or –disable  — Do not configure any iptables rules.–trust=  — Listing a device here, such as eth0, allows all traffic coming from that device to go through the firewall. To list more than one device, use –trust eth0 –trust eth1. Do NOT use a comma-separated format such as –trust eth0, eth1.<em><incoming></incoming></em> — Replace with one or more of the following to allow the specified services through the firewall.–ssh–telnet–smtp–http–ftp–port=  — You can specify that ports be allowed through the firewall using the port:protocol format. For example, to allow IMAP access through your firewall, specify imap:tcp. Numeric ports can also be specified explicitly; for example, to allow UDP packets on port 1234 through, specify 1234:udp. To specify multiple ports, separate them by commas.</p>
+</li>
+<li><p>firstboot  (optional)</p>
+<p>Determine whether the Setup Agent starts the first time the system is booted. If enabled, the firstboot  package must be installed. If not specified, this option is disabled by default.–enable  or –enabled  — The Setup Agent is started the first time the system boots.–disable  or –disabled  — The Setup Agent is not started the first time the system boots.–reconfig  — Enable the Setup Agent to start at boot time in reconfiguration mode. This mode enables the language, mouse, keyboard, root password, security level, time zone, and networking configuration options in addition to the default ones.</p>
+</li>
+<li><p>halt  (optional)</p>
+<p>Halt the system after the installation has successfully completed. This is similar to a manual installation, where anaconda displays a message and waits for the user to press a key before rebooting. During a kickstart installation, if no completion method is specified, this option is used as the default.The halt  option is roughly equivalent to the shutdown -h  command.For other completion methods, refer to the poweroff, reboot, and shutdown  kickstart options.</p>
+</li>
+<li><p>graphical  (optional)</p>
+<p>Perform the kickstart installation in graphical mode. This is the default.</p>
+</li>
+<li><p>install  (optional)</p>
+<p>Tells the system to install a fresh system rather than upgrade an existing system. This is the default mode. For installation, you must specify the type of installation from cdrom, harddrive, nfs, or url  (for FTP or HTTP installations). The install  command and the installation method command must be on separate lines.cdrom  — Install from the first CD-ROM drive on the system.harddrive  — Install from a Red Hat installation tree on a local drive, which must be either vfat or ext2.–biospart=BIOS partition to install from (such as 82).–partition=Partition to install from (such as sdb2).–dir=Directory containing the <code>variant</code>  directory of the installation tree.For example:harddrive –partition=hdb2 –dir=/tmp/install-treenfs  — Install from the NFS server specified.–server=Server from which to install (hostname or IP).–dir=Directory containing the <code>variant</code>  directory of the installation tree.–opts=Mount options to use for mounting the NFS export. (optional)For example:nfs –server=nfsserver.example.com –dir=/tmp/install-treeurl  — Install from an installation tree on a remote server via FTP or HTTP.For example:url –url http://<em><server></server></em>/<em><dir></dir></em>or:url –url ftp://<em><username></username></em>:<em><password>@<server></server></password></em>/<em><dir></dir></em></p>
+</li>
+<li><p>interactive  (optional)</p>
+<p>Uses the information provided in the kickstart file during the installation, but allow for inspection and modification of the values given. You are presented with each screen of the installation program with the values from the kickstart file. Either accept the values by clicking Next or change the values and click Next to continue. Refer to the autostep  command.</p>
+</li>
+<li><p>iscsi  (optional)</p>
+<p>iscsi –ipaddr= [options].Specifies additional iSCSI storage to be attached during installation. If you use the <em>iscsi</em> parameter, you must also assign a name to the iSCSI node, using the <em>iscsiname</em> parameter. The <em>iscsiname</em> parameter must appear before the <em>iscsi</em> parameter in the kickstart file.We recommend that wherever possible you configure iSCSI storage in the system BIOS or firmware (iBFT for Intel systems) rather than use the <em>iscsi</em> parameter. Anaconda automatically detects and uses disks configured in BIOS or firmware and no special configuration is necessary in the kickstart file.If you must use the <em>iscsi</em> parameter, ensure that networking is activated at the beginning of the installation, and that the <em>iscsi</em> parameter appears in the kickstart file before you refer to iSCSI disks with parameters such as <em>clearpart</em> or <em>ignoredisk</em>.–port=  (mandatory) — the port number (typically, –port=3260)–user=  — the username required to authenticate with the target–password=  — the password that corresponds with the username specified for the target–reverse-user=  — the username required to authenticate with the initiator from a target that uses reverse CHAP authentication–reverse-password=  — the password that corresponds with the username specified for the initiator</p>
+</li>
+<li><p>iscsiname  (optional)</p>
+<p>Assigns a name to an iSCSI node specified by the iscsi parameter. If you use the <em>iscsi</em> parameter in your kickstart file, this parameter is mandatory, and you must specify <em>iscsiname</em> in the kickstart file before you specify <em>iscsi</em>.</p>
+</li>
+<li><p>key  (optional)</p>
+<p>Specify an installation key, which is needed to aid in package selection and identify your system for support purposes.–skip  — Skip entering a key. Usually if the key command is not given, anaconda will pause at this step to prompt for a key. This option allows automated installation to continue if you do not have a key or do not want to provide one.</p>
+</li>
+<li><p>keyboard  (required)</p>
+<p>Sets system keyboard type. Here is the list of available keyboards on i386, Itanium, and Alpha machines:be-latin1, bg, br-abnt2, cf, cz-lat2, cz-us-qwertz, de, de-latin1,de-latin1-nodeadkeys, dk, dk-latin1, dvorak, es, et, fi, fi-latin1,fr, fr-latin0, fr-latin1, fr-pc, fr_CH, fr_CH-latin1, gr, hu, hu101,is-latin1, it, it-ibm, it2, jp106, la-latin1, mk-utf, no, no-latin1,pl, pt-latin1, ro_win, ru, ru-cp1251, ru-ms, ru1, ru2, ru_win,se-latin1, sg, sg-latin1, sk-qwerty, slovene, speakup, speakup-lt,sv-latin1, sg, sg-latin1, sk-querty, slovene, trq, ua, uk, us, us-acentosThe file /usr/lib/python2.2/site-packages/rhpl/keyboard_models.py  also contains this list and is part of the rhpl  package.</p>
+</li>
+<li><p>lang  (required)</p>
+<p>Sets the language to use during installation and the default language to use on the installed system. For example, to set the language to English, the kickstart file should contain the following line:lang en_USThe file /usr/share/system-config-language/locale-list  provides a list of the valid language codes in the first column of each line and is part of the system-config-language  package.Certain languages (mainly Chinese, Japanese, Korean, and Indic languages) are not supported during text mode installation. If one of these languages is specified using the lang command, installation will continue in English though the running system will have the specified language by default.</p>
+</li>
+<li><p>langsupport  (deprecated)</p>
+<p>The langsupport keyword is deprecated and its use will cause an error message to be printed to the screen and installation to halt. Instead of using the langsupport keyword, you should now list the support package groups for all languages you want supported in the %packages  section of your kickstart file. For instance, adding support for French means you should add the following to %packages:@french-support</p>
+</li>
+<li><p>logvol  (optional)</p>
+<p>Create a logical volume for Logical Volume Management (LVM) with the syntax:logvol <em><mntpoint></mntpoint></em> –vgname=<em><name></name></em> –size=<em><size></size></em> –name=<em><name></name></em> <em><options></options></em>The options are as follows:–noformat  — Use an existing logical volume and do not format it.–useexisting  — Use an existing logical volume and reformat it.–fstype=  — Sets the file system type for the logical volume. Valid values are xfs, ext2, ext3, ext4, swap, vfat, and hfs.–fsoptions=  — Specifies a free form string of options to be used when mounting the filesystem. This string will be copied into the /etc/fstab  file of the installed system and should be enclosed in quotes.–bytes-per-inode=  — Specifies the size of inodes on the filesystem to be made on the logical volume. Not all filesystems support this option, so it is silently ignored for those cases.–grow=  — Tells the logical volume to grow to fill available space (if any), or up to the maximum size setting.–maxsize=  — The maximum size in megabytes when the logical volume is set to grow. Specify an integer value here, and do not append the number with MB.–recommended=  — Determine the size of the logical volume automatically.–percent=  — Specify the size of the logical volume as a percentage of available space in the volume group.Create the partition first, create the logical volume group, and then create the logical volume. For example:part pv.01 –size 3000volgroup myvg pv.01logvol / –vgname=myvg –size=2000 –name=rootvol</p>
+</li>
+<li><p>logging  (optional)</p>
+<p>This command controls the error logging of anaconda during installation. It has no effect on the installed system.–host=  — Send logging information to the given remote host, which must be running a syslogd process configured to accept remote logging.–port=  — If the remote syslogd process uses a port other than the default, it may be specified with this option.–level=  — One of debug, info, warning, error, or critical.Specify the minimum level of messages that appear on tty3. All messages will still be sent to the log file regardless of this level, however.</p>
+</li>
+<li><p>mediacheck  (optional)</p>
+<p>If given, this will force anaconda to run mediacheck on the installation media. This command requires that installs be attended, so it is disabled by default.</p>
+</li>
+<li><p>monitor  (optional)</p>
+<p>If the monitor command is not given, anaconda will use X to automatically detect your monitor settings. Please try this before manually configuring your monitor.–hsync=  — Specifies the horizontal sync frequency of the monitor.–monitor=  — Use specified monitor; monitor name should be from the list of monitors in /usr/share/hwdata/MonitorsDB from the hwdata package. The list of monitors can also be found on the X Configuration screen of the Kickstart Configurator. This is ignored if –hsync or –vsync is provided. If no monitor information is provided, the installation program tries to probe for it automatically.–noprobe=  — Do not try to probe the monitor.–vsync=  — Specifies the vertical sync frequency of the monitor.</p>
+</li>
+<li><p>mouse  (deprecated)</p>
+<p>The mouse keyword is deprecated.</p>
+</li>
+<li><p>network  (optional)</p>
+<p>Configures network information for the system. If the kickstart installation does not require networking (in other words, it is not installed over NFS, HTTP, or FTP), networking is not configured for the system. If the installation does require networking and network information is not provided in the kickstart file, the installation program assumes that the installation should be done over eth0 via a dynamic IP address (BOOTP/DHCP), and configures the final, installed system to determine its IP address dynamically. The network  option configures networking information for kickstart installations via a network as well as for the installed system.–bootproto=  — One of dhcp, bootp, or static.It defaults to dhcp. bootp  and dhcp  are treated the same.The DHCP method uses a DHCP server system to obtain its networking configuration. As you might guess, the BOOTP method is similar, requiring a BOOTP server to supply the networking configuration. To direct a system to use DHCP:network –bootproto=dhcpTo direct a machine to use BOOTP to obtain its networking configuration, use the following line in the kickstart file:network –bootproto=bootpThe static method requires that you enter all the required networking information in the kickstart file. As the name implies, this information is static and is used during and after the installation. The line for static networking is more complex, as you must include all network configuration information on one line. You must specify the IP address, netmask, gateway, and nameserver.Note that although the presentation of this example on this page has broken the line, in a real kickstart file, you must include all this information on a single line with no break.network –bootproto=static –ip=10.0.2.15 –netmask=255.255.255.0–gateway=10.0.2.254 –nameserver=10.0.2.1If you use the static method, be aware of the following two restrictions:All static networking configuration information must be specified on <em>one</em> line; you cannot wrap lines using a backslash, for example.You can also configure multiple nameservers here. To do so, specify them as a comma-delimited list in the command line.Note that although the presentation of this example on this page has broken the line, in a real kickstart file, you must include all this information on a single line with no break.network –bootproto=static –ip=10.0.2.15 –netmask=255.255.255.0–gateway=10.0.2.254 –nameserver 192.168.2.1,192.168.3.1–device=  — Used to select a specific Ethernet device for installation. Note that using –device=  is not effective unless the kickstart file is a local file (such as ks=floppy), since the installation program configures the network to find the kickstart file. For example:network –bootproto=dhcp –device=eth0–ip=  — IP address for the machine to be installed.–gateway=  — Default gateway as an IP address.–nameserver=  — Primary nameserver, as an IP address.–nodns  — Do not configure any DNS server.–netmask=  — Netmask for the installed system.–hostname=  — Hostname for the installed system.–ethtool=  — Specifies additional low-level settings for the network device which will be passed to the ethtool program.–essid=  — The network ID for wireless networks.–wepkey=  — The encryption key for wireless networks.–onboot=  — Whether or not to enable the device at boot time.–dhcpclass=  — The DHCP class.–mtu=  — The MTU of the device.–noipv4  — Disable IPv4 on this device.–noipv6  — Disable IPv6 on this device.</p>
+</li>
+<li><p>multipath  (optional)</p>
+<p>Specifies a multipath device in the format:multipath –name=mpath<em>X</em> –device=<em>device_name</em> –rule=<em>policy</em>For example:multipath –name=mpath0 –device=/dev/sdc –rule=failoverThe available options are:–name=  — the name for the multipath device, in the format mpath<em>X</em>, where <em>X</em> is an integer.–device=  — the block device connected as a multipath device.–rule=  — a multipath <em>policy</em>: failover, multibus, group_by_serial, group_by_prio, or group_by_node_name. Refer to the multipath manpage for a description of these policies.</p>
+</li>
+<li><p>part  or partition  (required for installs, ignored for upgrades)</p>
+<p>Creates a partition on the system.If more than one Red Hat Enterprise Linux installation exists on the system on different partitions, the installation program prompts the user and asks which installation to upgrade.WarningAll partitions created are formatted as part of the installation process unless –noformat  and –onpart  are used.For a detailed example of part  in action, refer to <a href="http://docs.redhat.com/docs/en-US/Red_Hat_Enterprise_Linux/5/html/Installation_Guide/s1-kickstart2-options.html#s2-kickstart2-options-part-examples" target="_blank" rel="noopener">Section 31.4.1, “Advanced Partitioning Example”</a>.<em><mntpoint></mntpoint></em> — The <em><mntpoint></mntpoint></em> is where the partition is mounted and must be of one of the following forms:/<em><path></path></em>For example, /, /usr, /home swapThe partition is used as swap space.To determine the size of the swap partition automatically, use the –recommended  option:swap –recommendedThe recommended maximum swap size for machines with less than 2GB of RAM is twice the amount of RAM. For machines with 2GB or more, this recommendation changes to 2GB plus the amount of RAM.raid.<em><id></id></em>The partition is used for software RAID (refer to raid).pv.<em><id></id></em>The partition is used for LVM (refer to logvol).–size=  — The minimum partition size in megabytes. Specify an integer value here such as 500. Do not append the number with MB.–grow  — Tells the partition to grow to fill available space (if any), or up to the maximum size setting.NoteIf you use –grow=  without setting –maxsize=  on a swap partition, Anaconda will limit the maximum size of the swap partition. For systems that have less than 2GB of physical memory, the imposed limit is twice the amount of physical memory. For systems with more than 2GB, the imposed limit is the size of physical memory plus 2GB.–maxsize=  — The maximum partition size in megabytes when the partition is set to grow. Specify an integer value here, and do not append the number with MB.–noformat  — Tells the installation program not to format the partition, for use with the –onpart  command.–onpart=  or –usepart=  — Put the partition on the <em>already existing</em> device. For example:partition /home –onpart=hda1puts /home  on /dev/hda1, which must already exist.–ondisk=  or –ondrive=  — Forces the partition to be created on a particular disk. For example, –ondisk=sdb  puts the partition on the second SCSI disk on the system.–asprimary  — Forces automatic allocation of the partition as a primary partition, or the partitioning fails.–type=  (replaced by fstype) — This option is no longer available. Use fstype.–fstype=  — Sets the file system type for the partition. Valid values are xfs, ext2, ext3, ext4, swap, vfat, and hfs.–start=  — Specifies the starting cylinder for the partition. It requires that a drive be specified with –ondisk=  or ondrive=. It also requires that the ending cylinder be specified with –end=  or the partition size be specified with –size=.–end=  — Specifies the ending cylinder for the partition. It requires that the starting cylinder be specified with –start=.–bytes-per-inode=  — Specifies the size of inodes on the filesystem to be made on the partition. Not all filesystems support this option, so it is silently ignored for those cases.–recommended  — Determine the size of the partition automatically.–onbiosdisk  — Forces the partition to be created on a particular disk as discovered by the BIOS.–encrypted  — Specifies that this partition should be encrypted.–passphrase=  — Specifies the passphrase to use when encrypting this partition. Without the above –encrypted  option, this option does nothing. If no passphrase is specified, the default system-wide one is used, or the installer will stop and prompt if there is no default.–fsoptions=  — Specifies a free form string of options to be used when mounting the filesystem. This string will be copied into the /etc/fstab  file of the installed system and should be enclosed in quotes.NoteIf partitioning fails for any reason, diagnostic messages appear on virtual console 3.</p>
+</li>
+<li><p>poweroff  (optional)</p>
+<p>Shut down and power off the system after the installation has successfully completed. Normally during a manual installation, anaconda displays a message and waits for the user to press a key before rebooting. During a kickstart installation, if no completion method is specified, the halt  option is used as default.The poweroff  option is roughly equivalent to the shutdown -p  command.NoteThe poweroff  option is highly dependent on the system hardware in use. Specifically, certain hardware components such as the BIOS, APM (advanced power management), and ACPI (advanced configuration and power interface) must be able to interact with the system kernel. Contact your manufacturer for more information on you system’s APM/ACPI abilities.For other completion methods, refer to the halt, reboot, and shutdown  kickstart options.</p>
+</li>
+<li><p>raid  (optional)</p>
+<p>Assembles a software RAID device. This command is of the form:raid <em><mntpoint></mntpoint></em> –level=<em><level></level></em> –device=<em><mddevice></mddevice></em> <em>&lt;partitions\</em>&gt;*<em><mntpoint></mntpoint></em> — Location where the RAID file system is mounted. If it is /, the RAID level must be 1 unless a boot partition (/boot) is present. If a boot partition is present, the /boot  partition must be level 1 and the root (/) partition can be any of the available types. The <em>&lt;partitions\</em>&gt;* (which denotes that multiple partitions can be listed) lists the RAID identifiers to add to the RAID array.–level=  — RAID level to use (0, 1, 4, 5, 6, or 10).–device=  — Name of the RAID device to use (such as md0 or md1). RAID devices range from md0 to md15, and each may only be used once.–bytes-per-inode=  — Specifies the size of inodes on the filesystem to be made on the RAID device. Not all filesystems support this option, so it is silently ignored for those cases.–spares=  — Specifies the number of spare drives allocated for the RAID array. Spare drives are used to rebuild the array in case of drive failure.–fstype=  — Sets the file system type for the RAID array. Valid values are xfs, ext2, ext3, ext4, swap, vfat, and hfs.–fsoptions=  — Specifies a free form string of options to be used when mounting the filesystem. This string will be copied into the /etc/fstab file of the installed system and should be enclosed in quotes.–noformat  — Use an existing RAID device and do not format the RAID array.–useexisting  — Use an existing RAID device and reformat it.–encrypted  — Specifies that this RAID device should be encrypted.–passphrase=  — Specifies the passphrase to use when encrypting this RAID device. Without the above –encrypted  option, this option does nothing. If no passphrase is specified, the default system-wide one is used, or the installer will stop and prompt if there is no default.The following example shows how to create a RAID level 1 partition for /, and a RAID level 5 for /usr, assuming there are three SCSI disks on the system. It also creates three swap partitions, one on each drive.part raid.01 –size=60 –ondisk=sdapart raid.02 –size=60 –ondisk=sdbpart raid.03 –size=60 –ondisk=sdcpart swap –size=128 –ondisk=sdapart swap –size=128 –ondisk=sdbpart swap –size=128 –ondisk=sdcpart raid.11 –size=1 –grow –ondisk=sdapart raid.12 –size=1 –grow –ondisk=sdbpart raid.13 –size=1 –grow –ondisk=sdcraid / –level=1 –device=md0 raid.01 raid.02 raid.03raid /usr –level=5 –device=md1 raid.11 raid.12 raid.13For a detailed example of raid  in action, refer to <a href="http://docs.redhat.com/docs/en-US/Red_Hat_Enterprise_Linux/5/html/Installation_Guide/s1-kickstart2-options.html#s2-kickstart2-options-part-examples" target="_blank" rel="noopener">Section 31.4.1, “Advanced Partitioning Example”</a>.</p>
+</li>
+<li><p>reboot  (optional)</p>
+<p>Reboot after the installation is successfully completed (no arguments). Normally, kickstart displays a message and waits for the user to press a key before rebooting.The reboot  option is roughly equivalent to the shutdown -r  command.Specify reboot  to automate installation fully when installing in cmdline mode on System z.For other completion methods, refer to the halt, poweroff, and shutdown  kickstart options.The halt  option is the default completion method if no other methods are explicitly specified in the kickstart file.NoteUse of the reboot  option <em>may</em> result in an endless installation loop, depending on the installation media and method.</p>
+</li>
+<li><p>repo  (optional)</p>
+<p>Configures additional yum repositories that may be used as sources for package installation. Multiple repo lines may be specified.repo –name=<em><repoid></repoid></em> [–baseurl=<em><url></url></em>| –mirrorlist=<em><url></url></em>]–name=  — The repo id. This option is required.–baseurl=  — The URL for the repository. The variables that may be used in yum repo config files are not supported here. You may use one of either this option or –mirrorlist, not both.–mirrorlist=  — The URL pointing at a list of mirrors for the repository. The variables that may be used in yum repo config files are not supported here. You may use one of either this option or –baseurl, not both.</p>
+</li>
+<li><p>rootpw  (required)</p>
+<p>Sets the system’s root password to the <em><password></password></em> argument.rootpw [–iscrypted] <em><password></password></em>–iscrypted  — If this is present, the password argument is assumed to already be encrypted.</p>
+</li>
+<li><p>selinux  (optional)</p>
+<p>Sets the state of SELinux on the installed system. SELinux defaults to enforcing in anaconda.selinux [–disabled|–enforcing|–permissive]–enforcing  — Enables SELinux with the default targeted policy being enforced.</p>
+</li>
+</ul>
+<blockquote>
+<h4 id="Note"><a href="#Note" class="headerlink" title="Note"></a>Note</h4><blockquote>
+<p>If the selinux  option is not present in the kickstart file, SELinux is enabled and set to –enforcing  by default.</p>
+<ul>
+<li>–permissive  — Outputs warnings based on the SELinux policy, but does not actually enforce the policy.</li>
+<li>–disabled  — Disables SELinux completely on the system.</li>
+</ul>
+</blockquote>
+</blockquote>
+<ul>
+<li><p>services  (optional)</p>
+<p>Modifies the default set of services that will run under the default runlevel. The services listed in the disabled list will be disabled before the services listed in the enabled list are enabled.–disabled  — Disable the services given in the comma separated list.–enabled  — Enable the services given in the comma separated list.<strong><em>Do not include spaces in the list of services</em></strong>If you include spaces in the comma-separated list, kickstart will enable or disable only the services up to the first space. For example:services –disabled auditd, cups,smartd,nfslock will disable only the auditd service. To disable all four services, this entry should include no spaces between services:services –disabled auditd,cups,smartd,nfslock </p>
+</li>
+<li><p>shutdown  (optional)</p>
+<p>Shut down the system after the installation has successfully completed. During a kickstart installation, if no completion method is specified, the halt  option is used as default.The shutdown  option is roughly equivalent to the shutdown  command.For other completion methods, refer to the halt, poweroff, and reboot  kickstart options.</p>
+</li>
+<li><p>skipx  (optional)</p>
+<p>If present, X is not configured on the installed system.</p>
+</li>
+<li><p>text  (optional)</p>
+<p>Perform the kickstart installation in text mode. Kickstart installations are performed in graphical mode by default.</p>
+</li>
+<li><p>timezone  (required)</p>
+<p>Sets the system time zone to <em><timezone></timezone></em> which may be any of the time zones listed by timeconfig.timezone [–utc] <em><timezone></timezone></em>–utc  — If present, the system assumes the hardware clock is set to UTC (Greenwich Mean) time.</p>
+</li>
+<li><p>upgrade  (optional)</p>
+<p>Tells the system to upgrade an existing system rather than install a fresh system. You must specify one of cdrom, harddrive, nfs, or url  (for FTP and HTTP) as the location of the installation tree. Refer to install  for details.</p>
+</li>
+<li><p>user  (optional)</p>
+<p>Creates a new user on the system.user –name=<em><username></username></em> [–groups=<em><list></list></em>] [–homedir=<em><homedir></homedir></em>] [–password=<em><password></password></em>] [–iscrypted] [–shell=<em><shell></shell></em>] [–uid=<em><uid></uid></em>]–name=  — Provides the name of the user. This option is required.–groups=  — In addition to the default group, a comma separated list of group names the user should belong to. The groups must exist before the user account is created.–homedir=  — The home directory for the user. If not provided, this defaults to /home/<em><username></username></em>.–password=  — The new user’s password. If not provided, the account will be locked by default.–iscrypted=  — Is the password provided by –password already encrypted or not?–shell=  — The user’s login shell. If not provided, this defaults to the system default.–uid=  — The user’s UID. If not provided, this defaults to the next available non-system UID.</p>
+</li>
+<li><p>vnc  (optional)</p>
+<p>Allows the graphical installation to be viewed remotely via VNC. This method is usually preferred over text mode, as there are some size and language limitations in text installs. With no options, this command will start a VNC server on the machine with no password and will print out the command that needs to be run to connect a remote machine.vnc [–host=<em><hostname></hostname></em>] [–port=<em><port></port></em>] [–password=<em><password></password></em>]–host=  — Instead of starting a VNC server on the install machine, connect to the VNC viewer process listening on the given hostname.–port=  — Provide a port that the remote VNC viewer process is listening on. If not provided, anaconda will use the VNC default.–password=  — Set a password which must be provided to connect to the VNC session. This is optional, but recommended.</p>
+</li>
+<li><p>volgroup  (optional)</p>
+<p>Use to create a Logical Volume Management (LVM) group with the syntax:volgroup <em><name></name></em> <em><partition></partition></em> <em><options></options></em>The options are as follows:–noformat  — Use an existing volume group and do not format it.–useexisting  — Use an existing volume group and reformat it.–pesize=  — Set the size of the physical extents.Create the partition first, create the logical volume group, and then create the logical volume. For example:part pv.01 –size 3000volgroup myvg pv.01logvol / –vgname=myvg –size=2000 –name=rootvolFor a detailed example of volgroup  in action, refer to <a href="http://docs.redhat.com/docs/en-US/Red_Hat_Enterprise_Linux/5/html/Installation_Guide/s1-kickstart2-options.html#s2-kickstart2-options-part-examples" target="_blank" rel="noopener">Section 31.4.1, “Advanced Partitioning Example”</a>.</p>
+</li>
+<li><p>xconfig  (optional)</p>
+<p>Configures the X Window System. If this option is not given, the user must configure X manually during the installation, if X was installed; this option should not be used if X is not installed on the final system.–driver  — Specify the X driver to use for the video hardware.–videoram=  — Specifies the amount of video RAM the video card has.–defaultdesktop=  — Specify either GNOME or KDE to set the default desktop (assumes that GNOME Desktop Environment and/or KDE Desktop Environment has been installed through %packages).–startxonboot  — Use a graphical login on the installed system.–resolution=  — Specify the default resolution for the X Window System on the installed system. Valid values are 640x480, 800x600, 1024x768, 1152x864, 1280x1024, 1400x1050, 1600x1200. Be sure to specify a resolution that is compatible with the video card and monitor.–depth=  — Specify the default color depth for the X Window System on the installed system. Valid values are 8, 16, 24, and 32. Be sure to specify a color depth that is compatible with the video card and monitor.</p>
+</li>
+<li><p>%include  (optional)</p>
+<p>Use the %include <em>/path/to/file</em>  command to include the contents of another file in the kickstart file as though the contents were at the location of the %include  command in the kickstart file.</p>
+</li>
+</ul>
+<h3 id="Advanced-Partitioning-Example"><a href="#Advanced-Partitioning-Example" class="headerlink" title="Advanced Partitioning Example"></a>Advanced Partitioning Example</h3><p>The following is a single, integrated example showing the clearpart, raid, part, volgroup, and logvol  kickstart options in action:</p>
+<p>clearpart –drives=hda,hdc –initlabel</p>
+<p># Raid 1 IDE config</p>
+<p>part raid.11 –size 1000 –asprimary –ondrive=hda</p>
+<p>part raid.12 –size 1000 –asprimary –ondrive=hda</p>
+<p>part raid.13 –size 2000 –asprimary –ondrive=hda</p>
+<p>part raid.14 –size 8000 –ondrive=hda</p>
+<p>part raid.15 –size 1 –grow –ondrive=hda</p>
+<p>part raid.21 –size 1000 –asprimary –ondrive=hdc</p>
+<p>part raid.22 –size 1000 –asprimary –ondrive=hdc</p>
+<p>part raid.23 –size 2000 –asprimary –ondrive=hdc</p>
+<p>part raid.24 –size 8000 –ondrive=hdc</p>
+<p>part raid.25 –size 1 –grow –ondrive=hdc</p>
+<p># You can add –spares=x</p>
+<p>raid / –fstype ext3 –device md0 –level=RAID1 raid.11 raid.21</p>
+<p>raid /safe –fstype ext3 –device md1 –level=RAID1 raid.12 raid.22</p>
+<p>raid swap –fstype swap –device md2 –level=RAID1 raid.13 raid.23</p>
+<p>raid /usr –fstype ext3 –device md3 –level=RAID1 raid.14 raid.24</p>
+<p>raid pv.01 –fstype ext3 –device md4 –level=RAID1 raid.15 raid.25</p>
+<p># LVM configuration so that we can resize /var and /usr/local later</p>
+<p>volgroup sysvg pv.01</p>
+<p>logvol /var –vgname=sysvg –size=8000 –name=var</p>
+<p>logvol /var/freespace –vgname=sysvg –size=8000 –name=freespacetouse</p>
+<p>logvol /usr/local –vgname=sysvg –size=1 –grow –name=usrlocal</p>
+<p>This advanced example implements LVM over RAID, as well as the ability to resize various directories for future growth.</p>
+<p>You can use a kickstart file to install every available package by specifying @Everything  or simply *  in the %packages  section. Red Hat does not support this type of installation.</p>
+<p>Moreover, using a kickstart file in this way will introduce package and file conflicts onto the installed system. Packages known to cause such problems are assigned to the @Conflicts  group. If you specify @Everything  in a kickstart file, be sure to exclude @Conflicts  or the installation will fail:</p>
+<p>@Everything</p>
+<p>-@Conflicts</p>
+<p>Note that Red Hat does not support the use of @Everything  in a kickstart file, even if you exclude @Conflicts.</p>
+<p>Use the %packages  command to begin a kickstart file section that lists the packages you would like to install (this is for installations only, as package selection during upgrades is not supported).</p>
+<p>Packages can be specified by group or by individual package name, including with globs using the asterisk. The installation program defines several groups that contain related packages. Refer to the <em>variant</em>/repodata/comps-*.xml  file on the first Red Hat Enterprise Linux CD-ROM for a list of groups. Each group has an id, user visibility value, name, description, and package list. In the package list, the packages marked as mandatory are always installed if the group is selected, the packages marked default are selected by default if the group is selected, and the packages marked optional must be specifically selected even if the group is selected to be installed.</p>
+<p>Available groups vary slightly between different variants of Red Hat Enterprise Linux 5, but include:</p>
+<ul>
+<li>Administration Tools</li>
+<li>Authoring and Publishing</li>
+<li>Development Libraries</li>
+<li>Development Tools</li>
+<li>DNS Name Server</li>
+<li>Eclipse</li>
+<li>Editors</li>
+<li>Engineering and Scientific</li>
+<li>FTP Server</li>
+<li>GNOME Desktop Environment</li>
+<li>GNOME Software Development</li>
+<li>Games and Entertainment</li>
+<li>Graphical Internet</li>
+<li>Graphics</li>
+<li>Java Development</li>
+<li>KDE (K Desktop Environment)</li>
+<li>KDE Software Development</li>
+<li>Legacy Network Server</li>
+<li>Legacy Software Development</li>
+<li>Legacy Software Support</li>
+<li>Mail Server</li>
+<li>Misc</li>
+<li>Multimedia</li>
+<li>MySQL Database</li>
+<li>Network Servers</li>
+<li>News Server</li>
+<li>Office/Productivity</li>
+<li>OpenFabrics Enterprise Distribution</li>
+<li>PostgreSQL Database</li>
+<li>Printing Support</li>
+<li>Server Configuration Tools</li>
+<li>Sound and Video</li>
+<li>System Tools</li>
+<li>Text-based Internet</li>
+<li>Web Server</li>
+<li>Windows File Server</li>
+<li>Windows PV Drivers</li>
+<li>X Software Development</li>
+<li>X Window System</li>
+</ul>
+<p>In most cases, it is only necessary to list the desired groups and not individual packages. Note that the Core  and Base  groups are always selected by default, so it is not necessary to specify them in the %packages  section.</p>
+<p>Here is an example %packages  selection:</p>
+<p>%packages</p>
+<p>@ X Window System</p>
+<p>@ GNOME Desktop Environment</p>
+<p>@ Graphical Internet</p>
+<p>@ Sound and Video dhcp</p>
+<p>As you can see, groups are specified, one to a line, starting with an @  symbol, a space, and then the full group name as given in the comps.xml  file. Groups can also be specified using the id for the group, such as gnome-desktop. Specify individual packages with no additional characters (the dhcp  line in the example above is an individual package).</p>
+<p>You can also specify which packages not to install from the default package list:</p>
+<p>-autofs</p>
+<p>The following options are available for the %packages  option:</p>
+<ul>
+<li><p>–nobase </p>
+<p>Do not install the @Base group. Use this option if you are trying to create a very small system.</p>
+</li>
+<li><p>–resolvedeps </p>
+<p>The –resolvedeps option has been deprecated. Dependencies are resolved automatically every time now.</p>
+</li>
+<li><p>–ignoredeps </p>
+<p>The –ignoredeps option has been deprecated. Dependencies are resolved automatically every time now.</p>
+</li>
+<li><p>–ignoremissing </p>
+<p>Ignore the missing packages and groups instead of halting the installation to ask if the installation should be aborted or continued. For example:%packages –ignoremissing</p>
+</li>
+<li><p>interpreter <em>/usr/bin/python</em> </p>
+<p>Allows you to specify a different scripting language, such as Python. Replace <em>/usr/bin/python</em> with the scripting language of your choice.</p>
+</li>
+</ul>
+<h3 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h3><p>Here is an example %pre  section:</p>
+<p>%pre</p>
+<p>#!/bin/sh</p>
+<p>hds=””</p>
+<p>mymedia=””</p>
+<p>for file in /proc/ide/h* do</p>
+<p>​    mymedia=<code>cat $file/media</code></p>
+<p>​    if [ $mymedia == “disk” ] ; then</p>
+<p>​        hds=”$hds <code>basename $file</code>“</p>
+<p>​    fi</p>
+<p>done</p>
+<p>set $hds</p>
+<p>numhd=<code>echo $#</code></p>
+<p>drive1=<code>echo $hds | cut -d&#39; &#39; -f1</code></p>
+<p>drive2=<code>echo $hds | cut -d&#39; &#39; -f2</code></p>
+<p>#Write out partition scheme based on whether there are 1 or 2 hard drives</p>
+<p>if [ $numhd == “2” ] ; then</p>
+<p>​    #2 drives</p>
+<p>​    echo “#partitioning scheme generated in %pre for 2 drives” &gt; /tmp/part-include</p>
+<p>​    echo “clearpart –all” &gt;&gt; /tmp/part-include</p>
+<p>​    echo “part /boot –fstype ext3 –size 75 –ondisk hda” &gt;&gt; /tmp/part-include</p>
+<p>​    echo “part / –fstype ext3 –size 1 –grow –ondisk hda” &gt;&gt; /tmp/part-include</p>
+<p>​    echo “part swap –recommended –ondisk $drive1” &gt;&gt; /tmp/part-include</p>
+<p>​    echo “part /home –fstype ext3 –size 1 –grow –ondisk hdb” &gt;&gt; /tmp/part-include</p>
+<p>else</p>
+<p>​    #1 drive</p>
+<p>​    echo “#partitioning scheme generated in %pre for 1 drive” &gt; /tmp/part-include</p>
+<p>​    echo “clearpart –all” &gt;&gt; /tmp/part-include</p>
+<p>​    echo “part /boot –fstype ext3 –size 75” &gt;&gt; /tmp/part-include</p>
+<p>​    echo “part swap –recommended” &gt;&gt; /tmp/part-include</p>
+<p>​    echo “part / –fstype ext3 –size 2048” &gt;&gt; /tmp/part-include</p>
+<p>​    echo “part /home –fstype ext3 –size 2048 –grow” &gt;&gt; /tmp/part-include</p>
+<p>fi</p>
+<p>This script determines the number of hard drives in the system and writes a text file with a different partitioning scheme depending on whether it has one or two drives. Instead of having a set of partitioning commands in the kickstart file, include the line:</p>
+<p>%include /tmp/part-include</p>
+<p>The partitioning commands selected in the script are used.</p>
+<h4 id="Note-1"><a href="#Note-1" class="headerlink" title="Note"></a>Note</h4><ul>
+<li>The pre-installation script section of kickstart <em>cannot</em> manage multiple install trees or source media. This information must be included for each created ks.cfg file, as the pre-installation script occurs during the second stage of the installation process.</li>
+</ul>
+<h3 id="Post-installation-Script"><a href="#Post-installation-Script" class="headerlink" title="Post-installation Script"></a>Post-installation Script</h3><p>You have the option of adding commands to run on the system once the installation is complete. This section must be at the end of the kickstart file and must start with the %post  command. This section is useful for functions such as installing additional software and configuring an additional nameserver.</p>
+<h4 id="Notes"><a href="#Notes" class="headerlink" title="Notes"></a>Notes</h4><ul>
+<li><p>If you configured the network with static IP information, including a nameserver, you can access the network and resolve IP addresses in the %post  section. If you configured the network for DHCP, the /etc/resolv.conf  file has not been completed when the installation executes the %post  section. You can access the network, but you can not resolve IP addresses. Thus, if you are using DHCP, you must specify IP addresses in the %post  section.</p>
+</li>
+<li><p>The post-install script is run in a chroot environment; therefore, performing tasks such as copying scripts or RPMs from the installation media do not work.</p>
+<ul>
+<li><p>–nochroot </p>
+<p>Allows you to specify commands that you would like to run outside of the chroot environment.The following example copies the file /etc/resolv.conf  to the file system that was just installed.%post –nochrootcp /etc/resolv.conf /mnt/sysimage/etc/resolv.conf</p>
+</li>
+<li><p>–interpreter <em>/usr/bin/python</em> </p>
+<p>Allows you to specify a different scripting language, such as Python. Replace <em>/usr/bin/python</em> with the scripting language of your choice.</p>
+</li>
+<li><p>–log <em>/path/to/logfile</em> </p>
+<p>Logs the output of the post-install script. Note that the path of the log file must take into account whether or not you use the –nochroot  option. For example, without –nochroot:This command is available in Red Hat Enterprise Linux 5.5 and later.%post –log=/root/ks-post.logwith –nochroot:%post –nochroot –log=/mnt/sysimage/root/ks-post.log</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="Examples"><a href="#Examples" class="headerlink" title="Examples"></a>Examples</h3><p>Register the system to a Red Hat Network Satellite, using a subshell to log the result in Red Hat Enterprise Linux 5.4 and earlier:</p>
+<p>%post</p>
+<p>( # Note that in this example we run the entire %post section as a subshell for logging.</p>
+<p>wget -O- <a href="http://proxy-or-sat.example.com/pub/bootstrap_script" target="_blank" rel="noopener">http://proxy-or-sat.example.com/pub/bootstrap_script</a> | /bin/bash</p>
+<p>/usr/sbin/rhnreg_ks –activationkey=<em><activationkey></activationkey></em></p>
+<p># End the subshell and capture any output to a post-install log file.</p>
+<p>) 1&gt;/root/post_install.log 2&gt;&amp;1</p>
+<p>Register the system to a Red Hat Network Satellite, using the –log  option to log the result in Red Hat Enterprise Linux 5.5 and later:</p>
+<p>%post –log=/root/ks-post.log</p>
+<p>wget -O- <a href="http://proxy-or-sat.example.com/pub/bootstrap_script" target="_blank" rel="noopener">http://proxy-or-sat.example.com/pub/bootstrap_script</a> | /bin/bash</p>
+<p>/usr/sbin/rhnreg_ks –activationkey=<em><activationkey></activationkey></em></p>
+<p>Run a script named runme  from an NFS share:</p>
+<p>mkdir /mnt/temp</p>
+<p>mount -o nolock 10.10.0.2:/usr/new-machines /mnt/temp open -s -w –</p>
+<p>/mnt/temp/runme</p>
+<p>umount /mnt/temp</p>
+<h3 id="Note-2"><a href="#Note-2" class="headerlink" title="Note"></a>Note</h3><p>NFS file locking is <em>not</em> supported while in kickstart mode, therefore -o nolock  is required when mounting an NFS mount.</p>
+<h3 id="Making-the-Kickstart-File-Available"><a href="#Making-the-Kickstart-File-Available" class="headerlink" title="Making the Kickstart File Available"></a>Making the Kickstart File Available</h3><p>A kickstart file must be placed in one of the following locations:</p>
+<ul>
+<li>On a boot diskette</li>
+<li>On a boot CD-ROM</li>
+<li>On a network</li>
+</ul>
+<p>Normally a kickstart file is copied to the boot diskette, or made available on the network. <strong><em>The network-based approach is most commonly used, as most kickstart installations tend to be performed on networked computers.</em></strong></p>
+<p>Let us take a more in-depth look at where the kickstart file may be placed.</p>
+<h3 id="31-8-1-Creating-Kickstart-Boot-Media"><a href="#31-8-1-Creating-Kickstart-Boot-Media" class="headerlink" title="31.8.1. Creating Kickstart Boot Media"></a>31.8.1. Creating Kickstart Boot Media</h3><p>Diskette-based booting is no longer supported in Red Hat Enterprise Linux. Installations must use CD-ROM or flash memory products for booting. However, the kickstart file may still reside on a diskette’s top-level directory, and must be named ks.cfg.</p>
+<p>To perform a CD-ROM-based kickstart installation, the kickstart file must be named ks.cfg  and must be located in the boot CD-ROM’s top-level directory. Since a CD-ROM is read-only, the file must be added to the directory used to create the image that is written to the CD-ROM. Refer to <a href="http://docs.redhat.com/docs/en-US/Red_Hat_Enterprise_Linux/5/html/Installation_Guide/ch02s04.html#sect-New_Users-Alternative_Boot_Methods" target="_blank" rel="noopener">Section 2.4.1, “Alternative Boot Methods”</a> for instructions on creating boot media; however, before making the file.iso  image file, copy the ks.cfg  kickstart file to the isolinux/  directory.</p>
+<p>To perform a pen-based flash memory kickstart installation, the kickstart file must be named ks.cfg  and must be located in the flash memory’s top-level directory. Create the boot image first, and then copy the ks.cfg  file.</p>
+<h3 id="Note-3"><a href="#Note-3" class="headerlink" title="Note"></a>Note</h3><p>Creation of USB flash memory pen drives for booting is possible, but is heavily dependent on system hardware BIOS settings. Refer to your hardware manufacturer to see if your system supports booting to alternate devices.</p>
+<h3 id="Making-the-Kickstart-File-Available-on-the-Network"><a href="#Making-the-Kickstart-File-Available-on-the-Network" class="headerlink" title="Making the Kickstart File Available on the Network"></a>Making the Kickstart File Available on the Network</h3><p>Network installations using kickstart are quite common, because system administrators can easily automate the installation on many networked computers quickly and painlessly. In general, the approach most commonly used is for the administrator to have both a BOOTP/DHCP server and an NFS server on the local network. The BOOTP/DHCP server is used to give the client system its networking information, while the actual files used during the installation are served by the NFS server. Often, these two servers run on the same physical machine, but they are not required to.</p>
+<p>To perform a network-based kickstart installation, you must have a BOOTP/DHCP server on your network, and it must include configuration information for the machine on which you are attempting to install Red Hat Enterprise Linux. The BOOTP/DHCP server provides the client with its networking information as well as the location of the kickstart file.</p>
+<p>If a kickstart file is specified by the BOOTP/DHCP server, the client system attempts an NFS mount of the file’s path, and copies the specified file to the client, using it as the kickstart file. The exact settings required vary depending on the BOOTP/DHCP server you use.</p>
+<p>Here is an example of a line from the dhcpd.conf  file for the DHCP server:</p>
+<p>filename <em>“/usr/new-machine/kickstart/“</em>; next-server <em>blarg.redhat.com;</em></p>
+<p>Note that you should replace the value after filename  with the name of the kickstart file (or the directory in which the kickstart file resides) and the value after next-server  with the NFS server name.</p>
+<p>If the file name returned by the BOOTP/DHCP server ends with a slash (“/“), then it is interpreted as a path only. In this case, the client system mounts that path using NFS, and searches for a particular file. The file name the client searches for is:</p>
+<p><em><ip-addr></ip-addr></em>-kickstart</p>
+<p>The <code>&lt;ip-addr&gt;</code>  section of the file name should be replaced with the client’s IP address in dotted decimal notation. For example, the file name for a computer with an IP address of 10.10.0.1 would be 10.10.0.1-kickstart.</p>
+<p>Note that if you do not specify a server name, then the client system attempts to use the server that answered the BOOTP/DHCP request as its NFS server. If you do not specify a path or file name, the client system tries to mount /kickstart  from the BOOTP/DHCP server and tries to find the kickstart file using the same <em><ip-addr></ip-addr></em>-kickstart  file name as described above.</p>
+<h3 id="Making-the-Installation-Tree-Available"><a href="#Making-the-Installation-Tree-Available" class="headerlink" title="Making the Installation Tree Available"></a>Making the Installation Tree Available</h3><p>The kickstart installation must access an <em>installation tree</em>. An installation tree is a copy of the binary Red Hat Enterprise Linux CD-ROMs with the same directory structure.</p>
+<p>If you are performing a CD-based installation, insert the Red Hat Enterprise Linux CD-ROM #1 into the computer before starting the kickstart installation.</p>
+<p>If you are performing a hard drive installation, make sure the ISO images of the binary Red Hat Enterprise Linux CD-ROMs are on a hard drive in the computer.</p>
+<p>If you are performing a network-based (NFS, FTP, or HTTP) installation, you must make the installation tree available over the network. Refer to <a href="http://docs.redhat.com/docs/en-US/Red_Hat_Enterprise_Linux/5/html/Installation_Guide/s1-steps-network-installs-x86.html" target="_blank" rel="noopener">Section 2.5, “Preparing for a Network Installation”</a> for details.</p>
+<h3 id="Starting-a-Kickstart-Installation"><a href="#Starting-a-Kickstart-Installation" class="headerlink" title="Starting a Kickstart Installation"></a>Starting a Kickstart Installation</h3><p>To begin a kickstart installation, you must boot the system from boot media you have made or the Red Hat Enterprise Linux CD-ROM #1, and enter a special boot command at the boot prompt. The installation program looks for a kickstart file if the ks  command line argument is passed to the kernel.</p>
+<ul>
+<li><p>CD-ROM #1 and Diskette</p>
+<p>The linux ks=floppy command also works if the ks.cfg  file is located on a vfat or ext2 file system on a diskette and you boot from the Red Hat Enterprise Linux CD-ROM #1.An alternate boot command is to boot off the Red Hat Enterprise Linux CD-ROM #1 and have the kickstart file on a vfat or ext2 file system on a diskette. To do so, enter the following command at the boot:  prompt:linux ks=hd:fd0:/ks.cfg</p>
+</li>
+<li><p>With Driver Disk</p>
+<p>If you need to use a driver disk with kickstart, specify the dd option as well. For example, to boot off a boot diskette and use a driver disk, enter the following command at the boot:  prompt:linux ks=floppy dd</p>
+</li>
+<li><p>Boot CD-ROM</p>
+<p>If the kickstart file is on a boot CD-ROM as described in <a href="http://docs.redhat.com/docs/en-US/Red_Hat_Enterprise_Linux/5/html/Installation_Guide/s1-kickstart2-putkickstarthere.html#s2-kickstart2-boot-media" target="_blank" rel="noopener">Section 31.8.1, “Creating Kickstart Boot Media”</a>, insert the CD-ROM into the system, boot the system, and enter the following command at the boot:  prompt (where ks.cfg  is the name of the kickstart file):linux ks=cdrom:/ks.cfg</p>
+</li>
+</ul>
+<p>Other options to start a kickstart installation are as follows:</p>
+<ul>
+<li><p>askmethod </p>
+<p>Do not automatically use the CD-ROM as the install source if we detect a Red Hat Enterprise Linux CD in your CD-ROM drive.</p>
+</li>
+<li><p>autostep </p>
+<p>Make kickstart non-interactive.</p>
+</li>
+<li><p>debug </p>
+<p>Start up pdb immediately.</p>
+</li>
+<li><p>dd </p>
+<p>Use a driver disk.</p>
+</li>
+<li><p>dhcpclass=<em><class></class></em> </p>
+<p>Sends a custom DHCP vendor class identifier. ISC’s dhcpcd can inspect this value using “option vendor-class-identifier”.</p>
+</li>
+<li><p>dns=<em><dns></dns></em> </p>
+<p>Comma separated list of nameservers to use for a network installation.</p>
+</li>
+<li><p>driverdisk </p>
+<p>Same as ‘dd’.</p>
+</li>
+<li><p>expert </p>
+<p>Turns on special features:allows partitioning of removable mediaprompts for a driver disk</p>
+</li>
+<li><p>gateway=<em><gw></gw></em> </p>
+<p>Gateway to use for a network installation.</p>
+</li>
+<li><p>graphical </p>
+<p>Force graphical install. Required to have ftp/http use GUI.</p>
+</li>
+<li><p>isa </p>
+<p>Prompt user for ISA devices configuration.</p>
+</li>
+<li><p>ip=<em><ip></ip></em> </p>
+<p>IP to use for a network installation, use ‘dhcp’ for DHCP.</p>
+</li>
+<li><p>keymap=<em><keymap></keymap></em> </p>
+<p>Keyboard layout to use. Valid values are those which can be used for the ‘keyboard’ kickstart command.</p>
+</li>
+<li><p>ks=nfs:<em><server></server></em>:/<em><path></path></em> </p>
+<p>The installation program looks for the kickstart file on the NFS server <em><server></server></em>, as file <em><path></path></em>. The installation program uses DHCP to configure the Ethernet card. For example, if your NFS server is server.example.com and the kickstart file is in the NFS share /mydir/ks.cfg, the correct boot command would be ks=nfs:server.example.com:/mydir/ks.cfg.</p>
+</li>
+<li><p>ks=http://<em><server></server></em>/<em><path></path></em> </p>
+<p>The installation program looks for the kickstart file on the HTTP server <em><server></server></em>, as file <em><path></path></em>. The installation program uses DHCP to configure the Ethernet card. For example, if your HTTP server is server.example.com and the kickstart file is in the HTTP directory /mydir/ks.cfg, the correct boot command would be ks=<a href="http://server.example.com/mydir/ks.cfg" target="_blank" rel="noopener">http://server.example.com/mydir/ks.cfg</a>.</p>
+</li>
+<li><p>ks=floppy </p>
+<p>The installation program looks for the file ks.cfg  on a vfat or ext2 file system on the diskette in /dev/fd0.</p>
+</li>
+<li><p>ks=floppy:/<em><path></path></em> </p>
+<p>The installation program looks for the kickstart file on the diskette in /dev/fd0, as file <em><path></path></em>.</p>
+</li>
+<li><p>ks=hd:<em><device></device></em>:/<em><file></file></em> </p>
+<p>The installation program mounts the file system on <em><device></device></em> (which must be vfat or ext2), and look for the kickstart configuration file as <em><file></file></em> in that file system (for example, ks=hd:sda3:/mydir/ks.cfg).</p>
+</li>
+<li><p>ks=file:/<em><file></file></em> </p>
+<p>The installation program tries to read the file <em><file></file></em> from the file system; no mounts are done. This is normally used if the kickstart file is already on the initrd  image.</p>
+</li>
+<li><p>ks=cdrom:/<em><path></path></em> </p>
+<p>The installation program looks for the kickstart file on CD-ROM, as file <em><path></path></em>.</p>
+</li>
+<li><p>ks </p>
+<p>If ks  is used alone, the installation program configures the Ethernet card to use DHCP. The kickstart file is read from the “bootServer” from the DHCP response as if it is an NFS server sharing the kickstart file. By default, the bootServer is the same as the DHCP server. The name of the kickstart file is one of the following:If DHCP is specified and the boot file begins with a /, the boot file provided by DHCP is looked for on the NFS server.If DHCP is specified and the boot file begins with something other than a /, the boot file provided by DHCP is looked for in the /kickstart  directory on the NFS server.If DHCP did not specify a boot file, then the installation program tries to read the file /kickstart/1.2.3.4-kickstart, where <em>1.2.3.4</em> is the numeric IP address of the machine being installed.</p>
+</li>
+<li><p>ksdevice=<em><device></device></em> </p>
+<p>The installation program uses this network device to connect to the network. For example, consider a system connected to an NFS server through the eth1 device. To perform a kickstart installation on this system using a kickstart file from the NFS server, you would use the command ks=nfs:<em><server></server></em>:/<em><path></path></em> ksdevice=eth1  at the boot:  prompt.</p>
+</li>
+<li><p>kssendmac </p>
+<p>Adds HTTP headers to ks=http:// request that can be helpful for provisioning systems. Includes MAC address of all nics in CGI environment variables of the form: “X-RHN-Provisioning-MAC-0: eth0 01:23:45:67:89:ab”.</p>
+</li>
+<li><p>lang=<em><lang></lang></em> </p>
+<p>Language to use for the installation. This should be a language which is valid to be used with the ‘lang’ kickstart command.</p>
+</li>
+<li><p>loglevel=<em><level></level></em> </p>
+<p>Set the minimum level required for messages to be logged. Values for <level> are debug, info, warning, error, and critical. The default value is info.</level></p>
+</li>
+<li><p>lowres </p>
+<p>Force GUI installer to run at 640x480.</p>
+</li>
+<li><p>mediacheck </p>
+<p>Activates loader code to give user option of testing integrity of install source (if an ISO-based method).</p>
+</li>
+<li><p>method=cdrom </p>
+<p>Do a CDROM based installation.</p>
+</li>
+<li><p>method=ftp://<em><path></path></em> </p>
+<p>Use <path> for an FTP installation.</path></p>
+</li>
+<li><p>method=hd:<em><dev></dev></em>:<em><path></path></em> </p>
+<p>Use <path> on <dev> for a hard drive installation.</dev></path></p>
+</li>
+<li><p>method=http://<em><path></path></em> </p>
+<p>Use <path> for an HTTP installation.</path></p>
+</li>
+<li><p>method=nfs:<em><path></path></em> </p>
+<p>Use <path> for an NFS installation.</path></p>
+</li>
+<li><p>netmask=<em><nm></nm></em> </p>
+<p>Netmask to use for a network installation.</p>
+</li>
+<li><p>nofallback </p>
+<p>If GUI fails exit.</p>
+</li>
+<li><p>nofb </p>
+<p>Do not load the VGA16 framebuffer required for doing text-mode installation in some languages.</p>
+</li>
+<li><p>nofirewire </p>
+<p>Do not load support for firewire devices.</p>
+</li>
+<li><p>noipv6 </p>
+<p>Disable IPv6 networking during installation.This option is not available during PXE installationsDuring installations from a PXE server, IPv6 networking might become active before anaconda processes the Kickstart file. If so, this option will have no effect during installation.</p>
+</li>
+<li><p>nomount </p>
+<p>Don’t automatically mount any installed Linux partitions in rescue mode.</p>
+</li>
+<li><p>nonet </p>
+<p>Do not auto-probe network devices.</p>
+</li>
+<li><p>noparport </p>
+<p>Do not attempt to load support for parallel ports.</p>
+</li>
+<li><p>nopass </p>
+<p>Don’t pass keyboard/mouse info to stage 2 installer, good for testing keyboard and mouse config screens in stage2 installer during network installs.</p>
+</li>
+<li><p>nopcmcia </p>
+<p>Ignore PCMCIA controller in system.</p>
+</li>
+<li><p>noprobe </p>
+<p>Do not attempt to detect hw, prompts user instead.</p>
+</li>
+<li><p>noshell </p>
+<p>Do not put a shell on tty2 during install.</p>
+</li>
+<li><p>nostorage </p>
+<p>Do not auto-probe storage devices (SCSI, IDE, RAID).</p>
+</li>
+<li><p>nousb </p>
+<p>Do not load USB support (helps if install hangs early sometimes).</p>
+</li>
+<li><p>nousbstorage </p>
+<p>Do not load usbstorage module in loader. May help with device ordering on SCSI systems.</p>
+</li>
+<li><p>rescue </p>
+<p>Run rescue environment.</p>
+</li>
+<li><p>resolution=<em><mode></mode></em> </p>
+<p>Run installer in mode specified, ‘1024x768’ for example.</p>
+</li>
+<li><p>serial </p>
+<p>Turns on serial console support.</p>
+</li>
+<li><p>skipddc </p>
+<p>Skips DDC probe of monitor, may help if it’s hanging system.</p>
+</li>
+<li><p>syslog=<em><host></host></em>[:<em><port></port></em>] </p>
+<p>Once installation is up and running, send log messages to the syslog process on <em><host></host></em>, and optionally, on port <em><port></port></em>. Requires the remote syslog process to accept connections (the -r option).</p>
+</li>
+<li><p>text </p>
+<p>Force text mode install.</p>
+</li>
+<li><p>updates </p>
+<p>Prompt for floppy containing updates (bug fixes).</p>
+</li>
+<li><p>updates=ftp://<em><path></path></em> </p>
+<p>Image containing updates over FTP.</p>
+</li>
+<li><p>updates=http://<em><path></path></em> </p>
+<p>Image containing updates over HTTP.</p>
+</li>
+<li><p>upgradeany </p>
+<p>Don’t require an /etc/redhat-release that matches the expected syntax to upgrade.</p>
+</li>
+<li><p>vnc </p>
+<p>Enable vnc-based installation. You will need to connect to the machine using a vnc client application.</p>
+</li>
+<li><p>vncconnect=<em><host></host></em>[:<em><port></port></em>] </p>
+<p>Once installation is up and running, connect to the vnc client named <em><host></host></em>, and optionally use port <em><port></port></em>.Requires ‘vnc’ option to be specified as well.</p>
+</li>
+<li><p>vncpassword=<em><password></password></em> </p>
+<p>Enable a password for the vnc connection. This will prevent someone from inadvertently connecting to the vnc-based installation.Requires ‘vnc’ option to be specified as well.</p>
+</li>
+</ul>
+<p>## </p>
+<h2 id><a href="#" class="headerlink" title=" "></a> </h2>
+        
+        <br>
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+    </div>
+</div>
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+        <li>
+            <a target="_blank" href="https://www.zhihu.com/people/li-bo-2-25">
+                            <span class="fa-stack fa-lg">
+                                 <i class="iconfont icon-zhihu"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+        
+
+        
+        <li>
+            <a target="_blank" href="https://github.com/liboo0731">
+                            <span class="fa-stack fa-lg">
+                                <i class="iconfont icon-github"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span>/</span>
+        
+        <span><a href="https://www.cnblogs.com/liboo/">H2K1R~ACE_博客园</a></span>
+        <span>/</span>
+        
+        <span><a href="https://blog.csdn.net/weixin_40108079">H2K1E~ACE_CSDN</a></span>
+        <span>/</span>
+        
+    </p>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/js/index.js"></script>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+    <script>
+        /**
+         *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+         *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+        */
+        if( '' || '')
+        var disqus_config = function () {
+            this.page.url = '';  // Replace PAGE_URL with your page's canonical URL variable
+            this.page.identifier = ''; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        };
+
+        (function() { // DON'T EDIT BELOW THIS LINE
+            var d = document, s = d.createElement('script');
+            s.src = 'https://airclouds-blog.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+    </script>
+
+</html>

@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="李博的博客">
+    <meta name="keyword" content="striveliboo">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        【python】SSH远程操作 - Liboo的博客 | Liboo&#39;s Blog
+        
+    </title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/aircloud.css">
+    <link rel="stylesheet" href="/css/gitment.css">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> Internet of Everything, Everywhere. </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar">
+            <img src="/img/avatar.jpg">
+        </div>
+        <div class="name">
+            <i>H2K1E~ACE</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li>
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li>
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li>
+                <a href="/archive">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li>
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-基于用户名和密码的-sshclient-方式登录"><span class="toc-text">1. 基于用户名和密码的 sshclient 方式登录</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-基于用户名和密码的-transport-方式登录"><span class="toc-text">2. 基于用户名和密码的 transport 方式登录</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-基于公钥密钥的-SSHClient-方式登录"><span class="toc-text">3 基于公钥密钥的 SSHClient 方式登录</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-基于密钥的-Transport-方式登录"><span class="toc-text">4. 基于密钥的 Transport 方式登录</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-实现输入命令立马返回结果的功能"><span class="toc-text">5. 实现输入命令立马返回结果的功能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-支持tab自动补全"><span class="toc-text">6. 支持tab自动补全</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-SSH批量登陆执行命令（1）"><span class="toc-text">7. SSH批量登陆执行命令（1）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-SSH批量登陆执行命令（2）"><span class="toc-text">8. SSH批量登陆执行命令（2）</span></a></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input">
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+        <div class="index-about-mobile">
+            <i> Internet of Everything, Everywhere. </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        【python】SSH远程操作
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2018-03-02 09:58:55</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/tags/#python" title="python">python</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#ssh" title="ssh">ssh</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+
+    </div>
+    <div class="post-content ">
+        <p>paramiko模块提供了ssh及sft进行远程登录服务器执行命令和上传下载文件的功能。这是一个第三方的软件包，使用之前需要安装。</p>
+<h3 id="1-基于用户名和密码的-sshclient-方式登录"><a href="#1-基于用户名和密码的-sshclient-方式登录" class="headerlink" title="1. 基于用户名和密码的 sshclient 方式登录"></a>1. 基于用户名和密码的 sshclient 方式登录</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 建立一个sshclient对象</span></span><br><span class="line">ssh = paramiko.SSHClient()</span><br><span class="line"><span class="comment"># 允许将信任的主机自动加入到host_allow 列表，此方法必须放在connect方法的前面</span></span><br><span class="line">ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())</span><br><span class="line"><span class="comment"># 调用connect方法连接服务器</span></span><br><span class="line">ssh.connect(hostname=<span class="string">'192.168.2.129'</span>, port=<span class="number">22</span>, username=<span class="string">'super'</span>, password=<span class="string">'super'</span>)</span><br><span class="line"><span class="comment"># 执行命令</span></span><br><span class="line">stdin, stdout, stderr = ssh.exec_command(<span class="string">'df -hl'</span>)</span><br><span class="line"><span class="comment"># 结果放到stdout中，如果有错误将放到stderr中</span></span><br><span class="line">print(stdout.read().decode())</span><br><span class="line"><span class="comment"># 关闭连接</span></span><br><span class="line">ssh.close()</span><br></pre></td></tr></table></figure>
+<h3 id="2-基于用户名和密码的-transport-方式登录"><a href="#2-基于用户名和密码的-transport-方式登录" class="headerlink" title="2. 基于用户名和密码的 transport 方式登录"></a>2. 基于用户名和密码的 transport 方式登录</h3><p>方法1是传统的连接服务器、执行命令、关闭的一个操作，有时候需要登录上服务器执行多个操作，比如执行命令、上传/下载文件，方法1则无法实现，可以通过如下方式来操作</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 实例化一个transport对象</span></span><br><span class="line">trans = paramiko.Transport((<span class="string">'192.168.2.129'</span>, <span class="number">22</span>))</span><br><span class="line"><span class="comment"># 建立连接</span></span><br><span class="line">trans.connect(username=<span class="string">'super'</span>, password=<span class="string">'super'</span>)</span><br><span class="line"><span class="comment"># 将sshclient的对象的transport指定为以上的trans</span></span><br><span class="line">ssh = paramiko.SSHClient()</span><br><span class="line">ssh._transport = trans</span><br><span class="line"><span class="comment"># 执行命令，和传统方法一样</span></span><br><span class="line">stdin, stdout, stderr = ssh.exec_command(<span class="string">'df -hl'</span>)</span><br><span class="line">print(stdout.read().decode())</span><br><span class="line"><span class="comment"># 关闭连接</span></span><br><span class="line">trans.close()</span><br></pre></td></tr></table></figure>
+<h3 id="3-基于公钥密钥的-SSHClient-方式登录"><a href="#3-基于公钥密钥的-SSHClient-方式登录" class="headerlink" title="3 基于公钥密钥的 SSHClient 方式登录"></a>3 基于公钥密钥的 SSHClient 方式登录</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 指定本地的RSA私钥文件,如果建立密钥对时设置的有密码，password为设定的密码，如无不用指定password参数</span></span><br><span class="line">pkey = paramiko.RSAKey.from_private_key_file(<span class="string">'/home/super/.ssh/id_rsa'</span>, password=<span class="string">'12345'</span>)</span><br><span class="line"><span class="comment"># 建立连接</span></span><br><span class="line">ssh = paramiko.SSHClient()</span><br><span class="line">ssh.connect(hostname=<span class="string">'192.168.2.129'</span>,</span><br><span class="line">            port=<span class="number">22</span>,</span><br><span class="line">            username=<span class="string">'super'</span>,</span><br><span class="line">            pkey=pkey)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 执行命令</span></span><br><span class="line">stdin, stdout, stderr = ssh.exec_command(<span class="string">'df -hl'</span>)</span><br><span class="line"><span class="comment"># 结果放到stdout中，如果有错误将放到stderr中</span></span><br><span class="line">print(stdout.read().decode())</span><br><span class="line"><span class="comment"># 关闭连接</span></span><br><span class="line">ssh.close()</span><br></pre></td></tr></table></figure>
+<p>以上需要确保被访问的服务器对应用户.ssh目录下有authorized_keys文件，也就是将服务器上生成的公钥文件保存为authorized_keys。并将私钥文件作为paramiko的登陆密钥</p>
+<h3 id="4-基于密钥的-Transport-方式登录"><a href="#4-基于密钥的-Transport-方式登录" class="headerlink" title="4. 基于密钥的 Transport 方式登录"></a>4. 基于密钥的 Transport 方式登录</h3><p>指定本地的RSA私钥文件,如果建立密钥对时设置的有密码，password为设定的密码，如无不用指定password参数</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">pkey = paramiko.RSAKey.from_private_key_file(<span class="string">'/home/super/.ssh/id_rsa'</span>, password=<span class="string">'12345'</span>)</span><br><span class="line"><span class="comment"># 建立连接</span></span><br><span class="line">trans = paramiko.Transport((<span class="string">'192.168.2.129'</span>, <span class="number">22</span>))</span><br><span class="line">trans.connect(username=<span class="string">'super'</span>, pkey=pkey)</span><br><span class="line"><span class="comment"># 将sshclient的对象的transport指定为以上的trans</span></span><br><span class="line">ssh = paramiko.SSHClient()</span><br><span class="line">ssh._transport = trans</span><br><span class="line"><span class="comment"># 执行命令，和传统方法一样</span></span><br><span class="line">stdin, stdout, stderr = ssh.exec_command(<span class="string">'df -hl'</span>)</span><br><span class="line">print(stdout.read().decode())</span><br><span class="line"><span class="comment"># 关闭连接</span></span><br><span class="line">trans.close()</span><br><span class="line"><span class="comment">##### 传文件 SFTP ###########</span></span><br><span class="line"><span class="comment"># 实例化一个trans对象# 实例化一个transport对象</span></span><br><span class="line">trans = paramiko.Transport((<span class="string">'192.168.2.129'</span>, <span class="number">22</span>))</span><br><span class="line"><span class="comment"># 建立连接</span></span><br><span class="line">trans.connect(username=<span class="string">'super'</span>, password=<span class="string">'super'</span>)</span><br><span class="line"><span class="comment"># 实例化一个 sftp对象,指定连接的通道</span></span><br><span class="line">sftp = paramiko.SFTPClient.from_transport(trans)</span><br><span class="line"><span class="comment"># 发送文件</span></span><br><span class="line">sftp.put(localpath=<span class="string">'/tmp/11.txt'</span>, remotepath=<span class="string">'/tmp/22.txt'</span>)</span><br><span class="line"><span class="comment"># 下载文件</span></span><br><span class="line"><span class="comment"># sftp.get(remotepath, localpath)</span></span><br><span class="line">trans.close()</span><br></pre></td></tr></table></figure>
+<h3 id="5-实现输入命令立马返回结果的功能"><a href="#5-实现输入命令立马返回结果的功能" class="headerlink" title="5. 实现输入命令立马返回结果的功能"></a>5. 实现输入命令立马返回结果的功能</h3><p>以上操作都是基本的连接，如果我们想实现一个类似xshell工具的功能，登录以后可以输入命令回车后就返回结果：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> paramiko</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> select</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"></span><br><span class="line"><span class="comment"># 建立一个socket</span></span><br><span class="line">trans = paramiko.Transport((<span class="string">'192.168.2.129'</span>, <span class="number">22</span>))</span><br><span class="line"><span class="comment"># 启动一个客户端</span></span><br><span class="line">trans.start_client()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 如果使用rsa密钥登录的话</span></span><br><span class="line"></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">default_key_file = os.path.join(os.environ['HOME'], '.ssh', 'id_rsa')</span></span><br><span class="line"><span class="string">prikey = paramiko.RSAKey.from_private_key_file(default_key_file)</span></span><br><span class="line"><span class="string">trans.auth_publickey(username='super', key=prikey)</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 如果使用用户名和密码登录</span></span><br><span class="line">trans.auth_password(username=<span class="string">'super'</span>, password=<span class="string">'super'</span>)</span><br><span class="line"><span class="comment"># 打开一个通道</span></span><br><span class="line">channel = trans.open_session()</span><br><span class="line"><span class="comment"># 获取终端</span></span><br><span class="line">channel.get_pty()</span><br><span class="line"><span class="comment"># 激活终端，这样就可以登录到终端了，就和我们用类似于xshell登录系统一样</span></span><br><span class="line">channel.invoke_shell()</span><br><span class="line"><span class="comment"># 下面就可以执行你所有的操作，用select实现</span></span><br><span class="line"><span class="comment"># 对输入终端sys.stdin和 通道进行监控,</span></span><br><span class="line"><span class="comment"># 当用户在终端输入命令后，将命令交给channel通道，这个时候sys.stdin就发生变化，select就可以感知</span></span><br><span class="line"><span class="comment"># channel的发送命令、获取结果过程其实就是一个socket的发送和接受信息的过程</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">    readlist, writelist, errlist = select.select([channel, sys.stdin,], [], [])</span><br><span class="line">    <span class="comment"># 如果是用户输入命令了,sys.stdin发生变化</span></span><br><span class="line">    <span class="keyword">if</span> sys.stdin <span class="keyword">in</span> readlist:</span><br><span class="line">        <span class="comment"># 获取输入的内容</span></span><br><span class="line">        input_cmd = sys.stdin.read(<span class="number">1</span>)</span><br><span class="line">        <span class="comment"># 将命令发送给服务器</span></span><br><span class="line">        channel.sendall(input_cmd)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 服务器返回了结果,channel通道接受到结果,发生变化 select感知到</span></span><br><span class="line">    <span class="keyword">if</span> channel <span class="keyword">in</span> readlist:</span><br><span class="line">        <span class="comment"># 获取结果</span></span><br><span class="line">        result = channel.recv(<span class="number">1024</span>)</span><br><span class="line">        <span class="comment"># 断开连接后退出</span></span><br><span class="line">        <span class="keyword">if</span> len(result) == <span class="number">0</span>:</span><br><span class="line">            print(<span class="string">"\r\n**** EOF **** \r\n"</span>)</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">        <span class="comment"># 输出到屏幕</span></span><br><span class="line">        sys.stdout.write(result.decode())</span><br><span class="line">        sys.stdout.flush()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 关闭通道</span></span><br><span class="line">channel.close()</span><br><span class="line"><span class="comment"># 关闭链接</span></span><br><span class="line">trans.close()</span><br></pre></td></tr></table></figure>
+<h3 id="6-支持tab自动补全"><a href="#6-支持tab自动补全" class="headerlink" title="6. 支持tab自动补全"></a>6. 支持tab自动补全</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> paramiko</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> select</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">import</span> tty</span><br><span class="line"><span class="keyword">import</span> termios</span><br><span class="line"></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">实现一个xshell登录系统的效果，登录到系统就不断输入命令同时返回结果</span></span><br><span class="line"><span class="string">支持自动补全，直接调用服务器终端</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 建立一个socket</span></span><br><span class="line">trans = paramiko.Transport((<span class="string">'192.168.2.129'</span>, <span class="number">22</span>))</span><br><span class="line"><span class="comment"># 启动一个客户端</span></span><br><span class="line">trans.start_client()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 如果使用rsa密钥登录的话</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">default_key_file = os.path.join(os.environ['HOME'], '.ssh', 'id_rsa')</span></span><br><span class="line"><span class="string">prikey = paramiko.RSAKey.from_private_key_file(default_key_file)</span></span><br><span class="line"><span class="string">trans.auth_publickey(username='super', key=prikey)</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 如果使用用户名和密码登录</span></span><br><span class="line">trans.auth_password(username=<span class="string">'super'</span>, password=<span class="string">'super'</span>)</span><br><span class="line"><span class="comment"># 打开一个通道</span></span><br><span class="line">channel = trans.open_session()</span><br><span class="line"><span class="comment"># 获取终端</span></span><br><span class="line">channel.get_pty()</span><br><span class="line"><span class="comment"># 激活终端，这样就可以登录到终端了，就和我们用类似于xshell登录系统一样</span></span><br><span class="line">channel.invoke_shell()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 获取原操作终端属性</span></span><br><span class="line">oldtty = termios.tcgetattr(sys.stdin)</span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    <span class="comment"># 将现在的操作终端属性设置为服务器上的原生终端属性,可以支持tab了</span></span><br><span class="line">    tty.setraw(sys.stdin)</span><br><span class="line">    channel.settimeout(<span class="number">0</span>)</span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        readlist, writelist, errlist = select.select([channel, sys.stdin,], [], [])</span><br><span class="line">        <span class="comment"># 如果是用户输入命令了,sys.stdin发生变化</span></span><br><span class="line">        <span class="keyword">if</span> sys.stdin <span class="keyword">in</span> readlist:</span><br><span class="line">            <span class="comment"># 获取输入的内容，输入一个字符发送1个字符</span></span><br><span class="line">            input_cmd = sys.stdin.read(<span class="number">1</span>)</span><br><span class="line">            <span class="comment"># 将命令发送给服务器</span></span><br><span class="line">            channel.sendall(input_cmd)</span><br><span class="line">        <span class="comment"># 服务器返回了结果,channel通道接受到结果,发生变化 select感知到</span></span><br><span class="line">        <span class="keyword">if</span> channel <span class="keyword">in</span> readlist:</span><br><span class="line">            <span class="comment"># 获取结果</span></span><br><span class="line">            result = channel.recv(<span class="number">1024</span>)</span><br><span class="line">            <span class="comment"># 断开连接后退出</span></span><br><span class="line">            <span class="keyword">if</span> len(result) == <span class="number">0</span>:</span><br><span class="line">                print(<span class="string">"\r\n**** EOF **** \r\n"</span>)</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">            <span class="comment"># 输出到屏幕</span></span><br><span class="line">            sys.stdout.write(result.decode())</span><br><span class="line">            sys.stdout.flush()</span><br><span class="line"><span class="keyword">finally</span>:</span><br><span class="line">    <span class="comment"># 执行完后将现在的终端属性恢复为原操作终端属性</span></span><br><span class="line">    termios.tcsetattr(sys.stdin, termios.TCSADRAIN, oldtty)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 关闭通道</span></span><br><span class="line">channel.close()</span><br><span class="line"><span class="comment"># 关闭链接</span></span><br><span class="line">trans.close()</span><br></pre></td></tr></table></figure>
+<h3 id="7-SSH批量登陆执行命令（1）"><a href="#7-SSH批量登陆执行命令（1）" class="headerlink" title="7. SSH批量登陆执行命令（1）"></a>7. SSH批量登陆执行命令（1）</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#-*- coding: utf-8 -*-</span></span><br><span class="line"><span class="comment">#!/usr/bin/python</span></span><br><span class="line"><span class="keyword">import</span> paramiko</span><br><span class="line"><span class="keyword">import</span> threading</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">ssh2</span><span class="params">(ip,username,passwd,cmd)</span>:</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        ssh = paramiko.SSHClient()</span><br><span class="line">        ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())</span><br><span class="line">        ssh.connect(ip,<span class="number">22</span>,username,passwd,timeout=<span class="number">5</span>)</span><br><span class="line">        <span class="keyword">for</span> m <span class="keyword">in</span> cmd:</span><br><span class="line">            stdin, stdout, stderr = ssh.exec_command(m)</span><br><span class="line"><span class="comment">#           stdin.write("Y")   #简单交互，输入 ‘Y’</span></span><br><span class="line">            out = stdout.readlines()</span><br><span class="line">            <span class="comment">#屏幕输出</span></span><br><span class="line">            <span class="keyword">for</span> o <span class="keyword">in</span> out:</span><br><span class="line">                <span class="keyword">print</span> o,</span><br><span class="line">        <span class="keyword">print</span> <span class="string">'%s\tOK\n'</span>%(ip)</span><br><span class="line">        ssh.close()</span><br><span class="line">    <span class="keyword">except</span> :</span><br><span class="line">        <span class="keyword">print</span> <span class="string">'%s\tError\n'</span>%(ip)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__==<span class="string">'__main__'</span>:</span><br><span class="line">    cmd = [<span class="string">'cal'</span>,<span class="string">'echo hello!'</span>]<span class="comment">#你要执行的命令列表</span></span><br><span class="line">    username = <span class="string">""</span>  <span class="comment">#用户名</span></span><br><span class="line">    passwd = <span class="string">""</span>    <span class="comment">#密码</span></span><br><span class="line">    threads = []   <span class="comment">#多线程</span></span><br><span class="line">    <span class="keyword">print</span> <span class="string">"Begin......"</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>,<span class="number">254</span>):</span><br><span class="line">        ip = <span class="string">'192.168.1.'</span>+str(i)</span><br><span class="line">        a=threading.Thread(target=ssh2,args=(ip,username,passwd,cmd))</span><br><span class="line">        a.start()</span><br></pre></td></tr></table></figure>
+<h3 id="8-SSH批量登陆执行命令（2）"><a href="#8-SSH批量登陆执行命令（2）" class="headerlink" title="8. SSH批量登陆执行命令（2）"></a>8. SSH批量登陆执行命令（2）</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> pexpect</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">ssh_cmd</span><span class="params">(ip, passwd, cmd)</span>:</span></span><br><span class="line">    ret = <span class="number">-1</span></span><br><span class="line">    ssh = pexpect.spawn(<span class="string">'ssh root@%s "%s"'</span> % (ip, cmd))</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        i = ssh.expect([<span class="string">'password:'</span>, <span class="string">'continue connecting (yes/no)?'</span>], timeout=<span class="number">5</span>)</span><br><span class="line">        <span class="keyword">if</span> i == <span class="number">0</span> :</span><br><span class="line">            ssh.sendline(passwd)</span><br><span class="line">        <span class="keyword">elif</span> i == <span class="number">1</span>:</span><br><span class="line">            ssh.sendline(<span class="string">'yes\n'</span>)</span><br><span class="line">            ssh.expect(<span class="string">'password: '</span>)</span><br><span class="line">            ssh.sendline(passwd)</span><br><span class="line">        ssh.sendline(cmd)</span><br><span class="line">        r = ssh.read()</span><br><span class="line">        <span class="keyword">print</span> r</span><br><span class="line">        ret = <span class="number">0</span></span><br><span class="line">    <span class="keyword">except</span> pexpect.EOF:</span><br><span class="line">        <span class="keyword">print</span> <span class="string">"EOF"</span></span><br><span class="line">        ssh.close()</span><br><span class="line">        ret = <span class="number">-1</span></span><br><span class="line">    <span class="keyword">except</span> pexpect.TIMEOUT:</span><br><span class="line">        <span class="keyword">print</span> <span class="string">"TIMEOUT"</span></span><br><span class="line">        ssh.close()</span><br><span class="line">        ret = <span class="number">-2</span></span><br><span class="line">    <span class="keyword">return</span> ret</span><br></pre></td></tr></table></figure>
+
+        
+        <br>
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+    </div>
+</div>
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+        <li>
+            <a target="_blank" href="https://www.zhihu.com/people/li-bo-2-25">
+                            <span class="fa-stack fa-lg">
+                                 <i class="iconfont icon-zhihu"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+        
+
+        
+        <li>
+            <a target="_blank" href="https://github.com/liboo0731">
+                            <span class="fa-stack fa-lg">
+                                <i class="iconfont icon-github"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span>/</span>
+        
+        <span><a href="https://www.cnblogs.com/liboo/">H2K1R~ACE_博客园</a></span>
+        <span>/</span>
+        
+        <span><a href="https://blog.csdn.net/weixin_40108079">H2K1E~ACE_CSDN</a></span>
+        <span>/</span>
+        
+    </p>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/js/index.js"></script>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+    <script>
+        /**
+         *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+         *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+        */
+        if( '' || '')
+        var disqus_config = function () {
+            this.page.url = '';  // Replace PAGE_URL with your page's canonical URL variable
+            this.page.identifier = ''; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        };
+
+        (function() { // DON'T EDIT BELOW THIS LINE
+            var d = document, s = d.createElement('script');
+            s.src = 'https://airclouds-blog.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+    </script>
+
+</html>

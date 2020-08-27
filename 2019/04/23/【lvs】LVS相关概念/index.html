@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="李博的博客">
+    <meta name="keyword" content="striveliboo">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        【lvs】LVS相关概念 - Liboo的博客 | Liboo&#39;s Blog
+        
+    </title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/aircloud.css">
+    <link rel="stylesheet" href="/css/gitment.css">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> Internet of Everything, Everywhere. </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar">
+            <img src="/img/avatar.jpg">
+        </div>
+        <div class="name">
+            <i>H2K1E~ACE</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li>
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li>
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li>
+                <a href="/archive">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li>
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#概念了解"><span class="toc-text">概念了解</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#LVS"><span class="toc-text">LVS</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#负载调度器"><span class="toc-text">负载调度器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#三种IP负载均衡技术"><span class="toc-text">三种IP负载均衡技术</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#参数配置"><span class="toc-text">参数配置</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ARP"><span class="toc-text">ARP</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DR-模式Real-Server-配置"><span class="toc-text">DR 模式Real Server 配置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#CentOS-6（CentOS-7-安装net-tools-包也可使用）"><span class="toc-text">CentOS 6（CentOS 7 安装net-tools 包也可使用）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CentOS-7"><span class="toc-text">CentOS 7</span></a></li></ol></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input">
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+        <div class="index-about-mobile">
+            <i> Internet of Everything, Everywhere. </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        【lvs】LVS相关概念
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2019-04-23 09:50:58</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/tags/#lvs" title="lvs">lvs</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+
+    </div>
+    <div class="post-content ">
+        <h2 id="概念了解"><a href="#概念了解" class="headerlink" title="概念了解"></a>概念了解</h2><h3 id="LVS"><a href="#LVS" class="headerlink" title="LVS"></a>LVS</h3><p>LVS是Linux Virtual Server的简写，意即Linux虚拟服务器，是一个虚拟的服务器集群系统。</p>
+<p>针对可伸缩，高可用服务的需求，给予IP层和内容请求分发的负载均衡调度解决方法，并在Linux的内核中实现，将一组服务器构成一个实现可伸缩，高可用网络服务的虚拟服务器。</p>
+<h4 id="负载调度器"><a href="#负载调度器" class="headerlink" title="负载调度器"></a>负载调度器</h4><p>一组服务器通过高速的局域网或者地理分布的广域网相互相连，在他们的前端有一个负载均衡调度器（Load Balancer），负载均衡调度器能无缝的将网络请求调度到真实的服务器上，从而使得服务器集群的结构对用户是透明的，用户通过访问集群系统提供的网络服务，就像访问一台高性能，高可用的服务器。</p>
+<h4 id="三种IP负载均衡技术"><a href="#三种IP负载均衡技术" class="headerlink" title="三种IP负载均衡技术"></a>三种IP负载均衡技术</h4><p>1.VS/NAT（网络地址转换）<br>通过网络地址转换，调度器重写请求报文的目标地址，根据预设的调度算法，将请求分发给后端的真实服务器，真实服务器的响应报文通过调度器时，报文的源地址被重写，再返回到客户端，完成整个调度的过程。</p>
+<p>2.VS/TUN（IP隧道模式）<br>调度器将请求的报文通过IP隧道转发至真实服务器，而真实的服务器直接将结果返回给用户，调度器只处理请求报文，由于一般网路服务的应答大于请求，采用IP隧道模式，集群系统的最大吞吐量可以提高10倍。</p>
+<p>3.VS/DR（直接路由）<br>通过改写请求报文的MAC地址，将请求发送到真是服务器，真实服务器将响应直接返回给用户，之际额路由模式可以极大的提高集群系统的伸缩性，这种方法没有IP隧道的开销，集群中真实的服务器也没有必要必须支持IP隧道协议，只是需要调度器与真实服务器有一块网卡连在同一物理网段上。</p>
+<p><em>PS: DR和TUN模式都需要在真实服务器上对arp_ignore和arp_announce参数进行配置，主要是实现禁止响应对VIP的ARP请求。</em></p>
+<h4 id="参数配置"><a href="#参数配置" class="headerlink" title="参数配置"></a>参数配置</h4><p><strong>arp_ignore</strong></p>
+<ul>
+<li>0 - (默认值): 回应任何网络接口上对任何本地IP地址的arp查询请求 </li>
+<li>1 - 只回答目标IP地址是来访网络接口本地地址的ARP查询请求 </li>
+<li>2 -只回答目标IP地址是来访网络接口本地地址的ARP查询请求,且来访IP必须在该网络接口的子网段内 </li>
+<li>3 - 不回应该网络界面的arp请求，而只对设置的唯一和连接地址做出回应 </li>
+<li>4-7 - 保留未使用 </li>
+<li>8 -不回应所有（本地地址）的arp查询</li>
+</ul>
+<p><strong>arp_announce</strong></p>
+<ul>
+<li><p>0 - (默认) 在任意网络接口（eth0,eth1，lo）上的任何本地地址 </p>
+</li>
+<li><p>1 - 尽量避免不在该网络接口子网段的本地地址做出arp回应. 当发起ARP请求的源IP地址是被设置应该经由路由达到此网络接口的时候很有用.此时会检查来访IP是否为所有接口上的子网段内ip之一.如果改来访IP不属于各个网络接口上的子网段内,那么将采用级别2的方式来进行处理. </p>
+</li>
+<li>2 - 对查询目标使用最适当的本地地址.在此模式下将忽略这个IP数据包的源地址并尝试选择与能与该地址通信的本地地址.首要是选择所有的网络接口的子网中外出访问子网中包含该目标IP地址的本地地址. 如果没有合适的地址被发现,将选择当前的发送网络接口或其他的有可能接受到该ARP回应的网络接口来进行发送.</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">echo "1" &gt; /proc/sys/net/ipv4/conf/all/arp_ignore</span><br><span class="line">echo "1" &gt; /proc/sys/net/ipv4/conf/lo/arp_ignore</span><br><span class="line">echo "2" &gt; /proc/sys/net/ipv4/conf/lo/arp_announce</span><br><span class="line">echo "2" &gt; /proc/sys/net/ipv4/conf/all/arp_announce</span><br></pre></td></tr></table></figure>
+<h3 id="ARP"><a href="#ARP" class="headerlink" title="ARP"></a>ARP</h3><p>地址解析协议，即ARP（Address Resolution Protocol），是根据IP地址获取物理地址的一个TCP/IP协议。主机发送信息时将包含目标IP地址的ARP请求广播到网络上的所有主机，并接收返回消息，以此确定目标的物理地址；收到返回消息后将该IP地址和物理地址存入本机ARP缓存中并保留一定时间，下次请求时直接查询ARP缓存以节约资源。</p>
+<h2 id="DR-模式Real-Server-配置"><a href="#DR-模式Real-Server-配置" class="headerlink" title="DR 模式Real Server 配置"></a>DR 模式Real Server 配置</h2><h3 id="CentOS-6（CentOS-7-安装net-tools-包也可使用）"><a href="#CentOS-6（CentOS-7-安装net-tools-包也可使用）" class="headerlink" title="CentOS 6（CentOS 7 安装net-tools 包也可使用）"></a>CentOS 6（CentOS 7 安装net-tools 包也可使用）</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/sh</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> chkconfig: - 80 20</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> description: RealServer</span></span><br><span class="line"></span><br><span class="line">VIP=192.168.10.12</span><br><span class="line">/etc/rc.d/init.d/functions</span><br><span class="line">case "$1" in</span><br><span class="line">    start)</span><br><span class="line">        echo "Start LVS of RealServer"</span><br><span class="line">        ifconfig lo:0 $VIP broadcast $VIP netmask 255.255.255.255 up</span><br><span class="line">        route add -host $VIP dev lo:0</span><br><span class="line">        echo "1" &gt;/proc/sys/net/ipv4/conf/lo/arp_ignore</span><br><span class="line">        echo "2" &gt;/proc/sys/net/ipv4/conf/lo/arp_announce</span><br><span class="line">        echo "1" &gt;/proc/sys/net/ipv4/conf/all/arp_ignore</span><br><span class="line">        echo "2" &gt;/proc/sys/net/ipv4/conf/all/arp_announce</span><br><span class="line">        ;;</span><br><span class="line">    stop)</span><br><span class="line">        ifconfig lo:0 down</span><br><span class="line">        route del -host $VIP dev lo:0</span><br><span class="line">        echo "Stop LVS of RealServer"</span><br><span class="line">        echo "0" &gt;/proc/sys/net/ipv4/conf/lo/arp_ignore</span><br><span class="line">        echo "0" &gt;/proc/sys/net/ipv4/conf/lo/arp_announce</span><br><span class="line">        echo "0" &gt;/proc/sys/net/ipv4/conf/all/arp_ignore</span><br><span class="line">        echo "0" &gt;/proc/sys/net/ipv4/conf/all/arp_announce</span><br><span class="line">        ;;</span><br><span class="line">    *)</span><br><span class="line">        echo "Usage:$0&#123;start|stop&#125;"</span><br><span class="line">        exit 1</span><br><span class="line">esac</span><br></pre></td></tr></table></figure>
+<h3 id="CentOS-7"><a href="#CentOS-7" class="headerlink" title="CentOS 7"></a>CentOS 7</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/sh</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> chkconfig: - 80 20</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> description: RealServer</span></span><br><span class="line"></span><br><span class="line">VIP=192.168.10.12</span><br><span class="line">/etc/rc.d/init.d/functions</span><br><span class="line">case "$1" in</span><br><span class="line">start)</span><br><span class="line">	ip address add $VIP/32 broadcast $VIP label lo:0 dev lo</span><br><span class="line">	ip route add $VIP/32 dev lo:0</span><br><span class="line">	echo "1" &gt;/proc/sys/net/ipv4/conf/lo/arp_ignore</span><br><span class="line">	echo "2" &gt;/proc/sys/net/ipv4/conf/lo/arp_announce</span><br><span class="line">	echo "1" &gt;/proc/sys/net/ipv4/conf/all/arp_ignore</span><br><span class="line">	echo "2" &gt;/proc/sys/net/ipv4/conf/all/arp_announce</span><br><span class="line">	sysctl -p &gt;/dev/null 2&gt;&amp;1</span><br><span class="line">	echo "RealServer Start OK"</span><br><span class="line">	;;</span><br><span class="line">stop)</span><br><span class="line">	ip link set dev lo:0 down</span><br><span class="line">	ip route del $VIP/32 dev lo:0 &gt;/dev/null 2&gt;&amp;1</span><br><span class="line">	echo "0" &gt;/proc/sys/net/ipv4/conf/lo/arp_ignore</span><br><span class="line">	echo "0" &gt;/proc/sys/net/ipv4/conf/lo/arp_announce</span><br><span class="line">	echo "0" &gt;/proc/sys/net/ipv4/conf/all/arp_ignore</span><br><span class="line">	echo "0" &gt;/proc/sys/net/ipv4/conf/all/arp_announce</span><br><span class="line">	echo "RealServer Stoped"</span><br><span class="line">	;;</span><br><span class="line">*)</span><br><span class="line">	echo "Usage: $0 &#123;start|stop&#125;"</span><br><span class="line">	exit 1</span><br><span class="line">esac</span><br></pre></td></tr></table></figure>
+
+        
+        <br>
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+    </div>
+</div>
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+        <li>
+            <a target="_blank" href="https://www.zhihu.com/people/li-bo-2-25">
+                            <span class="fa-stack fa-lg">
+                                 <i class="iconfont icon-zhihu"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+        
+
+        
+        <li>
+            <a target="_blank" href="https://github.com/liboo0731">
+                            <span class="fa-stack fa-lg">
+                                <i class="iconfont icon-github"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span>/</span>
+        
+        <span><a href="https://www.cnblogs.com/liboo/">H2K1R~ACE_博客园</a></span>
+        <span>/</span>
+        
+        <span><a href="https://blog.csdn.net/weixin_40108079">H2K1E~ACE_CSDN</a></span>
+        <span>/</span>
+        
+    </p>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/js/index.js"></script>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+    <script>
+        /**
+         *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+         *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+        */
+        if( '' || '')
+        var disqus_config = function () {
+            this.page.url = '';  // Replace PAGE_URL with your page's canonical URL variable
+            this.page.identifier = ''; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        };
+
+        (function() { // DON'T EDIT BELOW THIS LINE
+            var d = document, s = d.createElement('script');
+            s.src = 'https://airclouds-blog.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+    </script>
+
+</html>

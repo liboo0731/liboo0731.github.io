@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="李博的博客">
+    <meta name="keyword" content="striveliboo">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        【centos】CentOS7-mkisofs命令 - Liboo的博客 | Liboo&#39;s Blog
+        
+    </title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/aircloud.css">
+    <link rel="stylesheet" href="/css/gitment.css">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> Internet of Everything, Everywhere. </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar">
+            <img src="/img/avatar.jpg">
+        </div>
+        <div class="name">
+            <i>H2K1E~ACE</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li>
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li>
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li>
+                <a href="/archive">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li>
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#语法"><span class="toc-text">语法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#选项"><span class="toc-text">选项</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#参数"><span class="toc-text">参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#实例"><span class="toc-text">实例</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#把NFS服务器上的目录挂载到本地-mnt-nfs-的目录："><span class="toc-text">把NFS服务器上的目录挂载到本地/mnt/nfs/的目录：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#把已挂载的文件复制到本地："><span class="toc-text">把已挂载的文件复制到本地：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#查找boot-cat文件并删除掉："><span class="toc-text">查找boot.cat文件并删除掉：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#查找TRANS-TBL文件并删除掉："><span class="toc-text">查找TRANS.TBL文件并删除掉：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#复制本地的所需文件到指定目录："><span class="toc-text">复制本地的所需文件到指定目录：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#把指定目录下的所有文件制作成ISO文件："><span class="toc-text">把指定目录下的所有文件制作成ISO文件：</span></a></li></ol></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input">
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+        <div class="index-about-mobile">
+            <i> Internet of Everything, Everywhere. </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        【centos】CentOS7-mkisofs命令
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2018-06-09 21:23:25</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/tags/#centos" title="centos">centos</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#centos7" title="centos7">centos7</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#mkisofs" title="mkisofs">mkisofs</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+
+    </div>
+    <div class="post-content ">
+        <p><strong>mkisofs命令</strong>用来将指定的目录与文件做成ISO 9660格式的映像文件，以供刻录光盘。</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><p>mkisofs(选项)(参数)</p>
+<h3 id="选项"><a href="#选项" class="headerlink" title="选项"></a>选项</h3><ul>
+<li>-a或–all：mkisofs通常不处理备份文件。使用此参数可以把备份文件加到映像文件中；</li>
+<li>-A&lt;应用程序<a href="http://man.linuxde.net/id" target="_blank" rel="noopener">id</a>&gt;或-appid&lt;应用程序ID&gt;：指定光盘的应用程序ID；</li>
+<li>-abstract&lt;摘要文件&gt;：指定摘要文件的文件名；</li>
+<li>-b&lt;开机映像文件&gt;或-eltorito-boot&lt;开机映像文件&gt;：指定在制作可开机光盘时所需的开机映像文件；</li>
+<li>-biblio&lt;ISBN文件&gt;：指定ISBN文件的文件名，ISBN文件位于光盘根目录下，记录光盘的ISBN；</li>
+<li>-c&lt;开机文件名称&gt;：制作可开机光盘时，mkisofs会将开机映像文件中的全-eltorito-catalog&lt;开机文件名称&gt;全部内容作成一个文件；</li>
+<li>-C&lt;盘区编号，盘区编号&gt;：将许多节区合成一个映像文件时，必须使用此参数；</li>
+<li>-copyright&lt;版权信息文件&gt;：指定版权信息文件的文件名；</li>
+<li>-d或-omit-period：省略文件后的句号；</li>
+<li>-D或-disable-deep-relocation：ISO 9660最多只能处理8层的目录，超过8层的部分，RRIP会自动将它们设置成ISO 9660兼容的格式。使用-D参数可关闭此功能；</li>
+<li>-f或-follow-links：忽略符号连接；</li>
+<li>-h：显示帮助；</li>
+<li>-hide&lt;目录或文件名&gt;：使指定的目录或文件在ISO 9660或Rock RidgeExtensions的系统中隐藏；</li>
+<li>-hide-joliet&lt;目录或文件名&gt;：使指定的目录或文件在Joliet系统中隐藏；</li>
+<li>-J或-joliet：使用Joliet格式的目录与文件名称；</li>
+<li>-l或-full-iso9660-filenames：使用ISO 9660 32字符长度的文件名；</li>
+<li>-L或-allow-leading-dots：允许文件名的第一个字符为句号；</li>
+<li>-log-<a href="http://man.linuxde.net/file" target="_blank" rel="noopener">file</a>&lt;记录文件&gt;：在执行过程中若有错误信息，预设会显示在屏幕上；</li>
+<li>-m&lt;目录或文件名&gt;或-exclude&lt;目录或文件名&gt;：指定的目录或文件名将不会房入映像文件中；</li>
+<li>-M&lt;映像文件&gt;或-prev-session&lt;映像文件&gt;：与指定的映像文件合并；</li>
+<li>-N或-omit-version-number：省略ISO 9660文件中的版本信息；</li>
+<li>-o&lt;映像文件&gt;或-output&lt;映像文件&gt;：指定映像文件的名称；</li>
+<li>-p&lt;数据处理人&gt;或-preparer&lt;数据处理人&gt;：记录光盘的数据处理人；</li>
+<li>-print-size：显示预估的文件系统大小；</li>
+<li>-quiet：执行时不显示任何信息；</li>
+<li>-r或-rational-rock：使用Rock Ridge Extensions，并开放全部文件的读取权限；</li>
+<li>-R或-rock：使用Rock Ridge Extensions；</li>
+<li>-sysid&lt;系统ID&gt;：指定光盘的系统ID；</li>
+<li>-T或-translation-table：建立文件名的转换表，适用于不支持Rock Ridge Extensions的系统上；</li>
+<li>-v或-verbose：执行时显示详细的信息；</li>
+<li>-V&lt;光盘ID&gt;或-volid&lt;光盘ID&gt;：指定光盘的卷册集ID；</li>
+<li>-volset-size&lt;光盘总数&gt;：指定卷册集所包含的光盘张数；</li>
+<li>-volset-seqno&lt;卷册序号&gt;：指定光盘片在卷册集中的编号；</li>
+<li>-x&lt;目录&gt;：指定的目录将不会放入映像文件中；</li>
+<li>-z：建立通透性压缩文件的SUSP记录，此记录目前只在Alpha机器上的Linux有效。</li>
+</ul>
+<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><p>路径：需要添加到映像文件中的路径。</p>
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><p>linux中用mkisofs命令把文件制作成ISO步骤：</p>
+<h4 id="把NFS服务器上的目录挂载到本地-mnt-nfs-的目录："><a href="#把NFS服务器上的目录挂载到本地-mnt-nfs-的目录：" class="headerlink" title="把NFS服务器上的目录挂载到本地/mnt/nfs/的目录："></a>把NFS服务器上的目录挂载到本地/mnt/nfs/的目录：</h4><p>mount -t nfs 10.0.2.2:/linuxos/rhel4.0_update3/ /mnt/nfs/</p>
+<h4 id="把已挂载的文件复制到本地："><a href="#把已挂载的文件复制到本地：" class="headerlink" title="把已挂载的文件复制到本地："></a>把已挂载的文件复制到本地：</h4><p>cp -a /mnt/NFS/<em> /root/De cp -a /mnt/nfs/</em> /root/Desktop/rhel4.0/&amp;sktop/rhel4.0/&amp;</p>
+<h4 id="查找boot-cat文件并删除掉："><a href="#查找boot-cat文件并删除掉：" class="headerlink" title="查找boot.cat文件并删除掉："></a>查找boot.cat文件并删除掉：</h4><p>find iso/ -name boot.cat | xargs rm</p>
+<h4 id="查找TRANS-TBL文件并删除掉："><a href="#查找TRANS-TBL文件并删除掉：" class="headerlink" title="查找TRANS.TBL文件并删除掉："></a>查找TRANS.TBL文件并删除掉：</h4><p>find iso/ -name TRANS.TBL -exec rm {} \;</p>
+<h4 id="复制本地的所需文件到指定目录："><a href="#复制本地的所需文件到指定目录：" class="headerlink" title="复制本地的所需文件到指定目录："></a>复制本地的所需文件到指定目录：</h4><p>cp /usr/share/comps/i386/.discinfo iso/</p>
+<h4 id="把指定目录下的所有文件制作成ISO文件："><a href="#把指定目录下的所有文件制作成ISO文件：" class="headerlink" title="把指定目录下的所有文件制作成ISO文件："></a>把指定目录下的所有文件制作成ISO文件：</h4><p>mkisofs -r -V “CentOS 7 x86_64” -b isolinux/isolinux.bin -c isolinux/boot.cat -cache-inodes -J -l -no-emul-boot -boot-load-size 4 -boot-info-table -o /InfoShare-3.0.0.iso ./iso/</p>
+
+        
+        <br>
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+    </div>
+</div>
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+        <li>
+            <a target="_blank" href="https://www.zhihu.com/people/li-bo-2-25">
+                            <span class="fa-stack fa-lg">
+                                 <i class="iconfont icon-zhihu"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+        
+
+        
+        <li>
+            <a target="_blank" href="https://github.com/liboo0731">
+                            <span class="fa-stack fa-lg">
+                                <i class="iconfont icon-github"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span>/</span>
+        
+        <span><a href="https://www.cnblogs.com/liboo/">H2K1R~ACE_博客园</a></span>
+        <span>/</span>
+        
+        <span><a href="https://blog.csdn.net/weixin_40108079">H2K1E~ACE_CSDN</a></span>
+        <span>/</span>
+        
+    </p>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/js/index.js"></script>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+    <script>
+        /**
+         *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+         *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+        */
+        if( '' || '')
+        var disqus_config = function () {
+            this.page.url = '';  // Replace PAGE_URL with your page's canonical URL variable
+            this.page.identifier = ''; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        };
+
+        (function() { // DON'T EDIT BELOW THIS LINE
+            var d = document, s = d.createElement('script');
+            s.src = 'https://airclouds-blog.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+    </script>
+
+</html>

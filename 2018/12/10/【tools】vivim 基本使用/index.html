@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="李博的博客">
+    <meta name="keyword" content="striveliboo">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        【tools】vi/vim基本使用方法 - Liboo的博客 | Liboo&#39;s Blog
+        
+    </title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/aircloud.css">
+    <link rel="stylesheet" href="/css/gitment.css">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> Internet of Everything, Everywhere. </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar">
+            <img src="/img/avatar.jpg">
+        </div>
+        <div class="name">
+            <i>H2K1E~ACE</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li>
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li>
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li>
+                <a href="/archive">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li>
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#vi-vim-基本使用方法"><span class="toc-text">vi/vim 基本使用方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1、vi的基本概念"><span class="toc-text">1、vi的基本概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2、vi的基本操作"><span class="toc-text">2、vi的基本操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3、命令行模式（command-mode）功能键"><span class="toc-text">3、命令行模式（command mode）功能键</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4、Last-line-mode下命令简介"><span class="toc-text">4、Last line mode下命令简介</span></a></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input">
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+        <div class="index-about-mobile">
+            <i> Internet of Everything, Everywhere. </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        【tools】vi/vim基本使用方法
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2018-12-10 21:11:12</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/tags/#tools" title="tools">tools</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#vi" title="vi">vi</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#vim" title="vim">vim</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+
+    </div>
+    <div class="post-content ">
+        <h3 id="vi-vim-基本使用方法"><a href="#vi-vim-基本使用方法" class="headerlink" title="vi/vim 基本使用方法"></a>vi/vim 基本使用方法</h3><p>本文介绍了vi (vim)的基本使用方法，但对于普通用户来说基本上够了！i/vim的区别简单点来说，它们都是多模式编辑器，不同的是vim 是vi的升级版本，它不仅兼容vi的所有指令，而且还有一些新的特性在里面。例如语法加亮，可视化操作不仅可以在终端运行，也可以运行于x window、 mac os、 windows。</p>
+<p>vi编辑器是所有Unix及Linux系统下标准的编辑器，它的强大不逊色于任何最新的文本编辑器，这里只是简单地介绍一下它的用法和一小部分指令。由于对Unix及 Linux系统的任何版本，vi编辑器是完全相同的，因此您可以在其他任何介绍vi的地方进一步了解它。Vi也是Linux中最基本的文本编辑器，学会它后，您将在Linux的世界里畅行无阻。</p>
+<p>[简单地，可以使用上下左右方向箭头和delete，backspace键来进行位置移动和删除，不管是命令模式还是插入模式]</p>
+<h3 id="1、vi的基本概念"><a href="#1、vi的基本概念" class="headerlink" title="1、vi的基本概念"></a>1、vi的基本概念</h3><p>基本上vi可以分为三种状态，分别是命令模式（command mode）、插入模式（Insert mode）和底行模式（last line mode），各模式的功能区分如下：<br>1) 命令行模式command mode）<br>控制屏幕光标的移动，字符、字或行的删除，移动复制某区段及进入Insert mode下，或者到 last line mode。<br>2) 插入模式（Insert mode）<br>只有在Insert mode下，才可以做文字输入，按「ESC」键可回到命令行模式。<br>3) 底行模式（last line mode）<br>将文件保存或退出vi，也可以设置编辑环境，如寻找字符串、列出行号……等。</p>
+<p>不过一般我们在使用时把vi简化成两个模式，就是将底行模式（last line mode）也算入命令行模式command mode）。</p>
+<h3 id="2、vi的基本操作"><a href="#2、vi的基本操作" class="headerlink" title="2、vi的基本操作"></a>2、vi的基本操作</h3><p>a) 进入vi<br>在系统提示符号输入vi及文件名称后，就进入vi全屏幕编辑画面：$ vi myfile。不过有一点要特别注意，就是您进入vi之后，是处于「命令行模式（command mode）」，您要切换到「插入模式（Insert mode）」才能够输入文字。初次使用vi的人都会想先用上下左右键移动光标，结果电脑一直哔哔叫，把自己气个半死，所以进入vi后，先不要乱动，转换到「插入模式（Insert mode）」再说吧！</p>
+<p>b) 切换至插入模式（Insert mode）编辑文件<br>在「命令行模式（command mode）」下按一下字母「i」就可以进入「插入模式（Insert mode）」，这时候你就可以开始输入文字了。</p>
+<p>c) Insert 的切换<br>您目前处于「插入模式（Insert mode）」，您就只能一直输入文字，如果您发现输错了字！想用光标键往回移动，将该字删除，就要先按一下「ESC」键转到「命令行模式（command mode）」再删除文字。</p>
+<p>d) 退出vi及保存文件<br>在「命令行模式（command mode）」下，按一下「：」冒号键进入「Last line mode」，例如：<br>: w filename （输入 「w filename」将文章以指定的文件名filename保存）<br>: wq (输入「wq」，存盘并退出vi)<br>: q! (输入q!， 不存盘强制退出vi)</p>
+<h3 id="3、命令行模式（command-mode）功能键"><a href="#3、命令行模式（command-mode）功能键" class="headerlink" title="3、命令行模式（command mode）功能键"></a>3、命令行模式（command mode）功能键</h3><p>1）. 插入模式<br>按「i」切换进入插入模式「insert mode」，按“i”进入插入模式后是从光标当前位置开始输入文件；<br>按「a」进入插入模式后，是从目前光标所在位置的下一个位置开始输入文字；<br>按「o」进入插入模式后，是插入新的一行，从行首开始输入文字。</p>
+<p>2）. 从插入模式切换为命令行模式<br>按「ESC」键。</p>
+<p>3）. 移动光标<br>vi可以直接用键盘上的光标来上下左右移动，但正规的vi是用小写英文字母「h」、「j」、「k」、「l」，分别控制光标左、下、上、右移一格。<br>按「ctrl」+「b」：屏幕往“后”移动一页。<br>按「ctrl」+「f」：屏幕往“前”移动一页。<br>按「ctrl」+「u」：屏幕往“后”移动半页。<br>按「ctrl」+「d」：屏幕往“前”移动半页。<br>按数字「0」：移到文章的开头。<br>按「G」：移动到文章的最后。<br>按「$」：移动到光标所在行的“行尾”。<br>按「^」：移动到光标所在行的“行首”<br>按「w」：光标跳到下个字的开头<br>按「e」：光标跳到下个字的字尾<br>按「b」：光标回到上个字的开头<br>按「#l」：光标移到该行的第#个位置，如：5l,56l。</p>
+<p>4）. 删除文字<br>「x」：每按一次，删除光标所在位置的“后面”一个字符。<br>「#x」：例如，「6x」表示删除光标所在位置的“后面”6个字符。<br>「X」：大写的X，每按一次，删除光标所在位置的“前面”一个字符。<br>「#X」：例如，「20X」表示删除光标所在位置的“前面”20个字符。<br>「dd」：删除光标所在行。<br>「#dd」：从光标所在行开始删除#行</p>
+<p>5）. 复制<br>「yw」：将光标所在之处到字尾的字符复制到缓冲区中。<br>「#yw」：复制#个字到缓冲区<br>「yy」：复制光标所在行到缓冲区。<br>「#yy」：例如，「6yy」表示拷贝从光标所在的该行“往下数”6行文字。<br>「p」：将缓冲区内的字符贴到光标所在位置。注意：所有与“y”有关的复制命令都必须与“p”配合才能完成复制与粘贴功能。</p>
+<p>6）. 替换<br>「r」：替换光标所在处的字符。<br>「R」：替换光标所到之处的字符，直到按下「ESC」键为止。</p>
+<p>7）. 回复上一次操作<br>「u」：如果您误执行一个命令，可以马上按下「u」，回到上一个操作。按多次“u”可以执行多次回复。</p>
+<p>8）. 更改<br>「cw」：更改光标所在处的字到字尾处<br>「c#w」：例如，「c3w」表示更改3个字</p>
+<p>9）. 跳至指定的行<br>「ctrl」+「g」列出光标所在行的行号。<br>「#G」：例如，「15G」，表示移动光标至文章的第15行行首。</p>
+<h3 id="4、Last-line-mode下命令简介"><a href="#4、Last-line-mode下命令简介" class="headerlink" title="4、Last line mode下命令简介"></a>4、Last line mode下命令简介</h3><p>　　在使用「last line mode」之前，请记住先按「ESC」键确定您已经处于「command mode」下后，再按「：」冒号即可进入「last line mode」。</p>
+<p>A) 列出行号<br>「set nu」：输入「set nu」后，会在文件中的每一行前面列出行号。</p>
+<p>B) 跳到文件中的某一行<br>「#」：「#」号表示一个数字，在冒号后输入一个数字，再按回车键就会跳到该行了，如输入数字15，再回车，就会跳到文章的第15行。</p>
+<p>C) 查找字符<br>「/关键字」：先按「/」键，再输入您想寻找的字符，如果第一次找的关键字不是您想要的，可以一直按「n」会往后寻找到您要的关键字为止。<br>「?关键字」：先按「?」键，再输入您想寻找的字符，如果第一次找的关键字不是您想要的，可以一直按「n」会往前寻找到您要的关键字为止。</p>
+<p>D) 保存文件<br>「w」：在冒号输入字母「w」就可以将文件保存起来。</p>
+<p>E) 离开vi<br>「q」：按「q」就是退出，如果无法离开vi，可以在「q」后跟一个「!」强制离开vi。<br>「qw」：一般建议离开时，搭配「w」一起使用，这样在退出的时候还可以保存文件。</p>
+
+        
+        <br>
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+    </div>
+</div>
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+        <li>
+            <a target="_blank" href="https://www.zhihu.com/people/li-bo-2-25">
+                            <span class="fa-stack fa-lg">
+                                 <i class="iconfont icon-zhihu"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+        
+
+        
+        <li>
+            <a target="_blank" href="https://github.com/liboo0731">
+                            <span class="fa-stack fa-lg">
+                                <i class="iconfont icon-github"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span>/</span>
+        
+        <span><a href="https://www.cnblogs.com/liboo/">H2K1R~ACE_博客园</a></span>
+        <span>/</span>
+        
+        <span><a href="https://blog.csdn.net/weixin_40108079">H2K1E~ACE_CSDN</a></span>
+        <span>/</span>
+        
+    </p>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/js/index.js"></script>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+    <script>
+        /**
+         *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+         *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+        */
+        if( '' || '')
+        var disqus_config = function () {
+            this.page.url = '';  // Replace PAGE_URL with your page's canonical URL variable
+            this.page.identifier = ''; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        };
+
+        (function() { // DON'T EDIT BELOW THIS LINE
+            var d = document, s = d.createElement('script');
+            s.src = 'https://airclouds-blog.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+    </script>
+
+</html>

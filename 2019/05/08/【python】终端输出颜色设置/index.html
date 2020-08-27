@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="李博的博客">
+    <meta name="keyword" content="striveliboo">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        【python】终端输出颜色设置 - Liboo的博客 | Liboo&#39;s Blog
+        
+    </title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/aircloud.css">
+    <link rel="stylesheet" href="/css/gitment.css">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> Internet of Everything, Everywhere. </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar">
+            <img src="/img/avatar.jpg">
+        </div>
+        <div class="name">
+            <i>H2K1E~ACE</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li>
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li>
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li>
+                <a href="/archive">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li>
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#termcolor模块"><span class="toc-text">termcolor模块</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#帮助文档"><span class="toc-text">帮助文档</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#示例代码"><span class="toc-text">示例代码</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#简单方法"><span class="toc-text">简单方法</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#自定义颜色显示"><span class="toc-text">自定义颜色显示</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#显示格式"><span class="toc-text">显示格式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#显示方式"><span class="toc-text">显示方式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#前景色和背景色"><span class="toc-text">前景色和背景色</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ANSI控制码的说明"><span class="toc-text">ANSI控制码的说明</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#自定义函数"><span class="toc-text">自定义函数</span></a></li></ol></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input">
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+        <div class="index-about-mobile">
+            <i> Internet of Everything, Everywhere. </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        【python】终端输出颜色设置
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2019-05-08 19:01:19</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/tags/#python" title="python">python</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+
+    </div>
+    <div class="post-content ">
+        <h3 id="termcolor模块"><a href="#termcolor模块" class="headerlink" title="termcolor模块"></a>termcolor模块</h3><h4 id="帮助文档"><a href="#帮助文档" class="headerlink" title="帮助文档"></a>帮助文档</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">FUNCTIONS</span><br><span class="line">    colored(text, color=<span class="literal">None</span>, on_color=<span class="literal">None</span>, attrs=<span class="literal">None</span>)</span><br><span class="line">    Colorize text.</span><br><span class="line">    </span><br><span class="line">    Available text colors:</span><br><span class="line">        red, green, yellow, blue, magenta, cyan, white.</span><br><span class="line">    </span><br><span class="line">    Available text highlights:</span><br><span class="line">        on_red, on_green, on_yellow, on_blue, on_magenta, on_cyan, on_white.</span><br><span class="line">    </span><br><span class="line">    Available attributes:</span><br><span class="line">        bold, dark, underline, blink, reverse, concealed.</span><br><span class="line">    </span><br><span class="line">    Example:</span><br><span class="line">        colored(<span class="string">'Hello, World!'</span>, <span class="string">'red'</span>, <span class="string">'on_grey'</span>, [<span class="string">'blue'</span>, <span class="string">'blink'</span>])</span><br><span class="line">        colored(<span class="string">'Hello, World!'</span>, <span class="string">'green'</span>)</span><br><span class="line">    </span><br><span class="line">    cprint(text, color=<span class="literal">None</span>, on_color=<span class="literal">None</span>, attrs=<span class="literal">None</span>, **kwargs)</span><br><span class="line">    Print colorize text.</span><br><span class="line">    </span><br><span class="line">    It accepts arguments of <span class="keyword">print</span> function.</span><br><span class="line"></span><br><span class="line">DATA</span><br><span class="line">    ATTRIBUTES = &#123;<span class="string">'blink'</span>: <span class="number">5</span>, <span class="string">'bold'</span>: <span class="number">1</span>, <span class="string">'concealed'</span>: <span class="number">8</span>, <span class="string">'dark'</span>: <span class="number">2</span>, <span class="string">'rever...</span></span><br><span class="line"><span class="string">    COLORS = &#123;'</span>blue<span class="string">': 34, '</span>cyan<span class="string">': 36, '</span>green<span class="string">': 32, '</span>grey<span class="string">': 30, '</span>magenta<span class="string">': ...</span></span><br><span class="line"><span class="string">    HIGHLIGHTS = &#123;'</span>on_blue<span class="string">': 44, '</span>on_cyan<span class="string">': 46, '</span>on_green<span class="string">': 42, '</span>on_grey<span class="string">':...</span></span><br><span class="line"><span class="string">    RESET = '</span>\x1b[<span class="number">0</span>m<span class="string">'</span></span><br><span class="line"><span class="string">    VERSION = (1, 1, 0)</span></span><br><span class="line"><span class="string">    __ALL__ = ['</span>colored<span class="string">', '</span>cprint<span class="string">']</span></span><br><span class="line"><span class="string">    print_function = _Feature((2, 6, 0, '</span>alpha<span class="string">', 2), (3, 0, 0, '</span>alpha<span class="string">', 0)...</span></span><br></pre></td></tr></table></figure>
+<h4 id="示例代码"><a href="#示例代码" class="headerlink" title="示例代码"></a>示例代码</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">from</span> termcolor <span class="keyword">import</span> colored, cprint</span><br><span class="line"> </span><br><span class="line"><span class="comment"># 红色背景字符不发光</span></span><br><span class="line">text = colored(<span class="string">'Hello, World!'</span>, <span class="string">'red'</span>, attrs=[<span class="string">'reverse'</span>, <span class="string">'blink'</span>])</span><br><span class="line">print(text)</span><br><span class="line"> </span><br><span class="line"><span class="comment"># 红色背景上显示绿色字符</span></span><br><span class="line">cprint(<span class="string">'Hello, World!'</span>, <span class="string">'green'</span>, <span class="string">'on_red'</span>)</span><br><span class="line"> </span><br><span class="line"><span class="comment"># 青蓝色背景上显示绿色字符</span></span><br><span class="line">print_red_on_cyan = <span class="keyword">lambda</span> x: cprint(x, <span class="string">'red'</span>, <span class="string">'on_cyan'</span>)</span><br><span class="line">print_red_on_cyan(<span class="string">'Hello, World!'</span>)</span><br><span class="line">print_red_on_cyan(<span class="string">'Hello, Universe!'</span>)</span><br><span class="line"> </span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">10</span>):</span><br><span class="line">    cprint(i, <span class="string">'magenta'</span>, end=<span class="string">' '</span>)</span><br><span class="line"> </span><br><span class="line"><span class="comment"># 红色字符加粗</span></span><br><span class="line">cprint(<span class="string">"Attention!"</span>, <span class="string">'red'</span>, attrs=[<span class="string">'bold'</span>], file=sys.stderr)</span><br></pre></td></tr></table></figure>
+<h4 id="简单方法"><a href="#简单方法" class="headerlink" title="简单方法"></a>简单方法</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> termcolor <span class="keyword">import</span> colored, cprint</span><br><span class="line"></span><br><span class="line"><span class="comment">#灰</span></span><br><span class="line">print_grey = <span class="keyword">lambda</span> x: cprint(x, <span class="string">'grey'</span>)</span><br><span class="line">print_grey(<span class="string">'Hello, World!'</span>)</span><br><span class="line"><span class="comment">#红</span></span><br><span class="line">print_red = <span class="keyword">lambda</span> x: cprint(x, <span class="string">'red'</span>)</span><br><span class="line">print_red(<span class="string">'Hello, World!'</span>)</span><br><span class="line"><span class="comment">#绿</span></span><br><span class="line">print_green = <span class="keyword">lambda</span> x: cprint(x, <span class="string">'green'</span>)</span><br><span class="line">print_green(<span class="string">'Hello, World!'</span>)</span><br><span class="line"><span class="comment">#黄</span></span><br><span class="line">print_yellow = <span class="keyword">lambda</span> x: cprint(x, <span class="string">'yellow'</span>)</span><br><span class="line">print_yellow(<span class="string">'Hello, World!'</span>)</span><br><span class="line"><span class="comment">#蓝</span></span><br><span class="line">print_blue = <span class="keyword">lambda</span> x: cprint(x, <span class="string">'blue'</span>)</span><br><span class="line">print_blue(<span class="string">'Hello, World!'</span>)</span><br><span class="line"><span class="comment">#紫</span></span><br><span class="line">print_magenta = <span class="keyword">lambda</span> x: cprint(x, <span class="string">'magenta'</span>)</span><br><span class="line">print_magenta(<span class="string">'Hello, World!'</span>)</span><br><span class="line"><span class="comment">#青蓝</span></span><br><span class="line">print_cyan = <span class="keyword">lambda</span> x: cprint(x, <span class="string">'cyan'</span>)</span><br><span class="line">print_cyan(<span class="string">'Hello, World!'</span>)</span><br><span class="line"><span class="comment">#白</span></span><br><span class="line">print_white = <span class="keyword">lambda</span> x: cprint(x, <span class="string">'white'</span>)</span><br><span class="line">print_white(<span class="string">'Hello, World!'</span>)</span><br></pre></td></tr></table></figure>
+<p><em>参考：</em></p>
+<p><em><a href="https://www.cnblogs.com/everfight/p/python_termcolor.html" target="_blank" rel="noopener">python库termcolor用法</a></em></p>
+<p><em><a href="https://pypi.org/project/termcolor/" target="_blank" rel="noopener">termcolor 1.1.0</a></em></p>
+<h3 id="自定义颜色显示"><a href="#自定义颜色显示" class="headerlink" title="自定义颜色显示"></a>自定义颜色显示</h3><h4 id="显示格式"><a href="#显示格式" class="headerlink" title="显示格式"></a>显示格式</h4><p>\033[显示方式;前景色;背景色m</p>
+<h4 id="显示方式"><a href="#显示方式" class="headerlink" title="显示方式"></a>显示方式</h4><table>
+<thead>
+<tr>
+<th>显示方式</th>
+<th>意义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>终端默认设置</td>
+</tr>
+<tr>
+<td>1</td>
+<td>高亮显示</td>
+</tr>
+<tr>
+<td>4</td>
+<td>使用下划线</td>
+</tr>
+<tr>
+<td>5</td>
+<td>闪烁</td>
+</tr>
+<tr>
+<td>7</td>
+<td>反白显示</td>
+</tr>
+<tr>
+<td>8</td>
+<td>不可见</td>
+</tr>
+</tbody>
+</table>
+<h4 id="前景色和背景色"><a href="#前景色和背景色" class="headerlink" title="前景色和背景色"></a>前景色和背景色</h4><table>
+<thead>
+<tr>
+<th style="text-align:center">前景色</th>
+<th style="text-align:center">背景色</th>
+<th style="text-align:center">显示颜色</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">30</td>
+<td style="text-align:center">40</td>
+<td style="text-align:center">黑色</td>
+</tr>
+<tr>
+<td style="text-align:center">31</td>
+<td style="text-align:center">41</td>
+<td style="text-align:center">红色</td>
+</tr>
+<tr>
+<td style="text-align:center">32</td>
+<td style="text-align:center">42</td>
+<td style="text-align:center">绿色</td>
+</tr>
+<tr>
+<td style="text-align:center">33</td>
+<td style="text-align:center">43</td>
+<td style="text-align:center">黃色</td>
+</tr>
+<tr>
+<td style="text-align:center">34</td>
+<td style="text-align:center">44</td>
+<td style="text-align:center">蓝色</td>
+</tr>
+<tr>
+<td style="text-align:center">35</td>
+<td style="text-align:center">45</td>
+<td style="text-align:center">紫红色</td>
+</tr>
+<tr>
+<td style="text-align:center">36</td>
+<td style="text-align:center">46</td>
+<td style="text-align:center">青蓝色</td>
+</tr>
+<tr>
+<td style="text-align:center">37</td>
+<td style="text-align:center">47</td>
+<td style="text-align:center">白色</td>
+</tr>
+</tbody>
+</table>
+<h4 id="ANSI控制码的说明"><a href="#ANSI控制码的说明" class="headerlink" title="ANSI控制码的说明"></a>ANSI控制码的说明</h4><table>
+<thead>
+<tr>
+<th style="text-align:center">ANSI控制码</th>
+<th style="text-align:center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">\33[0m</td>
+<td style="text-align:center">关闭所有属性</td>
+</tr>
+<tr>
+<td style="text-align:center">\33[1m</td>
+<td style="text-align:center">设置高亮度</td>
+</tr>
+<tr>
+<td style="text-align:center">\33[4m</td>
+<td style="text-align:center">下划线</td>
+</tr>
+<tr>
+<td style="text-align:center">\33[5m</td>
+<td style="text-align:center">闪烁</td>
+</tr>
+<tr>
+<td style="text-align:center">\33[7m</td>
+<td style="text-align:center">反显</td>
+</tr>
+<tr>
+<td style="text-align:center">\33[8m</td>
+<td style="text-align:center">消隐</td>
+</tr>
+<tr>
+<td style="text-align:center">\33[30m – \33[37m</td>
+<td style="text-align:center">设置前景色</td>
+</tr>
+<tr>
+<td style="text-align:center">\33[40m – \33[47m</td>
+<td style="text-align:center">设置背景色</td>
+</tr>
+<tr>
+<td style="text-align:center">\33[nA</td>
+<td style="text-align:center">光标上移n行</td>
+</tr>
+<tr>
+<td style="text-align:center">\33[nB</td>
+<td style="text-align:center">光标下移n行</td>
+</tr>
+<tr>
+<td style="text-align:center">\33[nC</td>
+<td style="text-align:center">光标右移n行</td>
+</tr>
+<tr>
+<td style="text-align:center">\33[nD</td>
+<td style="text-align:center">光标左移n行</td>
+</tr>
+<tr>
+<td style="text-align:center">\33[y;xH</td>
+<td style="text-align:center">设置光标位置</td>
+</tr>
+<tr>
+<td style="text-align:center">\33[2J</td>
+<td style="text-align:center">清屏</td>
+</tr>
+<tr>
+<td style="text-align:center">\33[K</td>
+<td style="text-align:center">清除从光标到行尾的内容</td>
+</tr>
+<tr>
+<td style="text-align:center">\33[s</td>
+<td style="text-align:center">保存光标位置</td>
+</tr>
+<tr>
+<td style="text-align:center">\33[u</td>
+<td style="text-align:center">恢复光标位置</td>
+</tr>
+<tr>
+<td style="text-align:center">\33[?25l</td>
+<td style="text-align:center">隐藏光标</td>
+</tr>
+<tr>
+<td style="text-align:center">\33[?25h</td>
+<td style="text-align:center">显示光标</td>
+</tr>
+</tbody>
+</table>
+<h4 id="自定义函数"><a href="#自定义函数" class="headerlink" title="自定义函数"></a>自定义函数</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">text_colors</span><span class="params">(text, fcolor=None, bcolor=None, style=None)</span>:</span></span><br><span class="line">    <span class="string">'''</span></span><br><span class="line"><span class="string">    自定义字体样式及颜色</span></span><br><span class="line"><span class="string">    '''</span></span><br><span class="line">    <span class="comment"># 字体颜色</span></span><br><span class="line">    fg=&#123;</span><br><span class="line">       <span class="string">'black'</span>: <span class="string">'\033[30m'</span>,     <span class="comment">#字体黑</span></span><br><span class="line">       <span class="string">'red'</span>: <span class="string">'\033[31m'</span>,       <span class="comment">#字体红</span></span><br><span class="line">       <span class="string">'green'</span>: <span class="string">'\033[32m'</span>,     <span class="comment">#字体绿</span></span><br><span class="line">       <span class="string">'yellow'</span>: <span class="string">'\033[33m'</span>,    <span class="comment">#字体黄</span></span><br><span class="line">       <span class="string">'blue'</span>: <span class="string">'\033[34m'</span>,      <span class="comment">#字体蓝</span></span><br><span class="line">       <span class="string">'magenta'</span>: <span class="string">'\033[35m'</span>,   <span class="comment">#字体紫</span></span><br><span class="line">       <span class="string">'cyan'</span>: <span class="string">'\033[36m'</span>,      <span class="comment">#字体青</span></span><br><span class="line">       <span class="string">'white'</span>:<span class="string">'\033[37m'</span>,      <span class="comment">#字体白</span></span><br><span class="line">        <span class="string">'end'</span>:<span class="string">'\033[0m'</span>         <span class="comment">#默认色</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment"># 背景颜色</span></span><br><span class="line">    bg=&#123;</span><br><span class="line">       <span class="string">'black'</span>: <span class="string">'\033[40m'</span>,     <span class="comment">#背景黑</span></span><br><span class="line">       <span class="string">'red'</span>: <span class="string">'\033[41m'</span>,       <span class="comment">#背景红</span></span><br><span class="line">       <span class="string">'green'</span>: <span class="string">'\033[42m'</span>,     <span class="comment">#背景绿</span></span><br><span class="line">       <span class="string">'yellow'</span>: <span class="string">'\033[43m'</span>,    <span class="comment">#背景黄</span></span><br><span class="line">       <span class="string">'blue'</span>: <span class="string">'\033[44m'</span>,      <span class="comment">#背景蓝</span></span><br><span class="line">       <span class="string">'magenta'</span>: <span class="string">'\033[45m'</span>,   <span class="comment">#背景紫</span></span><br><span class="line">       <span class="string">'cyan'</span>: <span class="string">'\033[46m'</span>,      <span class="comment">#背景青</span></span><br><span class="line">       <span class="string">'white'</span>:<span class="string">'\033[47m'</span>,      <span class="comment">#背景白</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment"># 内容样式</span></span><br><span class="line">    st=&#123;</span><br><span class="line">        <span class="string">'bold'</span>: <span class="string">'\033[1m'</span>,      <span class="comment">#高亮</span></span><br><span class="line">        <span class="string">'url'</span>: <span class="string">'\033[4m'</span>,       <span class="comment">#下划线</span></span><br><span class="line">        <span class="string">'blink'</span>: <span class="string">'\033[5m'</span>,     <span class="comment">#闪烁</span></span><br><span class="line">        <span class="string">'seleted'</span>: <span class="string">'\033[7m'</span>,   <span class="comment">#反显</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> fcolor <span class="keyword">in</span> fg:</span><br><span class="line">        text = fg[fcolor] + text + fg[<span class="string">'end'</span>]</span><br><span class="line">    <span class="keyword">if</span> bcolor <span class="keyword">in</span> bg:</span><br><span class="line">        text = bg[bcolor] + text + fg[<span class="string">'end'</span>]</span><br><span class="line">    <span class="keyword">if</span> style <span class="keyword">in</span> st:</span><br><span class="line">        text = st[style] + text + fg[<span class="string">'end'</span>]</span><br><span class="line">    <span class="keyword">return</span> text</span><br><span class="line"></span><br><span class="line"><span class="comment">#使用方法：</span></span><br><span class="line">print(text_colors(<span class="string">'文本内容'</span>,<span class="string">'字体颜色'</span>,<span class="string">'背景颜色'</span>,<span class="string">'字体样式'</span>))</span><br></pre></td></tr></table></figure>
+<p><em>参考：</em></p>
+<p><em><a href="http://www.cnblogs.com/zhanmeiliang/p/5948947.html" target="_blank" rel="noopener">python终端颜色设置</a></em></p>
+<p><em><a href="https://blog.csdn.net/qq_33282586/article/details/80637242" target="_blank" rel="noopener">Python控制台输出颜色</a></em></p>
+
+        
+        <br>
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+    </div>
+</div>
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+        <li>
+            <a target="_blank" href="https://www.zhihu.com/people/li-bo-2-25">
+                            <span class="fa-stack fa-lg">
+                                 <i class="iconfont icon-zhihu"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+        
+
+        
+        <li>
+            <a target="_blank" href="https://github.com/liboo0731">
+                            <span class="fa-stack fa-lg">
+                                <i class="iconfont icon-github"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span>/</span>
+        
+        <span><a href="https://www.cnblogs.com/liboo/">H2K1R~ACE_博客园</a></span>
+        <span>/</span>
+        
+        <span><a href="https://blog.csdn.net/weixin_40108079">H2K1E~ACE_CSDN</a></span>
+        <span>/</span>
+        
+    </p>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/js/index.js"></script>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+    <script>
+        /**
+         *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+         *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+        */
+        if( '' || '')
+        var disqus_config = function () {
+            this.page.url = '';  // Replace PAGE_URL with your page's canonical URL variable
+            this.page.identifier = ''; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        };
+
+        (function() { // DON'T EDIT BELOW THIS LINE
+            var d = document, s = d.createElement('script');
+            s.src = 'https://airclouds-blog.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+    </script>
+
+</html>

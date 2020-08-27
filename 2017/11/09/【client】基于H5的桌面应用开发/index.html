@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="李博的博客">
+    <meta name="keyword" content="striveliboo">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        【client】基于H5的桌面应用开发 - Liboo的博客 | Liboo&#39;s Blog
+        
+    </title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/aircloud.css">
+    <link rel="stylesheet" href="/css/gitment.css">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> Internet of Everything, Everywhere. </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar">
+            <img src="/img/avatar.jpg">
+        </div>
+        <div class="name">
+            <i>H2K1E~ACE</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li>
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li>
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li>
+                <a href="/archive">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li>
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-Tide-SDK"><span class="toc-text">1. Tide SDK</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-htmlPy"><span class="toc-text">2. htmlPy</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-AlloyDesktop"><span class="toc-text">3. AlloyDesktop</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-Pydown"><span class="toc-text">4. Pydown</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-XUL"><span class="toc-text">5. XUL</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-OneRing"><span class="toc-text">6. OneRing</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-Twisted-Nevow"><span class="toc-text">7.Twisted + Nevow</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-他山界面开发"><span class="toc-text">8. 他山界面开发</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-cefpython"><span class="toc-text">9. cefpython</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10-electron"><span class="toc-text">10. electron</span></a></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input">
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+        <div class="index-about-mobile">
+            <i> Internet of Everything, Everywhere. </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        【client】基于H5的桌面应用开发
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2017-11-09 21:53:20</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/tags/#client" title="client">client</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+
+    </div>
+    <div class="post-content ">
+        <h3 id="1-Tide-SDK"><a href="#1-Tide-SDK" class="headerlink" title="1. Tide SDK"></a>1. Tide SDK</h3><p>Tide SDK 是一个让你使用你的 Web 开发技能来创建漂亮而且独特桌面应用的开发工具包。支持跨平台开发。</p>
+<p>TideSDK 当前支持的编程语言包括：</p>
+<p>C/C++</p>
+<p>Python</p>
+<p>Ruby</p>
+<p>PHP</p>
+<p>JavaScript</p>
+<p>接下来将支持：</p>
+<p>Lua</p>
+<p>Falcon</p>
+<p>C# (maybe through Mono)</p>
+<p>Java</p>
+<p><a href="http://tidesdk.multipart.net/" target="_blank" rel="noopener">http://tidesdk.multipart.net/</a></p>
+<h3 id="2-htmlPy"><a href="#2-htmlPy" class="headerlink" title="2. htmlPy"></a>2. htmlPy</h3><p>htmlPy 是对 PySide 的 QtWebKit 库的 Python 封装。</p>
+<p>可以用 HTML5 和 CSS3 来开发漂亮的图形界面应用程序。</p>
+<p>基于 Qt 构建，具备高度可定制以及跨平台支持。</p>
+<p>兼容 Python2 和 Python3.可用于任何 Python 库和环境，如 django, flask, scipy, virtualenv 等。</p>
+<p>也可以使用前端框架，如 bootstrap, jQuery, jQuery UI 等。</p>
+<p><a href="http://amol-mandhane.github.io/htmlPy/" target="_blank" rel="noopener">http://amol-mandhane.github.io/htmlPy/</a></p>
+<h3 id="3-AlloyDesktop"><a href="#3-AlloyDesktop" class="headerlink" title="3. AlloyDesktop"></a>3. AlloyDesktop</h3><p>AlloyDesktop？这是一个什么东西呢？这是一个能将网页像软件一样运行在桌面上的app开发引擎。</p>
+<p>该引擎实现了对网页的透明渲染，使网页不再局限于浏览器的框框。</p>
+<p><a href="http://tencentopen.github.io/proj/AlloyDesktop/index.html" target="_blank" rel="noopener">http://tencentopen.github.io/proj/AlloyDesktop/index.html</a></p>
+<h3 id="4-Pydown"><a href="#4-Pydown" class="headerlink" title="4. Pydown"></a>4. Pydown</h3><p>pydown is another “Presentation System in a single HTML page” written by python inspired by keydown.</p>
+<p>Like keydown it uses the deck.js and its extentions for the presentation.</p>
+<p><a href="https://github.com/isnowfy/pydown" target="_blank" rel="noopener">https://github.com/isnowfy/pydown</a></p>
+<h3 id="5-XUL"><a href="#5-XUL" class="headerlink" title="5. XUL"></a>5. XUL</h3><p>XUL 是一个Mozilla使用XML来描述用户界面的一种技术，使用XUL你可以快速的创建出跨平台，基于因特网的应用程序。</p>
+<p><a href="https://developer.mozilla.org/zh-CN/docs/Mozilla/Tech/XUL" target="_blank" rel="noopener">https://developer.mozilla.org/zh-CN/docs/Mozilla/Tech/XUL</a></p>
+<p>XUL + XPCOM + PyXPCOM + Gecko + XULRunner</p>
+<h3 id="6-OneRing"><a href="#6-OneRing" class="headerlink" title="6. OneRing"></a>6. OneRing</h3><p>OneRing 是一个跨平台的桌面应用框架。和Adobe AIR类似，它支持用html/js/css制作用户界面，与之不同的是，它的应用为本地程序，可以直接访问操作系统的数据。</p>
+<p>授权协议： LGPL</p>
+<p>开发语言： Python</p>
+<p>操作系统： 跨平台</p>
+<h3 id="7-Twisted-Nevow"><a href="#7-Twisted-Nevow" class="headerlink" title="7.Twisted + Nevow"></a>7.Twisted + Nevow</h3><p>Twisted + Nevow  在python web开发上具有一定的优势，Nevow是一种比较新的CGI框架，而最近又有nufox(nevow+xul=nufox)出现，它是基于Nevow的技术</p>
+<h3 id="8-他山界面开发"><a href="#8-他山界面开发" class="headerlink" title="8. 他山界面开发"></a>8. 他山界面开发</h3><h3 id="9-cefpython"><a href="#9-cefpython" class="headerlink" title="9. cefpython"></a>9. cefpython</h3><h3 id="10-electron"><a href="#10-electron" class="headerlink" title="10. electron"></a>10. electron</h3>
+        
+        <br>
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+    </div>
+</div>
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+        <li>
+            <a target="_blank" href="https://www.zhihu.com/people/li-bo-2-25">
+                            <span class="fa-stack fa-lg">
+                                 <i class="iconfont icon-zhihu"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+        
+
+        
+        <li>
+            <a target="_blank" href="https://github.com/liboo0731">
+                            <span class="fa-stack fa-lg">
+                                <i class="iconfont icon-github"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span>/</span>
+        
+        <span><a href="https://www.cnblogs.com/liboo/">H2K1R~ACE_博客园</a></span>
+        <span>/</span>
+        
+        <span><a href="https://blog.csdn.net/weixin_40108079">H2K1E~ACE_CSDN</a></span>
+        <span>/</span>
+        
+    </p>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/js/index.js"></script>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+    <script>
+        /**
+         *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+         *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+        */
+        if( '' || '')
+        var disqus_config = function () {
+            this.page.url = '';  // Replace PAGE_URL with your page's canonical URL variable
+            this.page.identifier = ''; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        };
+
+        (function() { // DON'T EDIT BELOW THIS LINE
+            var d = document, s = d.createElement('script');
+            s.src = 'https://airclouds-blog.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+    </script>
+
+</html>

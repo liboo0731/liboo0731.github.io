@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="李博的博客">
+    <meta name="keyword" content="striveliboo">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        【web】Array &amp; Json 处理 - Liboo的博客 | Liboo&#39;s Blog
+        
+    </title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/aircloud.css">
+    <link rel="stylesheet" href="/css/gitment.css">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> Internet of Everything, Everywhere. </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar">
+            <img src="/img/avatar.jpg">
+        </div>
+        <div class="name">
+            <i>H2K1E~ACE</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li>
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li>
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li>
+                <a href="/archive">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li>
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#JavaScript-数组操作"><span class="toc-text">JavaScript 数组操作</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-创建"><span class="toc-text">1. 创建</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-访问"><span class="toc-text">2. 访问</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-添加"><span class="toc-text">3. 添加</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4-删除"><span class="toc-text">4. 删除</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#5-截取"><span class="toc-text">5. 截取</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#6-合并"><span class="toc-text">6. 合并</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#7-拷贝"><span class="toc-text">7. 拷贝</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#8-排序"><span class="toc-text">8. 排序</span></a></li></ol></li></ol><li class="toc-item toc-level-3"><a class="toc-link" href="#jQuery-数组操作"><span class="toc-text">jQuery 数组操作</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#each"><span class="toc-text">$.each()</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#selector-each"><span class="toc-text">$(selector).each()</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#map"><span class="toc-text">$.map()</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#selector-map"><span class="toc-text">$(selector).map()</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#inArray"><span class="toc-text">$.inArray()</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#merge"><span class="toc-text">$.merge()</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#grep"><span class="toc-text">$.grep()</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#unique"><span class="toc-text">$.unique()</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#makeArray"><span class="toc-text">$.makeArray()</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#selector-toArray"><span class="toc-text">$(selector).toArray()</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JSON-处理"><span class="toc-text">JSON 处理</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-返回JSON数组-长度"><span class="toc-text">1. 返回JSON数组 长度</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-JSON-数组去重"><span class="toc-text">2. JSON 数组去重</span></a></li></ol></li>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input">
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+        <div class="index-about-mobile">
+            <i> Internet of Everything, Everywhere. </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        【web】Array & Json 处理
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2018-09-06 19:11:29</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/tags/#web" title="web">web</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#javascript" title="javascript">javascript</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#jquery" title="jquery">jquery</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#json" title="json">json</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+
+    </div>
+    <div class="post-content ">
+        <h3 id="JavaScript-数组操作"><a href="#JavaScript-数组操作" class="headerlink" title="JavaScript 数组操作"></a>JavaScript 数组操作</h3><h5 id="1-创建"><a href="#1-创建" class="headerlink" title="1. 创建"></a>1. 创建</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> arrayObj = <span class="keyword">new</span> <span class="built_in">Array</span>();　<span class="comment">//创建一个数组</span></span><br><span class="line"><span class="keyword">var</span> arrayObj = <span class="keyword">new</span> <span class="built_in">Array</span>([size]);　<span class="comment">//创建一个数组并指定长度，注意不是上限，是长度</span></span><br><span class="line"><span class="keyword">var</span> arrayObj = <span class="keyword">new</span> <span class="built_in">Array</span>([element0[, element1[, ...[, elementN]]]]);　<span class="comment">//创建一个数组并赋值</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//要说明的是，虽然第二种方法创建数组指定了长度，但实际上所有情况下数组都是变长的，也就是说即使指定了长度为5，仍然可以将元素存储在规定长度以外的，注意：这时长度会随之改变</span></span><br></pre></td></tr></table></figure>
+<h5 id="2-访问"><a href="#2-访问" class="headerlink" title="2. 访问"></a>2. 访问</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> testGetArrValue=arrayObj[<span class="number">1</span>]; <span class="comment">//获取数组的元素值</span></span><br><span class="line">arrayObj[<span class="number">1</span>]= <span class="string">"这是新值"</span>; <span class="comment">//给数组元素赋予新的值</span></span><br></pre></td></tr></table></figure>
+<h5 id="3-添加"><a href="#3-添加" class="headerlink" title="3. 添加"></a>3. 添加</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">arrayObj.push([item1 [item2 [. . . [itemN ]]]]);<span class="comment">// 将一个或多个新元素添加到数组结尾，并返回数组新长度</span></span><br><span class="line">arrayObj.unshift([item1 [item2 [. . . [itemN ]]]]);<span class="comment">// 将一个或多个新元素添加到数组开始，数组中的元素自动后移，返回数组新长度</span></span><br><span class="line">arrayObj.splice(insertPos,<span class="number">0</span>,[item1[, item2[, . . . [,itemN]]]]);<span class="comment">//将一个或多个新元素插入到数组的指定位置，插入位置的元素自动后移，返回""</span></span><br></pre></td></tr></table></figure>
+<h5 id="4-删除"><a href="#4-删除" class="headerlink" title="4. 删除"></a>4. 删除</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">arrayObj.pop(); <span class="comment">//移除最后一个元素并返回该元素值</span></span><br><span class="line">arrayObj.shift(); <span class="comment">//移除最前一个元素并返回该元素值，数组中元素自动前移</span></span><br><span class="line">arrayObj.splice(deletePos,deleteCount); <span class="comment">//删除从指定位置deletePos开始的指定数量deleteCount的元素，数组形式返回所移除的元素</span></span><br></pre></td></tr></table></figure>
+<h5 id="5-截取"><a href="#5-截取" class="headerlink" title="5. 截取"></a>5. 截取</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">arrayObj.slice(start, [end]); <span class="comment">//以数组的形式返回数组的一部分，注意不包括 end 对应的元素，如果省略 end 将复制 start 之后的所有元素</span></span><br></pre></td></tr></table></figure>
+<h5 id="6-合并"><a href="#6-合并" class="headerlink" title="6. 合并"></a>6. 合并</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">arrayObj.concat([item1[, item2[, . . . [,itemN]]]]); <span class="comment">//将多个数组（也可以是字符串，或者是数组和字符串的混合）连接为一个数组，返回连接好的新的数组</span></span><br></pre></td></tr></table></figure>
+<h5 id="7-拷贝"><a href="#7-拷贝" class="headerlink" title="7. 拷贝"></a>7. 拷贝</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">arrayObj.slice(<span class="number">0</span>); <span class="comment">//返回数组的拷贝数组，注意是一个新的数组，不是指向</span></span><br><span class="line">arrayObj.concat(); <span class="comment">//返回数组的拷贝数组，注意是一个新的数组，不是指向</span></span><br></pre></td></tr></table></figure>
+<h5 id="8-排序"><a href="#8-排序" class="headerlink" title="8. 排序"></a>8. 排序</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">arrayObj.reverse(); <span class="comment">//反转元素（最前的排到最后、最后的排到最前），返回数组地址</span></span><br><span class="line">arrayObj.sort(); <span class="comment">//对数组元素排序，返回数组地址</span></span><br></pre></td></tr></table></figure>
+<ol start="9">
+<li>字符串化</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">arrayObj.join(separator); <span class="comment">//返回字符串，这个字符串将数组的每一个元素值连接在一起，中间用 separator 隔开</span></span><br></pre></td></tr></table></figure>
+<h3 id="jQuery-数组操作"><a href="#jQuery-数组操作" class="headerlink" title="jQuery 数组操作"></a>jQuery 数组操作</h3><h5 id="each"><a href="#each" class="headerlink" title="$.each()"></a>$.each()</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//$.each(array/object,function(index/key,value)&#123;&#125;)</span></span><br><span class="line"><span class="comment">//退出 each 循环可使回调函数返回 false, 其它返回值将被忽略</span></span><br><span class="line"><span class="comment">//The method returns its first argument, the object that was iterated.</span></span><br><span class="line">$.each([ <span class="number">52</span>, <span class="number">97</span> ], <span class="function"><span class="keyword">function</span>(<span class="params"> index, value </span>) </span>&#123;</span><br><span class="line">  alert( index + <span class="string">": "</span> + value );</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">//This produces two messages:</span></span><br><span class="line"><span class="comment">// 0: 52 </span></span><br><span class="line"><span class="comment">// 1: 97</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//If an object is used as the collection, the callback is passed a key-value pair each time:</span></span><br><span class="line"><span class="keyword">var</span> obj = &#123;</span><br><span class="line">  <span class="string">"flammable"</span>: <span class="string">"inflammable"</span>,</span><br><span class="line">  <span class="string">"duh"</span>: <span class="string">"no duh"</span></span><br><span class="line">&#125;;</span><br><span class="line">$.each( obj, <span class="function"><span class="keyword">function</span>(<span class="params"> key, value </span>) </span>&#123;</span><br><span class="line">  alert( key + <span class="string">": "</span> + value );</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">//Once again, this produces two messages:</span></span><br><span class="line"><span class="comment">// flammable: inflammable </span></span><br><span class="line"><span class="comment">// duh: no duh</span></span><br></pre></td></tr></table></figure>
+<h5 id="selector-each"><a href="#selector-each" class="headerlink" title="$(selector).each()"></a>$(selector).each()</h5><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- Suppose you have a simple unordered list on the page: --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span>foo<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span>bar<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//$(selector).each(function(index,element)&#123;&#125;) </span></span><br><span class="line"><span class="comment">//You can select the list items and iterate across them:</span></span><br><span class="line">$( <span class="string">"li"</span> ).each(<span class="function"><span class="keyword">function</span>(<span class="params"> index </span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log( index + <span class="string">": "</span> + $( <span class="keyword">this</span> ).text() );</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">//A message is thus logged for each item in the list:</span></span><br><span class="line"><span class="comment">// 0: foo </span></span><br><span class="line"><span class="comment">// 1: bar</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//You can stop the loop from within the callback function by returning false.</span></span><br></pre></td></tr></table></figure>
+<h5 id="map"><a href="#map" class="headerlink" title="$.map()"></a>$.map()</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//$.map(array/object,function(value,index/key)&#123;return;&#125;)</span></span><br><span class="line"><span class="comment">//更新数组元素值,或根据原值扩展一个新的副本元素</span></span><br><span class="line"><span class="comment">//Map the original array to a new one and add 4 to each value.</span></span><br><span class="line">$.map( [ <span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span> ], <span class="function"><span class="keyword">function</span>(<span class="params"> n </span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> n + <span class="number">4</span>;</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">//Result: [4, 5, 6]</span></span><br></pre></td></tr></table></figure>
+<h5 id="selector-map"><a href="#selector-map" class="headerlink" title="$(selector).map()"></a>$(selector).map()</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//$(selector).map(function(index,domElement)&#123;return;&#125;)</span></span><br><span class="line"><span class="comment">//The .map() method is particularly useful for getting or setting the value of a collection of elements. Consider a form with a set of checkboxes in it:</span></span><br><span class="line">&lt;form method=<span class="string">"post"</span> action=<span class="string">""</span>&gt;</span><br><span class="line">  &lt;fieldset&gt;</span><br><span class="line">    &lt;div&gt;</span><br><span class="line">      &lt;label <span class="keyword">for</span>=<span class="string">"two"</span>&gt;<span class="number">2</span>&lt;<span class="regexp">/label&gt;</span></span><br><span class="line"><span class="regexp">      &lt;input type="checkbox" value="2" id="two" name="number[]"&gt;</span></span><br><span class="line"><span class="regexp">    &lt;/</span>div&gt;</span><br><span class="line">    &lt;div&gt;</span><br><span class="line">      &lt;label <span class="keyword">for</span>=<span class="string">"four"</span>&gt;<span class="number">4</span>&lt;<span class="regexp">/label&gt;</span></span><br><span class="line"><span class="regexp">      &lt;input type="checkbox" value="4" id="four" name="number[]"&gt;</span></span><br><span class="line"><span class="regexp">    &lt;/</span>div&gt;</span><br><span class="line">    &lt;div&gt;</span><br><span class="line">      &lt;label <span class="keyword">for</span>=<span class="string">"six"</span>&gt;<span class="number">6</span>&lt;<span class="regexp">/label&gt;</span></span><br><span class="line"><span class="regexp">      &lt;input type="checkbox" value="6" id="six" name="number[]"&gt;</span></span><br><span class="line"><span class="regexp">    &lt;/</span>div&gt;</span><br><span class="line">    &lt;div&gt;</span><br><span class="line">      &lt;label <span class="keyword">for</span>=<span class="string">"eight"</span>&gt;<span class="number">8</span>&lt;<span class="regexp">/label&gt;</span></span><br><span class="line"><span class="regexp">      &lt;input type="checkbox" value="8" id="eight" name="number[]"&gt;</span></span><br><span class="line"><span class="regexp">    &lt;/</span>div&gt;</span><br><span class="line">  &lt;<span class="regexp">/fieldset&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>form&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment">//To get a comma-separated list of checkbox IDs:</span></span><br><span class="line">$( <span class="string">":checkbox"</span> )</span><br><span class="line">  .map(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.id;</span><br><span class="line">  &#125;)</span><br><span class="line">  .get()</span><br><span class="line">  .join();</span><br><span class="line"><span class="comment">//The result of this call is the string, "two,four,six,eight".</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//Within the callback function, this refers to the current DOM element for each iteration. The function can return an individual data item or an array of data items to be inserted into the resulting set. If an array is returned, the elements inside the array are inserted into the set. If the function returns null or undefined, no element will be inserted.</span></span><br></pre></td></tr></table></figure>
+<h5 id="inArray"><a href="#inArray" class="headerlink" title="$.inArray()"></a>$.inArray()</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//$.inArray(value,arrary)</span></span><br><span class="line"><span class="comment">//确定第一个参数在数组中的位置, 从0开始计数，如果没有找到则返回 -1</span></span><br><span class="line">$.inArray( <span class="number">5</span> + <span class="number">5</span>, [ <span class="string">"8"</span>, <span class="string">"9"</span>, <span class="string">"10"</span>, <span class="number">10</span> + <span class="string">""</span> ] );</span><br><span class="line"><span class="comment">//indexOf()返回字符串的首次出现位置</span></span><br></pre></td></tr></table></figure>
+<h5 id="merge"><a href="#merge" class="headerlink" title="$.merge()"></a>$.merge()</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//$.merge(firstArray,secondArray)</span></span><br><span class="line"><span class="comment">//返回的结果会修改第一个数组的内容</span></span><br><span class="line"><span class="comment">//Merges two arrays, altering the first argument.</span></span><br><span class="line">$.merge( [ <span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span> ], [ <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span> ] )</span><br><span class="line"><span class="comment">//Result: [ 0, 1, 2, 2, 3, 4 ]</span></span><br></pre></td></tr></table></figure>
+<h5 id="grep"><a href="#grep" class="headerlink" title="$.grep()"></a>$.grep()</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//$.grep(arrary,function(value,index)&#123;return boolean;&#125;,[invert])</span></span><br><span class="line"><span class="comment">//$.grep() 函数使用指定的函数过滤数组中的元素，并返回过滤后的数组。</span></span><br><span class="line"><span class="comment">//提示：源数组不会受到影响，过滤结果只反映在返回的结果数组中。</span></span><br><span class="line"><span class="comment">//数组元素过滤，返回true 保留，返回false 删除；</span></span><br><span class="line"><span class="comment">//第三个参数可选，默认为true，如果为false 表示结果取反</span></span><br><span class="line"><span class="comment">//Filter an array of numbers to include only numbers bigger then zero.</span></span><br><span class="line">$.grep( [ <span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span> ], <span class="function"><span class="keyword">function</span>(<span class="params"> n, i </span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> n &gt; <span class="number">0</span>;</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">//Result: [ 1, 2 ]</span></span><br></pre></td></tr></table></figure>
+<h5 id="unique"><a href="#unique" class="headerlink" title="$.unique()"></a>$.unique()</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//$.unique(arrary)</span></span><br><span class="line"><span class="comment">//过滤Jquery对象数组中重复的元素(内部实现为===)(不同版本不一样，不建议使用)</span></span><br><span class="line"><span class="comment">//只处理删除DOM元素数组,而不能处理字符串或者数字数组.</span></span><br></pre></td></tr></table></figure>
+<h5 id="makeArray"><a href="#makeArray" class="headerlink" title="$.makeArray()"></a>$.makeArray()</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//$.makeArray($(selector))</span></span><br><span class="line"><span class="comment">//将类数组对象转换为数组对象, 类数组对象有 length 属性,其成员索引为0至 length-1</span></span><br><span class="line"><span class="comment">//比如用getElementsByTagName获取的元素对象集合转换成数组对象</span></span><br></pre></td></tr></table></figure>
+<h5 id="selector-toArray"><a href="#selector-toArray" class="headerlink" title="$(selector).toArray()"></a>$(selector).toArray()</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//把jQuery集合中所有DOM元素恢复成一个数组</span></span><br><span class="line"><span class="comment">//.toArray() returns all of the elements in the jQuery set:</span></span><br><span class="line">alert( $( <span class="string">"li"</span> ).toArray() );</span><br><span class="line"><span class="comment">//All of the matched DOM nodes are returned by this call, contained in a standard array:</span></span><br><span class="line"><span class="comment">// [&lt;li id="foo"&gt;, &lt;li id="bar"&gt;]</span></span><br></pre></td></tr></table></figure>
+<h3 id="JSON-处理"><a href="#JSON-处理" class="headerlink" title="JSON 处理"></a>JSON 处理</h3><h5 id="1-返回JSON数组-长度"><a href="#1-返回JSON数组-长度" class="headerlink" title="1. 返回JSON数组 长度"></a>1. 返回JSON数组 长度</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getJsonLength</span>(<span class="params">jsonData</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> jsonLength = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> item <span class="keyword">in</span> jsonData)&#123;</span><br><span class="line">        jsonLength++;</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="keyword">return</span> jsonLength;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h5 id="2-JSON-数组去重"><a href="#2-JSON-数组去重" class="headerlink" title="2. JSON 数组去重"></a>2. JSON 数组去重</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">uniqueArray</span>(<span class="params">array, key</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> result = [array[<span class="number">0</span>]];</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">1</span>; i &lt; array.length; i++)&#123;</span><br><span class="line">        <span class="keyword">var</span> item = array[i];</span><br><span class="line">        <span class="keyword">var</span> repeat = <span class="literal">false</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">var</span> j = <span class="number">0</span>; j &lt; result.length; j++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (item[key] == result[j][key]) &#123;</span><br><span class="line">                repeat = <span class="literal">true</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (!repeat) &#123;</span><br><span class="line">            result.push(item);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+        
+        <br>
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+    </div>
+</div>
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+        <li>
+            <a target="_blank" href="https://www.zhihu.com/people/li-bo-2-25">
+                            <span class="fa-stack fa-lg">
+                                 <i class="iconfont icon-zhihu"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+        
+
+        
+        <li>
+            <a target="_blank" href="https://github.com/liboo0731">
+                            <span class="fa-stack fa-lg">
+                                <i class="iconfont icon-github"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span>/</span>
+        
+        <span><a href="https://www.cnblogs.com/liboo/">H2K1R~ACE_博客园</a></span>
+        <span>/</span>
+        
+        <span><a href="https://blog.csdn.net/weixin_40108079">H2K1E~ACE_CSDN</a></span>
+        <span>/</span>
+        
+    </p>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/js/index.js"></script>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+    <script>
+        /**
+         *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+         *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+        */
+        if( '' || '')
+        var disqus_config = function () {
+            this.page.url = '';  // Replace PAGE_URL with your page's canonical URL variable
+            this.page.identifier = ''; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        };
+
+        (function() { // DON'T EDIT BELOW THIS LINE
+            var d = document, s = d.createElement('script');
+            s.src = 'https://airclouds-blog.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+    </script>
+
+</html>

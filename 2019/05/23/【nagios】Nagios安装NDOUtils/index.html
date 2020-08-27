@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="李博的博客">
+    <meta name="keyword" content="striveliboo">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        【nagios】Nagios安装NDOUtils - Liboo的博客 | Liboo&#39;s Blog
+        
+    </title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/aircloud.css">
+    <link rel="stylesheet" href="/css/gitment.css">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> Internet of Everything, Everywhere. </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar">
+            <img src="/img/avatar.jpg">
+        </div>
+        <div class="name">
+            <i>H2K1E~ACE</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li>
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li>
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li>
+                <a href="/archive">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li>
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-连接被监控端出现Connection-reset-by-peer-的问题"><span class="toc-text">1. 连接被监控端出现Connection reset by peer 的问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-监控端只需要编译出check-nrpe-插件，并放到相应的位置即可"><span class="toc-text">2. 监控端只需要编译出check_nrpe 插件，并放到相应的位置即可</span></a></li></ol><li class="toc-item toc-level-2"><a class="toc-link" href="#CentOS-安装NDOUtils"><span class="toc-text">CentOS 安装NDOUtils</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Prerequisites"><span class="toc-text">Prerequisites</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Start-And-Configure-MySQL-MariaDB"><span class="toc-text">Start And Configure MySQL / MariaDB</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Define-MySQL-MariaDB-Root-Password"><span class="toc-text">Define MySQL / MariaDB Root Password</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Password-Note"><span class="toc-text">Password Note:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Create-Database"><span class="toc-text">Create Database</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Linux-Kernel-Settings"><span class="toc-text">Linux Kernel Settings</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Downloading-NDOUtils-Source"><span class="toc-text">Downloading NDOUtils Source</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Compile-NDOUtils"><span class="toc-text">Compile NDOUtils</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Install-Binaries"><span class="toc-text">Install Binaries</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Initialize-Database"><span class="toc-text">Initialize Database</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Install-Configuration-Files"><span class="toc-text">Install Configuration Files</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Install-Service-Daemon"><span class="toc-text">Install Service / Daemon</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Start-Service-Daemon"><span class="toc-text">Start Service / Daemon</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Update-Nagios-To-Use-NDO-Broker-Module"><span class="toc-text">Update Nagios To Use NDO Broker Module</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Restart-Nagios"><span class="toc-text">Restart Nagios</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Check-NDOUtils-Is-Working"><span class="toc-text">Check NDOUtils Is Working</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Service-Commands"><span class="toc-text">Service Commands</span></a></li></ol>
+</li></div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input">
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+        <div class="index-about-mobile">
+            <i> Internet of Everything, Everywhere. </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        【nagios】Nagios安装NDOUtils
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2019-05-23 09:47:50</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/tags/#nagios" title="nagios">nagios</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+
+    </div>
+    <div class="post-content ">
+        <h3 id="1-连接被监控端出现Connection-reset-by-peer-的问题"><a href="#1-连接被监控端出现Connection-reset-by-peer-的问题" class="headerlink" title="1. 连接被监控端出现Connection reset by peer 的问题"></a>1. 连接被监控端出现Connection reset by peer 的问题</h3><figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">使用官方安装脚本（./fullinstall）在配置Allow host 时未输入监控端地址或输入错误导致的问题</span><br><span class="line"></span><br><span class="line"># vi /etc/xinetd.d/nrpe</span><br><span class="line">only_from       = <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span> <span class="number">192.168</span><span class="number">.32</span><span class="number">.166</span></span><br><span class="line"></span><br><span class="line"># systemctl restart xinetd</span><br><span class="line"></span><br><span class="line">监控端测试：</span><br><span class="line">/usr/local/nagios/libexec/check_nrpe -H <span class="number">192.168</span><span class="number">.23</span><span class="number">.164</span></span><br><span class="line">被监控端测试：</span><br><span class="line">/usr/local/nagios/libexec/check_nrpe -H <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span></span><br></pre></td></tr></table></figure>
+<h3 id="2-监控端只需要编译出check-nrpe-插件，并放到相应的位置即可"><a href="#2-监控端只需要编译出check-nrpe-插件，并放到相应的位置即可" class="headerlink" title="2. 监控端只需要编译出check_nrpe 插件，并放到相应的位置即可"></a>2. 监控端只需要编译出check_nrpe 插件，并放到相应的位置即可</h3><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">1. </span>直接从被监控端拷贝，并修改权限</span><br><span class="line"><span class="bullet">2. </span>源码安装</span><br><span class="line">./configure</span><br><span class="line">make check_nrpe</span><br><span class="line">make install-plugin</span><br></pre></td></tr></table></figure>
+<h2 id="CentOS-安装NDOUtils"><a href="#CentOS-安装NDOUtils" class="headerlink" title="CentOS 安装NDOUtils"></a>CentOS 安装NDOUtils</h2><h3 id="Prerequisites"><a href="#Prerequisites" class="headerlink" title="Prerequisites"></a>Prerequisites</h3><p>Installing MySQL or MariaDB is required.</p>
+<p><strong>CentOS 5.x / 6.x</strong> </p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum <span class="keyword">install</span> -y mysql mysql-<span class="keyword">server</span> mysql-devel</span><br></pre></td></tr></table></figure>
+<p><strong>CentOS 7.x</strong></p>
+<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">yum</span> install -y <span class="keyword">mariadb </span><span class="keyword">mariadb-server </span><span class="keyword">mariadb-devel</span></span><br></pre></td></tr></table></figure>
+<h3 id="Start-And-Configure-MySQL-MariaDB"><a href="#Start-And-Configure-MySQL-MariaDB" class="headerlink" title="Start And Configure MySQL / MariaDB"></a>Start And Configure MySQL / MariaDB</h3><p>Before configuring MySQL / MariaDB you must start the service and configure it to boot on startup.</p>
+<p><strong>CentOS 5.x / 6.x</strong></p>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service mysqld <span class="literal">start</span></span><br></pre></td></tr></table></figure>
+<p>Check that it is running:</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ps</span> <span class="keyword">x</span> | <span class="keyword">grep</span> mysql | <span class="keyword">grep</span> -v <span class="keyword">grep</span></span><br></pre></td></tr></table></figure>
+<p>Which should output something like:</p>
+<figure class="highlight basic"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">1969 </span>pts/<span class="number">0</span>    S      <span class="number">0</span>:<span class="number">00</span> /bin/sh /<span class="keyword">usr</span>/bin/mysqld_safe --datadir=/var/lib/mysql --socket=/var/lib/mysql/mysql.sock --pid-file=/var/<span class="keyword">run</span>/mysqld/mysqld.pid --basedir=/<span class="keyword">usr</span> --user=mysql</span><br></pre></td></tr></table></figure>
+<p>Configure it to start when the system boots:</p>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">chkconfig <span class="comment">--add mysqld</span></span><br><span class="line">chkconfig mysqld <span class="keyword">on</span></span><br></pre></td></tr></table></figure>
+<p><strong>CentOS 7.x</strong></p>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl <span class="literal">start</span> mariadb.service</span><br></pre></td></tr></table></figure>
+<p>Check that it is running:</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ps</span> ax | <span class="keyword">grep</span> mysql | <span class="keyword">grep</span> -v <span class="keyword">grep</span></span><br></pre></td></tr></table></figure>
+<p>Which should output something like:</p>
+<figure class="highlight basic"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">2781 </span>?        Ss     <span class="number">0</span>:<span class="number">00</span> /bin/sh /<span class="keyword">usr</span>/bin/mysqld_safe --basedir=/<span class="keyword">usr</span></span><br><span class="line"><span class="symbol">2938 </span>?        Sl     <span class="number">0</span>:<span class="number">00</span> /<span class="keyword">usr</span>/libexec/mysqld --basedir=/<span class="keyword">usr</span> --datadir=/var/lib/mysql --plugin-dir=/<span class="keyword">usr</span>/lib64/mysql/plugin --<span class="keyword">log</span>-<span class="keyword">error</span>=/var/<span class="keyword">log</span>/mariadb/mariadb.<span class="keyword">log</span> --pid-file=/var/<span class="keyword">run</span>/mariadb/mariadb.pid --socket=/var/lib/mysql/mysql.sock</span><br></pre></td></tr></table></figure>
+<p>Configure it to start when the system boots:</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl <span class="builtin-name">enable</span> mariadb.service</span><br></pre></td></tr></table></figure>
+<h3 id="Define-MySQL-MariaDB-Root-Password"><a href="#Define-MySQL-MariaDB-Root-Password" class="headerlink" title="Define MySQL / MariaDB Root Password"></a>Define MySQL / MariaDB Root Password</h3><p>Now to define the password for the root account in MySQL / MariaDB.</p>
+<p>The password being defined is ‘<strong>mypassword</strong>‘ and will be used in future commands <em>(we suggest you use a more secure password)</em>.</p>
+<p>The <strong>‘</strong>single quotes<strong>‘</strong> are used to define the boundaries of the password, this is extremely important when the password contains a space or special characters.</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="regexp">/usr/</span>bin/mysqladmin -u root password <span class="string">'mypassword'</span></span><br></pre></td></tr></table></figure>
+<h3 id="Password-Note"><a href="#Password-Note" class="headerlink" title="Password Note:"></a>Password Note:</h3><p>In future commands you will see the password is provided using the <strong>-p</strong> argument like follows:</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">mysql</span> -u root -p<span class="string">'mypassword'</span></span><br></pre></td></tr></table></figure>
+<p><strong>NOTE:</strong> It’s very important to <strong>NOT</strong> put a space between the <strong>-p</strong> and the <strong>‘mypassword’</strong>.</p>
+<h3 id="Create-Database"><a href="#Create-Database" class="headerlink" title="Create Database"></a>Create Database</h3><p>NDOUtils requires a database to be created which will be called <strong>nagios</strong>.</p>
+<p>There will also be a dedicated user account called <strong>ndoutils</strong> with the password <strong>ndoutils_password</strong> <em>(we suggest you use a more secure password)</em>.</p>
+<p>The storage location of the database will be the default location that MySQL / MariaDB uses, this can be changed however it is not covered in this guide.</p>
+<p>This command will connect to the local MySQL / MariaDB database engine interface.</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">mysql</span> -u root -p<span class="string">'mypassword'</span></span><br></pre></td></tr></table></figure>
+<p>Now execute these four commands <em>(press **Enter** after each command)</em>:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">DATABASE</span> nagios <span class="keyword">DEFAULT</span> <span class="built_in">CHARACTER</span> <span class="keyword">SET</span> utf8 <span class="keyword">COLLATE</span> utf8_general_ci;</span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">USER</span> <span class="string">'ndoutils'</span>@<span class="string">'localhost'</span> <span class="keyword">IDENTIFIED</span> <span class="keyword">BY</span> <span class="string">'ndoutils_password'</span>;</span><br><span class="line"><span class="keyword">GRANT</span> <span class="keyword">USAGE</span> <span class="keyword">ON</span> *.* <span class="keyword">TO</span> <span class="string">'ndoutils'</span>@<span class="string">'localhost'</span> <span class="keyword">IDENTIFIED</span> <span class="keyword">BY</span> <span class="string">'ndoutils_password'</span> <span class="keyword">WITH</span> MAX_QUERIES_PER_HOUR <span class="number">0</span> MAX_CONNECTIONS_PER_HOUR <span class="number">0</span> MAX_UPDATES_PER_HOUR <span class="number">0</span> MAX_USER_CONNECTIONS <span class="number">0</span> ; </span><br><span class="line"><span class="keyword">GRANT</span> <span class="keyword">ALL</span> <span class="keyword">PRIVILEGES</span> <span class="keyword">ON</span> nagios.* <span class="keyword">TO</span> <span class="string">'ndoutils'</span>@<span class="string">'localhost'</span> <span class="keyword">WITH</span> <span class="keyword">GRANT</span> <span class="keyword">OPTION</span> ;</span><br></pre></td></tr></table></figure>
+<p>Now you can exit the local MySQL / MariaDB database engine interface.</p>
+<figure class="highlight livescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">\q</span></span><br></pre></td></tr></table></figure>
+<p>Run this command to ensure that the database has been created:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">'show databases;'</span> | mysql -u ndoutils -p<span class="string">'ndoutils_password'</span> -h localhost</span><br></pre></td></tr></table></figure>
+<p>The last command should output something like:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Database</span><br><span class="line">information_schema</span><br><span class="line">nagios</span><br><span class="line"><span class="built_in">test</span></span><br></pre></td></tr></table></figure>
+<h3 id="Linux-Kernel-Settings"><a href="#Linux-Kernel-Settings" class="headerlink" title="Linux Kernel Settings"></a>Linux Kernel Settings</h3><p>NDOUtils uses the kernel message queue for transferring the data from Nagios to NDOUtils. We are going to increase the default values the Kernel boots with to ensure it operates optimally.</p>
+<p>First create a backup copy of the <strong>/etc/sysctl.conf</strong> file:</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp <span class="regexp">/etc/</span>sysctl.conf <span class="regexp">/etc/</span>sysctl.conf_backup</span><br></pre></td></tr></table></figure>
+<p>Now make the required changes:</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">sed -<span class="selector-tag">i</span> <span class="string">'/msgmnb/d'</span> /etc/sysctl.conf</span><br><span class="line">sed -<span class="selector-tag">i</span> <span class="string">'/msgmax/d'</span> /etc/sysctl.conf</span><br><span class="line">sed -<span class="selector-tag">i</span> <span class="string">'/shmmax/d'</span> /etc/sysctl.conf</span><br><span class="line">sed -<span class="selector-tag">i</span> <span class="string">'/shmall/d'</span> /etc/sysctl.conf</span><br><span class="line">printf <span class="string">"\n\nkernel.msgmnb = 131072000\n"</span> &gt;&gt; /etc/sysctl.conf</span><br><span class="line">printf <span class="string">"kernel.msgmax = 131072000\n"</span> &gt;&gt; /etc/sysctl.conf</span><br><span class="line">printf <span class="string">"kernel.shmmax = 4294967295\n"</span> &gt;&gt; /etc/sysctl.conf</span><br><span class="line">printf <span class="string">"kernel.shmall = 268435456\n"</span> &gt;&gt; /etc/sysctl.conf</span><br><span class="line">sysctl -e -<span class="selector-tag">p</span> /etc/sysctl.conf</span><br></pre></td></tr></table></figure>
+<p>The last command should output something like:</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">net<span class="selector-class">.ipv4</span><span class="selector-class">.ip_forward</span> = <span class="number">0</span></span><br><span class="line">net<span class="selector-class">.ipv4</span><span class="selector-class">.conf</span><span class="selector-class">.default</span><span class="selector-class">.rp_filter</span> = <span class="number">1</span></span><br><span class="line">net<span class="selector-class">.ipv4</span><span class="selector-class">.conf</span><span class="selector-class">.default</span><span class="selector-class">.accept_source_route</span> = <span class="number">0</span></span><br><span class="line">kernel<span class="selector-class">.sysrq</span> = <span class="number">0</span></span><br><span class="line">kernel<span class="selector-class">.core_uses_pid</span> = <span class="number">1</span></span><br><span class="line">net<span class="selector-class">.ipv4</span><span class="selector-class">.tcp_syncookies</span> = <span class="number">1</span></span><br><span class="line">kernel<span class="selector-class">.msgmnb</span> = <span class="number">131072000</span></span><br><span class="line">kernel<span class="selector-class">.msgmax</span> = <span class="number">131072000</span></span><br><span class="line">kernel<span class="selector-class">.shmmax</span> = <span class="number">4294967295</span></span><br><span class="line">kernel<span class="selector-class">.shmall</span> = <span class="number">268435456</span></span><br></pre></td></tr></table></figure>
+<p>There is no need to reboot the system, the last command ensured the new settings are active in the kernel.</p>
+<h3 id="Downloading-NDOUtils-Source"><a href="#Downloading-NDOUtils-Source" class="headerlink" title="Downloading NDOUtils Source"></a>Downloading NDOUtils Source</h3><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd /tmp</span><br><span class="line">wget -O ndoutils<span class="selector-class">.tar</span><span class="selector-class">.gz</span> https:<span class="comment">//github.com/NagiosEnterprises/ndoutils/releases/download/ndoutils-2.1.3/ndoutils-2.1.3.tar.gz</span></span><br><span class="line">tar xzf ndoutils<span class="selector-class">.tar</span><span class="selector-class">.gz</span></span><br></pre></td></tr></table></figure>
+<h3 id="Compile-NDOUtils"><a href="#Compile-NDOUtils" class="headerlink" title="Compile NDOUtils"></a>Compile NDOUtils</h3><figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">cd</span> <span class="string">/tmp/ndoutils-2.1.3/</span></span><br><span class="line"><span class="string">./configure</span></span><br><span class="line">make all</span><br></pre></td></tr></table></figure>
+<h3 id="Install-Binaries"><a href="#Install-Binaries" class="headerlink" title="Install Binaries"></a>Install Binaries</h3><p>This step installs the binary files.</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make <span class="keyword">install</span></span><br></pre></td></tr></table></figure>
+<h3 id="Initialize-Database"><a href="#Initialize-Database" class="headerlink" title="Initialize Database"></a>Initialize Database</h3><p>This prepares the database for NDOUtils.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> db/</span><br><span class="line">./installdb -u <span class="string">'ndoutils'</span> -p <span class="string">'ndoutils_password'</span> -h <span class="string">'localhost'</span> -d nagios</span><br><span class="line"><span class="built_in">cd</span> ..</span><br></pre></td></tr></table></figure>
+<p>The command will produce output similar to the following:</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">DBD::mysql::db <span class="keyword">do</span> failed: Table <span class="symbol">'nagios</span>.nagios_dbversion' doesn<span class="symbol">'t</span> exist at ./installdb line <span class="number">52</span>.</span><br><span class="line">** Creating tables <span class="keyword">for</span> version <span class="number">2.0</span>.<span class="number">1</span></span><br><span class="line">     Using mysql.sql <span class="keyword">for</span> installation...</span><br><span class="line">** Updating table nagios_dbversion</span><br><span class="line">Done!</span><br></pre></td></tr></table></figure>
+<p>That first line of output that says <strong>failed: Table ‘nagios.nagios_dbversion’ doesn’t exist</strong> is expected, it’s testing to make sure the database hasn’t already been intiaialized.</p>
+<h3 id="Install-Configuration-Files"><a href="#Install-Configuration-Files" class="headerlink" title="Install Configuration Files"></a>Install Configuration Files</h3><p>This installs the config files as well as configuring the MySQL / MariaDB credentials so NDOUtils can connect to the database.</p>
+<p>The two config files are:</p>
+<p><strong>/usr/local/nagios/etc/ndo2db.cfg</strong></p>
+<p>The following lines are defined in this file:</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">db_user</span>=ndoutils</span><br><span class="line"><span class="attr">db_pass</span>=ndoutils_password</span><br></pre></td></tr></table></figure>
+<p>You should make sure the username and password are correct.</p>
+<p><strong>/usr/local/nagios/etc/ndomod.cfg</strong></p>
+<p>No changes are required in this file.</p>
+<p>Using the default username and password the following commands install the configuration files and make the required changes.</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">make install-config</span><br><span class="line">mv <span class="regexp">/usr/</span>local<span class="regexp">/nagios/</span>etc<span class="regexp">/ndo2db.cfg-sample /</span>usr<span class="regexp">/local/</span>nagios<span class="regexp">/etc/</span>ndo2db.cfg</span><br><span class="line">sed -i <span class="string">'s/^db_user=.*/db_user=ndoutils/g'</span> <span class="regexp">/usr/</span>local<span class="regexp">/nagios/</span>etc/ndo2db.cfg</span><br><span class="line">sed -i <span class="string">'s/^db_pass=.*/db_pass=ndoutils_password/g'</span> <span class="regexp">/usr/</span>local<span class="regexp">/nagios/</span>etc/ndo2db.cfg</span><br><span class="line">mv <span class="regexp">/usr/</span>local<span class="regexp">/nagios/</span>etc<span class="regexp">/ndomod.cfg-sample /</span>usr<span class="regexp">/local/</span>nagios<span class="regexp">/etc/</span>ndomod.cfg</span><br></pre></td></tr></table></figure>
+<h3 id="Install-Service-Daemon"><a href="#Install-Service-Daemon" class="headerlink" title="Install Service / Daemon"></a>Install Service / Daemon</h3><p>This installs the service or daemon files and configure them to start on boot.</p>
+<p><strong>CentOS 5.x / 6.x</strong></p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make <span class="keyword">install</span>-init</span><br></pre></td></tr></table></figure>
+<p><strong>CentOS 7.x</strong></p>
+<figure class="highlight gauss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">make</span> install-init</span><br><span class="line">systemctl <span class="keyword">enable</span> ndo2db.service</span><br></pre></td></tr></table></figure>
+<p>Information on starting and stopping services will be explained further on.</p>
+<h3 id="Start-Service-Daemon"><a href="#Start-Service-Daemon" class="headerlink" title="Start Service / Daemon"></a>Start Service / Daemon</h3><p>Different Linux distributions have different methods of starting the ndo2db service.</p>
+<p><strong>CentOS 5.x</strong></p>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service ndo2db <span class="literal">start</span></span><br></pre></td></tr></table></figure>
+<p><strong>CentOS 6.x</strong></p>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="literal">start</span> ndo2db</span><br></pre></td></tr></table></figure>
+<p><strong>CentOS 7.x</strong></p>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl <span class="literal">start</span> ndo2db.service</span><br></pre></td></tr></table></figure>
+<h3 id="Update-Nagios-To-Use-NDO-Broker-Module"><a href="#Update-Nagios-To-Use-NDO-Broker-Module" class="headerlink" title="Update Nagios To Use NDO Broker Module"></a>Update Nagios To Use NDO Broker Module</h3><p>Now you need to tell Nagios to use the NDO broker module. This is as simple as adding the following line to the <strong>nagios.cfg</strong> file:</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">broker_module=<span class="regexp">/usr/</span>local<span class="regexp">/nagios/</span>bin<span class="regexp">/ndomod.o config_file=/u</span>sr<span class="regexp">/local/</span>nagios<span class="regexp">/etc/</span>ndomod.cfg</span><br></pre></td></tr></table></figure>
+<p>The following commands will add that line as well as an extra line that explains what the module is for.</p>
+<figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">printf <span class="string">"\n\n# NDOUtils Broker Module\n"</span> &gt;&gt; <span class="regexp">/usr/local</span><span class="regexp">/nagios/etc</span><span class="regexp">/nagios.cfg</span></span><br><span class="line"><span class="regexp">printf "broker_module=/usr</span><span class="regexp">/local/nagios</span><span class="regexp">/bin/ndomod</span>.o config_file=<span class="regexp">/usr/local</span><span class="regexp">/nagios/etc</span><span class="regexp">/ndomod.cfg\n" &gt;&gt; /usr</span><span class="regexp">/local/nagios</span><span class="regexp">/etc/nagios</span>.cfg</span><br></pre></td></tr></table></figure>
+<h3 id="Restart-Nagios"><a href="#Restart-Nagios" class="headerlink" title="Restart Nagios"></a>Restart Nagios</h3><p>Now you need to restart Nagios to use the NDO broker module. Different Linux distributions have different methods of restarting Nagios Core. We will also check the status of the Nagios service to ensure it’s running after these changes.</p>
+<p><strong>CentOS 5.x / 6.x</strong></p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">service nagios restart</span><br><span class="line">service nagios status</span><br></pre></td></tr></table></figure>
+<p><strong>CentOS 7.x</strong></p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">systemctl</span> <span class="selector-tag">restart</span> <span class="selector-tag">nagios</span><span class="selector-class">.service</span></span><br><span class="line"><span class="selector-tag">systemctl</span> <span class="selector-tag">status</span> <span class="selector-tag">nagios</span><span class="selector-class">.service</span></span><br></pre></td></tr></table></figure>
+<p>The last command should show Nagios running:</p>
+<p><strong>CentOS 5.x / 6.x</strong></p>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nagios (pid <span class="number">5345</span>) <span class="keyword">is</span> <span class="built_in">running</span>...</span><br></pre></td></tr></table></figure>
+<p><strong>CentOS 7.x</strong></p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">● nagios.service - LSB: Starts <span class="keyword">and</span> stops the Nagios monitoring server</span><br><span class="line">   Loaded: loaded (/etc/rc.d/init.d/nagios)</span><br><span class="line">   Active: active (running) since Tue 2016-10-04 12:31:00 AEDT; 22s ago</span><br></pre></td></tr></table></figure>
+<h3 id="Check-NDOUtils-Is-Working"><a href="#Check-NDOUtils-Is-Working" class="headerlink" title="Check NDOUtils Is Working"></a>Check NDOUtils Is Working</h3><p>There are a couple of different ways to ensure NDO2DB is working.</p>
+<p>This command will show Nagios successfully loaded the NDO module:</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">grep</span> ndo <span class="regexp">/usr/</span>local<span class="regexp">/nagios/</span>var<span class="regexp">/nagios.log</span></span><br></pre></td></tr></table></figure>
+<p>The last command should output something like:</p>
+<figure class="highlight vbnet"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">[<span class="number">1475544660</span>] ndomod: NDOMOD <span class="number">2.1</span><span class="number">.1</span> (<span class="number">09</span><span class="number">-06</span><span class="number">-2016</span>) Copyright (c) <span class="number">2009</span> Nagios Core Development Team <span class="keyword">and</span> Community Contributors</span><br><span class="line">[<span class="number">1475544660</span>] ndomod: Successfully connected <span class="keyword">to</span> data sink.  <span class="number">0</span> queued items <span class="keyword">to</span> flush.</span><br><span class="line">[<span class="number">1475544660</span>] ndomod registered <span class="keyword">for</span> process data</span><br><span class="line">[<span class="number">1475544660</span>] ndomod registered <span class="keyword">for</span> timed <span class="keyword">event</span> data</span><br><span class="line">[<span class="number">1475544660</span>] ndomod registered <span class="keyword">for</span> log data<span class="comment">'</span></span><br><span class="line">[<span class="number">1475544660</span>] ndomod registered <span class="keyword">for</span> system command data<span class="comment">'</span></span><br><span class="line">[<span class="number">1475544660</span>] ndomod registered <span class="keyword">for</span> <span class="keyword">event</span> handler data<span class="comment">'</span></span><br><span class="line">[<span class="number">1475544660</span>] ndomod registered <span class="keyword">for</span> notification data<span class="comment">'</span></span><br><span class="line">[<span class="number">1475544660</span>] ndomod registered <span class="keyword">for</span> service check data<span class="comment">'</span></span><br><span class="line">[<span class="number">1475544660</span>] ndomod registered <span class="keyword">for</span> host check data<span class="comment">'</span></span><br><span class="line">[<span class="number">1475544660</span>] ndomod registered <span class="keyword">for</span> comment data<span class="comment">'</span></span><br><span class="line">[<span class="number">1475544660</span>] ndomod registered <span class="keyword">for</span> downtime data<span class="comment">'</span></span><br><span class="line">[<span class="number">1475544660</span>] ndomod registered <span class="keyword">for</span> flapping data<span class="comment">'</span></span><br><span class="line">[<span class="number">1475544660</span>] ndomod registered <span class="keyword">for</span> program status data<span class="comment">'</span></span><br><span class="line">[<span class="number">1475544660</span>] ndomod registered <span class="keyword">for</span> host status data<span class="comment">'</span></span><br><span class="line">[<span class="number">1475544660</span>] ndomod registered <span class="keyword">for</span> service status data<span class="comment">'</span></span><br><span class="line">[<span class="number">1475544660</span>] ndomod registered <span class="keyword">for</span> adaptive program data<span class="comment">'</span></span><br><span class="line">[<span class="number">1475544660</span>] ndomod registered <span class="keyword">for</span> adaptive host data<span class="comment">'</span></span><br><span class="line">[<span class="number">1475544660</span>] ndomod registered <span class="keyword">for</span> adaptive service data<span class="comment">'</span></span><br><span class="line">[<span class="number">1475544660</span>] ndomod registered <span class="keyword">for</span> external command data<span class="comment">'</span></span><br><span class="line">[<span class="number">1475544660</span>] ndomod registered <span class="keyword">for</span> aggregated status data<span class="comment">'</span></span><br><span class="line">[<span class="number">1475544660</span>] ndomod registered <span class="keyword">for</span> retention data<span class="comment">'</span></span><br><span class="line">[<span class="number">1475544660</span>] ndomod registered <span class="keyword">for</span> contact data<span class="comment">'</span></span><br><span class="line">[<span class="number">1475544660</span>] ndomod registered <span class="keyword">for</span> contact notification data<span class="comment">'</span></span><br><span class="line">[<span class="number">1475544660</span>] ndomod registered <span class="keyword">for</span> acknowledgement data<span class="comment">'</span></span><br><span class="line">[<span class="number">1475544660</span>] ndomod registered <span class="keyword">for</span> state change data<span class="comment">'</span></span><br><span class="line">[<span class="number">1475544660</span>] ndomod registered <span class="keyword">for</span> contact status data<span class="comment">'</span></span><br><span class="line">[<span class="number">1475544660</span>] ndomod registered <span class="keyword">for</span> adaptive contact data<span class="comment">'</span></span><br><span class="line">[<span class="number">1475544660</span>] <span class="keyword">Event</span> broker <span class="keyword">module</span> <span class="comment">'/usr/local/nagios/bin/ndomod.o' initialized successfully.</span></span><br></pre></td></tr></table></figure>
+<p>This command will show you the database with populated data:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">'select * from nagios.nagios_logentries;'</span> | mysql -u ndoutils -p<span class="string">'ndoutils_password'</span></span><br></pre></td></tr></table></figure>
+<p>The last command should output something like:</p>
+<figure class="highlight subunit"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">logentry_id    instance_id    logentry_time    entry_time    entry_time_usec    logentry_type    logentry_data    realtime_data    inferred_data_extracted</span><br><span class="line">1    1    2016<span class="string">-10</span><span class="string">-04</span> 12:31:00    2016<span class="string">-10</span><span class="string">-04</span> 12:31:00    868450    262144    ndomod registered for log data'    1    1</span><br><span class="line">2    1    2016<span class="string">-10</span><span class="string">-04</span> 12:31:00    2016<span class="string">-10</span><span class="string">-04</span> 12:31:00    868462    262144    ndomod registered for system command data'    1    1</span><br><span class="line">3    1    2016<span class="string">-10</span><span class="string">-04</span> 12:31:00    2016<span class="string">-10</span><span class="string">-04</span> 12:31:00    868467    262144    ndomod registered for event handler data'    1    1</span><br><span class="line">4    1    2016<span class="string">-10</span><span class="string">-04</span> 12:31:00    2016<span class="string">-10</span><span class="string">-04</span> 12:31:00    868472    262144    ndomod registered for notification data'    1    1</span><br><span class="line">5    1    2016<span class="string">-10</span><span class="string">-04</span> 12:31:00    2016<span class="string">-10</span><span class="string">-04</span> 12:31:00    868479    262144    ndomod registered for service check data'    1    1</span><br><span class="line">6    1    2016<span class="string">-10</span><span class="string">-04</span> 12:31:00    2016<span class="string">-10</span><span class="string">-04</span> 12:31:00    868486    262144    ndomod registered for host check data'    1    1</span><br><span class="line">7    1    2016<span class="string">-10</span><span class="string">-04</span> 12:31:00    2016<span class="string">-10</span><span class="string">-04</span> 12:31:00    868491    262144    ndomod registered for comment data'    11</span><br><span class="line">8    1    2016<span class="string">-10</span><span class="string">-04</span> 12:31:00    2016<span class="string">-10</span><span class="string">-04</span> 12:31:00    868496    262144    ndomod registered for downtime data'11</span><br><span class="line">9    1    2016<span class="string">-10</span><span class="string">-04</span> 12:31:00    2016<span class="string">-10</span><span class="string">-04</span> 12:31:00    869866    262144    ndomod registered for flapping data'11</span><br><span class="line">10    1    2016<span class="string">-10</span><span class="string">-04</span> 12:31:00    2016<span class="string">-10</span><span class="string">-04</span> 12:31:00    869878    262144    ndomod registered for program status data'    1    1</span><br><span class="line">11    1    2016<span class="string">-10</span><span class="string">-04</span> 12:31:00    2016<span class="string">-10</span><span class="string">-04</span> 12:31:00    869884    262144    ndomod registered for host status data'    1    1</span><br><span class="line">12    1    2016<span class="string">-10</span><span class="string">-04</span> 12:31:00    2016<span class="string">-10</span><span class="string">-04</span> 12:31:00    869888    262144    ndomod registered for service status data'    1    1</span><br><span class="line">13    1    2016<span class="string">-10</span><span class="string">-04</span> 12:31:00    2016<span class="string">-10</span><span class="string">-04</span> 12:31:00    869893    262144    ndomod registered for adaptive program data'    1    1</span><br><span class="line">14    1    2016<span class="string">-10</span><span class="string">-04</span> 12:31:00    2016<span class="string">-10</span><span class="string">-04</span> 12:31:00    869897    262144    ndomod registered for adaptive host data'    1    1</span><br><span class="line">15    1    2016<span class="string">-10</span><span class="string">-04</span> 12:31:00    2016<span class="string">-10</span><span class="string">-04</span> 12:31:00    869902    262144    ndomod registered for adaptive service data'    1    1</span><br><span class="line">16    1    2016<span class="string">-10</span><span class="string">-04</span> 12:31:00    2016<span class="string">-10</span><span class="string">-04</span> 12:31:00    869906    262144    ndomod registered for external command data'    1    1</span><br><span class="line">17    1    2016<span class="string">-10</span><span class="string">-04</span> 12:31:00    2016<span class="string">-10</span><span class="string">-04</span> 12:31:00    869911    262144    ndomod registered for aggregated status data'    1    1</span><br><span class="line">18    1    2016<span class="string">-10</span><span class="string">-04</span> 12:31:00    2016<span class="string">-10</span><span class="string">-04</span> 12:31:00    869915    262144    ndomod registered for retention data'1    1</span><br><span class="line">19    1    2016<span class="string">-10</span><span class="string">-04</span> 12:31:00    2016<span class="string">-10</span><span class="string">-04</span> 12:31:00    869920    262144    ndomod registered for contact data'    11</span><br><span class="line">20    1    2016<span class="string">-10</span><span class="string">-04</span> 12:31:00    2016<span class="string">-10</span><span class="string">-04</span> 12:31:00    871043    262144    ndomod registered for contact notification data'    1    1</span><br><span class="line">21    1    2016<span class="string">-10</span><span class="string">-04</span> 12:31:00    2016<span class="string">-10</span><span class="string">-04</span> 12:31:00    871055    262144    ndomod registered for acknowledgement data'    1    1</span><br><span class="line">22    1    2016<span class="string">-10</span><span class="string">-04</span> 12:31:00    2016<span class="string">-10</span><span class="string">-04</span> 12:31:00    871062    262144    ndomod registered for state change data'    1    1</span><br><span class="line">23    1    2016<span class="string">-10</span><span class="string">-04</span> 12:31:00    2016<span class="string">-10</span><span class="string">-04</span> 12:31:00    871067    262144    ndomod registered for contact status data'    1    1</span><br><span class="line">24    1    2016<span class="string">-10</span><span class="string">-04</span> 12:31:00    2016<span class="string">-10</span><span class="string">-04</span> 12:31:00    871072    262144    ndomod registered for adaptive contact data'    1    1</span><br><span class="line">25    1    2016<span class="string">-10</span><span class="string">-04</span> 12:31:00    2016<span class="string">-10</span><span class="string">-04</span> 12:31:00    871077    262144    Event broker module '/usr/local/nagios/bin/ndomod.o' initialized successfully.    1    1</span><br><span class="line">26    1    2016<span class="string">-10</span><span class="string">-04</span> 12:31:00    2016<span class="string">-10</span><span class="string">-04</span> 12:31:00    874858    262144    Successfully launched command file worker with pid 6026    1    1</span><br></pre></td></tr></table></figure>
+<h3 id="Service-Commands"><a href="#Service-Commands" class="headerlink" title="Service Commands"></a>Service Commands</h3><p>Different Linux distributions have different methods of starting / stopping / restarting / status ndo2db.</p>
+<p><strong>CentOS 5.x</strong></p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">service ndo2db start</span><br><span class="line">service ndo2db stop</span><br><span class="line">service ndo2db restart</span><br><span class="line">service ndo2db status</span><br></pre></td></tr></table></figure>
+<p><strong>CentOS 6.x</strong></p>
+<figure class="highlight gcode"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">start <span class="symbol">ndo2</span>db</span><br><span class="line">stop <span class="symbol">ndo2</span>db</span><br><span class="line">restart <span class="symbol">ndo2</span>db</span><br><span class="line">status <span class="symbol">ndo2</span>db</span><br></pre></td></tr></table></figure>
+<p><strong>CentOS 7.x</strong></p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">systemctl start ndo2db.service</span><br><span class="line">systemctl stop ndo2db.service</span><br><span class="line">systemctl restart ndo2db.service</span><br><span class="line">systemctl status ndo2db.service</span><br></pre></td></tr></table></figure>
+        
+        <br>
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+    </div>
+</div>
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+        <li>
+            <a target="_blank" href="https://www.zhihu.com/people/li-bo-2-25">
+                            <span class="fa-stack fa-lg">
+                                 <i class="iconfont icon-zhihu"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+        
+
+        
+        <li>
+            <a target="_blank" href="https://github.com/liboo0731">
+                            <span class="fa-stack fa-lg">
+                                <i class="iconfont icon-github"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span>/</span>
+        
+        <span><a href="https://www.cnblogs.com/liboo/">H2K1R~ACE_博客园</a></span>
+        <span>/</span>
+        
+        <span><a href="https://blog.csdn.net/weixin_40108079">H2K1E~ACE_CSDN</a></span>
+        <span>/</span>
+        
+    </p>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/js/index.js"></script>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+    <script>
+        /**
+         *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+         *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+        */
+        if( '' || '')
+        var disqus_config = function () {
+            this.page.url = '';  // Replace PAGE_URL with your page's canonical URL variable
+            this.page.identifier = ''; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        };
+
+        (function() { // DON'T EDIT BELOW THIS LINE
+            var d = document, s = d.createElement('script');
+            s.src = 'https://airclouds-blog.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+    </script>
+
+</html>

@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="李博的博客">
+    <meta name="keyword" content="striveliboo">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        【centos】CentOS6-定制化ISO - Liboo的博客 | Liboo&#39;s Blog
+        
+    </title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/aircloud.css">
+    <link rel="stylesheet" href="/css/gitment.css">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> Internet of Everything, Everywhere. </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar">
+            <img src="/img/avatar.jpg">
+        </div>
+        <div class="name">
+            <i>H2K1E~ACE</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li>
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li>
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li>
+                <a href="/archive">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li>
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#CentOS-6-5-iso定制化"><span class="toc-text">CentOS-6.5.iso定制化</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1、安装制作系统镜像所需要的工具"><span class="toc-text">1、安装制作系统镜像所需要的工具</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2、拷贝iso解压后的文件到-os目录下"><span class="toc-text">2、拷贝iso解压后的文件到/os目录下</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3、修改启动安装导向文件-os-isolinux-isolinux-cfg-下面为修改后内容"><span class="toc-text">3、修改启动安装导向文件/os/isolinux/isolinux.cfg,下面为修改后内容</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4、创建自响应文件-ks-cfg-，把此文件放在-os-isolinux-ks-cfg"><span class="toc-text">4、创建自响应文件 ks.cfg ，把此文件放在/os/isolinux/ks.cfg</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5、创建软件仓库"><span class="toc-text">5、创建软件仓库</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-修改光盘背景，文字等信息"><span class="toc-text">6.修改光盘背景，文字等信息</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#6-1修改系统自动安装过程中显示的背景图片-修改光盘背景，文字等信息"><span class="toc-text">6.1修改系统自动安装过程中显示的背景图片.修改光盘背景，文字等信息</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#6-2-修改安装过程中的欢迎语"><span class="toc-text">6.2 修改安装过程中的欢迎语</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#7、启动界面及登录界面CentOS字样修改："><span class="toc-text">7、启动界面及登录界面CentOS字样修改：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#8、重构系统，生成ISO镜像"><span class="toc-text">8、重构系统，生成ISO镜像</span></a></li></ol></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input">
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+        <div class="index-about-mobile">
+            <i> Internet of Everything, Everywhere. </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        【centos】CentOS6-定制化ISO
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2017-05-22 20:49:40</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/tags/#centos" title="centos">centos</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#centos6" title="centos6">centos6</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+
+    </div>
+    <div class="post-content ">
+        <h3 id="CentOS-6-5-iso定制化"><a href="#CentOS-6-5-iso定制化" class="headerlink" title="CentOS-6.5.iso定制化"></a>CentOS-6.5.iso定制化</h3><h4 id="1、安装制作系统镜像所需要的工具"><a href="#1、安装制作系统镜像所需要的工具" class="headerlink" title="1、安装制作系统镜像所需要的工具"></a>1、安装制作系统镜像所需要的工具</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum -y install anaconda repodata createrepo mkisofs rsync</span><br></pre></td></tr></table></figure>
+<h4 id="2、拷贝iso解压后的文件到-os目录下"><a href="#2、拷贝iso解压后的文件到-os目录下" class="headerlink" title="2、拷贝iso解压后的文件到/os目录下"></a>2、拷贝iso解压后的文件到/os目录下</h4><h4 id="3、修改启动安装导向文件-os-isolinux-isolinux-cfg-下面为修改后内容"><a href="#3、修改启动安装导向文件-os-isolinux-isolinux-cfg-下面为修改后内容" class="headerlink" title="3、修改启动安装导向文件/os/isolinux/isolinux.cfg,下面为修改后内容"></a>3、修改启动安装导向文件/os/isolinux/isolinux.cfg,下面为修改后内容</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">default vesamenu.c32</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">prompt 1</span></span><br><span class="line"></span><br><span class="line">timeout 200</span><br><span class="line"></span><br><span class="line">display boot.msg</span><br><span class="line"></span><br><span class="line">menu background splash.jpg</span><br><span class="line">menu title Welcome to GCloud 4.1!</span><br><span class="line">menu color border 0 #ffffffff #00000000</span><br><span class="line">menu color sel 7 #ffffffff #ff000000</span><br><span class="line">menu color title 0 #ffffffff #00000000</span><br><span class="line">menu color tabmsg 0 #ffffffff #00000000</span><br><span class="line">menu color unsel 0 #ffffffff #00000000</span><br><span class="line">menu color hotsel 0 #ff000000 #ffffffff</span><br><span class="line">menu color hotkey 7 #ffffffff #ff000000</span><br><span class="line">menu color scrollbar 0 #ffffffff #00000000</span><br><span class="line"></span><br><span class="line">label linux</span><br><span class="line">  menu label ^Install gcloud 4.1!</span><br><span class="line">  menu default</span><br><span class="line">  kernel vmlinuz</span><br><span class="line">  append ks=cdrom:/isolinux/ks.cfg initrd=initrd.img</span><br></pre></td></tr></table></figure>
+<h4 id="4、创建自响应文件-ks-cfg-，把此文件放在-os-isolinux-ks-cfg"><a href="#4、创建自响应文件-ks-cfg-，把此文件放在-os-isolinux-ks-cfg" class="headerlink" title="4、创建自响应文件 ks.cfg ，把此文件放在/os/isolinux/ks.cfg"></a>4、创建自响应文件 ks.cfg ，把此文件放在/os/isolinux/ks.cfg</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> Kickstart file automatically generated by anaconda.</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">version=DEVEL</span></span><br><span class="line"></span><br><span class="line">install</span><br><span class="line"></span><br><span class="line">cdrom</span><br><span class="line"></span><br><span class="line">lang en_US.UTF-8</span><br><span class="line"></span><br><span class="line">keyboard us</span><br><span class="line"></span><br><span class="line">network --onboot no --device eth0 --bootproto dhcp --noipv6</span><br><span class="line"></span><br><span class="line">rootpw --plaintext infocore</span><br><span class="line"></span><br><span class="line">firewall --disabled</span><br><span class="line"></span><br><span class="line">authconfig --enableshadow --passalgo=sha512</span><br><span class="line"></span><br><span class="line">selinux --disabled</span><br><span class="line"></span><br><span class="line">timezone Asia/Shanghai</span><br><span class="line"></span><br><span class="line">bootloader --location=mbr</span><br><span class="line"></span><br><span class="line">zerombr</span><br><span class="line"></span><br><span class="line">clearpart --all --initlabel</span><br><span class="line"></span><br><span class="line"><span class="meta">%</span><span class="bash">pre</span></span><br><span class="line"></span><br><span class="line">mkdir /os</span><br><span class="line">mount /dev/sr0 /os</span><br><span class="line">repo --name="CentOS"  --baseurl=file:///os --cost=100</span><br><span class="line"></span><br><span class="line"><span class="meta">%</span><span class="bash">packages --nobase</span></span><br><span class="line"></span><br><span class="line">@core</span><br><span class="line"></span><br><span class="line"><span class="meta">%</span><span class="bash">end</span></span><br><span class="line"></span><br><span class="line">reboot</span><br><span class="line"></span><br><span class="line"><span class="meta">%</span><span class="bash">post</span></span><br><span class="line"></span><br><span class="line">echo -ne '</span><br><span class="line">mkdir /os/</span><br><span class="line">mount -o loop /dev/sr0/ /os/</span><br><span class="line">mkdir -p /root/gcloud/</span><br><span class="line">cp -R /os/gcloud/* /root/gcloud/</span><br><span class="line">chmod +x /root/gcloud/*.sh</span><br><span class="line">/root/gcloud/compute.sh</span><br><span class="line">' &gt;&gt;/root/install.sh</span><br><span class="line"></span><br><span class="line">chmod +x /root/install.sh</span><br><span class="line">/root/install.sh</span><br><span class="line">rm -f /root/install.sh</span><br><span class="line">cp /root/gcloud/onekeyInstall.sh /root/</span><br><span class="line"></span><br><span class="line"><span class="meta">%</span><span class="bash">end</span></span><br></pre></td></tr></table></figure>
+<h4 id="5、创建软件仓库"><a href="#5、创建软件仓库" class="headerlink" title="5、创建软件仓库"></a>5、创建软件仓库</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">cd /os</span><br><span class="line"></span><br><span class="line">declare -x discinfo=$(head -1 .discinfo)</span><br><span class="line"></span><br><span class="line">cp repodata/*-c6-x86_64-comps.xml ./c6-x86_64-comps.xml</span><br><span class="line"></span><br><span class="line">rm -f /repodata/*</span><br><span class="line"></span><br><span class="line">mv ./c6-x86_64-comps.xml repodata</span><br><span class="line"></span><br><span class="line">createrepo -g repodata/c6-x86_64-comps.xml ./</span><br></pre></td></tr></table></figure>
+<h4 id="6-修改光盘背景，文字等信息"><a href="#6-修改光盘背景，文字等信息" class="headerlink" title="6.修改光盘背景，文字等信息"></a>6.修改光盘背景，文字等信息</h4><h5 id="6-1修改系统自动安装过程中显示的背景图片-修改光盘背景，文字等信息"><a href="#6-1修改系统自动安装过程中显示的背景图片-修改光盘背景，文字等信息" class="headerlink" title="6.1修改系统自动安装过程中显示的背景图片.修改光盘背景，文字等信息"></a>6.1修改系统自动安装过程中显示的背景图片.修改光盘背景，文字等信息</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">进入光盘images目录</span></span><br><span class="line">cd /os/images/</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">install.img镜像中包含了光盘安装过程中使用到的背景图片，挂载此img文件</span></span><br><span class="line">mount -o loop -t squashfs install.img /mnt/install</span><br><span class="line"></span><br><span class="line">mkdir tmp</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">挂载的install.img不能编辑，需要拷贝一份，修改后替换原install.img文件</span></span><br><span class="line">rsync -av /mnt/install/ tmp/</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">进入背景图片所在目录,选择需要修改的图片，并替换（主机图片尺寸，格式需要与原来的相同）,图片位置为：tmp/install/usr/share/anaconda/pixmaps</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">重新创建新的install.img</span></span><br><span class="line">mksquashfs tmp/ install_v1.img -all-root</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">替换install.img</span></span><br><span class="line">cp tmp/install_v1.img install.img</span><br></pre></td></tr></table></figure>
+<h5 id="6-2-修改安装过程中的欢迎语"><a href="#6-2-修改安装过程中的欢迎语" class="headerlink" title="6.2 修改安装过程中的欢迎语"></a>6.2 修改安装过程中的欢迎语</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">mkdir /os/isolinux/tmp</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">解压initrd.img镜像</span></span><br><span class="line">xz -dc ../initrd.img | cpio -id</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">修改欢迎语.buildstamp文件，把其中的CentOS替换为PowerSoft</span></span><br><span class="line">vim .buildstamp</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">创建新的initrd.img并替换</span></span><br><span class="line">find . | cpio -c -o | xz -9 --format=lzma &gt; ../initrd.img</span><br></pre></td></tr></table></figure>
+<h4 id="7、启动界面及登录界面CentOS字样修改："><a href="#7、启动界面及登录界面CentOS字样修改：" class="headerlink" title="7、启动界面及登录界面CentOS字样修改："></a>7、启动界面及登录界面CentOS字样修改：</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">yum install -y rpm-build</span><br><span class="line"></span><br><span class="line">rmp -ivh *.src.rpm</span><br><span class="line"></span><br><span class="line">rpmbuild -ba *.spec</span><br><span class="line"></span><br><span class="line">tar -xzvf *.tar.gz</span><br><span class="line"></span><br><span class="line">tar -zcvf *.tar.gz *</span><br><span class="line"></span><br><span class="line">infonix-release-6-5.3.infonix.11.src.rpm</span><br><span class="line"></span><br><span class="line">centos-release-6-5.el6.centos.11.1.x86_64.rpm</span><br></pre></td></tr></table></figure>
+<h4 id="8、重构系统，生成ISO镜像"><a href="#8、重构系统，生成ISO镜像" class="headerlink" title="8、重构系统，生成ISO镜像"></a>8、重构系统，生成ISO镜像</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mkisofs -o /tmp/GCloud-4.1_64.iso -b isolinux/isolinux.bin -c isolinux/boot.cat -no-emul-boot -boot-load-size 4 -boot-info-table -R -J -v -T .</span><br><span class="line"></span><br><span class="line">ls .|grep -v "comps.xml"|xargs -i rm -f &#123;&#125; cd ../ createrepo -g repodata/comps.xml ./ declare -x discinfo=`head -1 .discinfo` mkisofs -R -J -T -r -l -d -joliet-long -allow-multidot -allow-leading-dots -no-bak -o/opt/Mycentos7.iso -b isolinux/isolinux.bin -c isolinux/boot.cat -no-emul-boot -boot-load-size 4 -boot-info-</span><br></pre></td></tr></table></figure>
+
+        
+        <br>
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+    </div>
+</div>
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+        <li>
+            <a target="_blank" href="https://www.zhihu.com/people/li-bo-2-25">
+                            <span class="fa-stack fa-lg">
+                                 <i class="iconfont icon-zhihu"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+        
+
+        
+        <li>
+            <a target="_blank" href="https://github.com/liboo0731">
+                            <span class="fa-stack fa-lg">
+                                <i class="iconfont icon-github"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span>/</span>
+        
+        <span><a href="https://www.cnblogs.com/liboo/">H2K1R~ACE_博客园</a></span>
+        <span>/</span>
+        
+        <span><a href="https://blog.csdn.net/weixin_40108079">H2K1E~ACE_CSDN</a></span>
+        <span>/</span>
+        
+    </p>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/js/index.js"></script>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+    <script>
+        /**
+         *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+         *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+        */
+        if( '' || '')
+        var disqus_config = function () {
+            this.page.url = '';  // Replace PAGE_URL with your page's canonical URL variable
+            this.page.identifier = ''; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        };
+
+        (function() { // DON'T EDIT BELOW THIS LINE
+            var d = document, s = d.createElement('script');
+            s.src = 'https://airclouds-blog.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+    </script>
+
+</html>

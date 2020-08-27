@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="李博的博客">
+    <meta name="keyword" content="striveliboo">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        【python】python2-dialog模块使用总结 - Liboo的博客 | Liboo&#39;s Blog
+        
+    </title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/aircloud.css">
+    <link rel="stylesheet" href="/css/gitment.css">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> Internet of Everything, Everywhere. </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar">
+            <img src="/img/avatar.jpg">
+        </div>
+        <div class="name">
+            <i>H2K1E~ACE</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li>
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li>
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li>
+                <a href="/archive">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li>
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#简单示例"><span class="toc-text">简单示例</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#以mixform为例的参数解释"><span class="toc-text">以mixform为例的参数解释</span></a></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input">
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+        <div class="index-about-mobile">
+            <i> Internet of Everything, Everywhere. </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        【python】python2-dialog模块使用总结
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2019-03-18 15:11:42</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/tags/#python" title="python">python</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#dialog" title="dialog">dialog</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+
+    </div>
+    <div class="post-content ">
+        <h3 id="简单示例"><a href="#简单示例" class="headerlink" title="简单示例"></a>简单示例</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> locale</span><br><span class="line"><span class="keyword">from</span> dialog <span class="keyword">import</span> Dialog</span><br><span class="line"></span><br><span class="line"><span class="comment"># This is almost always a good thing to do at the beginning of your programs.</span></span><br><span class="line">locale.setlocale(locale.LC_ALL, <span class="string">''</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># You may want to use 'autowidgetsize=True' here (requires pythondialog &gt;= 3.1)</span></span><br><span class="line">d = Dialog(dialog=<span class="string">"dialog"</span>)</span><br><span class="line"><span class="comment"># Dialog.set_background_title() requires pythondialog 2.13 or later</span></span><br><span class="line">d.set_background_title(<span class="string">"My little program"</span>)</span><br><span class="line"><span class="comment"># For older versions, you can use:</span></span><br><span class="line"><span class="comment">#   d.add_persistent_args(["--backtitle", "My little program"])</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># In pythondialog 3.x, you can compare the return code to d.OK, Dialog.OK or</span></span><br><span class="line"><span class="comment"># "ok" (same object). In pythondialog 2.x, you have to use d.DIALOG_OK, which</span></span><br><span class="line"><span class="comment"># is deprecated since version 3.0.0.</span></span><br><span class="line"><span class="keyword">if</span> d.yesno(<span class="string">"Are you REALLY sure you want to see this?"</span>) == d.DIALOG_OK:</span><br><span class="line">    d.msgbox(<span class="string">"You have been warned..."</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># We could put non-empty items here (not only the tag for each entry)</span></span><br><span class="line">    code, tags = d.checklist(<span class="string">"What sandwich toppings do you like?"</span>,</span><br><span class="line">                             choices=[(<span class="string">"Catsup"</span>, <span class="string">""</span>,             <span class="literal">False</span>),</span><br><span class="line">                                      (<span class="string">"Mustard"</span>, <span class="string">""</span>,            <span class="literal">False</span>),</span><br><span class="line">                                      (<span class="string">"Pesto"</span>, <span class="string">""</span>,              <span class="literal">False</span>),</span><br><span class="line">                                      (<span class="string">"Mayonnaise"</span>, <span class="string">""</span>,         <span class="literal">True</span>),</span><br><span class="line">                                      (<span class="string">"Horse radish"</span>,<span class="string">""</span>,        <span class="literal">True</span>),</span><br><span class="line">                                      (<span class="string">"Sun-dried tomatoes"</span>, <span class="string">""</span>, <span class="literal">True</span>)],</span><br><span class="line">                             title=<span class="string">"Do you prefer ham or spam?"</span>,</span><br><span class="line">                             backtitle=<span class="string">"And now, for something "</span></span><br><span class="line">                             <span class="string">"completely different..."</span>)</span><br><span class="line">    <span class="keyword">if</span> code == d.DIALOG_OK:</span><br><span class="line">        <span class="comment"># 'tags' now contains a list of the toppings chosen by the user</span></span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    code, tag = d.menu(<span class="string">"OK, then you have two options:"</span>,</span><br><span class="line">                       choices=[(<span class="string">"(1)"</span>, <span class="string">"Leave this fascinating example"</span>),</span><br><span class="line">                                (<span class="string">"(2)"</span>, <span class="string">"Leave this fascinating example"</span>)])</span><br><span class="line">    <span class="keyword">if</span> code == d.DIALOG_OK:</span><br><span class="line">        <span class="comment"># 'tag' is now either "(1)" or "(2)"</span></span><br><span class="line">        <span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
+<h3 id="以mixform为例的参数解释"><a href="#以mixform为例的参数解释" class="headerlink" title="以mixform为例的参数解释"></a>以mixform为例的参数解释</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Dialog.mixedform(text, elements, height=0, width=0, form_height=0, **kwargs)</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># (label, yl, xl, item, yi, xi, field_length, input_length, attributes)</span></span><br><span class="line"><span class="comment"># label is a string that will be displayed at row yl, column xl. item is a string giving the initial value for the field, which will be displayed at row yi, column xi (row and column numbers starting from 1).</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#attributes is an integer interpreted as a bit mask with the following meaning (bit 0 being the least significant bit):</span></span><br><span class="line">Bit number	Meaning</span><br><span class="line"><span class="number">0</span>	the field should be hidden (e.g., a label)</span><br><span class="line"><span class="number">1</span>	the field should be read-only (e.g., a password)</span><br><span class="line"><span class="comment"># 经实践得0为label，1为password，与官网所述刚好相反</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 一个字符代表一列</span></span><br><span class="line">d.mixedform(<span class="string">'text'</span>,</span><br><span class="line">            [(<span class="string">'one'</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="string">'item'</span>,<span class="number">1</span>,<span class="number">10</span>,<span class="number">10</span>,<span class="number">20</span>,<span class="number">0</span>),</span><br><span class="line">             (<span class="string">'passwd'</span>, <span class="number">2</span>, <span class="number">1</span>, <span class="string">''</span>, <span class="number">2</span>, <span class="number">10</span>, <span class="number">10</span>, <span class="number">20</span>, <span class="number">1</span>)],</span><br><span class="line">            <span class="number">9</span>,      <span class="comment">#height 表格高度，比form_height多5，下面的操作按钮刚好正常显示</span></span><br><span class="line">            <span class="number">50</span>,     <span class="comment">#width 表格宽度</span></span><br><span class="line">            <span class="number">3</span>)      <span class="comment">#form_height 表格行数</span></span><br></pre></td></tr></table></figure>
+
+        
+        <br>
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+    </div>
+</div>
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+        <li>
+            <a target="_blank" href="https://www.zhihu.com/people/li-bo-2-25">
+                            <span class="fa-stack fa-lg">
+                                 <i class="iconfont icon-zhihu"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+        
+
+        
+        <li>
+            <a target="_blank" href="https://github.com/liboo0731">
+                            <span class="fa-stack fa-lg">
+                                <i class="iconfont icon-github"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span>/</span>
+        
+        <span><a href="https://www.cnblogs.com/liboo/">H2K1R~ACE_博客园</a></span>
+        <span>/</span>
+        
+        <span><a href="https://blog.csdn.net/weixin_40108079">H2K1E~ACE_CSDN</a></span>
+        <span>/</span>
+        
+    </p>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/js/index.js"></script>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+    <script>
+        /**
+         *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+         *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+        */
+        if( '' || '')
+        var disqus_config = function () {
+            this.page.url = '';  // Replace PAGE_URL with your page's canonical URL variable
+            this.page.identifier = ''; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        };
+
+        (function() { // DON'T EDIT BELOW THIS LINE
+            var d = document, s = d.createElement('script');
+            s.src = 'https://airclouds-blog.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+    </script>
+
+</html>

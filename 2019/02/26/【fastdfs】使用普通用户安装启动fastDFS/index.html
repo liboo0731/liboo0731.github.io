@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="李博的博客">
+    <meta name="keyword" content="striveliboo">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        【fastdfs】使用普通用户安装fastDFS - Liboo的博客 | Liboo&#39;s Blog
+        
+    </title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/aircloud.css">
+    <link rel="stylesheet" href="/css/gitment.css">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> Internet of Everything, Everywhere. </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar">
+            <img src="/img/avatar.jpg">
+        </div>
+        <div class="name">
+            <i>H2K1E~ACE</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li>
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li>
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li>
+                <a href="/archive">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li>
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#普通用户安装fastDFS"><span class="toc-text">普通用户安装fastDFS</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#一、安装依赖"><span class="toc-text">一、安装依赖</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二、创建fastdfs用户并设置密码"><span class="toc-text">二、创建fastdfs用户并设置密码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三、下载libfastcommon源码进行安装"><span class="toc-text">三、下载libfastcommon源码进行安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#四、设置软连接"><span class="toc-text">四、设置软连接</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#五、使用fastdfs登录系统，在-home-fastdfs创建目录"><span class="toc-text">五、使用fastdfs登录系统，在/home/fastdfs创建目录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#六、下载fastdfs5-05源码并解压"><span class="toc-text">六、下载fastdfs5.05源码并解压</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#七、修改make-sh并进行安装"><span class="toc-text">七、修改make.sh并进行安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#八、修改配置文件名，去掉-sample后缀"><span class="toc-text">八、修改配置文件名，去掉.sample后缀</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#九、修改storage-conf"><span class="toc-text">九、修改storage.conf</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#十、修改tracker-conf"><span class="toc-text">十、修改tracker.conf</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#十一、修改storage-ids-conf"><span class="toc-text">十一、修改storage_ids.conf</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#十二、修改client-conf"><span class="toc-text">十二、修改client.conf</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#十三、修改-home-fastdfs-init-d-fdfs-storaged"><span class="toc-text">十三、修改 /home/fastdfs/init.d/fdfs_storaged</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#十四、修改-home-fastdfs-init-d-fdfs-trackerd"><span class="toc-text">十四、修改 /home/fastdfs/init.d/fdfs_trackerd</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#十五、启动"><span class="toc-text">十五、启动</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#十六、常见问题"><span class="toc-text">十六、常见问题</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#普通用户开机启动服务"><span class="toc-text">普通用户开机启动服务</span></a></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input">
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+        <div class="index-about-mobile">
+            <i> Internet of Everything, Everywhere. </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        【fastdfs】使用普通用户安装fastDFS
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2019-02-26 19:56:31</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/tags/#fastdfs" title="fastdfs">fastdfs</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+
+    </div>
+    <div class="post-content ">
+        <h1 id="普通用户安装fastDFS"><a href="#普通用户安装fastDFS" class="headerlink" title="普通用户安装fastDFS"></a>普通用户安装fastDFS</h1><h2 id="一、安装依赖"><a href="#一、安装依赖" class="headerlink" title="一、安装依赖"></a>一、安装依赖</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y zlib zlib-devel pcre pcre-devel gcc gcc-c++ openssl openssl-devel libevent libevent-devel perl unzip</span><br></pre></td></tr></table></figure>
+<h2 id="二、创建fastdfs用户并设置密码"><a href="#二、创建fastdfs用户并设置密码" class="headerlink" title="二、创建fastdfs用户并设置密码"></a>二、创建fastdfs用户并设置密码</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">useradd fastdfs</span><br><span class="line">passwd fastdfs</span><br></pre></td></tr></table></figure>
+<h2 id="三、下载libfastcommon源码进行安装"><a href="#三、下载libfastcommon源码进行安装" class="headerlink" title="三、下载libfastcommon源码进行安装"></a>三、下载libfastcommon源码进行安装</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">cd /tmp</span><br><span class="line">wget -c https://github.com/happyfish100/libfastcommon/archive/V1.0.7.tar.gz</span><br><span class="line">tar -xvf V1.0.7.tar.gz</span><br><span class="line">cd libfastcommon-1.0.7</span><br><span class="line">./make.sh</span><br><span class="line">./make.sh install</span><br></pre></td></tr></table></figure>
+<h2 id="四、设置软连接"><a href="#四、设置软连接" class="headerlink" title="四、设置软连接"></a>四、设置软连接</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 此时 libfastcommon.so默认安装到了/usr/lib64/libfastcommon.so，而FastDFS主程序设置的lib目录是/usr/<span class="built_in">local</span>/lib，所以设置软连接</span></span><br><span class="line">ln -s /usr/lib64/libfastcommon.so /usr/local/lib/libfastcommon.so</span><br><span class="line">ln -s /usr/lib64/libfastcommon.so /usr/lib/libfastcommon.so</span><br><span class="line">ln -s /usr/lib64/libfdfsclient.so /usr/local/lib/libfdfsclient.so</span><br><span class="line">ln -s /usr/lib64/libfdfsclient.so /usr/lib/libfdfsclient.so</span><br></pre></td></tr></table></figure>
+<h2 id="五、使用fastdfs登录系统，在-home-fastdfs创建目录"><a href="#五、使用fastdfs登录系统，在-home-fastdfs创建目录" class="headerlink" title="五、使用fastdfs登录系统，在/home/fastdfs创建目录"></a>五、使用fastdfs登录系统，在/home/fastdfs创建目录</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mkdir src</span><br><span class="line">mkdir tracker</span><br><span class="line">mkdir storage</span><br></pre></td></tr></table></figure>
+<h2 id="六、下载fastdfs5-05源码并解压"><a href="#六、下载fastdfs5-05源码并解压" class="headerlink" title="六、下载fastdfs5.05源码并解压"></a>六、下载fastdfs5.05源码并解压</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cd src</span><br><span class="line">wget -c https://github.com/happyfish100/fastdfs/archive/V5.05.tar.gz</span><br><span class="line">tar -zxvf V5.05.tar.gz</span><br><span class="line">cd fastdfs-5.05</span><br></pre></td></tr></table></figure>
+<h2 id="七、修改make-sh并进行安装"><a href="#七、修改make-sh并进行安装" class="headerlink" title="七、修改make.sh并进行安装"></a>七、修改make.sh并进行安装</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">修改make.sh中的TARGET_PREFIX、TARGET_CONF_PATH和TARGET_INIT_PATH：</span><br><span class="line">TARGET_PREFIX=/home/fastdfs</span><br><span class="line">TARGET_CONF_PATH=/home/fastdfs/conf</span><br><span class="line">TARGET_INIT_PATH=/home/fastdfs/init.d</span><br><span class="line"></span><br><span class="line">然后执行</span><br><span class="line">./make.sh</span><br><span class="line">./make.sh install</span><br><span class="line">注：安装时报如下的错误不用理会，因为配置文件在/home/fastdfs/conf里</span><br><span class="line"></span><br><span class="line">mkdir: cannot create directory `/etc/fdfs': Permission denied</span><br></pre></td></tr></table></figure>
+<h2 id="八、修改配置文件名，去掉-sample后缀"><a href="#八、修改配置文件名，去掉-sample后缀" class="headerlink" title="八、修改配置文件名，去掉.sample后缀"></a>八、修改配置文件名，去掉.sample后缀</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cd /home/fastdfs/conf</span><br><span class="line">mv client.conf.sample client.conf</span><br><span class="line">mv storage.conf.sample storage.conf</span><br><span class="line">mv storage_ids.conf.sample  storage_ids.conf</span><br><span class="line">mv tracker.conf.sample tracker.conf</span><br></pre></td></tr></table></figure>
+<h2 id="九、修改storage-conf"><a href="#九、修改storage-conf" class="headerlink" title="九、修改storage.conf"></a>九、修改storage.conf</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">group_name=group1</span><br><span class="line">bind_addr=121.42.155.178 #改为实际的地址</span><br><span class="line">base_path=/home/fastdfs/storage</span><br><span class="line">store_path0=/home/fastdfs/storage</span><br><span class="line">tracker_server=121.42.155.178:22122 #改为实际的地址</span><br><span class="line">run_by_group=fastdfs</span><br><span class="line">run_by_user=fastdfs</span><br></pre></td></tr></table></figure>
+<h2 id="十、修改tracker-conf"><a href="#十、修改tracker-conf" class="headerlink" title="十、修改tracker.conf"></a>十、修改tracker.conf</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">bind_addr=121.42.155.178 #改为实际的地址</span><br><span class="line">base_path=/home/fastdfs/tracker</span><br><span class="line">run_by_group=fastdfs</span><br><span class="line">run_by_user=fastdfs</span><br><span class="line">use_storage_id = true</span><br><span class="line">storage_ids_filename = storage_ids.conf</span><br><span class="line">id_type_in_filename = id</span><br></pre></td></tr></table></figure>
+<h2 id="十一、修改storage-ids-conf"><a href="#十一、修改storage-ids-conf" class="headerlink" title="十一、修改storage_ids.conf"></a>十一、修改storage_ids.conf</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">100001   group1  121.42.155.178 #改为实际的地址</span><br></pre></td></tr></table></figure>
+<h2 id="十二、修改client-conf"><a href="#十二、修改client-conf" class="headerlink" title="十二、修改client.conf"></a>十二、修改client.conf</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">base_path=/home/fastdfs</span><br><span class="line">tracker_server=121.42.155.178:22122 #改为实际的地址</span><br></pre></td></tr></table></figure>
+<h2 id="十三、修改-home-fastdfs-init-d-fdfs-storaged"><a href="#十三、修改-home-fastdfs-init-d-fdfs-storaged" class="headerlink" title="十三、修改 /home/fastdfs/init.d/fdfs_storaged"></a>十三、修改 /home/fastdfs/init.d/fdfs_storaged</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">PRG=/home/fastdfs/bin/fdfs_storaged</span><br><span class="line">CONF=/home/fastdfs/conf/storage.conf</span><br><span class="line"></span><br><span class="line">将fdfs_storaged中所有的usr/local替换为home/fastdfs：</span><br><span class="line">sed  -i  's/usr\/local/home\/fastdfs/g'  fdfs_storaged</span><br></pre></td></tr></table></figure>
+<h2 id="十四、修改-home-fastdfs-init-d-fdfs-trackerd"><a href="#十四、修改-home-fastdfs-init-d-fdfs-trackerd" class="headerlink" title="十四、修改 /home/fastdfs/init.d/fdfs_trackerd"></a>十四、修改 /home/fastdfs/init.d/fdfs_trackerd</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">PRG=/home/fastdfs/bin/fdfs_trackerd</span><br><span class="line">CONF=/home/fastdfs/conf/tracker.conf</span><br><span class="line"></span><br><span class="line">将fdfs_trackerd中所有的usr/local替换为home/fastdfs：</span><br><span class="line">sed  -i  's:usr/local:home/fastdfs:g'  fdfs_trackerd</span><br></pre></td></tr></table></figure>
+<h2 id="十五、启动"><a href="#十五、启动" class="headerlink" title="十五、启动"></a>十五、启动</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">/home/fastdfs/init.d/fdfs_trackerd start</span><br><span class="line">/home/fastdfs/init.d/fdfs_storaged start</span><br></pre></td></tr></table></figure>
+<h2 id="十六、常见问题"><a href="#十六、常见问题" class="headerlink" title="十六、常见问题"></a>十六、常见问题</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">1.如何让server进程退出运行？</span><br><span class="line"></span><br><span class="line">直接kill即可让server进程正常退出，可以使用killall命令，例如：</span><br><span class="line"></span><br><span class="line">killall fdfs_trackerd</span><br><span class="line"></span><br><span class="line">killall fdfs_storaged</span><br><span class="line"></span><br><span class="line">也可以使用如下命令：</span><br><span class="line"></span><br><span class="line">/home/fastdfs/bin/fdfs_trackerd /home/fastdfs/conf/tracker.conf stop</span><br><span class="line"></span><br><span class="line">/home/fastdfs/bin/fdfs_storaged /home/fastdfs/conf/storage.conf stop</span><br><span class="line"></span><br><span class="line">千万不要使用-9参数强杀，否则可能会导致binlog数据丢失的问题。</span><br><span class="line"></span><br><span class="line"> </span><br><span class="line"></span><br><span class="line">2.如何查看storage状态？</span><br><span class="line"></span><br><span class="line">fdfs_monitor  /home/fastdfs/conf/storage.conf</span><br></pre></td></tr></table></figure>
+<h1 id="普通用户开机启动服务"><a href="#普通用户开机启动服务" class="headerlink" title="普通用户开机启动服务"></a>普通用户开机启动服务</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 1. 使用root账户登录，修改/etc/rc.local 文件</span></span><br><span class="line">[root@host-172-16-2-210 ~]# cat /etc/rc.local </span><br><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> THIS FILE IS ADDED FOR COMPATIBILITY PURPOSES</span></span><br><span class="line"><span class="meta">#</span><span class="bash"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> It is highly advisable to create own systemd services or udev rules</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> to run scripts during boot instead of using this file.</span></span><br><span class="line"><span class="meta">#</span><span class="bash"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> In contrast to previous versions due to parallel execution during boot</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> this script will NOT be run after all other services.</span></span><br><span class="line"><span class="meta">#</span><span class="bash"></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> Please note that you must run <span class="string">'chmod +x /etc/rc.d/rc.local'</span> to ensure</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> that this script will be executed during boot.</span></span><br><span class="line"></span><br><span class="line">touch /var/lock/subsys/local</span><br><span class="line"></span><br><span class="line">su - test -c "/bin/sh /home/test/init.d/fdfs_trackerd start"</span><br><span class="line">su - test -c "/bin/sh /home/test/init.d/fdfs_storaged start"</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 2. 给/etc/rc.local 文件赋予执行权限</span></span><br><span class="line">chmod +x /etc/rc.d/rc.local</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 3. 禁用防火墙</span></span><br><span class="line">systemctl disable firewalld</span><br><span class="line">systemctl stop firewalld</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 4. 重启测试</span></span><br></pre></td></tr></table></figure>
+
+        
+        <br>
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+    </div>
+</div>
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+        <li>
+            <a target="_blank" href="https://www.zhihu.com/people/li-bo-2-25">
+                            <span class="fa-stack fa-lg">
+                                 <i class="iconfont icon-zhihu"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+        
+
+        
+        <li>
+            <a target="_blank" href="https://github.com/liboo0731">
+                            <span class="fa-stack fa-lg">
+                                <i class="iconfont icon-github"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span>/</span>
+        
+        <span><a href="https://www.cnblogs.com/liboo/">H2K1R~ACE_博客园</a></span>
+        <span>/</span>
+        
+        <span><a href="https://blog.csdn.net/weixin_40108079">H2K1E~ACE_CSDN</a></span>
+        <span>/</span>
+        
+    </p>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/js/index.js"></script>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+    <script>
+        /**
+         *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+         *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+        */
+        if( '' || '')
+        var disqus_config = function () {
+            this.page.url = '';  // Replace PAGE_URL with your page's canonical URL variable
+            this.page.identifier = ''; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        };
+
+        (function() { // DON'T EDIT BELOW THIS LINE
+            var d = document, s = d.createElement('script');
+            s.src = 'https://airclouds-blog.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+    </script>
+
+</html>

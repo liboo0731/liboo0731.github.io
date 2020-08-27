@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="李博的博客">
+    <meta name="keyword" content="striveliboo">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        【web】AngularJs的UI组件ui-bootstrap —— Model - Liboo的博客 | Liboo&#39;s Blog
+        
+    </title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/aircloud.css">
+    <link rel="stylesheet" href="/css/gitment.css">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> Internet of Everything, Everywhere. </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar">
+            <img src="/img/avatar.jpg">
+        </div>
+        <div class="name">
+            <i>H2K1E~ACE</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li>
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li>
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li>
+                <a href="/archive">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li>
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-5"><a class="toc-link" href="#uibModal-open-方法可以使用的参数："><span class="toc-text">$uibModal.open()方法可以使用的参数：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#uibModal-open-方法返回模态窗实例的属性："><span class="toc-text">$uibModal.open()方法返回模态窗实例的属性：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#静态资源引入："><span class="toc-text">静态资源引入：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#定义模块："><span class="toc-text">定义模块：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#创建弹窗自定义指令："><span class="toc-text">创建弹窗自定义指令：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#组件中绑定："><span class="toc-text">组件中绑定：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#页面调用："><span class="toc-text">页面调用：</span></a></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input">
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+        <div class="index-about-mobile">
+            <i> Internet of Everything, Everywhere. </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        【web】AngularJs的UI组件ui-bootstrap —— Model
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2018-09-28 16:21:23</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/tags/#web" title="web">web</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#angularjs" title="angularjs">angularjs</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#ui-bootstrap" title="ui-bootstrap">ui-bootstrap</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#ocLazyLoad" title="ocLazyLoad">ocLazyLoad</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+
+    </div>
+    <div class="post-content ">
+        <p>Model是用来创建模态窗口的，但是实际上，并没有Model指令，而只有<code>$uibModal</code>服务，创建模态窗口是使用<code>$uibModal.open()</code>方法。</p>
+<p>全局的设置可以通过<code>$uibModalProvider.options</code>来配置。</p>
+<h5 id="uibModal-open-方法可以使用的参数："><a href="#uibModal-open-方法可以使用的参数：" class="headerlink" title="$uibModal.open()方法可以使用的参数："></a>$uibModal.open()方法可以使用的参数：</h5><table>
+<thead>
+<tr>
+<th>参数名</th>
+<th>默认值</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>animation</td>
+<td>true</td>
+<td>是否启用动画</td>
+</tr>
+<tr>
+<td>appendTo</td>
+<td>body</td>
+<td>把模态窗口放在指定的dom元素中。例如$document.find(‘aside’).eq(0)</td>
+</tr>
+<tr>
+<td>backdrop</td>
+<td>true</td>
+<td>打开模态窗口时的背景设置。可设置的值有：true（显示灰色背景，在模态窗口之外单击会关闭模态窗口），false （不显示灰色背景），”static”（显示灰色背景，在模态窗口关闭之前背景元素不可用）</td>
+</tr>
+<tr>
+<td>backdropClass</td>
+<td></td>
+<td>为背景添加的类名</td>
+</tr>
+<tr>
+<td>bindToController</td>
+<td>false</td>
+<td>设置为true并且使用controllerAs参数时，$scope的属性会传递给模态窗口所使用的controller</td>
+</tr>
+<tr>
+<td>controller</td>
+<td></td>
+<td>可以设置为一个表示controller的字符串，或者一个函数，或者一个数组（使用数组标记的方式为控制器注入依赖）。 控制器中可使用$uibModalInstance来表示模态窗口的实例。</td>
+</tr>
+<tr>
+<td>controllerAs</td>
+<td></td>
+<td>controller-as语法的替代写法</td>
+</tr>
+<tr>
+<td>keyboard</td>
+<td>true</td>
+<td>是否允许用ESC键关闭模态窗口</td>
+</tr>
+<tr>
+<td>openedClass</td>
+<td>modal-open</td>
+<td>打开模态窗口时为body元素增加的类名</td>
+</tr>
+<tr>
+<td>resolve</td>
+<td></td>
+<td>传递到模态窗口中的对象</td>
+</tr>
+<tr>
+<td>scope</td>
+<td>$rootScope</td>
+<td>模态窗口的父作用域对象</td>
+</tr>
+<tr>
+<td>size</td>
+<td></td>
+<td>一个字符串，和前缀“model-”组合成类名添加到模态窗口上</td>
+</tr>
+<tr>
+<td>template</td>
+<td></td>
+<td>表示模态窗口内容的文本</td>
+</tr>
+<tr>
+<td>templateUrl</td>
+<td></td>
+<td>模态窗口内容的模板url</td>
+</tr>
+<tr>
+<td>windowClass</td>
+<td></td>
+<td>添加到模态窗口模板的类名（不是模态窗口内容模板）</td>
+</tr>
+<tr>
+<td>windowTemplateUrl</td>
+<td>uib/template/modal/window.html</td>
+<td></td>
+</tr>
+<tr>
+<td>windowTopClass</td>
+<td></td>
+<td>添加到顶层模态窗口的类名</td>
+</tr>
+</tbody>
+</table>
+<h5 id="uibModal-open-方法返回模态窗实例的属性："><a href="#uibModal-open-方法返回模态窗实例的属性：" class="headerlink" title="$uibModal.open()方法返回模态窗实例的属性："></a>$uibModal.open()方法返回模态窗实例的属性：</h5><table>
+<thead>
+<tr>
+<th>属性名</th>
+<th>类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>close(result)</td>
+<td>function</td>
+<td>关闭模态窗口，传递一个结果</td>
+</tr>
+<tr>
+<td>dismiss(reason)</td>
+<td>function</td>
+<td>取消模态窗口，传递一个原因</td>
+</tr>
+<tr>
+<td>result</td>
+<td>promise</td>
+<td>一个promise，窗口关闭时为resolved，窗口取消时为rejected</td>
+</tr>
+<tr>
+<td>opened</td>
+<td>promise</td>
+<td>一个promise，窗口打开并下载完内容解析了所有变量后，promise为resolved</td>
+</tr>
+<tr>
+<td>closed</td>
+<td>promise</td>
+<td>一个promise，窗口关闭并且动画结束后为resolved</td>
+</tr>
+<tr>
+<td>rendered</td>
+<td>promise</td>
+<td>一个promise，窗口呈现出来后为resolved</td>
+</tr>
+</tbody>
+</table>
+<h5 id="静态资源引入："><a href="#静态资源引入：" class="headerlink" title="静态资源引入："></a>静态资源引入：</h5><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">href</span>=<span class="string">"plugins/bootstrap/css/bootstrap.css"</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> /&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"js/angular.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"js/ocLazyLoad.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"js/ui-bootstrap-tpls"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h5 id="定义模块："><a href="#定义模块：" class="headerlink" title="定义模块："></a>定义模块：</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> baseModule=angular.module(<span class="string">'base-module'</span>,[</span><br><span class="line">	<span class="string">'ui.bootstrap'</span>,</span><br><span class="line">	<span class="string">'oc.lazyLoad'</span></span><br><span class="line">]);</span><br></pre></td></tr></table></figure>
+<h5 id="创建弹窗自定义指令："><a href="#创建弹窗自定义指令：" class="headerlink" title="创建弹窗自定义指令："></a>创建弹窗自定义指令：</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">baseModule.directive(<span class="string">'uibModal'</span>,[</span><br><span class="line">	<span class="string">'$uibModal'</span>,</span><br><span class="line">	<span class="string">'$ocLazyLoad'</span>,</span><br><span class="line">	<span class="string">'$rootScope'</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span></span></span><br><span class="line"><span class="function"><span class="params">			$uibModal,</span></span></span><br><span class="line"><span class="function"><span class="params">			$ocLazyLoad,</span></span></span><br><span class="line"><span class="function"><span class="params">			$rootScope</span>)</span>&#123;</span><br><span class="line">	<span class="keyword">return</span> &#123;</span><br><span class="line">		restrict: <span class="string">'A'</span>,</span><br><span class="line">		scope: &#123;</span><br><span class="line">			uibModal: <span class="string">'='</span></span><br><span class="line">		&#125;,</span><br><span class="line">		link:<span class="function"><span class="keyword">function</span>(<span class="params">scope,element,attr</span>)</span>&#123;</span><br><span class="line">			element.on(<span class="string">'click'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">				<span class="comment">//动态加载组件</span></span><br><span class="line">				$ocLazyLoad.load(scope.uibModal.componentUrl).then(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">					<span class="comment">//解绑事件，否则下次执行会累计增加一个弹窗</span></span><br><span class="line">					element.blur();</span><br><span class="line">		        	<span class="comment">//打开弹窗</span></span><br><span class="line">					<span class="keyword">var</span> options=angular.extend(&#123;</span><br><span class="line">						animation:<span class="literal">false</span>,</span><br><span class="line">						backdrop:<span class="string">'static'</span>,</span><br><span class="line">						auth:<span class="literal">true</span>,</span><br><span class="line">		            &#125;,scope.uibModal);</span><br><span class="line">					<span class="keyword">var</span> modalInstance=$uibModal.open(options);</span><br><span class="line">					<span class="comment">//下面的特性，要求静态资源也要检查登录,或者要求组件内有发起过数据获取</span></span><br><span class="line">					<span class="keyword">if</span>(options.auth)&#123;</span><br><span class="line">						modalInstance.rendered.then(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">							<span class="keyword">if</span>(!$rootScope.currentUser)&#123;</span><br><span class="line">								modalInstance.close();</span><br><span class="line">							&#125;</span><br><span class="line">						&#125;);</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;);</span><br><span class="line">		    &#125;);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;]);</span><br></pre></td></tr></table></figure>
+<h5 id="组件中绑定："><a href="#组件中绑定：" class="headerlink" title="组件中绑定："></a>组件中绑定：</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">angular.module(<span class="string">'user-groups'</span>).component(<span class="string">'userGroupsForm'</span>, &#123;</span><br><span class="line">	bindings:&#123;</span><br><span class="line">		resolve:<span class="string">'&lt;'</span>,</span><br><span class="line">		close:<span class="string">'&amp;'</span>,</span><br><span class="line">	    dismiss:<span class="string">'&amp;'</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h5 id="页面调用："><a href="#页面调用：" class="headerlink" title="页面调用："></a>页面调用：</h5><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">"button"</span> <span class="attr">uib-modal</span>=<span class="string">"&#123;componentUrl:'user-groups/form/component',component:'userGroupsForm',size:'lg',resolve:&#123;title:&#123;title:'新建群组'&#125;&#125;&#125;"</span>&gt;</span>新建群组<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+        
+        <br>
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+    </div>
+</div>
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+        <li>
+            <a target="_blank" href="https://www.zhihu.com/people/li-bo-2-25">
+                            <span class="fa-stack fa-lg">
+                                 <i class="iconfont icon-zhihu"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+        
+
+        
+        <li>
+            <a target="_blank" href="https://github.com/liboo0731">
+                            <span class="fa-stack fa-lg">
+                                <i class="iconfont icon-github"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span>/</span>
+        
+        <span><a href="https://www.cnblogs.com/liboo/">H2K1R~ACE_博客园</a></span>
+        <span>/</span>
+        
+        <span><a href="https://blog.csdn.net/weixin_40108079">H2K1E~ACE_CSDN</a></span>
+        <span>/</span>
+        
+    </p>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/js/index.js"></script>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+    <script>
+        /**
+         *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+         *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+        */
+        if( '' || '')
+        var disqus_config = function () {
+            this.page.url = '';  // Replace PAGE_URL with your page's canonical URL variable
+            this.page.identifier = ''; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        };
+
+        (function() { // DON'T EDIT BELOW THIS LINE
+            var d = document, s = d.createElement('script');
+            s.src = 'https://airclouds-blog.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+    </script>
+
+</html>

@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="李博的博客">
+    <meta name="keyword" content="striveliboo">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        【nagios】Nagios安装 - Liboo的博客 | Liboo&#39;s Blog
+        
+    </title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/aircloud.css">
+    <link rel="stylesheet" href="/css/gitment.css">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> Internet of Everything, Everywhere. </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar">
+            <img src="/img/avatar.jpg">
+        </div>
+        <div class="name">
+            <i>H2K1E~ACE</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li>
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li>
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li>
+                <a href="/archive">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li>
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#What-Nagios-Provides"><span class="toc-text">What Nagios Provides</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#How-It-Works"><span class="toc-text">How It Works</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Monitoring"><span class="toc-text">Monitoring</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Alerting"><span class="toc-text">Alerting</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Response"><span class="toc-text">Response</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Reporting"><span class="toc-text">Reporting</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Maintenance"><span class="toc-text">Maintenance</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Planning"><span class="toc-text">Planning</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Features"><span class="toc-text">Features</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Comprehensive"><span class="toc-text">Comprehensive</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Visibility"><span class="toc-text">Visibility</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Awareness"><span class="toc-text">Awareness</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Problem-Remediation"><span class="toc-text">Problem Remediation</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Proactive-Planning"><span class="toc-text">Proactive Planning</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Reporting-1"><span class="toc-text">Reporting</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Multi-Tenant"><span class="toc-text">Multi-Tenant</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Extendable-Architecture"><span class="toc-text">Extendable Architecture</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Favorite-Nagios-Projects"><span class="toc-text">Favorite Nagios Projects</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#NCPA"><span class="toc-text">NCPA</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DNX"><span class="toc-text">DNX</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#NRPE"><span class="toc-text">NRPE</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#NRDP"><span class="toc-text">NRDP</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#NSCA"><span class="toc-text">NSCA</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#NSClient"><span class="toc-text">NSClient++</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Nagiosgraph"><span class="toc-text">Nagiosgraph</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#NSTI"><span class="toc-text">NSTI</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#NConf"><span class="toc-text">NConf</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#NDOUtils"><span class="toc-text">NDOUtils</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#BPI"><span class="toc-text">BPI</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#NagVis"><span class="toc-text">NagVis</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CentOS-Easy-Setup"><span class="toc-text">CentOS Easy Setup</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Reference"><span class="toc-text">Reference</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Security-Enhanced-Linux"><span class="toc-text">Security-Enhanced Linux</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Prerequisites"><span class="toc-text">Prerequisites</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Downloading-the-Source"><span class="toc-text">Downloading the Source</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Compile"><span class="toc-text">Compile</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Create-User-And-Group"><span class="toc-text">Create User And Group</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Install-Binaries"><span class="toc-text">Install Binaries</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Install-Service-Daemon"><span class="toc-text">Install Service / Daemon</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Install-Command-Mode"><span class="toc-text">Install Command Mode</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Install-Configuration-Files"><span class="toc-text">Install Configuration Files</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Install-Apache-Config-Files"><span class="toc-text">Install Apache Config Files</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Configure-Firewall"><span class="toc-text">Configure Firewall</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Create-nagiosadmin-User-Account"><span class="toc-text">Create nagiosadmin User Account</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Start-Apache-Web-Server"><span class="toc-text">Start Apache Web Server</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Start-Service-Daemon"><span class="toc-text">Start Service / Daemon</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Test-Nagios"><span class="toc-text">Test Nagios</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#BUT-WAIT-…"><span class="toc-text">BUT WAIT …</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Installing-The-Nagios-Plugins"><span class="toc-text">Installing The Nagios Plugins</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Prerequisites-1"><span class="toc-text">Prerequisites</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Downloading-The-Source"><span class="toc-text">Downloading The Source</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Compile-Install"><span class="toc-text">Compile + Install</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Test-Plugins"><span class="toc-text">Test Plugins</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Service-Daemon-Commands"><span class="toc-text">Service / Daemon Commands</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Centos7-x-nagios-script"><span class="toc-text">Centos7.x-nagios-script</span></a></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input">
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+        <div class="index-about-mobile">
+            <i> Internet of Everything, Everywhere. </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        【nagios】Nagios安装
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2019-05-20 14:02:09</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/tags/#nagios" title="nagios">nagios</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+
+    </div>
+    <div class="post-content ">
+        <h2 id="What-Nagios-Provides"><a href="#What-Nagios-Provides" class="headerlink" title="What Nagios Provides"></a>What Nagios Provides</h2><p>Designed with <strong>scalability</strong> and <strong>flexibility</strong> in mind, Nagios gives you the peace of mind that comes from knowing your organization’s business processes won’t be affected by unknown outages.</p>
+<p>Nagios is a powerful tool that provides you with instant awareness of your organization’s mission-critical IT infrastructure. Nagios allows you to detect and repair problems and mitigate future issues before they affect end-users and customers.</p>
+<p><strong>By using Nagios, you can:</strong></p>
+<ul>
+<li>Plan for infrastructure upgrades before outdated systems cause failures</li>
+<li>Respond to issues at the first sign of a problem</li>
+<li>Automatically fix problems when they are detected</li>
+<li>Coordinate technical team responses</li>
+<li>Ensure your organization’s SLAs are being met</li>
+<li>Ensure IT infrastructure outages have a minimal effect on your organization’s bottom line</li>
+<li>Monitor your entire infrastructure and business processes</li>
+</ul>
+<h2 id="How-It-Works"><a href="#How-It-Works" class="headerlink" title="How It Works"></a>How It Works</h2><h3 id="Monitoring"><a href="#Monitoring" class="headerlink" title="Monitoring"></a>Monitoring</h3><p>IT staff configure Nagios to monitor critical IT infrastructure components, including system metrics, network protocols, applications, services, servers, and network infrastructure.</p>
+<h3 id="Alerting"><a href="#Alerting" class="headerlink" title="Alerting"></a>Alerting</h3><p>Nagios sends alerts when critical infrastructure components fail and recover, providing administrators with notice of important events. Alerts can be delivered via email, SMS, or custom script.</p>
+<h3 id="Response"><a href="#Response" class="headerlink" title="Response"></a>Response</h3><p>IT staff can acknowledge alerts and begin resolving outages and investigating security alerts immediately. Alerts can be escalated to different groups if alerts are not acknowledged in a timely manner.</p>
+<h3 id="Reporting"><a href="#Reporting" class="headerlink" title="Reporting"></a>Reporting</h3><p>Reports provide a historical record of outages, events, notifications, and alert response for later review. Availability reports help ensure your SLAs are being met.</p>
+<h3 id="Maintenance"><a href="#Maintenance" class="headerlink" title="Maintenance"></a>Maintenance</h3><p>Scheduled downtime prevents alerts during scheduled maintenance and upgrade windows.</p>
+<h3 id="Planning"><a href="#Planning" class="headerlink" title="Planning"></a>Planning</h3><p>Trending and capacity planning graphs and reports allow you to identify necessary infrastructure upgrades before failures occur.</p>
+<h2 id="Features"><a href="#Features" class="headerlink" title="Features"></a>Features</h2><h3 id="Comprehensive"><a href="#Comprehensive" class="headerlink" title="Comprehensive"></a>Comprehensive</h3><p>MonitoringCore provides monitoring of all mission-critical infrastructure components in your IT infrastructure.</p>
+<h3 id="Visibility"><a href="#Visibility" class="headerlink" title="Visibility"></a>Visibility</h3><p>Gain a centralized view of your entire IT operations and review detailed status information through the web interface.</p>
+<h3 id="Awareness"><a href="#Awareness" class="headerlink" title="Awareness"></a>Awareness</h3><p>Alerts with escalation capabilities are delivered to IT staff via email and SMS to ensure fast detection of outages.</p>
+<h3 id="Problem-Remediation"><a href="#Problem-Remediation" class="headerlink" title="Problem Remediation"></a>Problem Remediation</h3><p>Event handlers can automatically restart failed applications, servers, devices, and services when problems are found.</p>
+<h3 id="Proactive-Planning"><a href="#Proactive-Planning" class="headerlink" title="Proactive Planning"></a>Proactive Planning</h3><p>Trending and capacity planning extensions allow you to proactively plan for upgrades.</p>
+<h3 id="Reporting-1"><a href="#Reporting-1" class="headerlink" title="Reporting"></a>Reporting</h3><p>Availability reports ensure SLAs are being met and historical reports provide record of critical information.</p>
+<h3 id="Multi-Tenant"><a href="#Multi-Tenant" class="headerlink" title="Multi-Tenant"></a>Multi-Tenant</h3><p>CapabilitiesMulti-user access and user-specific views can be configured to ensure clients see specific information.</p>
+<h3 id="Extendable-Architecture"><a href="#Extendable-Architecture" class="headerlink" title="Extendable Architecture"></a>Extendable Architecture</h3><p>Multiple API’s provide integration with in-house / third-party applications, and community-developed add-ons.</p>
+<h2 id="Favorite-Nagios-Projects"><a href="#Favorite-Nagios-Projects" class="headerlink" title="Favorite Nagios Projects"></a>Favorite Nagios Projects</h2><h3 id="NCPA"><a href="#NCPA" class="headerlink" title="NCPA"></a>NCPA</h3><p>NCPA is a cross-platform monitoring agent that runs on Windows, Linux/Unix, and Mac OS/X machines. Its features include both active and passive checks, remote management, and a local monitoring interface.</p>
+<h3 id="DNX"><a href="#DNX" class="headerlink" title="DNX"></a>DNX</h3><p>DNX is a modular extension of Nagios that offloads a significant portion of the work normally done by Nagios to a distributed network of remote hosts. The DNX module ensures that work is distributed fairly and evenly among the registered DNX client hosts.</p>
+<h3 id="NRPE"><a href="#NRPE" class="headerlink" title="NRPE"></a>NRPE</h3><p>NRPE allows you to remotely execute Nagios plugins on other Linux/Unix machines. This allows you to monitor remote machine metrics (disk usage, CPU load, etc.). NRPE can also communicate with Windows agent addons like NSClient++, so you can check metrics on remote Windows machines as well.</p>
+<h3 id="NRDP"><a href="#NRDP" class="headerlink" title="NRDP"></a>NRDP</h3><p>NRDP is a flexible data transport mechanism and processor for Nagios. It is designed with a simple and powerful architecture that allows for it to be easily extended and customized to fit individual users’ needs. It uses standard ports protocols (HTTP(S) and XML) and can be implemented as a replacement for NSCA.</p>
+<h3 id="NSCA"><a href="#NSCA" class="headerlink" title="NSCA"></a>NSCA</h3><p>NSCA allows you to integrate passive alerts and checks from remote machines and applications with Nagios. Useful for processing security alerts, as well as deploying redundant and distributed Nagios setups.</p>
+<h3 id="NSClient"><a href="#NSClient" class="headerlink" title="NSClient++"></a>NSClient++</h3><p>NSClient++ is a monitoring agent/daemon for Microsoft Windows systems that works with Nagios. Make monitoring Windows machines easy.</p>
+<h3 id="Nagiosgraph"><a href="#Nagiosgraph" class="headerlink" title="Nagiosgraph"></a>Nagiosgraph</h3><p>Nagiosgraph is graphing tool that parses output and performance data from Nagios plugins and stores the data in RRD files. nagiosgraph displays data in Nagios trends, as popups for hosts and services, or in separate reports. Easy to set up and eminently customizable.</p>
+<h3 id="NSTI"><a href="#NSTI" class="headerlink" title="NSTI"></a>NSTI</h3><p>NSTI is a Nagios addon that makes managing SNMP traps easier. NSTI provide a PHP frontend for the SNMPTT database backend and allows you to filter SNMP results quickly and effectively to get a comprehensive overview of the information you want to see.</p>
+<h3 id="NConf"><a href="#NConf" class="headerlink" title="NConf"></a>NConf</h3><p>NConf is a PHP frontend for configuring Nagios. It differs from other tools by offering enterprise-class features like templates, dependencies and the ability to configure a large-scale, distributed Nagios server topology.</p>
+<h3 id="NDOUtils"><a href="#NDOUtils" class="headerlink" title="NDOUtils"></a>NDOUtils</h3><p>NDOUtils allows you to export current and historical data from one or more Nagios instances to a MySQL database. Several community addons use this as one of their data sources. NDOUtils consists of a standalone daemon, a Nagios event broker, and several helper utilities.</p>
+<h3 id="BPI"><a href="#BPI" class="headerlink" title="BPI"></a>BPI</h3><p>Nagios Business Process Intelligence (BPI) is an advanced grouping tool that allows you to set more complex dependencies to determine groups states. Nagios BPI provides an interface to effectively view the ‘real’ state of the network. Rules for group states can be determined by the user, and parent-child relationships are easily identified when you need to ‘drill down’ on a problem. This tool can also be used in conjunction with a check plugin to allow for notifications through Nagios.</p>
+<h3 id="NagVis"><a href="#NagVis" class="headerlink" title="NagVis"></a>NagVis</h3><p>Nagvis is a visualization addon for Nagios. It can be used to visualize Nagios data, e.g. to display IT processes like a mail system or a network infrastructur</p>
+<h2 id="CentOS-Easy-Setup"><a href="#CentOS-Easy-Setup" class="headerlink" title="CentOS Easy Setup"></a>CentOS Easy Setup</h2><h3 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h3><p><em><a href="https://www.nagios.org/" target="_blank" rel="noopener">Nagios</a></em></p>
+<p><em><a href="https://assets.nagios.com/downloads/nagioscore/docs/" target="_blank" rel="noopener">Nagios Core Document</a></em></p>
+<h3 id="Security-Enhanced-Linux"><a href="#Security-Enhanced-Linux" class="headerlink" title="Security-Enhanced Linux"></a>Security-Enhanced Linux</h3><p>This guide is based on SELinux being disabled or in permissive mode. Steps to do this are as follows.</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sed -<span class="selector-tag">i</span> <span class="string">'s/SELINUX=.*/SELINUX=disabled/g'</span> /etc/selinux/config</span><br><span class="line">setenforce <span class="number">0</span></span><br></pre></td></tr></table></figure>
+<h3 id="Prerequisites"><a href="#Prerequisites" class="headerlink" title="Prerequisites"></a>Prerequisites</h3><p>Perform these steps to install the pre-requisite packages.</p>
+<figure class="highlight maxima"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y gcc glibc glibc-common wget unzip httpd php <span class="built_in">gd</span> <span class="built_in">gd</span>-devel perl <span class="built_in">postfix</span></span><br></pre></td></tr></table></figure>
+<h3 id="Downloading-the-Source"><a href="#Downloading-the-Source" class="headerlink" title="Downloading the Source"></a>Downloading the Source</h3><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd /tmp</span><br><span class="line">wget -O nagioscore<span class="selector-class">.tar</span><span class="selector-class">.gz</span> https:<span class="comment">//github.com/NagiosEnterprises/nagioscore/archive/nagios-4.4.3.tar.gz</span></span><br><span class="line">tar xzf nagioscore<span class="selector-class">.tar</span><span class="selector-class">.gz</span></span><br></pre></td></tr></table></figure>
+<h3 id="Compile"><a href="#Compile" class="headerlink" title="Compile"></a>Compile</h3><figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">cd</span> <span class="string">/tmp/nagioscore-nagios-4.4.3/</span></span><br><span class="line"><span class="string">./configure</span></span><br><span class="line">make all</span><br></pre></td></tr></table></figure>
+<h3 id="Create-User-And-Group"><a href="#Create-User-And-Group" class="headerlink" title="Create User And Group"></a>Create User And Group</h3><p>This creates the nagios user and group. The apache user is also added to the nagios group.</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">make <span class="keyword">install</span>-<span class="keyword">groups</span>-<span class="keyword">users</span></span><br><span class="line">usermod -a -G nagios apache</span><br></pre></td></tr></table></figure>
+<h3 id="Install-Binaries"><a href="#Install-Binaries" class="headerlink" title="Install Binaries"></a>Install Binaries</h3><p>This step installs the binary files, CGIs, and HTML files.</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make <span class="keyword">install</span></span><br></pre></td></tr></table></figure>
+<h3 id="Install-Service-Daemon"><a href="#Install-Service-Daemon" class="headerlink" title="Install Service / Daemon"></a>Install Service / Daemon</h3><p>This installs the service or daemon files and also configures them to start on boot. The Apache httpd service is also configured at this point.</p>
+<p><strong>CentOS 5.x / 6.x</strong></p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">make <span class="keyword">install</span>-daemoninit</span><br><span class="line">chkconfig --level <span class="number">2345</span> httpd <span class="keyword">on</span></span><br></pre></td></tr></table></figure>
+<p><strong>CentOS 7.x</strong></p>
+<figure class="highlight gauss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">make</span> install-daemoninit</span><br><span class="line">systemctl <span class="keyword">enable</span> httpd.service</span><br></pre></td></tr></table></figure>
+<p>Information on starting and stopping services will be explained further on.</p>
+<h3 id="Install-Command-Mode"><a href="#Install-Command-Mode" class="headerlink" title="Install Command Mode"></a>Install Command Mode</h3><p>This installs and configures the external command file.</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make <span class="keyword">install</span>-commandmode</span><br></pre></td></tr></table></figure>
+<h3 id="Install-Configuration-Files"><a href="#Install-Configuration-Files" class="headerlink" title="Install Configuration Files"></a>Install Configuration Files</h3><p>This installs the <em>SAMPLE</em> configuration files. These are required as Nagios needs some configuration files to allow it to start.</p>
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make install-<span class="built_in">config</span></span><br></pre></td></tr></table></figure>
+<h3 id="Install-Apache-Config-Files"><a href="#Install-Apache-Config-Files" class="headerlink" title="Install Apache Config Files"></a>Install Apache Config Files</h3><p>This installs the Apache web server configuration files. Also configure Apache settings if required.</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make <span class="keyword">install</span>-webconf</span><br></pre></td></tr></table></figure>
+<h3 id="Configure-Firewall"><a href="#Configure-Firewall" class="headerlink" title="Configure Firewall"></a>Configure Firewall</h3><p>You need to allow port 80 inbound traffic on the local firewall so you can reach the Nagios Core web interface.</p>
+<p><strong>CentOS 5.x / 6.x</strong></p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">iptables -I INPUT -p tcp --destination-port 80 -j ACCEPT</span><br><span class="line">service iptables save</span><br><span class="line">ip6tables -I INPUT -p tcp --destination-port 80 -j ACCEPT</span><br><span class="line">service ip6tables save</span><br></pre></td></tr></table></figure>
+<p><strong>CentOS 7.x</strong></p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">firewall-cmd <span class="attribute">--zone</span>=public <span class="attribute">--add-port</span>=80/tcp</span><br><span class="line">firewall-cmd <span class="attribute">--zone</span>=public <span class="attribute">--add-port</span>=80/tcp --permanent</span><br></pre></td></tr></table></figure>
+<h3 id="Create-nagiosadmin-User-Account"><a href="#Create-nagiosadmin-User-Account" class="headerlink" title="Create nagiosadmin User Account"></a>Create nagiosadmin User Account</h3><p>You’ll need to create an Apache user account to be able to log into Nagios.</p>
+<p>The following command will create a user account called nagiosadmin and you will be prompted to provide a password for the account.</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">htpasswd -c <span class="regexp">/usr/</span>local<span class="regexp">/nagios/</span>etc<span class="regexp">/htpasswd.users nagiosadmin</span></span><br></pre></td></tr></table></figure>
+<p>When adding additional users in the future, you need to remove <strong>-c</strong> from the above command otherwise it will replace the existing nagiosadmin user <em>(and any other users you may have added)</em>.</p>
+<h3 id="Start-Apache-Web-Server"><a href="#Start-Apache-Web-Server" class="headerlink" title="Start Apache Web Server"></a>Start Apache Web Server</h3><p><strong>CentOS 5.x / 6.x</strong></p>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service httpd <span class="literal">start</span></span><br></pre></td></tr></table></figure>
+<p><strong>CentOS 7.x</strong></p>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl <span class="literal">start</span> httpd.service</span><br></pre></td></tr></table></figure>
+<h3 id="Start-Service-Daemon"><a href="#Start-Service-Daemon" class="headerlink" title="Start Service / Daemon"></a>Start Service / Daemon</h3><p>This command starts Nagios Core.</p>
+<p><strong>CentOS 5.x / 6.x</strong></p>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service nagios <span class="literal">start</span></span><br></pre></td></tr></table></figure>
+<p> <strong>CentOS 7.x</strong></p>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl <span class="literal">start</span> nagios.service</span><br></pre></td></tr></table></figure>
+<h3 id="Test-Nagios"><a href="#Test-Nagios" class="headerlink" title="Test Nagios"></a>Test Nagios</h3><p>Nagios is now running, to confirm this you need to log into the Nagios Web Interface.</p>
+<p>Point your web browser to the ip address or FQDN of your Nagios Core server, for example:</p>
+<p><a href="http://10.25.5.143/nagios" target="_blank" rel="noopener">http://10.25.5.143/nagios</a></p>
+<p><a href="http://core-013.domain.local/nagios" target="_blank" rel="noopener">http://core-013.domain.local/nagios</a></p>
+<p>You will be prompted for a username and password. The username is nagiosadmin (you created it in a previous step) and the password is what you provided earlier.</p>
+<p>Once you have logged in you are presented with the Nagios interface. Congratulations you have installed Nagios Core.</p>
+<h3 id="BUT-WAIT-…"><a href="#BUT-WAIT-…" class="headerlink" title="BUT WAIT …"></a>BUT WAIT …</h3><p>Currently you have only installed the Nagios Core engine. You’ll notice some errors under the hosts and services along the lines of:</p>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(No output <span class="keyword">on</span> stdout) stderr: execvp(/usr/<span class="keyword">local</span>/nagios/libexec/check_load, ...) failed. errno <span class="keyword">is</span> <span class="number">2</span>: No such <span class="built_in">file</span> <span class="keyword">or</span> directory</span><br></pre></td></tr></table></figure>
+<p>These errors will be resolved once you install the Nagios Plugins, which is covered in the next step.</p>
+<h3 id="Installing-The-Nagios-Plugins"><a href="#Installing-The-Nagios-Plugins" class="headerlink" title="Installing The Nagios Plugins"></a>Installing The Nagios Plugins</h3><p>Nagios Core needs plugins to operate properly. The following steps will walk you through installing Nagios Plugins.</p>
+<p>These steps install nagios-plugins 2.2.1. Newer versions will become available in the future and you can use those in the following installation steps. Please see the <a href="https://github.com/nagios-plugins/nagios-plugins/releases" target="_blank" rel="noopener">releases page on GitHub</a> for all available versions.</p>
+<p>Please note that the following steps install most of the plugins that come in the Nagios Plugins package. However there are some plugins that require other libraries which are not included in those instructions. Please refer to the following KB article for detailed installation instructions:</p>
+<p><a href="https://support.nagios.com/kb/article.php?id=569" target="_blank" rel="noopener">Documentation - Installing Nagios Plugins From Source</a></p>
+<h3 id="Prerequisites-1"><a href="#Prerequisites-1" class="headerlink" title="Prerequisites"></a>Prerequisites</h3><p>Make sure that you have the following packages installed.</p>
+<p><strong>CentOS 5.x</strong></p>
+<figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">yum install -y gcc glibc glibc-common make gettext automake wget openssl-devel net-snmp net-snmp-utils epel-release</span><br><span class="line">yum install -y perl-Net-SNMP</span><br><span class="line"><span class="keyword">cd</span> <span class="string">/tmp</span></span><br><span class="line">wget http:<span class="string">//ftp.gnu.org/gnu/autoconf/autoconf-2.60.tar.gz</span></span><br><span class="line">tar xzf autoconf-2.60.tar.gz </span><br><span class="line"><span class="keyword">cd</span> <span class="string">/tmp/autoconf-2.60</span></span><br><span class="line"><span class="string">./configure</span> </span><br><span class="line">make</span><br><span class="line">make install</span><br></pre></td></tr></table></figure>
+<p><strong>CentOS 6.x / 7.x</strong></p>
+<figure class="highlight dos"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yum install -y gcc glibc glibc-common make gettext automake autoconf wget openssl-devel <span class="built_in">net</span>-snmp <span class="built_in">net</span>-snmp-utils epel-release</span><br><span class="line">yum install -y perl-<span class="built_in">Net</span>-SNMP</span><br></pre></td></tr></table></figure>
+<h3 id="Downloading-The-Source"><a href="#Downloading-The-Source" class="headerlink" title="Downloading The Source"></a>Downloading The Source</h3><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd /tmp</span><br><span class="line">wget --no-check-certificate -O nagios-plugins<span class="selector-class">.tar</span><span class="selector-class">.gz</span> https:<span class="comment">//github.com/nagios-plugins/nagios-plugins/archive/release-2.2.1.tar.gz</span></span><br><span class="line">tar zxf nagios-plugins<span class="selector-class">.tar</span><span class="selector-class">.gz</span></span><br></pre></td></tr></table></figure>
+<h3 id="Compile-Install"><a href="#Compile-Install" class="headerlink" title="Compile + Install"></a>Compile + Install</h3><figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">cd</span> <span class="string">/tmp/nagios-plugins-release-2.2.1/</span></span><br><span class="line"><span class="string">./tools/setup</span></span><br><span class="line"><span class="string">./configure</span></span><br><span class="line">make</span><br><span class="line">make install</span><br></pre></td></tr></table></figure>
+<h3 id="Test-Plugins"><a href="#Test-Plugins" class="headerlink" title="Test Plugins"></a>Test Plugins</h3><p>Point your web browser to the ip address or FQDN of your Nagios Core server, for example:</p>
+<p><a href="http://10.25.5.143/nagios" target="_blank" rel="noopener">http://10.25.5.143/nagios</a></p>
+<p><a href="http://core-013.domain.local/nagios" target="_blank" rel="noopener">http://core-013.domain.local/nagios</a></p>
+<p>Go to a host or service object and “Re-schedule the next check” under the Commands menu. The error you previously saw should now disappear and the correct output will be shown on the screen.</p>
+<h3 id="Service-Daemon-Commands"><a href="#Service-Daemon-Commands" class="headerlink" title="Service / Daemon Commands"></a>Service / Daemon Commands</h3><p>Different Linux distributions have different methods of starting / stopping / restarting / status Nagios.</p>
+<p><strong>CentOS 5.x / 6.x</strong></p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">service nagios start</span><br><span class="line">service nagios stop</span><br><span class="line">service nagios restart</span><br><span class="line">service nagios status</span><br></pre></td></tr></table></figure>
+<p><strong>CentOS 7.x</strong></p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">systemctl start nagios.service</span><br><span class="line">systemctl stop nagios.service</span><br><span class="line">systemctl restart nagios.service</span><br><span class="line">systemctl status nagios.service</span><br></pre></td></tr></table></figure>
+<h2 id="Centos7-x-nagios-script"><a href="#Centos7-x-nagios-script" class="headerlink" title="Centos7.x-nagios-script"></a>Centos7.x-nagios-script</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">CentOS 7.x</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">Security-Enhanced Linux</span></span><br><span class="line">sed -i 's/SELINUX=.*/SELINUX=disabled/g' /etc/selinux/config</span><br><span class="line">setenforce 0</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">Prerequisites</span></span><br><span class="line">yum install -y gcc glibc glibc-common wget unzip httpd php gd gd-devel perl postfix</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">Downloading the Source</span></span><br><span class="line">cd /tmp</span><br><span class="line">wget -O nagioscore.tar.gz https://github.com/NagiosEnterprises/nagioscore/archive/nagios-4.4.3.tar.gz</span><br><span class="line">tar xzf nagioscore.tar.gz</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">Compile</span></span><br><span class="line">cd /tmp/nagioscore-nagios-4.4.3/</span><br><span class="line">./configure</span><br><span class="line">make all</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">Create User And Group</span></span><br><span class="line">make install-groups-users</span><br><span class="line">usermod -a -G nagios apache</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">Install Binaries</span></span><br><span class="line">make install</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">Install Service / Daemon</span></span><br><span class="line">make install-daemoninit</span><br><span class="line">systemctl enable httpd.service</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">Install Command Mode</span></span><br><span class="line">make install-commandmode</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">Install Configuration Files</span></span><br><span class="line">make install-config</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">Install Apache Config Files</span></span><br><span class="line">make install-webconf</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">Configure Firewall</span></span><br><span class="line">firewall-cmd --zone=public --add-port=80/tcp --permanent</span><br><span class="line">firewall-cmd --reload</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">Create nagiosadmin User Account</span></span><br><span class="line">htpasswd -c /usr/local/nagios/etc/htpasswd.users nagiosadmin</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">Start Apache Web Server</span></span><br><span class="line">systemctl start httpd.service</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">Start Service / Daemon</span></span><br><span class="line">systemctl start nagios.service</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">Installing The Nagios Plugins</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">Prerequisites</span></span><br><span class="line">yum install -y gcc glibc glibc-common make gettext automake autoconf wget openssl-devel net-snmp net-snmp-utils epel-release</span><br><span class="line">yum install -y perl-Net-SNMP</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">Downloading The Source</span></span><br><span class="line">cd /tmp</span><br><span class="line">wget --no-check-certificate -O nagios-plugins.tar.gz https://github.com/nagios-plugins/nagios-plugins/archive/release-2.2.1.tar.gz</span><br><span class="line">tar zxf nagios-plugins.tar.gz</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">Compile + Install</span></span><br><span class="line">cd /tmp/nagios-plugins-release-2.2.1/</span><br><span class="line">./tools/setup</span><br><span class="line">./configure</span><br><span class="line">make</span><br><span class="line">make install</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">Service / Daemon Commands</span></span><br><span class="line">systemctl restart nagios.service</span><br><span class="line">systemctl status nagios.service</span><br><span class="line">systemctl restart httpd.service</span><br><span class="line">systemctl status httpd.service</span><br></pre></td></tr></table></figure>
+
+        
+        <br>
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+    </div>
+</div>
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+        <li>
+            <a target="_blank" href="https://www.zhihu.com/people/li-bo-2-25">
+                            <span class="fa-stack fa-lg">
+                                 <i class="iconfont icon-zhihu"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+        
+
+        
+        <li>
+            <a target="_blank" href="https://github.com/liboo0731">
+                            <span class="fa-stack fa-lg">
+                                <i class="iconfont icon-github"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span>/</span>
+        
+        <span><a href="https://www.cnblogs.com/liboo/">H2K1R~ACE_博客园</a></span>
+        <span>/</span>
+        
+        <span><a href="https://blog.csdn.net/weixin_40108079">H2K1E~ACE_CSDN</a></span>
+        <span>/</span>
+        
+    </p>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/js/index.js"></script>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+    <script>
+        /**
+         *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+         *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+        */
+        if( '' || '')
+        var disqus_config = function () {
+            this.page.url = '';  // Replace PAGE_URL with your page's canonical URL variable
+            this.page.identifier = ''; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        };
+
+        (function() { // DON'T EDIT BELOW THIS LINE
+            var d = document, s = d.createElement('script');
+            s.src = 'https://airclouds-blog.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+    </script>
+
+</html>

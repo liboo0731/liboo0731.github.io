@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="李博的博客">
+    <meta name="keyword" content="striveliboo">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        【Linux】LVM使用及扩展 - Liboo的博客 | Liboo&#39;s Blog
+        
+    </title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/aircloud.css">
+    <link rel="stylesheet" href="/css/gitment.css">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> Internet of Everything, Everywhere. </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar">
+            <img src="/img/avatar.jpg">
+        </div>
+        <div class="name">
+            <i>H2K1E~ACE</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li>
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li>
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li>
+                <a href="/archive">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li>
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#LVM介绍"><span class="toc-text">LVM介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#LVM使用"><span class="toc-text">LVM使用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-查看可用磁盘信息"><span class="toc-text">1. 查看可用磁盘信息</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-创建PV"><span class="toc-text">2. 创建PV</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-创建VG，并将PV加入到VG"><span class="toc-text">3. 创建VG，并将PV加入到VG</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-创建LV"><span class="toc-text">4. 创建LV</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-给LV创建文件系统"><span class="toc-text">5. 给LV创建文件系统</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-将LV挂载到相应的目录"><span class="toc-text">6. 将LV挂载到相应的目录</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#LVM扩展"><span class="toc-text">LVM扩展</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-查看磁盘信息"><span class="toc-text">1. 查看磁盘信息</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-VG扩容"><span class="toc-text">2. VG扩容</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-LV扩容"><span class="toc-text">3. LV扩容</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-扩展文件系统"><span class="toc-text">4. 扩展文件系统</span></a></li></ol></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input">
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+        <div class="index-about-mobile">
+            <i> Internet of Everything, Everywhere. </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        【Linux】LVM使用及扩展
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2018-11-10 21:11:12</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/tags/#linux" title="linux">linux</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#lvm" title="lvm">lvm</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+
+    </div>
+    <div class="post-content ">
+        <h2 id="LVM介绍"><a href="#LVM介绍" class="headerlink" title="LVM介绍"></a>LVM介绍</h2><p>LVM是 Logical Volume Manager（逻辑卷管理）的简写，它是Linux环境下对磁盘分区进行管理的一种机制，它由Heinz Mauelshagen在Linux 2.4内核上实现，目前最新版本为：稳定版1.0.5，开发版 1.1.0-rc2，以及LVM2开发版。Linux用户安装Linux操作系统时遇到的一个常见的难以决定的问题就是如何正确地评估各分区大小，以分配合适的硬盘空间。普通的磁盘分区管理方式在逻辑分区划分好之后就无法改变其大小，当一个逻辑分区存放不下某个文件时，这个文件因为受上层文件系统的限制，也不能跨越多个分区来存放，所以也不能同时放到别的磁盘上。而遇到出现某个分区空间耗尽时，解决的方法通常是使用符号链接，或者使用调整分区大小的工具，但这只是暂时解决办法，没有从根本上解决问题。随着Linux的逻辑卷管理功能的出现，这些问题都迎刃而解，用户在无需停机的情况下可以方便地调整各个分区大小。</p>
+<h2 id="LVM使用"><a href="#LVM使用" class="headerlink" title="LVM使用"></a>LVM使用</h2><h3 id="1-查看可用磁盘信息"><a href="#1-查看可用磁盘信息" class="headerlink" title="1. 查看可用磁盘信息"></a>1. 查看可用磁盘信息</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fdisk -l</span><br></pre></td></tr></table></figure>
+<h3 id="2-创建PV"><a href="#2-创建PV" class="headerlink" title="2. 创建PV"></a>2. 创建PV</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">pvcreate /dev/sdb</span><br><span class="line"></span><br><span class="line">pvscan</span><br><span class="line">pvs</span><br><span class="line">pvdisplay</span><br></pre></td></tr></table></figure>
+<h3 id="3-创建VG，并将PV加入到VG"><a href="#3-创建VG，并将PV加入到VG" class="headerlink" title="3. 创建VG，并将PV加入到VG"></a>3. 创建VG，并将PV加入到VG</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">vgcreate vg_name /dev/sdb</span><br><span class="line"></span><br><span class="line">vgscan</span><br><span class="line">vgs</span><br><span class="line">vgdisplay</span><br></pre></td></tr></table></figure>
+<h3 id="4-创建LV"><a href="#4-创建LV" class="headerlink" title="4. 创建LV"></a>4. 创建LV</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">lvcreate -L 5G -n lv_name vg_name</span><br><span class="line"></span><br><span class="line">lvscan</span><br><span class="line">lvs</span><br><span class="line">lvdisplay</span><br></pre></td></tr></table></figure>
+<h3 id="5-给LV创建文件系统"><a href="#5-给LV创建文件系统" class="headerlink" title="5. 给LV创建文件系统"></a>5. 给LV创建文件系统</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> xfs文件系统</span></span><br><span class="line">mkfs.xfs -f /dev/vg_name/lv_name</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> ext4文件系统</span></span><br><span class="line">mkfs.ext4 /dev/vg_name/lv_name</span><br></pre></td></tr></table></figure>
+<h3 id="6-将LV挂载到相应的目录"><a href="#6-将LV挂载到相应的目录" class="headerlink" title="6. 将LV挂载到相应的目录"></a>6. 将LV挂载到相应的目录</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 挂载</span></span><br><span class="line">mount /dev/vg_name/lv_name /data</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 开机自动挂载</span></span><br><span class="line">/dev/vg_name/lv_name /data xfs defaults 0 0</span><br><span class="line">/dev/vg_name/lv_name /data exts defaults 0 0</span><br><span class="line"><span class="meta">#</span><span class="bash"> 使用UUID挂载，目录可能会发生变化</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> blkid命令查看UUID</span></span><br><span class="line">UUID=a613d4f4-2f10-4f74-aa23-1815faf8f2fa /data xfs defaults 0 0</span><br><span class="line"><span class="meta">#</span><span class="bash"> iscsi存储挂载，网卡必须先启动</span></span><br><span class="line">/dev/vg_name/lv_name /data xfs defaults,_netdev 0 0</span><br></pre></td></tr></table></figure>
+<h2 id="LVM扩展"><a href="#LVM扩展" class="headerlink" title="LVM扩展"></a>LVM扩展</h2><h3 id="1-查看磁盘信息"><a href="#1-查看磁盘信息" class="headerlink" title="1. 查看磁盘信息"></a>1. 查看磁盘信息</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fdisk -l</span><br></pre></td></tr></table></figure>
+<h3 id="2-VG扩容"><a href="#2-VG扩容" class="headerlink" title="2. VG扩容"></a>2. VG扩容</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 一块新盘加入到卷组</span></span><br><span class="line">vgextend vg_name /dev/sdc</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 创建新分区</span></span><br><span class="line">fdisk /dev/sdc</span><br><span class="line"><span class="meta">#</span><span class="bash"> partprobe 将磁盘分区表变化信息通知内核，请求操作系统重新加载分区表，不需要重启系统</span></span><br><span class="line">pvcreate /dev/sdc3</span><br><span class="line"><span class="meta">#</span><span class="bash"> 一个新分区加入到卷组</span></span><br><span class="line">vgextend vg_name /dev/sdc3</span><br></pre></td></tr></table></figure>
+<h3 id="3-LV扩容"><a href="#3-LV扩容" class="headerlink" title="3. LV扩容"></a>3. LV扩容</h3><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lvextend -L +<span class="number">5</span>G <span class="regexp">/dev/</span>vg_name<span class="regexp">/lv_name</span></span><br></pre></td></tr></table></figure>
+<h3 id="4-扩展文件系统"><a href="#4-扩展文件系统" class="headerlink" title="4. 扩展文件系统"></a>4. 扩展文件系统</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> xfs扩展</span></span><br><span class="line">xfs_growfs /dev/vg_name/lv_name</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> ext4扩展</span></span><br><span class="line">resize2fs -f /dev/vg_name/lv_name</span><br></pre></td></tr></table></figure>
+
+        
+        <br>
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+    </div>
+</div>
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+        <li>
+            <a target="_blank" href="https://www.zhihu.com/people/li-bo-2-25">
+                            <span class="fa-stack fa-lg">
+                                 <i class="iconfont icon-zhihu"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+        
+
+        
+        <li>
+            <a target="_blank" href="https://github.com/liboo0731">
+                            <span class="fa-stack fa-lg">
+                                <i class="iconfont icon-github"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span>/</span>
+        
+        <span><a href="https://www.cnblogs.com/liboo/">H2K1R~ACE_博客园</a></span>
+        <span>/</span>
+        
+        <span><a href="https://blog.csdn.net/weixin_40108079">H2K1E~ACE_CSDN</a></span>
+        <span>/</span>
+        
+    </p>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/js/index.js"></script>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+    <script>
+        /**
+         *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+         *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+        */
+        if( '' || '')
+        var disqus_config = function () {
+            this.page.url = '';  // Replace PAGE_URL with your page's canonical URL variable
+            this.page.identifier = ''; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        };
+
+        (function() { // DON'T EDIT BELOW THIS LINE
+            var d = document, s = d.createElement('script');
+            s.src = 'https://airclouds-blog.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+    </script>
+
+</html>

@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="李博的博客">
+    <meta name="keyword" content="striveliboo">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        【python】SQLAlchemy-入门模板 - Liboo的博客 | Liboo&#39;s Blog
+        
+    </title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/aircloud.css">
+    <link rel="stylesheet" href="/css/gitment.css">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> Internet of Everything, Everywhere. </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar">
+            <img src="/img/avatar.jpg">
+        </div>
+        <div class="name">
+            <i>H2K1E~ACE</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li>
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li>
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li>
+                <a href="/archive">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li>
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#SQLAlchemy-入门模板"><span class="toc-text">SQLAlchemy-入门模板</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SQLAlchemy-CRUD基础"><span class="toc-text">SQLAlchemy-CRUD基础</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SQLAlchemy-非ORM操作"><span class="toc-text">SQLAlchemy-非ORM操作</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#创建表格，初始化数据库"><span class="toc-text">创建表格，初始化数据库</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#基本操作，插入"><span class="toc-text">基本操作，插入</span></a></li></ol></li></ol></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input">
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+        <div class="index-about-mobile">
+            <i> Internet of Everything, Everywhere. </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        【python】SQLAlchemy-入门模板
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2018-05-04 10:41:19</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/tags/#python" title="python">python</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#sqlalchemy" title="sqlalchemy">sqlalchemy</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+
+    </div>
+    <div class="post-content ">
+        <h3 id="SQLAlchemy-入门模板"><a href="#SQLAlchemy-入门模板" class="headerlink" title="SQLAlchemy-入门模板"></a>SQLAlchemy-入门模板</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sqlalchemy <span class="keyword">import</span> create_engine</span><br><span class="line"><span class="keyword">from</span> sqlalchemy.orm <span class="keyword">import</span> sessionmaker</span><br><span class="line"></span><br><span class="line"><span class="comment"># DB_CONNECT_STRING 就是连接数据库的路径。“mysql+mysqldb”指定了使用 MySQL-Python 来连接</span></span><br><span class="line">DB_CONNECT_STRING = <span class="string">'mysql+mysqldb://root:mysql@localhost/test?charset=utf8'</span></span><br><span class="line"><span class="comment"># echo 参数为 True 时，会显示每条执行的 SQL 语句，生产环境下可关闭</span></span><br><span class="line">engine = create_engine(DB_CONNECT_STRING, echo=<span class="literal">True</span>)</span><br><span class="line">DB_Session = sessionmaker(bind=engine)</span><br><span class="line">session = DB_Session()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> sqlalchemy <span class="keyword">import</span> Column</span><br><span class="line"><span class="keyword">from</span> sqlalchemy.types <span class="keyword">import</span> CHAR, Integer, String</span><br><span class="line"><span class="keyword">from</span> sqlalchemy.ext.declarative <span class="keyword">import</span> declarative_base</span><br><span class="line"></span><br><span class="line">BaseModel = declarative_base()</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">init_db</span><span class="params">()</span>:</span></span><br><span class="line">    BaseModel.metadata.create_all(engine)</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">drop_db</span><span class="params">()</span>:</span></span><br><span class="line">    BaseModel.metadata.drop_all(engine)</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">User</span><span class="params">(BaseModel)</span>:</span></span><br><span class="line">    __tablename__ = <span class="string">'user'</span></span><br><span class="line">    id = Column(Integer, primary_key=<span class="literal">True</span>)</span><br><span class="line">    name = Column(CHAR(<span class="number">30</span>)) <span class="comment"># or Column(String(30))</span></span><br><span class="line"></span><br><span class="line">init_db()</span><br></pre></td></tr></table></figure>
+<h3 id="SQLAlchemy-CRUD基础"><a href="#SQLAlchemy-CRUD基础" class="headerlink" title="SQLAlchemy-CRUD基础"></a>SQLAlchemy-CRUD基础</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> sqlalchemy <span class="keyword">import</span> func, or_, not_</span><br><span class="line"></span><br><span class="line">user = User(name=<span class="string">'a'</span>)</span><br><span class="line">session.add(user)</span><br><span class="line">user = User(name=<span class="string">'b'</span>)</span><br><span class="line">session.add(user)</span><br><span class="line">user = User(name=<span class="string">'a'</span>)</span><br><span class="line">session.add(user)</span><br><span class="line">user = User()</span><br><span class="line">session.add(user)</span><br><span class="line">session.commit()</span><br><span class="line">query = session.query(User)</span><br><span class="line"><span class="keyword">print</span> query <span class="comment"># 显示SQL 语句</span></span><br><span class="line"><span class="keyword">print</span> query.statement <span class="comment"># 同上</span></span><br><span class="line"><span class="keyword">for</span> user <span class="keyword">in</span> query: <span class="comment"># 遍历时查询</span></span><br><span class="line">    <span class="keyword">print</span> user.name</span><br><span class="line"><span class="keyword">print</span> query.all() <span class="comment"># 返回的是一个类似列表的对象</span></span><br><span class="line"><span class="keyword">print</span> query.first().name <span class="comment"># 记录不存在时，first() 会返回 None</span></span><br><span class="line"><span class="comment"># print query.one().name # 不存在，或有多行记录时会抛出异常</span></span><br><span class="line"><span class="keyword">print</span> query.filter(User.id == <span class="number">2</span>).first().name</span><br><span class="line"><span class="keyword">print</span> query.get(<span class="number">2</span>).name <span class="comment"># 以主键获取，等效于上句</span></span><br><span class="line"><span class="keyword">print</span> query.filter(<span class="string">'id = 2'</span>).first().name <span class="comment"># 支持字符串</span></span><br><span class="line">query2 = session.query(User.name)</span><br><span class="line"><span class="keyword">print</span> query2.all() <span class="comment"># 每行是个元组</span></span><br><span class="line"><span class="keyword">print</span> query2.limit(<span class="number">1</span>).all() <span class="comment"># 最多返回 1 条记录</span></span><br><span class="line"><span class="keyword">print</span> query2.offset(<span class="number">1</span>).all() <span class="comment"># 从第 2 条记录开始返回</span></span><br><span class="line"><span class="keyword">print</span> query2.order_by(User.name).all()</span><br><span class="line"><span class="keyword">print</span> query2.order_by(<span class="string">'name'</span>).all()</span><br><span class="line"><span class="keyword">print</span> query2.order_by(User.name.desc()).all()</span><br><span class="line"><span class="keyword">print</span> query2.order_by(<span class="string">'name desc'</span>).all()</span><br><span class="line"><span class="keyword">print</span> session.query(User.id).order_by(User.name.desc(), User.id).all()</span><br><span class="line"><span class="keyword">print</span> query2.filter(User.id == <span class="number">1</span>).scalar() <span class="comment"># 如果有记录，返回第一条记录的第一个元素</span></span><br><span class="line"><span class="keyword">print</span> session.query(<span class="string">'id'</span>).select_from(User).filter(<span class="string">'id = 1'</span>).scalar()</span><br><span class="line"><span class="keyword">print</span> query2.filter(User.id &gt; <span class="number">1</span>, User.name != <span class="string">'a'</span>).scalar() <span class="comment"># and</span></span><br><span class="line">query3 = query2.filter(User.id &gt; <span class="number">1</span>) <span class="comment"># 多次拼接的 filter 也是 and</span></span><br><span class="line">query3 = query3.filter(User.name != <span class="string">'a'</span>)</span><br><span class="line"><span class="keyword">print</span> query3.scalar()</span><br><span class="line"><span class="keyword">print</span> query2.filter(or_(User.id == <span class="number">1</span>, User.id == <span class="number">2</span>)).all() <span class="comment"># or</span></span><br><span class="line"><span class="keyword">print</span> query2.filter(User.id.in_((<span class="number">1</span>, <span class="number">2</span>))).all() <span class="comment"># in</span></span><br><span class="line">query4 = session.query(User.id)</span><br><span class="line"><span class="keyword">print</span> query4.filter(User.name == <span class="literal">None</span>).scalar()</span><br><span class="line"><span class="keyword">print</span> query4.filter(<span class="string">'name is null'</span>).scalar()</span><br><span class="line"><span class="keyword">print</span> query4.filter(not_(User.name == <span class="literal">None</span>)).all() <span class="comment"># not</span></span><br><span class="line"><span class="keyword">print</span> query4.filter(User.name != <span class="literal">None</span>).all()</span><br><span class="line"><span class="keyword">print</span> query4.count()</span><br><span class="line"><span class="keyword">print</span> session.query(func.count(<span class="string">'*'</span>)).select_from(User).scalar()</span><br><span class="line"><span class="keyword">print</span> session.query(func.count(<span class="string">'1'</span>)).select_from(User).scalar()</span><br><span class="line"><span class="keyword">print</span> session.query(func.count(User.id)).scalar()</span><br><span class="line"><span class="keyword">print</span> session.query(func.count(<span class="string">'*'</span>)).filter(User.id &gt; <span class="number">0</span>).scalar() <span class="comment"># filter() 中包含 User，因此不需要指定表</span></span><br><span class="line"><span class="keyword">print</span> session.query(func.count(<span class="string">'*'</span>)).filter(User.name == <span class="string">'a'</span>).limit(<span class="number">1</span>).scalar() == <span class="number">1</span> <span class="comment"># 可以用 limit() 限制 count() 的返回数</span></span><br><span class="line"><span class="keyword">print</span> session.query(func.sum(User.id)).scalar()</span><br><span class="line"><span class="keyword">print</span> session.query(func.now()).scalar() <span class="comment"># func 后可以跟任意函数名，只要该数据库支持</span></span><br><span class="line"><span class="keyword">print</span> session.query(func.current_timestamp()).scalar()</span><br><span class="line"><span class="keyword">print</span> session.query(func.md5(User.name)).filter(User.id == <span class="number">1</span>).scalar()</span><br><span class="line">query.filter(User.id == <span class="number">1</span>).update(&#123;User.name: <span class="string">'c'</span>&#125;)</span><br><span class="line">user = query.get(<span class="number">1</span>)</span><br><span class="line"><span class="keyword">print</span> user.name</span><br><span class="line">user.name = <span class="string">'d'</span></span><br><span class="line">session.flush() <span class="comment"># 写数据库，但并不提交</span></span><br><span class="line"><span class="keyword">print</span> query.get(<span class="number">1</span>).name</span><br><span class="line">session.delete(user)</span><br><span class="line">session.flush()</span><br><span class="line"><span class="keyword">print</span> query.get(<span class="number">1</span>)</span><br><span class="line">session.rollback()</span><br><span class="line"><span class="keyword">print</span> query.get(<span class="number">1</span>).name</span><br><span class="line">query.filter(User.id == <span class="number">1</span>).delete()</span><br><span class="line">session.commit()</span><br><span class="line"><span class="keyword">print</span> query.get(<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="SQLAlchemy-非ORM操作"><a href="#SQLAlchemy-非ORM操作" class="headerlink" title="SQLAlchemy-非ORM操作"></a>SQLAlchemy-非ORM操作</h3><h4 id="创建表格，初始化数据库"><a href="#创建表格，初始化数据库" class="headerlink" title="创建表格，初始化数据库"></a>创建表格，初始化数据库</h4><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; users_table = Table(<span class="string">'users'</span>, metadata,</span><br><span class="line">...     Column(<span class="string">'id'</span>, Integer, primary_key=True),</span><br><span class="line">...     Column(<span class="string">'name'</span>, String(<span class="number">40</span>)),</span><br><span class="line">...     Column(<span class="string">'email'</span>, String(<span class="number">120</span>)))</span><br><span class="line">&gt;&gt;&gt;</span><br><span class="line">&gt;&gt;&gt; users_table.create()</span><br><span class="line"><span class="number">2014</span>-<span class="number">01</span>-<span class="number">09</span> <span class="number">10</span>:<span class="number">03</span>:<span class="number">32</span>,<span class="number">436</span> INFO sqlalchemy<span class="selector-class">.engine</span><span class="selector-class">.base</span><span class="selector-class">.Engine</span></span><br><span class="line">CREATE TABLE users (</span><br><span class="line">    id INTEGER NOT NULL,</span><br><span class="line">    name VARCHAR(<span class="number">40</span>),</span><br><span class="line">    email VARCHAR(<span class="number">120</span>),</span><br><span class="line">    PRIMARY KEY (id)</span><br><span class="line">)       </span><br><span class="line"><span class="number">2014</span>-<span class="number">01</span>-<span class="number">09</span> <span class="number">10</span>:<span class="number">03</span>:<span class="number">32</span>,<span class="number">436</span> INFO sqlalchemy<span class="selector-class">.engine</span><span class="selector-class">.base</span><span class="selector-class">.Engine</span> ()</span><br><span class="line"><span class="number">2014</span>-<span class="number">01</span>-<span class="number">09</span> <span class="number">10</span>:<span class="number">03</span>:<span class="number">32</span>,<span class="number">575</span> INFO sqlalchemy<span class="selector-class">.engine</span><span class="selector-class">.base</span><span class="selector-class">.Engine</span> COMMIT</span><br></pre></td></tr></table></figure>
+<h5 id="基本操作，插入"><a href="#基本操作，插入" class="headerlink" title="基本操作，插入"></a>基本操作，插入</h5><p>如果已经table表已经存在， 第二次运行就不许要 create了， 使用 autoload 设置</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">from</span> sqlalchemy <span class="keyword">import</span> *</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">from</span> sqlalchemy.orm <span class="keyword">import</span> *</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>engine = create_engine(<span class="string">'sqlite:///./sqlalchemy.db'</span>, echo=<span class="literal">True</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>metadata = MetaData(engine)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>users_table = Table(<span class="string">'users'</span>, metadata, autoload=<span class="literal">True</span>)</span><br><span class="line"><span class="number">2014</span><span class="number">-01</span><span class="number">-09</span> <span class="number">10</span>:<span class="number">20</span>:<span class="number">01</span>,<span class="number">580</span> INFO sqlalchemy.engine.base.Engine PRAGMA table_info(<span class="string">"users"</span>)</span><br><span class="line"><span class="number">2014</span><span class="number">-01</span><span class="number">-09</span> <span class="number">10</span>:<span class="number">20</span>:<span class="number">01</span>,<span class="number">581</span> INFO sqlalchemy.engine.base.Engine ()</span><br><span class="line"><span class="number">2014</span><span class="number">-01</span><span class="number">-09</span> <span class="number">10</span>:<span class="number">20</span>:<span class="number">01</span>,<span class="number">582</span> INFO sqlalchemy.engine.base.Engine PRAGMA foreign_key_list(<span class="string">"users"</span>)</span><br><span class="line"><span class="number">2014</span><span class="number">-01</span><span class="number">-09</span> <span class="number">10</span>:<span class="number">20</span>:<span class="number">01</span>,<span class="number">583</span> INFO sqlalchemy.engine.base.Engine ()</span><br><span class="line"><span class="number">2014</span><span class="number">-01</span><span class="number">-09</span> <span class="number">10</span>:<span class="number">20</span>:<span class="number">01</span>,<span class="number">583</span> INFO sqlalchemy.engine.base.Engine PRAGMA index_list(<span class="string">"users"</span>)</span><br><span class="line"><span class="number">2014</span><span class="number">-01</span><span class="number">-09</span> <span class="number">10</span>:<span class="number">20</span>:<span class="number">01</span>,<span class="number">583</span> INFO sqlalchemy.engine.base.Engine ()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>users_table</span><br><span class="line">Table(<span class="string">'users'</span>, MetaData(bind=Engine(sqlite:///./sqlalchemy.db)), Column(<span class="string">'id'</span>, INTEGER(), table=&lt;users&gt;, primary_key=<span class="literal">True</span>, nullable=<span class="literal">False</span>), Column(<span class="string">'name'</span>, VARCHAR(length=<span class="number">40</span>), table=&lt;users&gt;), Column(<span class="string">'email'</span>, VARCHAR(length=<span class="number">120</span>), table=&lt;users&gt;), schema=<span class="literal">None</span>)</span><br><span class="line">&gt;&gt;&gt;</span><br></pre></td></tr></table></figure>
+
+        
+        <br>
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+    </div>
+</div>
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+        <li>
+            <a target="_blank" href="https://www.zhihu.com/people/li-bo-2-25">
+                            <span class="fa-stack fa-lg">
+                                 <i class="iconfont icon-zhihu"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+        
+
+        
+        <li>
+            <a target="_blank" href="https://github.com/liboo0731">
+                            <span class="fa-stack fa-lg">
+                                <i class="iconfont icon-github"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span>/</span>
+        
+        <span><a href="https://www.cnblogs.com/liboo/">H2K1R~ACE_博客园</a></span>
+        <span>/</span>
+        
+        <span><a href="https://blog.csdn.net/weixin_40108079">H2K1E~ACE_CSDN</a></span>
+        <span>/</span>
+        
+    </p>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/js/index.js"></script>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+    <script>
+        /**
+         *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+         *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+        */
+        if( '' || '')
+        var disqus_config = function () {
+            this.page.url = '';  // Replace PAGE_URL with your page's canonical URL variable
+            this.page.identifier = ''; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        };
+
+        (function() { // DON'T EDIT BELOW THIS LINE
+            var d = document, s = d.createElement('script');
+            s.src = 'https://airclouds-blog.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+    </script>
+
+</html>

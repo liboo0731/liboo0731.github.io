@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="李博的博客">
+    <meta name="keyword" content="striveliboo">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        【nagios】Nagios监控Linux主机对外服务 - Liboo的博客 | Liboo&#39;s Blog
+        
+    </title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/aircloud.css">
+    <link rel="stylesheet" href="/css/gitment.css">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> Internet of Everything, Everywhere. </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar">
+            <img src="/img/avatar.jpg">
+        </div>
+        <div class="name">
+            <i>H2K1E~ACE</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li>
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li>
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li>
+                <a href="/archive">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li>
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Nagios安装目录"><span class="toc-text">Nagios安装目录</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Nagios安装目录详解"><span class="toc-text">Nagios安装目录详解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Nagios配置目录详解"><span class="toc-text">Nagios配置目录详解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#添加Linux-主机，监控对外开放的服务"><span class="toc-text">添加Linux 主机，监控对外开放的服务</span></a></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input">
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+        <div class="index-about-mobile">
+            <i> Internet of Everything, Everywhere. </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        【nagios】Nagios监控Linux主机对外服务
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2019-05-21 14:49:51</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/tags/#nagios" title="nagios">nagios</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+
+    </div>
+    <div class="post-content ">
+        <h3 id="Nagios安装目录"><a href="#Nagios安装目录" class="headerlink" title="Nagios安装目录"></a>Nagios安装目录</h3><figure class="highlight tap"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost nagios]<span class="comment"># pwd</span></span><br><span class="line">/usr/local/nagios</span><br><span class="line">[root@localhost nagios]<span class="comment"># ll</span></span><br><span class="line">total 12</span><br><span class="line">drwxrwxr-x. <span class="number"> 2 </span>nagios nagios  <span class="number"> 38 </span>May<span class="number"> 20 </span>10:46 bin</span><br><span class="line">drwxrwxr-x. <span class="number"> 3 </span>nagios nagios  <span class="number"> 96 </span>May<span class="number"> 21 </span>09:35 etc</span><br><span class="line">drwxrwxr-x. <span class="number"> 2 </span>nagios nagios<span class="number"> 4096 </span>May<span class="number"> 21 </span>14:44 libexec</span><br><span class="line">drwxrwxr-x. <span class="number"> 2 </span>nagios nagios<span class="number"> 4096 </span>May<span class="number"> 20 </span>10:46 sbin</span><br><span class="line">drwxrwxr-x.<span class="number"> 15 </span>nagios nagios<span class="number"> 4096 </span>May<span class="number"> 20 </span>11:05 share</span><br><span class="line">drwxrwxr-x. <span class="number"> 5 </span>nagios nagios <span class="number"> 147 </span>May<span class="number"> 21 </span>14:53 var</span><br><span class="line">[root@localhost nagios]<span class="comment">#</span></span><br></pre></td></tr></table></figure>
+<h3 id="Nagios安装目录详解"><a href="#Nagios安装目录详解" class="headerlink" title="Nagios安装目录详解"></a>Nagios安装目录详解</h3><table>
+<thead>
+<tr>
+<th>目录名</th>
+<th>注解</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>bin</td>
+<td>Nagios 可执行程序所在目录</td>
+</tr>
+<tr>
+<td>etc</td>
+<td>Nagios 配置文件所在目录</td>
+</tr>
+<tr>
+<td>sbin</td>
+<td>Nagios CGI 文件所在目录，也就是执行外部命令所需文件所在的目录</td>
+</tr>
+<tr>
+<td>share</td>
+<td>Nagios网页文件所在的目录</td>
+</tr>
+<tr>
+<td>libexec</td>
+<td>Nagios 外部插件所在目录</td>
+</tr>
+<tr>
+<td>var</td>
+<td>Nagios 日志文件、lock 等文件所在的目录</td>
+</tr>
+<tr>
+<td>var/archives</td>
+<td>Nagios 日志自动归档目录</td>
+</tr>
+<tr>
+<td>var/rw</td>
+<td>用来存放外部命令文件的目录</td>
+</tr>
+</tbody>
+</table>
+<h3 id="Nagios配置目录详解"><a href="#Nagios配置目录详解" class="headerlink" title="Nagios配置目录详解"></a>Nagios配置目录详解</h3><table>
+<thead>
+<tr>
+<th><strong>文件名或目录名</strong></th>
+<th><strong>用途</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>cgi.cfg</td>
+<td>控制CGI访问的配置文件</td>
+</tr>
+<tr>
+<td>htpasswd.users</td>
+<td>Nagios账户信息</td>
+</tr>
+<tr>
+<td>nagios.cfg</td>
+<td>Nagios 主配置文件</td>
+</tr>
+<tr>
+<td>resource.cfg</td>
+<td>变量定义文件，又称为资源文件，在些文件中定义变量，以便由其他配置文件引用，如$USER1$</td>
+</tr>
+<tr>
+<td>objects</td>
+<td>objects 是一个目录，在此目录下有很多配置文件模板，用于定义Nagios 对象</td>
+</tr>
+<tr>
+<td>objects/commands.cfg</td>
+<td>命令定义配置文件，其中定义的命令可以被其他配置文件引用</td>
+</tr>
+<tr>
+<td>objects/contacts.cfg</td>
+<td>定义联系人和联系人组的配置文件</td>
+</tr>
+<tr>
+<td>objects/localhost.cfg</td>
+<td>定义监控本地主机的配置文件</td>
+</tr>
+<tr>
+<td>objects/printer.cfg</td>
+<td>定义监控打印机的一个配置文件模板，默认没有启用此文件</td>
+</tr>
+<tr>
+<td>objects/switch.cfg</td>
+<td>定义监控路由器的一个配置文件模板，默认没有启用此文件</td>
+</tr>
+<tr>
+<td>objects/templates.cfg</td>
+<td>定义主机和服务的一个模板配置文件，可以在其他配置文件中引用</td>
+</tr>
+<tr>
+<td>objects/timeperiods.cfg</td>
+<td>定义Nagios 监控时间段的配置文件</td>
+</tr>
+<tr>
+<td>objects/windows.cfg</td>
+<td>监控Windows 主机的一个配置文件模板，默认没有启用此文件</td>
+</tr>
+</tbody>
+</table>
+<p><em>参考：</em></p>
+<p><em><a href="https://www.cnblogs.com/mchina/archive/2013/02/20/2883404.html" target="_blank" rel="noopener">Linux下Nagios的安装与配置</a></em></p>
+<h3 id="添加Linux-主机，监控对外开放的服务"><a href="#添加Linux-主机，监控对外开放的服务" class="headerlink" title="添加Linux 主机，监控对外开放的服务"></a>添加Linux 主机，监控对外开放的服务</h3><ol>
+<li>添加配置文件</li>
+</ol>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">touch /usr/local/nagios/etc/objects/192.168.23.123.cfg</span><br><span class="line"></span><br><span class="line">vi /usr/local/nagios/etc/objects/192.168.23.123.cfg</span><br><span class="line"></span><br><span class="line">define host &#123;   </span><br><span class="line">        use                     linux-server </span><br><span class="line">        host_name               host123</span><br><span class="line">        alias                   Host 123</span><br><span class="line">       <span class="built_in"> address </span>                192.168.23.123</span><br><span class="line">&#125;     </span><br><span class="line">define hostgroup &#123;      </span><br><span class="line">        hostgroup_name          host123-servers</span><br><span class="line">        alias                   Host123 servers</span><br><span class="line">        members                 host123     </span><br><span class="line">&#125;</span><br><span class="line">define<span class="built_in"> service </span>&#123;  </span><br><span class="line">        use                     local-service</span><br><span class="line">        host_name               host123</span><br><span class="line">        service_description     check-host-alive</span><br><span class="line">        check_command           check-host-alive</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>添加配置项</li>
+</ol>
+<figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">vi <span class="meta-keyword">/usr/</span>local<span class="meta-keyword">/nagios/</span>etc/nagios.cfg</span><br><span class="line"></span><br><span class="line">cfg_file=<span class="meta-keyword">/usr/</span>local<span class="meta-keyword">/nagios/</span>etc<span class="meta-keyword">/objects/</span><span class="number">192.168</span><span class="number">.23</span><span class="number">.123</span>.cfg</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>验证配置</li>
+</ol>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="regexp">/usr/</span>local<span class="regexp">/nagios/</span>bin<span class="regexp">/nagios -v /u</span>sr<span class="regexp">/local/</span>nagios<span class="regexp">/etc/</span>nagios.cfg</span><br></pre></td></tr></table></figure>
+<ol start="4">
+<li>重启服务</li>
+</ol>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">systemctl restart nagios</span></span><br></pre></td></tr></table></figure>
+
+        
+        <br>
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+    </div>
+</div>
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+        <li>
+            <a target="_blank" href="https://www.zhihu.com/people/li-bo-2-25">
+                            <span class="fa-stack fa-lg">
+                                 <i class="iconfont icon-zhihu"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+        
+
+        
+        <li>
+            <a target="_blank" href="https://github.com/liboo0731">
+                            <span class="fa-stack fa-lg">
+                                <i class="iconfont icon-github"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span>/</span>
+        
+        <span><a href="https://www.cnblogs.com/liboo/">H2K1R~ACE_博客园</a></span>
+        <span>/</span>
+        
+        <span><a href="https://blog.csdn.net/weixin_40108079">H2K1E~ACE_CSDN</a></span>
+        <span>/</span>
+        
+    </p>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/js/index.js"></script>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+    <script>
+        /**
+         *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+         *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+        */
+        if( '' || '')
+        var disqus_config = function () {
+            this.page.url = '';  // Replace PAGE_URL with your page's canonical URL variable
+            this.page.identifier = ''; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        };
+
+        (function() { // DON'T EDIT BELOW THIS LINE
+            var d = document, s = d.createElement('script');
+            s.src = 'https://airclouds-blog.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+    </script>
+
+</html>

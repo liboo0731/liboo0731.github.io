@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="李博的博客">
+    <meta name="keyword" content="striveliboo">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        【docker】Dockerfile参考文档 - Liboo的博客 | Liboo&#39;s Blog
+        
+    </title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/aircloud.css">
+    <link rel="stylesheet" href="/css/gitment.css">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> Internet of Everything, Everywhere. </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar">
+            <img src="/img/avatar.jpg">
+        </div>
+        <div class="name">
+            <i>H2K1E~ACE</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li>
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li>
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li>
+                <a href="/archive">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li>
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Dockerfile参考文档"><span class="toc-text">Dockerfile参考文档</span></a></li></ol><li class="toc-item toc-level-2"><a class="toc-link" href="#Dockerfile-instructions"><span class="toc-text">Dockerfile instructions</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#FROM"><span class="toc-text">FROM</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#LABEL"><span class="toc-text">LABEL</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RUN"><span class="toc-text">RUN</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#APT-GET"><span class="toc-text">APT-GET</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#USING-PIPES"><span class="toc-text">USING PIPES</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CMD"><span class="toc-text">CMD</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#EXPOSE"><span class="toc-text">EXPOSE</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ENV"><span class="toc-text">ENV</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ADD-or-COPY"><span class="toc-text">ADD or COPY</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ENTRYPOINT"><span class="toc-text">ENTRYPOINT</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#VOLUME"><span class="toc-text">VOLUME</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#USER"><span class="toc-text">USER</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#WORKDIR"><span class="toc-text">WORKDIR</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ONBUILD"><span class="toc-text">ONBUILD</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Additional-resources"><span class="toc-text">Additional resources:</span></a>
+</li></div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input">
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+        <div class="index-about-mobile">
+            <i> Internet of Everything, Everywhere. </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        【docker】Dockerfile参考文档
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2019-05-23 21:13:34</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/tags/#docker" title="docker">docker</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+
+    </div>
+    <div class="post-content ">
+        <h3 id="Dockerfile参考文档"><a href="#Dockerfile参考文档" class="headerlink" title="Dockerfile参考文档"></a>Dockerfile参考文档</h3><p><a href="http://www.dockerinfo.net/dockerfile%e4%bb%8b%e7%bb%8d" target="_blank" rel="noopener">Dockerfile介绍</a></p>
+<p><a href="https://docs.docker.com/develop/develop-images/dockerfile_best-practices/#dockerfile-instructions" target="_blank" rel="noopener">Dockerfile instructions</a></p>
+<h2 id="Dockerfile-instructions"><a href="#Dockerfile-instructions" class="headerlink" title="Dockerfile instructions"></a>Dockerfile instructions</h2><p>These recommendations are designed to help you create an efficient and maintainable <code>Dockerfile</code>.</p>
+<h3 id="FROM"><a href="#FROM" class="headerlink" title="FROM"></a>FROM</h3><p><a href="https://docs.docker.com/engine/reference/builder/#from" target="_blank" rel="noopener">Dockerfile reference for the FROM instruction</a></p>
+<p>Whenever possible, use current official images as the basis for your images. We recommend the <a href="https://hub.docker.com/_/alpine/" target="_blank" rel="noopener">Alpine image</a> as it is tightly controlled and small in size (currently under 5 MB), while still being a full Linux distribution.</p>
+<h3 id="LABEL"><a href="#LABEL" class="headerlink" title="LABEL"></a>LABEL</h3><p><a href="https://docs.docker.com/config/labels-custom-metadata/" target="_blank" rel="noopener">Understanding object labels</a></p>
+<p>You can add labels to your image to help organize images by project, record licensing information, to aid in automation, or for other reasons. For each label, add a line beginning with <code>LABEL</code> and with one or more key-value pairs. The following examples show the different acceptable formats. Explanatory comments are included inline.</p>
+<blockquote>
+<p>Strings with spaces must be quoted <strong>or</strong> the spaces must be escaped. Inner quote characters (<code>&quot;</code>), must also be escaped.</p>
+</blockquote>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Set one or more individual labels</span></span><br><span class="line"><span class="keyword">LABEL</span><span class="bash"> com.example.version=<span class="string">"0.0.1-beta"</span></span></span><br><span class="line"><span class="keyword">LABEL</span><span class="bash"> vendor1=<span class="string">"ACME Incorporated"</span></span></span><br><span class="line"><span class="keyword">LABEL</span><span class="bash"> vendor2=ZENITH\ Incorporated</span></span><br><span class="line"><span class="keyword">LABEL</span><span class="bash"> com.example.release-date=<span class="string">"2015-02-12"</span></span></span><br><span class="line"><span class="keyword">LABEL</span><span class="bash"> com.example.version.is-production=<span class="string">""</span></span></span><br></pre></td></tr></table></figure>
+<p>An image can have more than one label. Prior to Docker 1.10, it was recommended to combine all labels into a single <code>LABEL</code>instruction, to prevent extra layers from being created. This is no longer necessary, but combining labels is still supported.</p>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Set multiple labels on one line</span></span><br><span class="line"><span class="keyword">LABEL</span><span class="bash"> com.example.version=<span class="string">"0.0.1-beta"</span> com.example.release-date=<span class="string">"2015-02-12"</span></span></span><br></pre></td></tr></table></figure>
+<p>The above can also be written as:</p>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Set multiple labels at once, using line-continuation characters to break long lines</span></span><br><span class="line"><span class="keyword">LABEL</span><span class="bash"> vendor=ACME\ Incorporated \</span></span><br><span class="line"><span class="bash">      com.example.is-beta= \</span></span><br><span class="line"><span class="bash">      com.example.is-production=<span class="string">""</span> \</span></span><br><span class="line"><span class="bash">      com.example.version=<span class="string">"0.0.1-beta"</span> \</span></span><br><span class="line"><span class="bash">      com.example.release-date=<span class="string">"2015-02-12"</span></span></span><br></pre></td></tr></table></figure>
+<p>See <a href="https://docs.docker.com/config/labels-custom-metadata/" target="_blank" rel="noopener">Understanding object labels</a> for guidelines about acceptable label keys and values. For information about querying labels, refer to the items related to filtering in <a href="https://docs.docker.com/config/labels-custom-metadata/#managing-labels-on-objects" target="_blank" rel="noopener">Managing labels on objects</a>. See also <a href="https://docs.docker.com/engine/reference/builder/#label" target="_blank" rel="noopener">LABEL</a> in the Dockerfile reference.</p>
+<h3 id="RUN"><a href="#RUN" class="headerlink" title="RUN"></a>RUN</h3><p><a href="https://docs.docker.com/engine/reference/builder/#run" target="_blank" rel="noopener">Dockerfile reference for the RUN instruction</a></p>
+<p>Split long or complex <code>RUN</code> statements on multiple lines separated with backslashes to make your <code>Dockerfile</code> more readable, understandable, and maintainable.</p>
+<h4 id="APT-GET"><a href="#APT-GET" class="headerlink" title="APT-GET"></a>APT-GET</h4><p>Probably the most common use-case for <code>RUN</code> is an application of <code>apt-get</code>. Because it installs packages, the <code>RUN apt-get</code>command has several gotchas to look out for.</p>
+<p>Avoid <code>RUN apt-get upgrade</code> and <code>dist-upgrade</code>, as many of the “essential” packages from the parent images cannot upgrade inside an <a href="https://docs.docker.com/engine/reference/run/#security-configuration" target="_blank" rel="noopener">unprivileged container</a>. If a package contained in the parent image is out-of-date, contact its maintainers. If you know there is a particular package, <code>foo</code>, that needs to be updated, use <code>apt-get install -y foo</code> to update automatically.</p>
+<p>Always combine <code>RUN apt-get update</code> with <code>apt-get install</code> in the same <code>RUN</code> statement. For example:</p>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">RUN</span><span class="bash"> apt-get update &amp;&amp; apt-get install -y \</span></span><br><span class="line"><span class="bash">    package-bar \</span></span><br><span class="line"><span class="bash">    package-baz \</span></span><br><span class="line"><span class="bash">    package-foo</span></span><br></pre></td></tr></table></figure>
+<p>Using <code>apt-get update</code> alone in a <code>RUN</code> statement causes caching issues and subsequent <code>apt-get install</code> instructions fail. For example, say you have a Dockerfile:</p>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">FROM</span> ubuntu:<span class="number">18.04</span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> apt-get update</span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> apt-get install -y curl</span></span><br></pre></td></tr></table></figure>
+<p>After building the image, all layers are in the Docker cache. Suppose you later modify <code>apt-get install</code> by adding extra package:</p>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">FROM</span> ubuntu:<span class="number">18.04</span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> apt-get update</span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> apt-get install -y curl nginx</span></span><br></pre></td></tr></table></figure>
+<p>Docker sees the initial and modified instructions as identical and reuses the cache from previous steps. As a result the <code>apt-get update</code> is <em>not</em> executed because the build uses the cached version. Because the <code>apt-get update</code> is not run, your build can potentially get an outdated version of the <code>curl</code> and <code>nginx</code> packages.</p>
+<p>Using <code>RUN apt-get update &amp;&amp; apt-get install -y</code> ensures your Dockerfile installs the latest package versions with no further coding or manual intervention. This technique is known as “cache busting”. You can also achieve cache-busting by specifying a package version. This is known as version pinning, for example:</p>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">RUN</span><span class="bash"> apt-get update &amp;&amp; apt-get install -y \</span></span><br><span class="line"><span class="bash">    package-bar \</span></span><br><span class="line"><span class="bash">    package-baz \</span></span><br><span class="line"><span class="bash">    package-foo=1.3.*</span></span><br></pre></td></tr></table></figure>
+<p>Version pinning forces the build to retrieve a particular version regardless of what’s in the cache. This technique can also reduce failures due to unanticipated changes in required packages.</p>
+<p>Below is a well-formed <code>RUN</code> instruction that demonstrates all the <code>apt-get</code> recommendations.</p>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">RUN</span><span class="bash"> apt-get update &amp;&amp; apt-get install -y \</span></span><br><span class="line"><span class="bash">    aufs-tools \</span></span><br><span class="line"><span class="bash">    automake \</span></span><br><span class="line"><span class="bash">    build-essential \</span></span><br><span class="line"><span class="bash">    curl \</span></span><br><span class="line"><span class="bash">    dpkg-sig \</span></span><br><span class="line"><span class="bash">    libcap-dev \</span></span><br><span class="line"><span class="bash">    libsqlite3-dev \</span></span><br><span class="line"><span class="bash">    mercurial \</span></span><br><span class="line"><span class="bash">    reprepro \</span></span><br><span class="line"><span class="bash">    ruby1.9.1 \</span></span><br><span class="line"><span class="bash">    ruby1.9.1-dev \</span></span><br><span class="line"><span class="bash">    s3cmd=1.1.* \</span></span><br><span class="line"><span class="bash"> &amp;&amp; rm -rf /var/lib/apt/lists/*</span></span><br></pre></td></tr></table></figure>
+<p>The <code>s3cmd</code> argument specifies a version <code>1.1.*</code>. If the image previously used an older version, specifying the new one causes a cache bust of <code>apt-get update</code> and ensures the installation of the new version. Listing packages on each line can also prevent mistakes in package duplication.</p>
+<p>In addition, when you clean up the apt cache by removing <code>/var/lib/apt/lists</code> it reduces the image size, since the apt cache is not stored in a layer. Since the <code>RUN</code> statement starts with <code>apt-get update</code>, the package cache is always refreshed prior to <code>apt-get install</code>.</p>
+<blockquote>
+<p>Official Debian and Ubuntu images <a href="https://github.com/moby/moby/blob/03e2923e42446dbb830c654d0eec323a0b4ef02a/contrib/mkimage/debootstrap#L82-L105" target="_blank" rel="noopener">automatically run <code>apt-get clean</code></a>, so explicit invocation is not required.</p>
+</blockquote>
+<h4 id="USING-PIPES"><a href="#USING-PIPES" class="headerlink" title="USING PIPES"></a>USING PIPES</h4><p>Some <code>RUN</code> commands depend on the ability to pipe the output of one command into another, using the pipe character (<code>|</code>), as in the following example:</p>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">RUN</span><span class="bash"> wget -O - https://some.site | wc -l &gt; /number</span></span><br></pre></td></tr></table></figure>
+<p>Docker executes these commands using the <code>/bin/sh -c</code> interpreter, which only evaluates the exit code of the last operation in the pipe to determine success. In the example above this build step succeeds and produces a new image so long as the <code>wc -l</code>command succeeds, even if the <code>wget</code> command fails.</p>
+<p>If you want the command to fail due to an error at any stage in the pipe, prepend <code>set -o pipefail &amp;&amp;</code> to ensure that an unexpected error prevents the build from inadvertently succeeding. For example:</p>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">RUN</span><span class="bash"> <span class="built_in">set</span> -o pipefail &amp;&amp; wget -O - https://some.site | wc -l &gt; /number</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Not all shells support the <code>-o pipefail</code> option.</p>
+<p>In cases such as the <code>dash</code> shell on Debian-based images, consider using the <em>exec</em> form of <code>RUN</code> to explicitly choose a shell that does support the <code>pipefail</code> option. For example:</p>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; <span class="keyword">RUN</span><span class="bash"> [<span class="string">"/bin/bash"</span>, <span class="string">"-c"</span>, <span class="string">"set -o pipefail &amp;&amp; wget -O - https://some.site | wc -l &gt; /number"</span>]</span></span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h3 id="CMD"><a href="#CMD" class="headerlink" title="CMD"></a>CMD</h3><p><a href="https://docs.docker.com/engine/reference/builder/#cmd" target="_blank" rel="noopener">Dockerfile reference for the CMD instruction</a></p>
+<p>The <code>CMD</code> instruction should be used to run the software contained by your image, along with any arguments. <code>CMD</code> should almost always be used in the form of <code>CMD [&quot;executable&quot;, &quot;param1&quot;, &quot;param2&quot;…]</code>. Thus, if the image is for a service, such as Apache and Rails, you would run something like <code>CMD [&quot;apache2&quot;,&quot;-DFOREGROUND&quot;]</code>. Indeed, this form of the instruction is recommended for any service-based image.</p>
+<p>In most other cases, <code>CMD</code> should be given an interactive shell, such as bash, python and perl. For example, <code>CMD [&quot;perl&quot;, &quot;-de0&quot;]</code>, <code>CMD [&quot;python&quot;]</code>, or <code>CMD [&quot;php&quot;, &quot;-a&quot;]</code>. Using this form means that when you execute something like <code>docker run -it python</code>, you’ll get dropped into a usable shell, ready to go. <code>CMD</code> should rarely be used in the manner of <code>CMD [&quot;param&quot;, &quot;param&quot;]</code> in conjunction with <a href="https://docs.docker.com/engine/reference/builder/#entrypoint" target="_blank" rel="noopener"><code>ENTRYPOINT</code></a>, unless you and your expected users are already quite familiar with how <code>ENTRYPOINT</code> works.</p>
+<h3 id="EXPOSE"><a href="#EXPOSE" class="headerlink" title="EXPOSE"></a>EXPOSE</h3><p><a href="https://docs.docker.com/engine/reference/builder/#expose" target="_blank" rel="noopener">Dockerfile reference for the EXPOSE instruction</a></p>
+<p>The <code>EXPOSE</code> instruction indicates the ports on which a container listens for connections. Consequently, you should use the common, traditional port for your application. For example, an image containing the Apache web server would use <code>EXPOSE 80</code>, while an image containing MongoDB would use <code>EXPOSE 27017</code> and so on.</p>
+<p>For external access, your users can execute <code>docker run</code> with a flag indicating how to map the specified port to the port of their choice. For container linking, Docker provides environment variables for the path from the recipient container back to the source (ie, <code>MYSQL_PORT_3306_TCP</code>).</p>
+<h3 id="ENV"><a href="#ENV" class="headerlink" title="ENV"></a>ENV</h3><p><a href="https://docs.docker.com/engine/reference/builder/#env" target="_blank" rel="noopener">Dockerfile reference for the ENV instruction</a></p>
+<p>To make new software easier to run, you can use <code>ENV</code> to update the <code>PATH</code> environment variable for the software your container installs. For example, <code>ENV PATH /usr/local/nginx/bin:$PATH</code> ensures that <code>CMD [&quot;nginx&quot;]</code> just works.</p>
+<p>The <code>ENV</code> instruction is also useful for providing required environment variables specific to services you wish to containerize, such as Postgres’s <code>PGDATA</code>.</p>
+<p>Lastly, <code>ENV</code> can also be used to set commonly used version numbers so that version bumps are easier to maintain, as seen in the following example:</p>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ENV</span> PG_MAJOR <span class="number">9.3</span></span><br><span class="line"><span class="keyword">ENV</span> PG_VERSION <span class="number">9.3</span>.<span class="number">4</span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> curl -SL http://example.com/postgres-<span class="variable">$PG_VERSION</span>.tar.xz | tar -xJC /usr/src/postgress &amp;&amp; …</span></span><br><span class="line"><span class="keyword">ENV</span> PATH /usr/local/postgres-$PG_MAJOR/bin:$PATH</span><br></pre></td></tr></table></figure>
+<p>Similar to having constant variables in a program (as opposed to hard-coding values), this approach lets you change a single <code>ENV</code>instruction to auto-magically bump the version of the software in your container.</p>
+<p>Each <code>ENV</code> line creates a new intermediate layer, just like <code>RUN</code> commands. This means that even if you unset the environment variable in a future layer, it still persists in this layer and its value can be dumped. You can test this by creating a Dockerfile like the following, and then building it.</p>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">FROM</span> alpine</span><br><span class="line"><span class="keyword">ENV</span> ADMIN_USER=<span class="string">"mark"</span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> <span class="built_in">echo</span> <span class="variable">$ADMIN_USER</span> &gt; ./mark</span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> <span class="built_in">unset</span> ADMIN_USER</span></span><br><span class="line">$ docker <span class="keyword">run</span><span class="bash"> --rm <span class="built_in">test</span> sh -c <span class="string">'echo $ADMIN_USER'</span></span></span><br><span class="line"></span><br><span class="line">mark</span><br></pre></td></tr></table></figure>
+<p>To prevent this, and really unset the environment variable, use a <code>RUN</code> command with shell commands, to set, use, and unset the variable all in a single layer. You can separate your commands with <code>;</code> or <code>&amp;&amp;</code>. If you use the second method, and one of the commands fails, the <code>docker build</code> also fails. This is usually a good idea. Using <code>\</code> as a line continuation character for Linux Dockerfiles improves readability. You could also put all of the commands into a shell script and have the <code>RUN</code> command just run that shell script.</p>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">FROM</span> alpine</span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> <span class="built_in">export</span> ADMIN_USER=<span class="string">"mark"</span> \</span></span><br><span class="line"><span class="bash">    &amp;&amp; <span class="built_in">echo</span> <span class="variable">$ADMIN_USER</span> &gt; ./mark \</span></span><br><span class="line"><span class="bash">    &amp;&amp; <span class="built_in">unset</span> ADMIN_USER</span></span><br><span class="line"><span class="keyword">CMD</span><span class="bash"> sh</span></span><br><span class="line">$ docker <span class="keyword">run</span><span class="bash"> --rm <span class="built_in">test</span> sh -c <span class="string">'echo $ADMIN_USER'</span></span></span><br></pre></td></tr></table></figure>
+<h3 id="ADD-or-COPY"><a href="#ADD-or-COPY" class="headerlink" title="ADD or COPY"></a>ADD or COPY</h3><ul>
+<li><a href="https://docs.docker.com/engine/reference/builder/#add" target="_blank" rel="noopener">Dockerfile reference for the ADD instruction</a></li>
+<li><a href="https://docs.docker.com/engine/reference/builder/#copy" target="_blank" rel="noopener">Dockerfile reference for the COPY instruction</a></li>
+</ul>
+<p>Although <code>ADD</code> and <code>COPY</code> are functionally similar, generally speaking, <code>COPY</code> is preferred. That’s because it’s more transparent than <code>ADD</code>. <code>COPY</code> only supports the basic copying of local files into the container, while <code>ADD</code> has some features (like local-only tar extraction and remote URL support) that are not immediately obvious. Consequently, the best use for <code>ADD</code> is local tar file auto-extraction into the image, as in <code>ADD rootfs.tar.xz /</code>.</p>
+<p>If you have multiple <code>Dockerfile</code> steps that use different files from your context, <code>COPY</code> them individually, rather than all at once. This ensures that each step’s build cache is only invalidated (forcing the step to be re-run) if the specifically required files change.</p>
+<p>For example:</p>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">COPY</span><span class="bash"> requirements.txt /tmp/</span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> pip install --requirement /tmp/requirements.txt</span></span><br><span class="line"><span class="keyword">COPY</span><span class="bash"> . /tmp/</span></span><br></pre></td></tr></table></figure>
+<p>Results in fewer cache invalidations for the <code>RUN</code> step, than if you put the <code>COPY . /tmp/</code> before it.</p>
+<p>Because image size matters, using <code>ADD</code> to fetch packages from remote URLs is strongly discouraged; you should use <code>curl</code> or <code>wget</code> instead. That way you can delete the files you no longer need after they’ve been extracted and you don’t have to add another layer in your image. For example, you should avoid doing things like:</p>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ADD</span><span class="bash"> http://example.com/big.tar.xz /usr/src/things/</span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> tar -xJf /usr/src/things/big.tar.xz -C /usr/src/things</span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> make -C /usr/src/things all</span></span><br></pre></td></tr></table></figure>
+<p>And instead, do something like:</p>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">RUN</span><span class="bash"> mkdir -p /usr/src/things \</span></span><br><span class="line"><span class="bash">    &amp;&amp; curl -SL http://example.com/big.tar.xz \</span></span><br><span class="line"><span class="bash">    | tar -xJC /usr/src/things \</span></span><br><span class="line"><span class="bash">    &amp;&amp; make -C /usr/src/things all</span></span><br></pre></td></tr></table></figure>
+<p>For other items (files, directories) that do not require <code>ADD</code>’s tar auto-extraction capability, you should always use <code>COPY</code>.</p>
+<h3 id="ENTRYPOINT"><a href="#ENTRYPOINT" class="headerlink" title="ENTRYPOINT"></a>ENTRYPOINT</h3><p><a href="https://docs.docker.com/engine/reference/builder/#entrypoint" target="_blank" rel="noopener">Dockerfile reference for the ENTRYPOINT instruction</a></p>
+<p>The best use for <code>ENTRYPOINT</code> is to set the image’s main command, allowing that image to be run as though it was that command (and then use <code>CMD</code> as the default flags).</p>
+<p>Let’s start with an example of an image for the command line tool <code>s3cmd</code>:</p>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ENTRYPOINT</span><span class="bash"> [<span class="string">"s3cmd"</span>]</span></span><br><span class="line"><span class="keyword">CMD</span><span class="bash"> [<span class="string">"--help"</span>]</span></span><br></pre></td></tr></table></figure>
+<p>Now the image can be run like this to show the command’s help:</p>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker <span class="keyword">run</span><span class="bash"> s3cmd</span></span><br></pre></td></tr></table></figure>
+<p>Or using the right parameters to execute a command:</p>
+<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker <span class="keyword">run</span> s3cmd <span class="keyword">ls</span> s3:<span class="comment">//mybucket</span></span><br></pre></td></tr></table></figure>
+<p>This is useful because the image name can double as a reference to the binary as shown in the command above.</p>
+<p>The <code>ENTRYPOINT</code> instruction can also be used in combination with a helper script, allowing it to function in a similar way to the command above, even when starting the tool may require more than one step.</p>
+<p>For example, the <a href="https://hub.docker.com/_/postgres/" target="_blank" rel="noopener">Postgres Official Image</a> uses the following script as its <code>ENTRYPOINT</code>:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="built_in">set</span> -e</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> [ <span class="string">"<span class="variable">$1</span>"</span> = <span class="string">'postgres'</span> ]; <span class="keyword">then</span></span><br><span class="line">    chown -R postgres <span class="string">"<span class="variable">$PGDATA</span>"</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> [ -z <span class="string">"<span class="variable">$(ls -A "$PGDATA")</span>"</span> ]; <span class="keyword">then</span></span><br><span class="line">        gosu postgres initdb</span><br><span class="line">    <span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line">    <span class="built_in">exec</span> gosu postgres <span class="string">"<span class="variable">$@</span>"</span></span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">exec</span> <span class="string">"<span class="variable">$@</span>"</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Configure app as PID 1</p>
+<p>This script uses <a href="http://wiki.bash-hackers.org/commands/builtin/exec" target="_blank" rel="noopener">the <code>exec</code> Bash command</a> so that the final running application becomes the container’s PID 1. This allows the application to receive any Unix signals sent to the container. For more, see the <a href="https://docs.docker.com/engine/reference/builder/#entrypoint" target="_blank" rel="noopener"><code>ENTRYPOINT</code> reference</a>.</p>
+</blockquote>
+<p>The helper script is copied into the container and run via <code>ENTRYPOINT</code> on container start:</p>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">COPY</span><span class="bash"> ./docker-entrypoint.sh /</span></span><br><span class="line"><span class="keyword">ENTRYPOINT</span><span class="bash"> [<span class="string">"/docker-entrypoint.sh"</span>]</span></span><br><span class="line"><span class="keyword">CMD</span><span class="bash"> [<span class="string">"postgres"</span>]</span></span><br></pre></td></tr></table></figure>
+<p>This script allows the user to interact with Postgres in several ways.</p>
+<p>It can simply start Postgres:</p>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker <span class="keyword">run</span><span class="bash"> postgres</span></span><br></pre></td></tr></table></figure>
+<p>Or, it can be used to run Postgres and pass parameters to the server:</p>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker <span class="keyword">run</span><span class="bash"> postgres postgres --<span class="built_in">help</span></span></span><br></pre></td></tr></table></figure>
+<p>Lastly, it could also be used to start a totally different tool, such as Bash:</p>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker <span class="built_in">run</span> <span class="comment">--rm -it postgres bash</span></span><br></pre></td></tr></table></figure>
+<h3 id="VOLUME"><a href="#VOLUME" class="headerlink" title="VOLUME"></a>VOLUME</h3><p><a href="https://docs.docker.com/engine/reference/builder/#volume" target="_blank" rel="noopener">Dockerfile reference for the VOLUME instruction</a></p>
+<p>The <code>VOLUME</code> instruction should be used to expose any database storage area, configuration storage, or files/folders created by your docker container. You are strongly encouraged to use <code>VOLUME</code> for any mutable and/or user-serviceable parts of your image.</p>
+<h3 id="USER"><a href="#USER" class="headerlink" title="USER"></a>USER</h3><p><a href="https://docs.docker.com/engine/reference/builder/#user" target="_blank" rel="noopener">Dockerfile reference for the USER instruction</a></p>
+<p>If a service can run without privileges, use <code>USER</code> to change to a non-root user. Start by creating the user and group in the <code>Dockerfile</code> with something like <code>RUN groupadd -r postgres &amp;&amp; useradd --no-log-init -r -g postgres postgres</code>.</p>
+<blockquote>
+<p>Consider an explicit UID/GID</p>
+<p>Users and groups in an image are assigned a non-deterministic UID/GID in that the “next” UID/GID is assigned regardless of image rebuilds. So, if it’s critical, you should assign an explicit UID/GID.</p>
+</blockquote>
+<blockquote>
+<p>Due to an <a href="https://github.com/golang/go/issues/13548" target="_blank" rel="noopener">unresolved bug</a> in the Go archive/tar package’s handling of sparse files, attempting to create a user with a significantly large UID inside a Docker container can lead to disk exhaustion because <code>/var/log/faillog</code> in the container layer is filled with NULL (\0) characters. A workaround is to pass the <code>--no-log-init</code> flag to useradd. The Debian/Ubuntu <code>adduser</code> wrapper does not support this flag.</p>
+</blockquote>
+<p>Avoid installing or using <code>sudo</code> as it has unpredictable TTY and signal-forwarding behavior that can cause problems. If you absolutely need functionality similar to <code>sudo</code>, such as initializing the daemon as <code>root</code> but running it as non-<code>root</code>), consider using <a href="https://github.com/tianon/gosu" target="_blank" rel="noopener">“gosu”</a>.</p>
+<p>Lastly, to reduce layers and complexity, avoid switching <code>USER</code> back and forth frequently.</p>
+<h3 id="WORKDIR"><a href="#WORKDIR" class="headerlink" title="WORKDIR"></a>WORKDIR</h3><p><a href="https://docs.docker.com/engine/reference/builder/#workdir" target="_blank" rel="noopener">Dockerfile reference for the WORKDIR instruction</a></p>
+<p>For clarity and reliability, you should always use absolute paths for your <code>WORKDIR</code>. Also, you should use <code>WORKDIR</code> instead of proliferating instructions like <code>RUN cd … &amp;&amp; do-something</code>, which are hard to read, troubleshoot, and maintain.</p>
+<h3 id="ONBUILD"><a href="#ONBUILD" class="headerlink" title="ONBUILD"></a>ONBUILD</h3><p><a href="https://docs.docker.com/engine/reference/builder/#onbuild" target="_blank" rel="noopener">Dockerfile reference for the ONBUILD instruction</a></p>
+<p>An <code>ONBUILD</code> command executes after the current <code>Dockerfile</code> build completes. <code>ONBUILD</code> executes in any child image derived <code>FROM</code> the current image. Think of the <code>ONBUILD</code> command as an instruction the parent <code>Dockerfile</code> gives to the child <code>Dockerfile</code>.</p>
+<p>A Docker build executes <code>ONBUILD</code> commands before any command in a child <code>Dockerfile</code>.</p>
+<p><code>ONBUILD</code> is useful for images that are going to be built <code>FROM</code> a given image. For example, you would use <code>ONBUILD</code> for a language stack image that builds arbitrary user software written in that language within the <code>Dockerfile</code>, as you can see in <a href="https://github.com/docker-library/ruby/blob/master/2.4/jessie/onbuild/Dockerfile" target="_blank" rel="noopener">Ruby’s <code>ONBUILD</code>variants</a>.</p>
+<p>Images built from <code>ONBUILD</code> should get a separate tag, for example: <code>ruby:1.9-onbuild</code> or <code>ruby:2.0-onbuild</code>.</p>
+<p>Be careful when putting <code>ADD</code> or <code>COPY</code> in <code>ONBUILD</code>. The “onbuild” image fails catastrophically if the new build’s context is missing the resource being added. Adding a separate tag, as recommended above, helps mitigate this by allowing the <code>Dockerfile</code> author to make a choice.</p>
+<h2 id="Additional-resources"><a href="#Additional-resources" class="headerlink" title="Additional resources:"></a>Additional resources:</h2><ul>
+<li><a href="https://docs.docker.com/engine/reference/builder/" target="_blank" rel="noopener">Dockerfile Reference</a></li>
+<li><a href="https://docs.docker.com/develop/develop-images/baseimages/" target="_blank" rel="noopener">More about Base Images</a></li>
+<li><a href="https://docs.docker.com/docker-hub/builds/" target="_blank" rel="noopener">More about Automated Builds</a></li>
+<li><a href="https://docs.docker.com/docker-hub/official_images/" target="_blank" rel="noopener">Guidelines for Creating Official Images</a></li>
+</ul>
+
+        
+        <br>
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+    </div>
+</div>
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+        <li>
+            <a target="_blank" href="https://www.zhihu.com/people/li-bo-2-25">
+                            <span class="fa-stack fa-lg">
+                                 <i class="iconfont icon-zhihu"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+        
+
+        
+        <li>
+            <a target="_blank" href="https://github.com/liboo0731">
+                            <span class="fa-stack fa-lg">
+                                <i class="iconfont icon-github"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span>/</span>
+        
+        <span><a href="https://www.cnblogs.com/liboo/">H2K1R~ACE_博客园</a></span>
+        <span>/</span>
+        
+        <span><a href="https://blog.csdn.net/weixin_40108079">H2K1E~ACE_CSDN</a></span>
+        <span>/</span>
+        
+    </p>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/js/index.js"></script>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+    <script>
+        /**
+         *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+         *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+        */
+        if( '' || '')
+        var disqus_config = function () {
+            this.page.url = '';  // Replace PAGE_URL with your page's canonical URL variable
+            this.page.identifier = ''; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        };
+
+        (function() { // DON'T EDIT BELOW THIS LINE
+            var d = document, s = d.createElement('script');
+            s.src = 'https://airclouds-blog.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+    </script>
+
+</html>

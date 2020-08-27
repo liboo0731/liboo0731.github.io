@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="李博的博客">
+    <meta name="keyword" content="striveliboo">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        【firewalld】Firewalld常用操作 - Liboo的博客 | Liboo&#39;s Blog
+        
+    </title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/aircloud.css">
+    <link rel="stylesheet" href="/css/gitment.css">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> Internet of Everything, Everywhere. </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar">
+            <img src="/img/avatar.jpg">
+        </div>
+        <div class="name">
+            <i>H2K1E~ACE</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li>
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li>
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li>
+                <a href="/archive">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li>
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Firewalld引入-Zone-的概念"><span class="toc-text">Firewalld引入 Zone 的概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#端口开放与移除"><span class="toc-text">端口开放与移除</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#IP伪装"><span class="toc-text">IP伪装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#端口转发"><span class="toc-text">端口转发</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#一、firewalld-守护进程"><span class="toc-text">一、firewalld 守护进程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二、控制端口-服务"><span class="toc-text">二、控制端口/服务</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#三、伪装IP"><span class="toc-text">三、伪装IP</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#四、端口转发"><span class="toc-text">四、端口转发</span></a></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input">
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+        <div class="index-about-mobile">
+            <i> Internet of Everything, Everywhere. </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        【firewalld】Firewalld常用操作
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2019-03-12 14:40:07</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/tags/#firewalld" title="firewalld">firewalld</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+
+    </div>
+    <div class="post-content ">
+        <h3 id="Firewalld引入-Zone-的概念"><a href="#Firewalld引入-Zone-的概念" class="headerlink" title="Firewalld引入 Zone 的概念"></a>Firewalld引入 Zone 的概念</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">firewall-cmd --list-all-zones    #查看所有zone信息</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>drop: 丢弃所有进入的包，而不给出任何响应</p>
+</li>
+<li><p>block: 拒绝所有外部发起的连接，允许内部发起的连接</p>
+</li>
+<li><p>public: 允许指定的进入连接</p>
+</li>
+<li><p>external: 同上，对伪装的进入连接，一般用于路由转发</p>
+</li>
+<li><p>dmz: 允许受限制的进入连接</p>
+</li>
+<li><p>work: 允许受信任的计算机被限制的进入连接，类似 workgroup</p>
+</li>
+<li><p>home: 同上，类似 homegroup</p>
+</li>
+<li><p>internal: 同上，范围针对所有互联网用户</p>
+</li>
+<li>trusted: 信任所有连接</li>
+</ul>
+<p><em>参考链接：<a href="http://www.itlnmp.com/373.html" target="_blank" rel="noopener">防火墙（firewalld）端口转发</a></em></p>
+<h3 id="端口开放与移除"><a href="#端口开放与移除" class="headerlink" title="端口开放与移除"></a>端口开放与移除</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 添加端口</span></span><br><span class="line">firewall-cmd --permanent --zone=&lt;ZONE&gt; --add-port=80/tcp</span><br><span class="line"><span class="meta">#</span><span class="bash"> 移除端口</span></span><br><span class="line">firewall-cmd --permanent --zone=&lt;ZONE&gt; --remove-port=80/tcp</span><br><span class="line"><span class="meta">#</span><span class="bash"> 重启生效</span></span><br><span class="line">firewall-cmd --reload</span><br><span class="line"><span class="meta">#</span><span class="bash"> 罗列开放端口</span></span><br><span class="line">firewall-cmd --list-ports</span><br></pre></td></tr></table></figure>
+<h3 id="IP伪装"><a href="#IP伪装" class="headerlink" title="IP伪装"></a>IP伪装</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">firewall-cmd --permanent --zone=&lt;ZONE&gt; --add-masquerade</span><br><span class="line"></span><br><span class="line">firewall-cmd --permanent --zone=&lt;ZONE&gt; --add-rich-rule='rule family=ipv4 source address=192.168.122.0/24 masquerade'</span><br></pre></td></tr></table></figure>
+<h3 id="端口转发"><a href="#端口转发" class="headerlink" title="端口转发"></a>端口转发</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">firewall-cmd --permanent --zone=&lt;ZONE&gt; --add-forward-port=port=80:proto=tcp:toport=8080:toaddr=192.168.122.7</span><br><span class="line"></span><br><span class="line">firewall-cmd --permanent --zone=&lt;ZONE&gt; --add-rich-rule='rule family=ipv4 source address=192.168.122.0/24 forward-port port=80 to-port=8080 protocol=tcp accept'</span><br></pre></td></tr></table></figure>
+<h3 id="一、firewalld-守护进程"><a href="#一、firewalld-守护进程" class="headerlink" title="一、firewalld 守护进程"></a>一、firewalld 守护进程</h3><p>firewall-cmd命令需要firewalld进程处于运行状态。我们可以使用systemctl status/start/stop/restart firewalld来控制这个守护进程。firewalld进程为防火墙提供服务。</p>
+<p>当我们修改了某些配置之后（尤其是配置文件的修改），firewall并不会立即生效。可以通过两种方式来激活最新配置<code>systemctl restart firewalld</code>和<code>firewall-cmd --reload</code>两种方式，前一种是重启firewalld服务，建议使用后一种“重载配置文件”。重载配置文件之后不会断掉正在连接的tcp会话，而重启服务则会断开tcp会话。</p>
+<h3 id="二、控制端口-服务"><a href="#二、控制端口-服务" class="headerlink" title="二、控制端口/服务"></a>二、控制端口/服务</h3><p>可以通过两种方式控制端口的开放，一种是指定端口号另一种是指定服务名。虽然开放http服务就是开放了80端口，但是还是不能通过端口号来关闭，也就是说通过指定服务名开放的就要通过指定服务名关闭；通过指定端口号开放的就要通过指定端口号关闭。还有一个要注意的就是指定端口的时候一定要指定是什么协议，tcp还是udp。知道这个之后以后就不用每次先关防火墙了，可以让防火墙真正的生效。</p>
+<figure class="highlight autohotkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">`firewall-cmd --add-service=mysql ``# 开放mysql端口``firewall-cmd --remove-service=http ``# 阻止http端口``firewall-cmd --list-services  ``# 查看开放的服务``firewall-cmd --add-port=<span class="number">3306</span>``/tcp` `# 开放通过tcp访问<span class="number">3306</span>``firewall-cmd --remove-port=<span class="number">80</span>tcp ``# 阻止通过tcp访问<span class="number">3306</span>``firewall-cmd --add-port=<span class="number">233</span>``/udp`  `# 开放通过udp访问<span class="number">233</span>``firewall-cmd --list-ports  ``# 查看开放的端口`</span><br></pre></td></tr></table></figure>
+<h3 id="三、伪装IP"><a href="#三、伪装IP" class="headerlink" title="三、伪装IP"></a>三、伪装IP</h3><p>防火墙可以实现伪装IP的功能，下面的端口转发就会用到这个功能。</p>
+<figure class="highlight autohotkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">`firewall-cmd --query-masquerade ``# 检查是否允许伪装IP``firewall-cmd --add-masquerade ``# 允许防火墙伪装IP``firewall-cmd --remove-masquerade``# 禁止防火墙伪装IP`</span><br></pre></td></tr></table></figure>
+<h3 id="四、端口转发"><a href="#四、端口转发" class="headerlink" title="四、端口转发"></a>四、端口转发</h3><p>端口转发可以将指定地址访问指定的端口时，将流量转发至指定地址的指定端口。转发的目的如果不指定ip的话就默认为本机，如果指定了ip却没指定端口，则默认使用来源端口。</p>
+<p>如果配置好端口转发之后不能用，可以检查下面两个问题：</p>
+<ul>
+<li>比如我将80端口转发至8080端口，首先检查本地的80端口和目标的8080端口是否开放监听了</li>
+<li>其次检查是否允许伪装IP，没允许的话要开启伪装IP</li>
+</ul>
+<figure class="highlight autohotkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">`# 将<span class="number">80</span>端口的流量转发至<span class="number">8080</span>``firewall-cmd --add-forward-port=port=<span class="number">80</span>:proto=tcp:toport=<span class="number">8080</span>``# 将<span class="number">80</span>端口的流量转发至``firewall-cmd --add-forward-port=port=<span class="number">80</span>:proto=tcp:toaddr=<span class="number">192.168</span>.<span class="number">1.0</span>.<span class="number">1192.168</span>.<span class="number">0.1</span>``# 将<span class="number">80</span>端口的流量转发至<span class="number">192.168</span>.<span class="number">0.1</span>的<span class="number">8080</span>端口``firewall-cmd --add-forward-port=port=<span class="number">80</span>:proto=tcp:toaddr=<span class="number">192.168</span>.<span class="number">0.1</span>:toport=<span class="number">8080</span>`</span><br></pre></td></tr></table></figure>
+<ul>
+<li>当我们想把某个端口隐藏起来的时候，就可以在防火墙上阻止那个端口访问，然后再开一个不规则的端口，之后配置防火墙的端口转发，将流量转发过去。</li>
+<li>端口转发还可以做流量分发，一个防火墙拖着好多台运行着不同服务的机器，然后用防火墙将不同端口的流量转发至不同机器。</li>
+</ul>
+<p><em>参考链接：<a href="https://www.jb51.net/article/112698.htm" target="_blank" rel="noopener">CentOS 7下用firewall-cmd控制端口与端口转发详解</a></em></p>
+
+        
+        <br>
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+    </div>
+</div>
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+        <li>
+            <a target="_blank" href="https://www.zhihu.com/people/li-bo-2-25">
+                            <span class="fa-stack fa-lg">
+                                 <i class="iconfont icon-zhihu"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+        
+
+        
+        <li>
+            <a target="_blank" href="https://github.com/liboo0731">
+                            <span class="fa-stack fa-lg">
+                                <i class="iconfont icon-github"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span>/</span>
+        
+        <span><a href="https://www.cnblogs.com/liboo/">H2K1R~ACE_博客园</a></span>
+        <span>/</span>
+        
+        <span><a href="https://blog.csdn.net/weixin_40108079">H2K1E~ACE_CSDN</a></span>
+        <span>/</span>
+        
+    </p>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/js/index.js"></script>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+    <script>
+        /**
+         *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+         *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+        */
+        if( '' || '')
+        var disqus_config = function () {
+            this.page.url = '';  // Replace PAGE_URL with your page's canonical URL variable
+            this.page.identifier = ''; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        };
+
+        (function() { // DON'T EDIT BELOW THIS LINE
+            var d = document, s = d.createElement('script');
+            s.src = 'https://airclouds-blog.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+    </script>
+
+</html>

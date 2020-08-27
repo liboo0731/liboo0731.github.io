@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="李博的博客">
+    <meta name="keyword" content="striveliboo">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        【Linux】Linux磁盘管理相关命令 - Liboo的博客 | Liboo&#39;s Blog
+        
+    </title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/aircloud.css">
+    <link rel="stylesheet" href="/css/gitment.css">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> Internet of Everything, Everywhere. </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar">
+            <img src="/img/avatar.jpg">
+        </div>
+        <div class="name">
+            <i>H2K1E~ACE</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li>
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li>
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li>
+                <a href="/archive">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li>
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input">
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+        <div class="index-about-mobile">
+            <i> Internet of Everything, Everywhere. </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        【Linux】Linux磁盘管理相关命令
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2019-04-01 13:45:32</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/tags/#linux" title="linux">linux</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#磁盘" title="磁盘">磁盘</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+
+    </div>
+    <div class="post-content ">
+        <p><strong>1. df命令</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> df命令用于显示磁盘分区上的可使用的磁盘空间。默认显示单位为KB。可以利用该命令来获取硬盘被占用了多少空间，目前还剩下多少空间等信息。</span></span><br><span class="line"></span><br><span class="line">Usage: df [OPTION]... [FILE]...</span><br><span class="line">Show information about the file system on which each FILE resides,</span><br><span class="line">or all file systems by default.</span><br><span class="line"></span><br><span class="line">Mandatory arguments to long options are mandatory for short options too.</span><br><span class="line">  -a, --all             include dummy file systems</span><br><span class="line">  -B, --block-size=SIZE  scale sizes by SIZE before printing them; e.g.,</span><br><span class="line">                           '-BM' prints sizes in units of 1,048,576 bytes;</span><br><span class="line">                           see SIZE format below</span><br><span class="line">      --direct          show statistics for a file instead of mount point</span><br><span class="line">      --total           produce a grand total</span><br><span class="line">  -h, --human-readable  print sizes in human readable format (e.g., 1K 234M 2G)</span><br><span class="line">  -H, --si              likewise, but use powers of 1000 not 1024</span><br><span class="line">  -i, --inodes          list inode information instead of block usage</span><br><span class="line">  -k                    like --block-size=1K</span><br><span class="line">  -l, --local           limit listing to local file systems</span><br><span class="line">      --no-sync         do not invoke sync before getting usage info (default)</span><br><span class="line">      --output[=FIELD_LIST]  use the output format defined by FIELD_LIST,</span><br><span class="line">                               or print all fields if FIELD_LIST is omitted.</span><br><span class="line">  -P, --portability     use the POSIX output format</span><br><span class="line">      --sync            invoke sync before getting usage info</span><br><span class="line">  -t, --type=TYPE       limit listing to file systems of type TYPE</span><br><span class="line">  -T, --print-type      print file system type</span><br><span class="line">  -x, --exclude-type=TYPE   limit listing to file systems not of type TYPE</span><br><span class="line">  -v                    (ignored)</span><br><span class="line">      --help     display this help and exit</span><br><span class="line">      --version  output version information and exit</span><br><span class="line"></span><br><span class="line">Display values are in units of the first available SIZE from --block-size,</span><br><span class="line">and the DF_BLOCK_SIZE, BLOCK_SIZE and BLOCKSIZE environment variables.</span><br><span class="line">Otherwise, units default to 1024 bytes (or 512 if POSIXLY_CORRECT is set).</span><br><span class="line"></span><br><span class="line">SIZE is an integer and optional unit (example: 10M is 10*1024*1024).  Units</span><br><span class="line">are K, M, G, T, P, E, Z, Y (powers of 1024) or KB, MB, ... (powers of 1000).</span><br><span class="line"></span><br><span class="line">FIELD_LIST is a comma-separated list of columns to be included.  Valid</span><br><span class="line">field names are: 'source', 'fstype', 'itotal', 'iused', 'iavail', 'ipcent',</span><br><span class="line">'size', 'used', 'avail', 'pcent', 'file' and 'target' (see info page).</span><br><span class="line"></span><br><span class="line">GNU coreutils online help: &lt;http://www.gnu.org/software/coreutils/&gt;</span><br><span class="line">For complete documentation, run: info coreutils 'df invocation'</span><br></pre></td></tr></table></figure>
+<p><strong>2. fdisk命令</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> fdisk命令用于观察硬盘实体使用情况，也可对硬盘分区。它采用传统的问答式界面，而非类似DOS fdisk的cfdisk互动式操作界面，因此在使用上较为不便，但功能却丝毫不打折扣。</span></span><br><span class="line"></span><br><span class="line">Usage:</span><br><span class="line"> fdisk [options] &lt;disk&gt;    change partition table</span><br><span class="line"> fdisk [options] -l &lt;disk&gt; list partition table(s)</span><br><span class="line"> fdisk -s &lt;partition&gt;      give partition size(s) in blocks</span><br><span class="line"></span><br><span class="line">Options:</span><br><span class="line"> -b &lt;size&gt;             sector size (512, 1024, 2048 or 4096)</span><br><span class="line"> -c[=&lt;mode&gt;]           compatible mode: 'dos' or 'nondos' (default)</span><br><span class="line"> -h                    print this help text</span><br><span class="line"> -u[=&lt;unit&gt;]           display units: 'cylinders' or 'sectors' (default)</span><br><span class="line"> -v                    print program version</span><br><span class="line"> -C &lt;number&gt;           specify the number of cylinders</span><br><span class="line"> -H &lt;number&gt;           specify the number of heads</span><br><span class="line"> -S &lt;number&gt;           specify the number of sectors per track</span><br></pre></td></tr></table></figure>
+<p><strong>3. lsblk命令</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> lsblk命令用于列出所有可用块设备的信息，而且还能显示他们之间的依赖关系，但是它不会列出RAM盘的信息。块设备有硬盘，闪存盘，<span class="built_in">cd</span>-ROM等等。lsblk命令包含在util-linux-ng包中，现在该包改名为util-linux。这个包带了几个其它工具，如dmesg。</span></span><br><span class="line"></span><br><span class="line">Usage:</span><br><span class="line"> lsblk [options] [&lt;device&gt; ...]</span><br><span class="line"></span><br><span class="line">Options:</span><br><span class="line"> -a, --all            print all devices</span><br><span class="line"> -b, --bytes          print SIZE in bytes rather than in human readable format</span><br><span class="line"> -d, --nodeps         don't print slaves or holders</span><br><span class="line"> -D, --discard        print discard capabilities</span><br><span class="line"> -e, --exclude &lt;list&gt; exclude devices by major number (default: RAM disks)</span><br><span class="line"> -I, --include &lt;list&gt; show only devices with specified major numbers</span><br><span class="line"> -f, --fs             output info about filesystems</span><br><span class="line"> -h, --help           usage information (this)</span><br><span class="line"> -i, --ascii          use ascii characters only</span><br><span class="line"> -m, --perms          output info about permissions</span><br><span class="line"> -l, --list           use list format output</span><br><span class="line"> -n, --noheadings     don't print headings</span><br><span class="line"> -o, --output &lt;list&gt;  output columns</span><br><span class="line"> -p, --paths          print complate device path</span><br><span class="line"> -P, --pairs          use key="value" output format</span><br><span class="line"> -r, --raw            use raw output format</span><br><span class="line"> -s, --inverse        inverse dependencies</span><br><span class="line"> -t, --topology       output info about topology</span><br><span class="line"> -S, --scsi           output info about SCSI devices</span><br><span class="line"></span><br><span class="line"> -h, --help     display this help and exit</span><br><span class="line"> -V, --version  output version information and exit</span><br><span class="line"></span><br><span class="line">Available columns (for --output):</span><br><span class="line">        NAME  device name</span><br><span class="line">       KNAME  internal kernel device name</span><br><span class="line">     MAJ:MIN  major:minor device number</span><br><span class="line">      FSTYPE  filesystem type</span><br><span class="line">  MOUNTPOINT  where the device is mounted</span><br><span class="line">       LABEL  filesystem LABEL</span><br><span class="line">        UUID  filesystem UUID</span><br><span class="line">   PARTLABEL  partition LABEL</span><br><span class="line">    PARTUUID  partition UUID</span><br><span class="line">          RA  read-ahead of the device</span><br><span class="line">          RO  read-only device</span><br><span class="line">          RM  removable device</span><br><span class="line">       MODEL  device identifier</span><br><span class="line">      SERIAL  disk serial number</span><br><span class="line">        SIZE  size of the device</span><br><span class="line">       STATE  state of the device</span><br><span class="line">       OWNER  user name</span><br><span class="line">       GROUP  group name</span><br><span class="line">        MODE  device node permissions</span><br><span class="line">   ALIGNMENT  alignment offset</span><br><span class="line">      MIN-IO  minimum I/O size</span><br><span class="line">      OPT-IO  optimal I/O size</span><br><span class="line">     PHY-SEC  physical sector size</span><br><span class="line">     LOG-SEC  logical sector size</span><br><span class="line">        ROTA  rotational device</span><br><span class="line">       SCHED  I/O scheduler name</span><br><span class="line">     RQ-SIZE  request queue size</span><br><span class="line">        TYPE  device type</span><br><span class="line">    DISC-ALN  discard alignment offset</span><br><span class="line">   DISC-GRAN  discard granularity</span><br><span class="line">    DISC-MAX  discard max bytes</span><br><span class="line">   DISC-ZERO  discard zeroes data</span><br><span class="line">       WSAME  write same max bytes</span><br><span class="line">         WWN  unique storage identifier</span><br><span class="line">        RAND  adds randomness</span><br><span class="line">      PKNAME  internal parent kernel device name</span><br><span class="line">        HCTL  Host:Channel:Target:Lun for SCSI</span><br><span class="line">        TRAN  device transport type</span><br><span class="line">         REV  device revision</span><br><span class="line">      VENDOR  device vendor</span><br><span class="line"></span><br><span class="line">For more details see lsblk(8).</span><br></pre></td></tr></table></figure>
+<p><strong>4. blkid命令</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 在Linux下可以使用blkid命令对查询设备上所采用文件系统类型进行查询。blkid主要用来对系统的块设备（包括交换分区）所使用的文件系统类型、LABEL、UUID等信息进行查询。要使用这个命令必须安装e2fsprogs软件包。</span></span><br><span class="line"></span><br><span class="line">blkid from util-linux 2.23.2  (libblkid 2.23.0, 25-Apr-2013)</span><br><span class="line">Usage:</span><br><span class="line"> blkid -L &lt;label&gt; | -U &lt;uuid&gt;</span><br><span class="line"></span><br><span class="line"> blkid [-c &lt;file&gt;] [-ghlLv] [-o &lt;format&gt;] [-s &lt;tag&gt;] </span><br><span class="line">       [-t &lt;token&gt;] [&lt;dev&gt; ...]</span><br><span class="line"></span><br><span class="line"> blkid -p [-s &lt;tag&gt;] [-O &lt;offset&gt;] [-S &lt;size&gt;] </span><br><span class="line">       [-o &lt;format&gt;] &lt;dev&gt; ...</span><br><span class="line"></span><br><span class="line"> blkid -i [-s &lt;tag&gt;] [-o &lt;format&gt;] &lt;dev&gt; ...</span><br><span class="line"></span><br><span class="line">Options:</span><br><span class="line"> -c &lt;file&gt;   read from &lt;file&gt; instead of reading from the default</span><br><span class="line">               cache file (-c /dev/null means no cache)</span><br><span class="line"> -d          don't encode non-printing characters</span><br><span class="line"> -h          print this usage message and exit</span><br><span class="line"> -g          garbage collect the blkid cache</span><br><span class="line"> -o &lt;format&gt; output format; can be one of:</span><br><span class="line">               value, device, export or full; (default: full)</span><br><span class="line"> -k          list all known filesystems/RAIDs and exit</span><br><span class="line"> -s &lt;tag&gt;    show specified tag(s) (default show all tags)</span><br><span class="line"> -t &lt;token&gt;  find device with a specific token (NAME=value pair)</span><br><span class="line"> -l          look up only first device with token specified by -t</span><br><span class="line"> -L &lt;label&gt;  convert LABEL to device name</span><br><span class="line"> -U &lt;uuid&gt;   convert UUID to device name</span><br><span class="line"> -V          print version and exit</span><br><span class="line"> &lt;dev&gt;       specify device(s) to probe (default: all devices)</span><br><span class="line"></span><br><span class="line">Low-level probing options:</span><br><span class="line"> -p          low-level superblocks probing (bypass cache)</span><br><span class="line"> -i          gather information about I/O limits</span><br><span class="line"> -S &lt;size&gt;   overwrite device size</span><br><span class="line"> -O &lt;offset&gt; probe at the given offset</span><br><span class="line"> -u &lt;list&gt;   filter by "usage" (e.g. -u filesystem,raid)</span><br><span class="line"> -n &lt;list&gt;   filter by filesystem type (e.g. -n vfat,ext3)</span><br></pre></td></tr></table></figure>
+<p><strong>5. mkfs.xfs命令</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">Usage: mkfs.xfs</span><br><span class="line">/* blocksize */		[-b log=n|size=num]</span><br><span class="line">/* metadata */		[-m crc=0|1,finobt=0|1,uuid=xxx]</span><br><span class="line">/* data subvol */	[-d agcount=n,agsize=n,file,name=xxx,size=num,</span><br><span class="line">			    (sunit=value,swidth=value|su=num,sw=num|noalign),</span><br><span class="line">			    sectlog=n|sectsize=num</span><br><span class="line">/* force overwrite */	[-f]</span><br><span class="line">/* inode size */	[-i log=n|perblock=n|size=num,maxpct=n,attr=0|1|2,</span><br><span class="line">			    projid32bit=0|1]</span><br><span class="line">/* no discard */	[-K]</span><br><span class="line">/* log subvol */	[-l agnum=n,internal,size=num,logdev=xxx,version=n</span><br><span class="line">			    sunit=value|su=num,sectlog=n|sectsize=num,</span><br><span class="line">			    lazy-count=0|1]</span><br><span class="line">/* label */		[-L label (maximum 12 characters)]</span><br><span class="line">/* naming */		[-n log=n|size=num,version=2|ci,ftype=0|1]</span><br><span class="line">/* no-op info only */	[-N]</span><br><span class="line">/* prototype file */	[-p fname]</span><br><span class="line">/* quiet */		[-q]</span><br><span class="line">/* realtime subvol */	[-r extsize=num,size=num,rtdev=xxx]</span><br><span class="line">/* sectorsize */	[-s log=n|size=num]</span><br><span class="line">/* version */		[-V]</span><br><span class="line">			devicename</span><br><span class="line">&lt;devicename&gt; is required unless -d name=xxx is given.</span><br><span class="line">&lt;num&gt; is xxx (bytes), xxxs (sectors), xxxb (fs blocks), xxxk (xxx KiB),</span><br><span class="line">      xxxm (xxx MiB), xxxg (xxx GiB), xxxt (xxx TiB) or xxxp (xxx PiB).</span><br><span class="line">&lt;value&gt; is xxx (512 byte blocks).</span><br></pre></td></tr></table></figure>
+<p><strong>6. mkfs.ext4命令</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Usage: mkfs.ext4 [-c|-l filename] [-b block-size] [-C cluster-size]</span><br><span class="line">	[-i bytes-per-inode] [-I inode-size] [-J journal-options]</span><br><span class="line">	[-G flex-group-size] [-N number-of-inodes]</span><br><span class="line">	[-m reserved-blocks-percentage] [-o creator-os]</span><br><span class="line">	[-g blocks-per-group] [-L volume-label] [-M last-mounted-directory]</span><br><span class="line">	[-O feature[,...]] [-r fs-revision] [-E extended-option[,...]]</span><br><span class="line">	[-t fs-type] [-T usage-type ] [-U UUID] [-jnqvDFKSV] device [blocks-count]</span><br></pre></td></tr></table></figure>
+<p><strong>7. partprobe命令</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> partprobe命令用于重读分区表，当出现删除文件后，出现仍然占用空间。可以partprobe在不重启的情况下重读分区。</span></span><br><span class="line"></span><br><span class="line">Usage: partprobe [OPTION] [DEVICE]...</span><br><span class="line">Inform the operating system about partition table changes.</span><br><span class="line"></span><br><span class="line">  -d, --dry-run    do not actually inform the operating system</span><br><span class="line">  -s, --summary    print a summary of contents</span><br><span class="line">  -h, --help       display this help and exit</span><br><span class="line">  -v, --version    output version information and exit</span><br><span class="line"></span><br><span class="line">When no DEVICE is given, probe all partitions.</span><br><span class="line"></span><br><span class="line">Report bugs to &lt;bug-parted@gnu.org&gt;.</span><br></pre></td></tr></table></figure>
+
+        
+        <br>
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+    </div>
+</div>
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+        <li>
+            <a target="_blank" href="https://www.zhihu.com/people/li-bo-2-25">
+                            <span class="fa-stack fa-lg">
+                                 <i class="iconfont icon-zhihu"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+        
+
+        
+        <li>
+            <a target="_blank" href="https://github.com/liboo0731">
+                            <span class="fa-stack fa-lg">
+                                <i class="iconfont icon-github"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span>/</span>
+        
+        <span><a href="https://www.cnblogs.com/liboo/">H2K1R~ACE_博客园</a></span>
+        <span>/</span>
+        
+        <span><a href="https://blog.csdn.net/weixin_40108079">H2K1E~ACE_CSDN</a></span>
+        <span>/</span>
+        
+    </p>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/js/index.js"></script>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+    <script>
+        /**
+         *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+         *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+        */
+        if( '' || '')
+        var disqus_config = function () {
+            this.page.url = '';  // Replace PAGE_URL with your page's canonical URL variable
+            this.page.identifier = ''; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        };
+
+        (function() { // DON'T EDIT BELOW THIS LINE
+            var d = document, s = d.createElement('script');
+            s.src = 'https://airclouds-blog.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+    </script>
+
+</html>

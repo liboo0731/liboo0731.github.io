@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="李博的博客">
+    <meta name="keyword" content="striveliboo">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        【python】htmlpy框架使用 - Liboo的博客 | Liboo&#39;s Blog
+        
+    </title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/aircloud.css">
+    <link rel="stylesheet" href="/css/gitment.css">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> Internet of Everything, Everywhere. </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar">
+            <img src="/img/avatar.jpg">
+        </div>
+        <div class="name">
+            <i>H2K1E~ACE</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li>
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li>
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li>
+                <a href="/archive">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li>
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#htmlPy-Project"><span class="toc-text">htmlPy Project</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Standalone-application"><span class="toc-text">Standalone application</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Web-based-application"><span class="toc-text">Web based application</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Here’s-a-sample-driver-file"><span class="toc-text">Here’s a sample driver file</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Set-static-path-and-template-path"><span class="toc-text">Set static_path and template_path</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#GUI-to-Python-calls"><span class="toc-text">GUI to Python calls</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Python-to-GUI-calls"><span class="toc-text">Python to GUI calls</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Using-file-input"><span class="toc-text">Using file input</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Integration-with-django"><span class="toc-text">Integration with django</span></a></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input">
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+        <div class="index-about-mobile">
+            <i> Internet of Everything, Everywhere. </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        【python】htmlpy框架使用
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2017-11-25 11:23:49</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/tags/#python" title="python">python</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#htmlpy" title="htmlpy">htmlpy</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+
+    </div>
+    <div class="post-content ">
+        <h3 id="htmlPy-Project"><a href="#htmlPy-Project" class="headerlink" title="htmlPy Project"></a>htmlPy Project</h3><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">back_end_codes/</span><br><span class="line">static/</span><br><span class="line">    css/</span><br><span class="line">        style.css</span><br><span class="line">        .</span><br><span class="line">        .</span><br><span class="line">        .</span><br><span class="line">    js/</span><br><span class="line">        script.js</span><br><span class="line">        .</span><br><span class="line">        .</span><br><span class="line">        .</span><br><span class="line">    img/</span><br><span class="line">        logo.img</span><br><span class="line">        .</span><br><span class="line">        .</span><br><span class="line">        .</span><br><span class="line">templates/</span><br><span class="line">    first_template_directory/</span><br><span class="line">        template1.html</span><br><span class="line">        template2.html</span><br><span class="line">        .</span><br><span class="line">        .</span><br><span class="line">    another_template_directory/</span><br><span class="line">        another_template.html</span><br><span class="line">    base_layout.html</span><br><span class="line">main.py</span><br></pre></td></tr></table></figure>
+<h3 id="Standalone-application"><a href="#Standalone-application" class="headerlink" title="Standalone application"></a>Standalone application</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> htmlPy</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line">app = htmlPy.AppGUI(title=<span class="string">u"htmlPy Quickstart"</span>, maximized=<span class="literal">True</span>)</span><br><span class="line">app.template_path = os.path.abspath(<span class="string">"."</span>)</span><br><span class="line">app.static_path = os.path.abspath(<span class="string">"."</span>)</span><br><span class="line">app.template = (<span class="string">"index.html"</span>, &#123;<span class="string">"username"</span>: <span class="string">"htmlPy_user"</span>&#125;)</span><br><span class="line"></span><br><span class="line">app.start()</span><br></pre></td></tr></table></figure>
+<h3 id="Web-based-application"><a href="#Web-based-application" class="headerlink" title="Web based application"></a>Web based application</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> htmlPy</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">web_app = htmlPy.WebAppGUI(title=<span class="string">u"Python Website"</span>, maximized=<span class="literal">True</span>)</span><br><span class="line">web_app.url = <span class="string">u"&lt;http://python.org/&gt;"</span></span><br><span class="line"></span><br><span class="line">web_app.start()</span><br></pre></td></tr></table></figure>
+<h3 id="Here’s-a-sample-driver-file"><a href="#Here’s-a-sample-driver-file" class="headerlink" title="Here’s a sample driver file"></a>Here’s a sample driver file</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> htmlPy</span><br><span class="line"><span class="keyword">from</span> PyQt4 <span class="keyword">import</span> QtGui</span><br><span class="line"></span><br><span class="line"><span class="comment"># Initial confiurations</span></span><br><span class="line">BASE_DIR = os.path.abspath(os.path.dirname(__file__))</span><br><span class="line"><span class="comment"># GUI initializations</span></span><br><span class="line">app = htmlPy.AppGUI(title=<span class="string">u"Application"</span>, maximized=<span class="literal">True</span>, plugins=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># GUI configurations</span></span><br><span class="line">app.static_path = os.path.join(BASE_DIR, <span class="string">"static/"</span>)</span><br><span class="line">app.template_path = os.path.join(BASE_DIR, <span class="string">"templates/"</span>)</span><br><span class="line"></span><br><span class="line">app.web_app.setMinimumWidth(<span class="number">1024</span>)</span><br><span class="line">app.web_app.setMinimumHeight(<span class="number">768</span>)</span><br><span class="line">app.window.setWindowIcon(QtGui.QIcon(BASE_DIR + <span class="string">"/static/img/icon.png"</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment"># Binding of back-end functionalities with GUI</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Import back-end functionalities</span></span><br><span class="line"><span class="keyword">from</span> html_to_python <span class="keyword">import</span> ClassName</span><br><span class="line"></span><br><span class="line"><span class="comment"># Register back-end functionalities</span></span><br><span class="line">app.bind(ClassName())</span><br><span class="line"></span><br><span class="line"><span class="comment"># Instructions for running application</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</span><br><span class="line">    <span class="comment"># The driver file will have to be imported everywhere in back-end.</span></span><br><span class="line">    <span class="comment"># So, always keep app.start() in if __name__ == "__main__" conditional</span></span><br><span class="line"></span><br><span class="line">    app.start()</span><br></pre></td></tr></table></figure>
+<h3 id="Set-static-path-and-template-path"><a href="#Set-static-path-and-template-path" class="headerlink" title="Set static_path and template_path"></a>Set static_path and template_path</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"&#123;&#123; 'js/jquery.min.js'|staticfile &#125;&#125;"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">href</span>=<span class="string">"&#123;&#123; 'css/bootstrap.min.css'|staticfile &#125;&#125;"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="GUI-to-Python-calls"><a href="#GUI-to-Python-calls" class="headerlink" title="GUI to Python calls"></a>GUI to Python calls</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> htmlPy</span><br><span class="line"><span class="keyword">import</span> json</span><br><span class="line"><span class="keyword">from</span> sample_app <span class="keyword">import</span> app <span class="keyword">as</span> htmlPy_app</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ClassName</span><span class="params">(htmlPy.Object)</span>:</span></span><br><span class="line">    <span class="comment"># GUI callable functions have to be inside a class.</span></span><br><span class="line">    <span class="comment"># The class should be inherited from htmlPy.Object.</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        super(ClassName. self).__init__()</span><br><span class="line">        <span class="comment"># Initialize the class here, if required.</span></span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line"></span><br><span class="line"><span class="meta">    @htmlPy.Slot()</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">function_name</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="comment"># This is the function exposed to GUI events.</span></span><br><span class="line">        <span class="comment"># You can change app HTML from here.</span></span><br><span class="line">        <span class="comment"># Or, you can do pretty much any python from here.</span></span><br><span class="line">        <span class="comment">#</span></span><br><span class="line">        <span class="comment"># <span class="doctag">NOTE:</span> @htmlPy.Slot decorater needs argument and return data-types.</span></span><br><span class="line">        <span class="comment"># Refer to API documentation.</span></span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line"></span><br><span class="line"><span class="meta">    @htmlPy.Slot(str, result=str)</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">form_function_name</span><span class="params">(self, json_data)</span>:</span></span><br><span class="line">        <span class="comment"># @htmlPy.Slot(arg1_type, arg2_type, ..., result=return_type)</span></span><br><span class="line">        <span class="comment"># This function can be used for GUI forms.</span></span><br><span class="line">        <span class="comment">#</span></span><br><span class="line">        form_data = json.loads(json_data)</span><br><span class="line">        <span class="keyword">return</span> json.dumps(form_data)</span><br><span class="line"></span><br><span class="line"><span class="meta">    @htmlPy.Slot()</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">javascript_function</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="comment"># Any function decorated with @htmlPy.Slot decorater can be called</span></span><br><span class="line">        <span class="comment"># using javascript in GUI</span></span><br><span class="line">        <span class="keyword">return</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"ClassName.function_name"</span> <span class="attr">id</span>=<span class="string">"link"</span> <span class="attr">data-bind</span>=<span class="string">"true"</span>&gt;</span>GUI clickable link<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- The "a" tag needs to have unique ID and data-bind attribute set to "true"</span></span><br><span class="line"><span class="comment">The ClassName and function_name have to be set in href attribute as displayed above.</span></span><br><span class="line"><span class="comment">The "a" tag can be styled using CSS with other HTML elements inside it --&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">"ClassName.form_function_name"</span> <span class="attr">id</span>=<span class="string">"form"</span> <span class="attr">data-bind</span>=<span class="string">"true"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">id</span>=<span class="string">"form_input"</span> <span class="attr">name</span>=<span class="string">"name"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"submit"</span> <span class="attr">value</span>=<span class="string">"Submit"</span> <span class="attr">id</span>=<span class="string">"form_submit"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- The "form" tag needs to have unique ID and data-bind attribute set to "true".</span></span><br><span class="line"><span class="comment">The ClassName and form_function_name have to be set in action attribute as</span></span><br><span class="line"><span class="comment">displayed above. The argument given to ClassName.form_function_name on form submit</span></span><br><span class="line"><span class="comment">will be a json string of the form data. --&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="undefined">ClassName.javascript_function();</span></span><br><span class="line"><span class="actionscript"><span class="comment">// You can treat the class inherited from htmlPy.Object (in this case, ClassName)</span></span></span><br><span class="line"><span class="actionscript"><span class="comment">// as a javascript object.</span></span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h4 id="Python-to-GUI-calls"><a href="#Python-to-GUI-calls" class="headerlink" title="Python to GUI calls"></a>Python to GUI calls</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sample_app <span class="keyword">import</span> app</span><br><span class="line"></span><br><span class="line"><span class="comment"># app imported from sample_app file is an instance of htmlPy.AppGUI class.</span></span><br><span class="line"><span class="comment"># Change HTML of the app</span></span><br><span class="line">app.html = <span class="string">u"&lt;html&gt;&lt;/html&gt;"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Change HTML of the app using Jinja2 templates</span></span><br><span class="line">app.template = (<span class="string">"./index.html"</span>, &#123;<span class="string">"template_variable_name"</span>: <span class="string">"value"</span>&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Execute javascript on currently displayed HTML in the app</span></span><br><span class="line">app.evaluate_javascript(<span class="string">"alert('Hello from back-end')"</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="Using-file-input"><a href="#Using-file-input" class="headerlink" title="Using file input"></a>Using file input</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"file"</span> <span class="attr">name</span>=<span class="string">"file"</span> <span class="attr">id</span>=<span class="string">"file"</span> <span class="attr">data-filter</span>=<span class="string">"[&#123;'title': 'Images', 'extensions': '*.png *.xpm *.jpg'&#125;, &#123;'title': 'Documents', 'extensions': '*.pdf *.doc *.docx'&#125;]"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="Integration-with-django"><a href="#Integration-with-django" class="headerlink" title="Integration with django"></a>Integration with django</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line">os.environ.setdefault(<span class="string">"DJANGO_SETTINGS_MODULE"</span>, <span class="string">"&lt;project_name&gt;.settings"</span>)</span><br></pre></td></tr></table></figure>
+
+        
+        <br>
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+    </div>
+</div>
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+        <li>
+            <a target="_blank" href="https://www.zhihu.com/people/li-bo-2-25">
+                            <span class="fa-stack fa-lg">
+                                 <i class="iconfont icon-zhihu"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+        
+
+        
+        <li>
+            <a target="_blank" href="https://github.com/liboo0731">
+                            <span class="fa-stack fa-lg">
+                                <i class="iconfont icon-github"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span>/</span>
+        
+        <span><a href="https://www.cnblogs.com/liboo/">H2K1R~ACE_博客园</a></span>
+        <span>/</span>
+        
+        <span><a href="https://blog.csdn.net/weixin_40108079">H2K1E~ACE_CSDN</a></span>
+        <span>/</span>
+        
+    </p>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/js/index.js"></script>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+    <script>
+        /**
+         *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+         *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+        */
+        if( '' || '')
+        var disqus_config = function () {
+            this.page.url = '';  // Replace PAGE_URL with your page's canonical URL variable
+            this.page.identifier = ''; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        };
+
+        (function() { // DON'T EDIT BELOW THIS LINE
+            var d = document, s = d.createElement('script');
+            s.src = 'https://airclouds-blog.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+    </script>
+
+</html>

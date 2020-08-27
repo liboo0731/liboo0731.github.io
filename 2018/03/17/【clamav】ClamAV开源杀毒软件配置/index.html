@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="李博的博客">
+    <meta name="keyword" content="striveliboo">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        【clamav】ClamAV开源杀毒软件配置 - Liboo的博客 | Liboo&#39;s Blog
+        
+    </title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/aircloud.css">
+    <link rel="stylesheet" href="/css/gitment.css">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> Internet of Everything, Everywhere. </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar">
+            <img src="/img/avatar.jpg">
+        </div>
+        <div class="name">
+            <i>H2K1E~ACE</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li>
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li>
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li>
+                <a href="/archive">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li>
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Centos7安装杀毒软件ClamAV"><span class="toc-text">Centos7安装杀毒软件ClamAV</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#安装EPEL源"><span class="toc-text">安装EPEL源</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#安装ClamAV"><span class="toc-text">安装ClamAV</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ClamAV-配置使用"><span class="toc-text">ClamAV 配置使用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#备注"><span class="toc-text">备注</span></a></li></ol></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input">
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+        <div class="index-about-mobile">
+            <i> Internet of Everything, Everywhere. </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        【clamav】ClamAV开源杀毒软件配置
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2018-03-17 21:01:25</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/tags/#clamav" title="clamav">clamav</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+
+    </div>
+    <div class="post-content ">
+        <p>Clam AntiVirus（ClamAV）是免费而且开放源代码的防毒软件，软件与病毒码的更新皆由社群免费发布。</p>
+<p>目前ClamAV主要是使用在由Linux、FreeBSD等Unix-like系统架设的邮件服务器上，提供电子邮件的病毒扫描服务。</p>
+<p>ClamAV 杀毒是Linux平台最受欢迎的杀毒软件，ClamAV属于免费开源产品，支持多种平台，如：Linux/Unix、MAC OS X、Windows、OpenVMS。</p>
+<p>ClamAV是基于病毒扫描的命令行工具，但同时也有支持图形界面的ClamTK工具。</p>
+<p>ClamAV主要用于邮件服务器扫描邮件。</p>
+<p>它有多种接口从邮件服务器扫描邮件，支持文件格式有如：ZIP、RAR、TAR、GZIP、BZIP2、HTML、DOC、PDF,、SIS CHM、RTF等等。</p>
+<p>ClamAV有自动的数据库更新器，还可以从共享库中运行。</p>
+<p>命令行的界面让ClamAV运行流畅，你不必以后台进程的方式运行，当你想扫描时只需输入扫描命令指定文件或目录就行。</p>
+<h3 id="Centos7安装杀毒软件ClamAV"><a href="#Centos7安装杀毒软件ClamAV" class="headerlink" title="Centos7安装杀毒软件ClamAV"></a>Centos7安装杀毒软件ClamAV</h3><h4 id="安装EPEL源"><a href="#安装EPEL源" class="headerlink" title="安装EPEL源"></a>安装EPEL源</h4><p>（<a href="http://www.cyberciti.biz/faq/installing-rhel-epel-repo-on-centos-redhat-7-x/" target="_blank" rel="noopener">http://www.cyberciti.biz/faq/installing-rhel-epel-repo-on-centos-redhat-7-x/</a>）</p>
+<p>Clamav可以通过EPEL源来安装，所以要首先安装EPEL，可以采用两种方法来安装：</p>
+<p><strong>第一种，通过命令行安装</strong></p>
+<p>[root@server_for_product ~]# yum install epel-release</p>
+<p><strong>第二种，使用下载好的安装包进行安装</strong></p>
+<p>[root@server_for_product ~]# cd /tmp</p>
+<p>[root@server_for_product tmp]# wget <a href="https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm" target="_blank" rel="noopener">https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm</a></p>
+<p>[root@server_for_product tmp]# yum install epel-release-7.noarch.rpm</p>
+<h4 id="安装ClamAV"><a href="#安装ClamAV" class="headerlink" title="安装ClamAV"></a>安装ClamAV</h4><p>在安装了EPEL源后，运行下面的命令安装ClamAV</p>
+<p>[root@server_for_product ~]# yum install clamav-server clamav-data clamav-update clamav-filesystem clamav clamav-scanner-systemd clamav-devel clamav-lib clamav-server-systemd -y</p>
+<h4 id="ClamAV-配置使用"><a href="#ClamAV-配置使用" class="headerlink" title="ClamAV 配置使用"></a>ClamAV 配置使用</h4><p>在两个配置文件/etc/freshclam.conf和/etc/clamd.d/scan.conf中移除“Example”字符</p>
+<p>[root@server_for_product ~]#sed -i -e “s/^Example/#Example/“ /etc/freshclam.conf</p>
+<p>[root@server_for_product ~]#sed -i -e “s/^Example/#Example/“ /etc/clamd.d/scan.conf</p>
+<p><strong>手动更新病毒库</strong></p>
+<p>[root@server_for_product ~]# freshclam</p>
+<p>freshclam命令通过文件/etc/cron.d/clamav-update来自动运行</p>
+<p>默认情况下是禁止了自动更新功能，需要移除文件/etc/sysconfig/freshclam最后一行的配置才能启用</p>
+<p>移除后自动更新： // FRESHCLAM_DELAY=disabled-warn # REMOVE ME</p>
+<p>定义服务器类型（本地或者TCP），在这里定义为使用本地socket，将文件/etc/clamd.d/scan.conf中的这一行前面的注释符号去掉：</p>
+<p>#LocalSocket /var/run/clamd.scan/clamd.sock</p>
+<p><strong>配置开机启动</strong></p>
+<p>[root@server_for_product ~]# systemctl enable <a href="mailto:clamd@scan.serv" target="_blank" rel="noopener">clamd@scan.serv</a>ice</p>
+<p>[root@server_for_product ~]# ln -s ‘/usr/lib/systemd/system/clamd\@scan.service’ ‘/etc/systemd/system/multi-user.target.wants/clamd\@scan.service’</p>
+<p><strong>启动并检查服务状态</strong></p>
+<p>[root@server_for_product ~]# systemctl start clamd@scan</p>
+<p>[root@server_for_product ~]# systemctl status clamd@scan</p>
+<h4 id="备注"><a href="#备注" class="headerlink" title="备注"></a>备注</h4><p>如果在手动更新病毒库的时候遇到错误：Update failed. Your network may be down or none of the mirrors listed in freshclam.conf is working.</p>
+<p>此时就要删除掉旧的镜像地址文件</p>
+<p>[root@server_for_product ~]# rm -f /var/lib/clamav/mirrors.dat</p>
+<p>再手动更新一次病毒库</p>
+<p>[root@server_for_product ~]# freshclam</p>
+
+        
+        <br>
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+    </div>
+</div>
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+        <li>
+            <a target="_blank" href="https://www.zhihu.com/people/li-bo-2-25">
+                            <span class="fa-stack fa-lg">
+                                 <i class="iconfont icon-zhihu"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+        
+
+        
+        <li>
+            <a target="_blank" href="https://github.com/liboo0731">
+                            <span class="fa-stack fa-lg">
+                                <i class="iconfont icon-github"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span>/</span>
+        
+        <span><a href="https://www.cnblogs.com/liboo/">H2K1R~ACE_博客园</a></span>
+        <span>/</span>
+        
+        <span><a href="https://blog.csdn.net/weixin_40108079">H2K1E~ACE_CSDN</a></span>
+        <span>/</span>
+        
+    </p>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/js/index.js"></script>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+    <script>
+        /**
+         *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+         *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+        */
+        if( '' || '')
+        var disqus_config = function () {
+            this.page.url = '';  // Replace PAGE_URL with your page's canonical URL variable
+            this.page.identifier = ''; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        };
+
+        (function() { // DON'T EDIT BELOW THIS LINE
+            var d = document, s = d.createElement('script');
+            s.src = 'https://airclouds-blog.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+    </script>
+
+</html>

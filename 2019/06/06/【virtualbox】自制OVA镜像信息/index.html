@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="李博的博客">
+    <meta name="keyword" content="striveliboo">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        【virtualbox】自制OVA镜像信息 - Liboo的博客 | Liboo&#39;s Blog
+        
+    </title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/aircloud.css">
+    <link rel="stylesheet" href="/css/gitment.css">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> Internet of Everything, Everywhere. </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar">
+            <img src="/img/avatar.jpg">
+        </div>
+        <div class="name">
+            <i>H2K1E~ACE</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li>
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li>
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li>
+                <a href="/archive">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li>
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#OVA镜像信息"><span class="toc-text">OVA镜像信息</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#CentOS-7-x86-64-Minimal-1708-ova"><span class="toc-text">CentOS-7-x86_64-Minimal-1708.ova</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Jenkins-ova"><span class="toc-text">Jenkins.ova</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ZabbixServer-ova"><span class="toc-text">ZabbixServer.ova</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ZabbixProxy-ova"><span class="toc-text">ZabbixProxy.ova</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ZabbixAgent-ova"><span class="toc-text">ZabbixAgent.ova</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Nagios-ova"><span class="toc-text">Nagios.ova</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#LVS1-Keepalived1-Web1-ova"><span class="toc-text">LVS1+Keepalived1+Web1.ova</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#LVS2-Keepalived2-Web2-ova"><span class="toc-text">LVS2+Keepalived2+Web2.ova</span></a></li></ol></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input">
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+        <div class="index-about-mobile">
+            <i> Internet of Everything, Everywhere. </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        【virtualbox】自制OVA镜像信息
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2019-06-06 15:10:12</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/tags/#virtualbox" title="virtualbox">virtualbox</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#ova" title="ova">ova</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+
+    </div>
+    <div class="post-content ">
+        <h2 id="OVA镜像信息"><a href="#OVA镜像信息" class="headerlink" title="OVA镜像信息"></a>OVA镜像信息</h2><h3 id="CentOS-7-x86-64-Minimal-1708-ova"><a href="#CentOS-7-x86-64-Minimal-1708-ova" class="headerlink" title="CentOS-7-x86_64-Minimal-1708.ova"></a>CentOS-7-x86_64-Minimal-1708.ova</h3><ul>
+<li>登录：root/q</li>
+</ul>
+<h3 id="Jenkins-ova"><a href="#Jenkins-ova" class="headerlink" title="Jenkins.ova"></a>Jenkins.ova</h3><ul>
+<li><p>登录：root/q</p>
+</li>
+<li><p>Web：liboo/liboo</p>
+</li>
+<li>Web地址：http://&lt; ip : 8080 &gt;</li>
+</ul>
+<h3 id="ZabbixServer-ova"><a href="#ZabbixServer-ova" class="headerlink" title="ZabbixServer.ova"></a>ZabbixServer.ova</h3><ul>
+<li><p>登录：root/q</p>
+</li>
+<li><p>MySQL：root/liboo，zabbix/password</p>
+</li>
+<li>Web地址：http://&lt; ip &gt;/zabbix</li>
+</ul>
+<h3 id="ZabbixProxy-ova"><a href="#ZabbixProxy-ova" class="headerlink" title="ZabbixProxy.ova"></a>ZabbixProxy.ova</h3><ul>
+<li><p>登录：root/q</p>
+</li>
+<li><p>MySQL：root/liboo，zabbix/password</p>
+</li>
+<li>修改：/etc/zabbix/zabbix_proxy.conf</li>
+</ul>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">Hostname</span>=&lt;hostname&gt;</span><br><span class="line"><span class="attr">Server</span>=&lt;zabbix_server&gt;</span><br><span class="line"><span class="attr">DBPassword</span>=&lt;zabbix_proxy_user_password&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="ZabbixAgent-ova"><a href="#ZabbixAgent-ova" class="headerlink" title="ZabbixAgent.ova"></a>ZabbixAgent.ova</h3><ul>
+<li><p>登录：root/q</p>
+</li>
+<li><p>修改：/etc/zabbix/zabbix_agentd.conf</p>
+</li>
+</ul>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">Server</span>=&lt;zabbix_server_or_zabbix_proxy_ip&gt;</span><br><span class="line"><span class="attr">ServerActive</span>=&lt;zabbix_server_or_zabbix_proxy_ip&gt;</span><br><span class="line"><span class="attr">Hostname</span>=&lt;hostname&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="Nagios-ova"><a href="#Nagios-ova" class="headerlink" title="Nagios.ova"></a>Nagios.ova</h3><ul>
+<li><p>登录：root/q</p>
+</li>
+<li><p>Web：nagiosadmin/liboo</p>
+</li>
+<li>Web地址：http://&lt; ip &gt;/nagios</li>
+<li>MySQL：root/liboo，ndoutils/ndoutils_password</li>
+</ul>
+<h3 id="LVS1-Keepalived1-Web1-ova"><a href="#LVS1-Keepalived1-Web1-ova" class="headerlink" title="LVS1+Keepalived1+Web1.ova"></a>LVS1+Keepalived1+Web1.ova</h3><ul>
+<li><p>登录：root/q</p>
+</li>
+<li><p>Web地址：http://&lt; ip &gt;</p>
+</li>
+<li>修改：</li>
+</ul>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line">$ cat /etc/sysconfig/network-scripts/ifcfg-lo:0</span><br><span class="line"></span><br><span class="line"><span class="attribute">DEVICE</span>=lo:0</span><br><span class="line"><span class="attribute">IPADDR</span>=192.168.23.253	# 需要修改</span><br><span class="line"><span class="attribute">NETMASK</span>=255.255.255.255</span><br><span class="line"><span class="attribute">ONBOOT</span>=<span class="literal">yes</span></span><br><span class="line"></span><br><span class="line">$ cat /etc/keepalived/keepalived.conf</span><br><span class="line"></span><br><span class="line">! Configuration File <span class="keyword">for</span> keepalived</span><br><span class="line"></span><br><span class="line">vrrp_instance VI_1 &#123;</span><br><span class="line">    state MASTER</span><br><span class="line">   <span class="built_in"> interface </span>enp0s3	# 需要修改</span><br><span class="line">    virtual_router_id 91</span><br><span class="line">    priority 100</span><br><span class="line">    advert_int 1</span><br><span class="line">    authentication &#123;</span><br><span class="line">        auth_type PASS</span><br><span class="line">        auth_pass 1111</span><br><span class="line">    &#125;</span><br><span class="line">    virtual_ipaddress &#123;</span><br><span class="line">        192.168.23.253	# 需要修改</span><br><span class="line">    &#125;</span><br><span class="line">    notify_backup <span class="string">"/root/notify_node.sh b"</span></span><br><span class="line">    notify_master <span class="string">"/root/notify_node.sh m"</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">virtual_server 192.168.23.253 0 &#123;	# 需要修改</span><br><span class="line">    delay_loop 6</span><br><span class="line">    lb_algo wrr</span><br><span class="line">    lb_kind DR</span><br><span class="line">    persistence_timeout 50</span><br><span class="line">    protocol TCP</span><br><span class="line"></span><br><span class="line">    real_server 192.168.23.56 0 &#123;	# 需要修改</span><br><span class="line">        weight 3</span><br><span class="line">        TCP_CHECK &#123;</span><br><span class="line">            connect_ip 192.168.23.56	# 需要修改</span><br><span class="line">            connect_port 80</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    real_server 192.168.23.58 0 &#123;	# 需要修改</span><br><span class="line">        weight 3</span><br><span class="line">        TCP_CHECK &#123;</span><br><span class="line">            connect_ip 192.168.23.58	# 需要修改</span><br><span class="line">            connect_port 80</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="LVS2-Keepalived2-Web2-ova"><a href="#LVS2-Keepalived2-Web2-ova" class="headerlink" title="LVS2+Keepalived2+Web2.ova"></a>LVS2+Keepalived2+Web2.ova</h3><ul>
+<li>登录：root/q</li>
+<li>Web地址：http://&lt; ip &gt;</li>
+<li>修改：</li>
+</ul>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line">$ cat /etc/sysconfig/network-scripts/ifcfg-lo:0</span><br><span class="line"></span><br><span class="line"><span class="attribute">DEVICE</span>=lo:0</span><br><span class="line"><span class="attribute">IPADDR</span>=192.168.23.253	# 需要修改</span><br><span class="line"><span class="attribute">NETMASK</span>=255.255.255.255</span><br><span class="line"><span class="attribute">ONBOOT</span>=<span class="literal">yes</span></span><br><span class="line"></span><br><span class="line">$ cat /etc/keepalived/keepalived.conf</span><br><span class="line"></span><br><span class="line">! Configuration File <span class="keyword">for</span> keepalived</span><br><span class="line"></span><br><span class="line">vrrp_instance VI_1 &#123;</span><br><span class="line">    state BACKUP</span><br><span class="line">   <span class="built_in"> interface </span>enp0s3	# 需要修改</span><br><span class="line">    virtual_router_id 91</span><br><span class="line">    priority 50</span><br><span class="line">    advert_int 1</span><br><span class="line">    authentication &#123;</span><br><span class="line">        auth_type PASS</span><br><span class="line">        auth_pass 1111</span><br><span class="line">    &#125;</span><br><span class="line">    virtual_ipaddress &#123;</span><br><span class="line">        192.168.23.253	# 需要修改</span><br><span class="line">    &#125;</span><br><span class="line">    notify_backup <span class="string">"/root/notify_node.sh b"</span></span><br><span class="line">    notify_master <span class="string">"/root/notify_node.sh m"</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">virtual_server 192.168.23.253 0 &#123;	# 需要修改</span><br><span class="line">    delay_loop 6</span><br><span class="line">    lb_algo wrr</span><br><span class="line">    lb_kind DR</span><br><span class="line">    persistence_timeout 50</span><br><span class="line">    protocol TCP</span><br><span class="line"></span><br><span class="line">    real_server 192.168.23.56 0 &#123;	# 需要修改</span><br><span class="line">        weight 3</span><br><span class="line">        TCP_CHECK &#123;</span><br><span class="line">            connect_ip 192.168.23.56	# 需要修改</span><br><span class="line">            connect_port 80</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    real_server 192.168.23.58 0 &#123;	# 需要修改</span><br><span class="line">        weight 3</span><br><span class="line">        TCP_CHECK &#123;</span><br><span class="line">            connect_ip 192.168.23.58	# 需要修改</span><br><span class="line">            connect_port 80</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+        
+        <br>
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+    </div>
+</div>
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+        <li>
+            <a target="_blank" href="https://www.zhihu.com/people/li-bo-2-25">
+                            <span class="fa-stack fa-lg">
+                                 <i class="iconfont icon-zhihu"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+        
+
+        
+        <li>
+            <a target="_blank" href="https://github.com/liboo0731">
+                            <span class="fa-stack fa-lg">
+                                <i class="iconfont icon-github"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span>/</span>
+        
+        <span><a href="https://www.cnblogs.com/liboo/">H2K1R~ACE_博客园</a></span>
+        <span>/</span>
+        
+        <span><a href="https://blog.csdn.net/weixin_40108079">H2K1E~ACE_CSDN</a></span>
+        <span>/</span>
+        
+    </p>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/js/index.js"></script>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+    <script>
+        /**
+         *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+         *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+        */
+        if( '' || '')
+        var disqus_config = function () {
+            this.page.url = '';  // Replace PAGE_URL with your page's canonical URL variable
+            this.page.identifier = ''; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        };
+
+        (function() { // DON'T EDIT BELOW THIS LINE
+            var d = document, s = d.createElement('script');
+            s.src = 'https://airclouds-blog.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+    </script>
+
+</html>
